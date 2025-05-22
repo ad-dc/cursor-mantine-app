@@ -1,0 +1,52 @@
+# 🧩 Cursor Prompt Template: Next.js + Mantine 7
+
+Use this prompt to instruct Cursor IDE to generate components, layouts, or utilities for your prototypes based on a consistent tech stack.
+
+---
+
+## 🔧 Tech Stack Baseline
+
+- **Next.js v14+** using the **App Router**
+- **Mantine v7** for UI and styling
+- **TypeScript**
+
+---
+
+## 📐 Development Guidelines
+
+- Use **server** and **client components** appropriately.
+- Style only with **Mantine**:
+  - `@mantine/core`
+  - `@mantine/hooks`
+  - `@mantine/notifications`, etc.
+- Leverage **Mantine theming** for colors, spacing, and typography.
+- Do **not** use Tailwind CSS, CSS modules, or other styling libraries unless explicitly requested.
+- Prioritize **composability** and **readable functional components**.
+
+---
+
+## 📝 Prompt Template
+
+> You are assisting with prototyping a web application using the following tech stack:
+>
+> - Next.js v14+ (App Router)
+> - Mantine v7
+> - TypeScript
+>
+> Use server/client components appropriately. Style exclusively with Mantine. Use Mantine theming where applicable. Avoid other UI libraries unless explicitly asked.
+>
+> **Task:**  
+> Generate a [component / layout / page / utility] that does the following:
+>
+> **[INSERT YOUR FEATURE OR REQUIREMENTS HERE]**
+>
+> Include all necessary hooks, context providers, and utility functions needed. Keep the output modular and clean.
+
+---
+
+## ✅ Example Prompt
+
+> Generate a **dashboard page** that includes:
+> - a sidebar with icons and labels  
+> - a top navbar with user avatar and dropdown  
+> - a main content area that fetches and displays a list of customer quotes from a mocked API  

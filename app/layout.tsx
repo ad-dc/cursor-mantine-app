@@ -1,6 +1,22 @@
+'use client';
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { MantineProvider } from "@mantine/core";
+import { theme } from "@/styles/theme";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
+          {children}
+        </MantineProvider>
+      </body>
+    </html>
+  );
+}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
