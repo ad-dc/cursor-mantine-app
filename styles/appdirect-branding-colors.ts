@@ -2,4 +2,4 @@
 export const AppDirectBrandingColors = {
   Navy: '#011B58',
   // Add more branding colors here as needed
-}; 
+};
