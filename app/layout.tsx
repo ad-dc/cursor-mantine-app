@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <MantineProvider theme={theme}>
+        <MantineProvider theme={theme} defaultColorScheme="light" cssVariablesSelector=":root">
           {children}
         </MantineProvider>
       </body>
