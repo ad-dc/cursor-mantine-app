@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { ActionIcon, Group, Indicator, Stack, Text, SimpleGrid, rem } from "@mantine/core";
+import { Button } from '@/components/DesignSystem';
 import { IconFilter, IconMaximize, IconMinimize, IconBaselineDensityMedium, IconBaselineDensitySmall, IconBaselineDensityLarge } from '@tabler/icons-react';
 import { DatesRangeValue } from "@mantine/dates";
 import {
@@ -16,6 +17,14 @@ import DateRangeSelector from "./DateRangeSelectorFilter";
 import FilterChip from "./FilterChip";
 import ResultCount from "./ResultCount/index";
 
+// =============================================================================
+// TYPES & INTERFACES
+// =============================================================================
+
+/**
+ * Enum defining all available cities for filtering
+ * @TODO: Consider moving this to a separate constants file for better maintainability
+ */
 export enum City {
   NEW_YORK = "New York",
   LOS_ANGELES = "Los Angeles",
@@ -39,22 +48,32 @@ export enum City {
   COLUMBUS = "Columbus",
 }
 
+/**
+ * Interface for date range filter values
+ */
 export interface DateRange {
   start: Date | null;
   end: Date | null;
 }
 
+/**
+ * Central interface for all filter states
+ */
 export interface Filters {
   cities?: City[] | null;
   dateRange?: DateRange | null;
   searchTerm?: string;
 }
 
+/**
+ * Props for the main CustomTopToolbar component
+ */
 export interface CustomTopToolbarProps<T extends MRT_RowData> {
   filtersState: Filters;
   locale: string;
   onChange: (filters: Filters) => void;
   resultCount: number;
+  totalCount?: number; // Total records across all pages (unfiltered)
   numberOfSelectedRows: number;
   table: MRTTableInstance<T>;
   isLoading?: boolean;
@@ -62,6 +81,9 @@ export interface CustomTopToolbarProps<T extends MRT_RowData> {
   showFilters: boolean;
 }
 
+/**
+ * Extended props for the MRT Toolbar Alert Banner
+ */
 interface ExtendedAlertBannerProps<T extends MRT_RowData> {
   stackAlertBanner?: boolean;
   table: MRTTableInstance<T>;
@@ -70,39 +92,451 @@ interface ExtendedAlertBannerProps<T extends MRT_RowData> {
   style?: React.CSSProperties;
 }
 
+/**
+ * Props for the filter icon button component
+ */
+interface FilterIconButtonProps {
+  onClick: () => void;
+  areFiltersShown: boolean;
+  text?: string;
+}
+
+/**
+ * Props for action icon components (fullscreen, density)
+ */
+interface ActionIconButtonProps {
+  onClick: () => void;
+  ariaLabel: string;
+  icon: ReactElement;
+  testId?: string;
+}
+
+// =============================================================================
+// CONSTANTS & UTILITIES
+// =============================================================================
+
+/**
+ * Typed wrapper for the MRT Toolbar Alert Banner
+ */
 const MRTToolbarAlertBanner = BaseMRTToolbarAlertBanner as React.ComponentType<ExtendedAlertBannerProps<any>>;
 
-const dateOptions: Intl.DateTimeFormatOptions = {
+/**
+ * Date formatting options for display purposes
+ */
+const DATE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
   year: "numeric",
   month: "long",
   day: "numeric",
 };
 
-interface FilterIconButtonProps {
-  onClick: () => void;
-  areFiltersShown: boolean;
-}
+/**
+ * Shared styling for action buttons (30x30 square buttons)
+ */
+const ACTION_BUTTON_STYLES = {
+  width: rem(30),
+  height: rem(30),
+  minWidth: rem(30),
+  minHeight: rem(30),
+  padding: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 'var(--mantine-radius-sm)',
+  border: '1px solid var(--mantine-color-gray-4)',
+  background: 'var(--mantine-color-white)',
+} as const;
 
-const FilterIconButton = ({ onClick, areFiltersShown }: FilterIconButtonProps): ReactElement => (
+const ACTION_ICON_STYLES = {
+  width: rem(30),
+  height: rem(30),
+  borderRadius: 'var(--mantine-radius-sm)',
+  border: '1px solid var(--mantine-color-gray-4)',
+} as const;
+
+/**
+ * Icon styling for consistent appearance
+ */
+const ICON_STYLES = {
+  color: 'var(--mantine-color-black)',
+};
+
+/**
+ * City options data for the select filter
+ * @TODO: Consider moving this to a separate data file or fetching from an API
+ */
+const CITY_OPTIONS = [
+  { value: City.ATLANTA, label: "table.filters.city.atlanta" as const },
+  { value: City.AUSTIN, label: "table.filters.city.austin" as const },
+  { value: City.BOSTON, label: "table.filters.city.boston" as const },
+  { value: City.CHARLOTTE, label: "table.filters.city.charlotte" as const },
+  { value: City.CHICAGO, label: "table.filters.city.chicago" as const },
+  { value: City.COLUMBUS, label: "table.filters.city.columbus" as const },
+  { value: City.DENVER, label: "table.filters.city.denver" as const },
+  { value: City.DETROIT, label: "table.filters.city.detroit" as const },
+  { value: City.INDIANAPOLIS, label: "table.filters.city.indianapolis" as const },
+  { value: City.LAS_VEGAS, label: "table.filters.city.las.vegas" as const },
+  { value: City.LOS_ANGELES, label: "table.filters.city.los.angeles" as const },
+  { value: City.MIAMI, label: "table.filters.city.miami" as const },
+  { value: City.NASHVILLE, label: "table.filters.city.nashville" as const },
+  { value: City.NEW_YORK, label: "table.filters.city.new.york" as const },
+  { value: City.ORLANDO, label: "table.filters.city.orlando" as const },
+  { value: City.PHOENIX, label: "table.filters.city.phoenix" as const },
+  { value: City.PORTLAND, label: "table.filters.city.portland" as const },
+  { value: City.SAN_FRANCISCO, label: "table.filters.city.san.francisco" as const },
+  { value: City.SEATTLE, label: "table.filters.city.seattle" as const },
+  { value: City.TAMPA, label: "table.filters.city.tampa" as const },
+].map(option => ({
+  ...option,
+  label: translate(option.label),
+}));
+
+// =============================================================================
+// UTILITY FUNCTIONS
+// =============================================================================
+
+/**
+ * Utility function to determine if filters are currently active
+ * @param filters - The current filter state
+ * @returns boolean indicating if any filters are applied
+ */
+const hasActiveFilters = (filters: Filters): boolean => {
+  const { cities, dateRange } = filters;
+  return Boolean(
+    (cities && cities.length > 0) || 
+    (dateRange && dateRange.start && dateRange.end)
+  );
+};
+
+/**
+ * Utility function to process date range selection
+ * Handles the logic for ensuring both dates are selected and sets end time to end of day
+ * @param value - The selected date range value
+ * @returns Processed DateRange or null
+ */
+const processDateRangeSelection = (value: DatesRangeValue | null): DateRange | null => {
+  // Helper functions for date validation
+  const isOnlyOneDateSelected = (): boolean => {
+    return !!(value && (value[0] === null || value[1] === null));
+  };
+
+  const areBothDatesSelected = (): boolean => {
+    return !!(value && value[0] !== null && value[1] !== null);
+  };
+
+  // Return early if only one date is selected (incomplete selection)
+  if (isOnlyOneDateSelected()) {
+    return null;
+  }
+
+  let range: DateRange | null = null;
+
+  if (value !== null && areBothDatesSelected()) {
+    let endDate = value[1];
+    
+    // Set end date to end of day for inclusive range
+    if (endDate) {
+      const endOfDay = new Date(endDate);
+      endOfDay.setHours(23, 59, 59, 999);
+      endDate = endOfDay;
+    }
+
+    range = {
+      start: value[0],
+      end: endDate,
+    };
+  }
+
+  return range;
+};
+
+/**
+ * Utility function to get the appropriate density icon based on current state
+ * @param density - Current table density setting
+ * @returns React element for the density icon
+ */
+const getDensityIcon = (density: string): ReactElement => {
+  const iconProps = { size: 18, style: ICON_STYLES };
+  
+  switch (density) {
+    case 'md':
+      return <IconBaselineDensityMedium {...iconProps} />;
+    case 'xs':
+      return <IconBaselineDensitySmall {...iconProps} />;
+    case 'xl':
+      return <IconBaselineDensityLarge {...iconProps} />;
+    default:
+      return <IconBaselineDensityMedium {...iconProps} />;
+  }
+};
+
+/**
+ * Utility function to cycle through density options
+ * @param currentDensity - Current density setting
+ * @returns Next density setting in the cycle
+ */
+const getNextDensity = (currentDensity: string): 'xs' | 'md' | 'xl' => {
+  const densityMap: Record<string, 'xs' | 'md' | 'xl'> = {
+    'xs': 'md',
+    'md': 'xl',
+    'xl': 'xs'
+  };
+  return densityMap[currentDensity] || 'md';
+};
+
+// =============================================================================
+// SUB-COMPONENTS
+// =============================================================================
+
+/**
+ * Reusable action icon component with consistent styling
+ * Used for fullscreen and density toggle buttons
+ */
+const ActionIconButton: React.FC<ActionIconButtonProps> = ({ 
+  onClick, 
+  ariaLabel, 
+  icon, 
+  testId 
+}) => (
   <ActionIcon
-    data-testid="additional-filter-toggle"
-    variant={areFiltersShown ? "outline" : undefined}
+    variant="subtle"
     onClick={onClick}
-    aria-label={translate("table.filters.toggle.aria")}
-    style={{
-      color: 'var(--mantine-color-gray-7)',
-      backgroundColor: 'var(--mantine-color-white)',
-      borderColor: 'var(--mantine-color-gray-4)',
-    }}
+    aria-label={ariaLabel}
+    style={ACTION_ICON_STYLES}
+    data-testid={testId}
   >
-    <IconFilter size={18} />
+    {icon}
   </ActionIcon>
 );
 
+/**
+ * Filter toggle button with indicator support
+ * Shows an indicator dot when filters are active
+ * Conditionally renders ActionIcon (icon-only) or Button (icon+text) based on text prop
+ */
+const FilterIconButton: React.FC<FilterIconButtonProps> = ({ 
+  onClick, 
+  areFiltersShown,
+  text
+}) => {
+  const icon = <IconFilter size={18} style={ICON_STYLES} />;
+  
+  // If no text provided or empty string, use ActionIcon for icon-only display with perfect centering
+  if (!text || text.trim() === '') {
+    return (
+      <ActionIcon
+        data-testid="additional-filter-toggle"
+        onClick={onClick}
+        aria-label={translate("table.filters.toggle.aria")}
+        style={{
+          width: rem(30),
+          height: rem(30),
+          borderRadius: 'var(--mantine-radius-sm)',
+          border: areFiltersShown 
+            ? '1px solid var(--mantine-color-blue-6)' 
+            : '1px solid var(--mantine-color-gray-4)',
+          background: 'var(--mantine-color-white)',
+          color: 'var(--mantine-color-black)',
+        }}
+      >
+        {icon}
+      </ActionIcon>
+    );
+  }
+
+  // If text is provided, use Button with leftSection for icon + text display
+  return (
+    <Button
+      data-testid="additional-filter-toggle"
+      variant={areFiltersShown ? "outline" : "light"}
+      onClick={onClick}
+      aria-label={translate("table.filters.toggle.aria")}
+      size="xs"
+      leftIcon={icon}
+      style={{
+        height: rem(30),
+        borderRadius: 'var(--mantine-radius-sm)',
+        border: areFiltersShown 
+          ? '1px solid var(--mantine-color-blue-6)' 
+          : '1px solid var(--mantine-color-gray-4)',
+        background: 'var(--mantine-color-white)',
+      }}
+    >
+      {text}
+    </Button>
+  );
+};
+
+/**
+ * Active filters display section
+ * Shows filter chips for currently applied filters and clear all button
+ */
+interface ActiveFiltersProps {
+  filters: Filters;
+  onClearFilters: () => void;
+  onRemoveCity: (cityToRemove: City) => void;
+  onRemoveDateRange: () => void;
+}
+
+const ActiveFilters: React.FC<ActiveFiltersProps> = ({
+  filters,
+  onClearFilters,
+  onRemoveCity,
+  onRemoveDateRange,
+}) => {
+  const { cities, dateRange } = filters;
+
+  return (
+    <>
+      {/* Clear all filters button */}
+      <Text
+        size="xs"
+        span
+        role="button"
+        fw={600}
+        style={{ cursor: "pointer" }}
+        onClick={onClearFilters}
+        c="blue"
+        data-testid="clear-filters"
+      >
+        {translate("table.filters.clear.filters")}
+      </Text>
+
+      {/* City filter chips */}
+      {cities && cities.map((city) => (
+        <FilterChip
+          key={city}
+          label={city}
+          onClick={() => onRemoveCity(city)}
+        />
+      ))}
+
+      {/* Date range filter chip */}
+      {dateRange && (
+        <FilterChip
+          label={translate("table.filters.chip.date.range.label", {
+            startDate: dateRange.start?.toLocaleDateString(undefined, DATE_FORMAT_OPTIONS) || '',
+            endDate: dateRange.end?.toLocaleDateString(undefined, DATE_FORMAT_OPTIONS) || '',
+          })}
+          onClick={onRemoveDateRange}
+        />
+      )}
+    </>
+  );
+};
+
+/**
+ * Toolbar action buttons section
+ * Contains fullscreen toggle and density toggle buttons
+ */
+interface ToolbarActionsProps<T extends MRT_RowData> {
+  table: MRTTableInstance<T>;
+}
+
+const ToolbarActions = <T extends MRT_RowData>({ table }: ToolbarActionsProps<T>) => {
+  const isFullScreen = table.getState().isFullScreen ?? false;
+  const currentDensity = table.getState().density;
+
+  const handleFullscreenToggle = () => {
+    table.setIsFullScreen(!isFullScreen);
+  };
+
+  const handleDensityToggle = () => {
+    const nextDensity = getNextDensity(currentDensity);
+    table.setDensity(nextDensity);
+  };
+
+  return (
+    <Group justify="end" gap="xs">
+      {/* Fullscreen toggle button */}
+      <ActionIconButton
+        onClick={handleFullscreenToggle}
+        ariaLabel={isFullScreen ? "Exit fullscreen" : "Enter fullscreen"}
+        icon={isFullScreen ? 
+          <IconMinimize size={18} style={ICON_STYLES} /> : 
+          <IconMaximize size={18} style={ICON_STYLES} />
+        }
+      />
+
+      {/* Density toggle button */}
+      <ActionIconButton
+        onClick={handleDensityToggle}
+        ariaLabel="Toggle density"
+        icon={getDensityIcon(currentDensity)}
+        testId="toggle-dense-padding"
+      />
+    </Group>
+  );
+};
+
+/**
+ * Expandable filters section
+ * Contains date range and city selection filters
+ */
+interface ExpandableFiltersProps {
+  visible: boolean;
+  locale: string;
+  cities: City[] | null | undefined;
+  onDateChange: (value: DatesRangeValue | null) => void;
+  onCityChange: (value: string[] | null) => void;
+  dateRangeSelectorKey: number;
+}
+
+const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
+  visible,
+  locale,
+  cities,
+  onDateChange,
+  onCityChange,
+  dateRangeSelectorKey,
+}) => {
+  if (!visible) return null;
+
+  return (
+    <SimpleGrid data-testid="additional-filters" cols={3} spacing="xs" role="menu">
+      {/* Date range selector */}
+      <DateRangeSelector
+        key={dateRangeSelectorKey}
+        label={translate("table.filters.applied.on")}
+        locale={locale}
+        onChange={onDateChange}
+      />
+
+      {/* City multi-select filter */}
+      <SelectFilter
+        label={translate("table.filters.city")}
+        onChange={onCityChange}
+        selectedValue={(cities as string[]) || null}
+        placeholderEmpty={translate("table.filters.placeholder.all")}
+        placeholderWithSelection={translate("table.filters.placeholder.select.more")}
+        data={CITY_OPTIONS}
+      />
+    </SimpleGrid>
+  );
+};
+
+// =============================================================================
+// MAIN COMPONENT
+// =============================================================================
+
+/**
+ * CustomTopToolbar - Main toolbar component for data tables
+ * 
+ * Features:
+ * - Search functionality
+ * - Filter toggle with indicator
+ * - Active filter chips with remove functionality
+ * - Fullscreen and density controls
+ * - Expandable filter section (date range, city selection)
+ * - Result count display
+ * - Selection alert banner integration
+ * 
+ * @param props - CustomTopToolbarProps containing all necessary data and handlers
+ */
 const CustomTopToolbar = <T extends MRT_RowData>({
   filtersState,
   locale,
   resultCount,
+  totalCount,
   onChange,
   table,
   numberOfSelectedRows,
@@ -110,61 +544,59 @@ const CustomTopToolbar = <T extends MRT_RowData>({
   showFilters,
   onFilterToggleChange,
 }: CustomTopToolbarProps<T>): ReactElement => {
-  console.log('CustomTopToolbar - Props:', { resultCount, isLoading });
+  
+  // =============================================================================
+  // STATE MANAGEMENT
+  // =============================================================================
   
   const { searchTerm, cities, dateRange } = filtersState;
   const [dateRangeSelectorRefreshKey, setDateRangeSelectorRefreshKey] = useState<number>(0);
   const [showFiltersState, setShowFiltersState] = useState(showFilters);
 
+  // =============================================================================
+  // EFFECTS
+  // =============================================================================
+  
+  /**
+   * Reset date range selector when date range is cleared
+   * This forces the component to re-render and clear its internal state
+   */
   useEffect(() => {
     if (dateRange === null) {
       setDateRangeSelectorRefreshKey(prev => prev + 1);
     }
   }, [dateRange]);
 
+  // =============================================================================
+  // EVENT HANDLERS
+  // =============================================================================
+  
+  /**
+   * Handles date range selection changes
+   * Processes the raw date selection and converts it to our DateRange format
+   */
   const handleDateChange = (value: DatesRangeValue | null): void => {
-    function isOnlyOneDateSelected(): boolean {
-      return !!(value && (value[0] === null || value[1] === null));
+    const processedRange = processDateRangeSelection(value);
+    
+    // Only update if we have a complete range or null (clear)
+    if (processedRange !== null || value === null) {
+      onChange({ dateRange: processedRange });
     }
-
-    function areBothDatesSelected(): boolean {
-      return !!(value && value[0] !== null && value[1] !== null);
-    }
-
-    if (isOnlyOneDateSelected()) {
-      return;
-    }
-    let range: DateRange | null = null;
-
-    if (value !== null && areBothDatesSelected()) {
-      let newEndDate = value[1];
-      if (newEndDate) {
-        const endOfDay = new Date(newEndDate);
-        endOfDay.setHours(23, 59, 59, 999);
-        newEndDate = endOfDay;
-      }
-
-      range = {
-        start: value[0],
-        end: value[1] ? newEndDate : value[1],
-      };
-    }
-    onChange({
-      dateRange: range,
-    });
   };
 
-  const areFiltersActive = (): boolean => {
-    return Boolean(cities && cities.length > 0 || (dateRange && dateRange.start && dateRange.end));
-  };
-
-  const onToggleFilterClick = (): void => {
+  /**
+   * Toggles the visibility of the expandable filters section
+   */
+  const handleFilterToggle = (): void => {
     const newShowFilters = !showFiltersState;
     setShowFiltersState(newShowFilters);
     onFilterToggleChange?.();
   };
 
-  const clearFilters = (): void => {
+  /**
+   * Clears all applied filters except search term
+   */
+  const handleClearAllFilters = (): void => {
     onChange({
       searchTerm,
       cities: null,
@@ -173,11 +605,84 @@ const CustomTopToolbar = <T extends MRT_RowData>({
     setDateRangeSelectorRefreshKey(prev => prev + 1);
   };
 
-  const hasActiveFilters = areFiltersActive();
-  const isFullScreen = table.getState().isFullScreen ?? false;
+  /**
+   * Removes a specific city from the cities filter
+   */
+  const handleRemoveCity = (cityToRemove: City): void => {
+    const updatedCities = cities?.filter((city) => city !== cityToRemove) || [];
+    onChange({
+      cities: updatedCities.length > 0 ? updatedCities : null,
+    });
+  };
 
+  /**
+   * Removes the date range filter
+   */
+  const handleRemoveDateRange = (): void => {
+    onChange({ dateRange: null });
+  };
+
+  /**
+   * Handles search term changes
+   */
+  const handleSearchChange = (value: string): void => {
+    onChange({ searchTerm: value });
+  };
+
+  /**
+   * Handles city selection changes
+   */
+  const handleCityChange = (value: string[] | null): void => {
+    onChange({ cities: value as City[] | null });
+  };
+
+  // =============================================================================
+  // COMPUTED VALUES
+  // =============================================================================
+  
+  const filtersAreActive = hasActiveFilters(filtersState);
+
+  // Get correct result counts from table state
+  const currentFilteredTotal = table.getFilteredRowModel().rows.length; // Total filtered results across all pages
+  const totalRecords = table.getCoreRowModel().rows.length; // Total unfiltered records
+  const currentPageSize = table.getState().pagination.pageSize;
+  const currentPageData = table.getRowModel().rows.length; // Current page only
+
+  // Determine the correct counts to display based on filter state and server-side vs client-side
+  let displayResultCount: number;
+  let displayTotalCount: number;
+
+  if (totalCount !== undefined) {
+    // Server-side/manual pagination: use provided props
+    displayTotalCount = totalCount;
+    
+    if (filtersAreActive) {
+      // When filters are active, show filtered count vs total
+      displayResultCount = resultCount;
+    } else {
+      // When no filters are active, show total count only
+      displayResultCount = totalCount;
+    }
+  } else {
+    // Client-side pagination with full dataset: use table instance methods
+    if (filtersAreActive) {
+      // When filters are active, show filtered count
+      displayResultCount = currentFilteredTotal;
+      displayTotalCount = totalRecords;
+    } else {
+      // When no filters are active, show total count only
+      displayResultCount = totalRecords;
+      displayTotalCount = totalRecords;
+    }
+  }
+
+  // =============================================================================
+  // RENDER
+  // =============================================================================
+  
   return (
     <>
+      {/* Main toolbar content */}
       <Stack
         p="md"
         gap="xshalf"
@@ -185,225 +690,76 @@ const CustomTopToolbar = <T extends MRT_RowData>({
           borderBottom: "1px solid var(--mantine-color-gray-3)",
         }}
       >
+        {/* Top row: Search and action buttons */}
         <SimpleGrid cols={2}>
+          {/* Left side: Filter toggle and search */}
           <Group gap="xs" align="center">
-            {hasActiveFilters ? (
+            {/* Filter toggle button with optional indicator */}
+            {filtersAreActive ? (
               <Indicator size="8">
-                <FilterIconButton areFiltersShown={showFiltersState} onClick={onToggleFilterClick} />
+                <FilterIconButton 
+                  areFiltersShown={showFiltersState} 
+                  onClick={handleFilterToggle}
+                  text=""
+                />
               </Indicator>
             ) : (
-              <FilterIconButton areFiltersShown={showFiltersState} onClick={onToggleFilterClick} />
+              <FilterIconButton 
+                areFiltersShown={showFiltersState} 
+                onClick={handleFilterToggle}
+                text=""
+              />
             )}
+
+            {/* Search input */}
             <SearchFilter
               searchTerm={searchTerm as string}
-              onChange={(value): void =>
-                onChange({
-                  searchTerm: value,
-                })
-              }
+              onChange={handleSearchChange}
             />
           </Group>
-          <Group justify="end" gap="xs">
-            <ActionIcon
-              size={rem(30)}
-              onClick={() => table.setIsFullScreen(!isFullScreen)}
-              aria-label={isFullScreen ? "Exit fullscreen" : "Enter fullscreen"}
-              style={{
-                color: 'var(--mantine-color-gray-7)',
-                backgroundColor: 'var(--mantine-color-white)',
-                borderColor: 'var(--mantine-color-gray-4)',
-              }}
-            >
-              {isFullScreen ? <IconMinimize size={18} /> : <IconMaximize size={18} />}
-            </ActionIcon>
-            <ActionIcon
-              size={rem(30)}
-              onClick={() => {
-                const currentDensity = table.getState().density;
-                const nextDensity = currentDensity === 'xs' ? 'md' : currentDensity === 'md' ? 'xl' : 'xs';
-                table.setDensity(nextDensity);
-              }}
-              data-testid="toggle-dense-padding"
-              aria-label="Toggle density"
-              style={{
-                color: 'var(--mantine-color-gray-7)',
-                backgroundColor: 'var(--mantine-color-white)',
-                borderColor: 'var(--mantine-color-gray-4)',
-              }}
-            >
-              {(() => {
-                switch (table.getState().density) {
-                  case 'md':
-                    return <IconBaselineDensityMedium size={18} />;
-                  case 'xs':
-                    return <IconBaselineDensitySmall size={18} />;
-                  case 'xl':
-                    return <IconBaselineDensityLarge size={18} />;
-                  default:
-                    return <IconBaselineDensityMedium size={18} />;
-                }
-              })()}
-            </ActionIcon>
-          </Group>
+
+          {/* Right side: Action buttons */}
+          <ToolbarActions table={table} />
         </SimpleGrid>
+
+        {/* Second row: Active filters and result count */}
         <Group justify="space-between">
           <Group gap="xs">
-            {hasActiveFilters && (
-              <>
-                <Text
-                  size="xs"
-                  span
-                  role="button"
-                  fw={600}
-                  style={{
-                    cursor: "pointer",
-                  }}
-                  onClick={clearFilters}
-                  c="blue"
-                  data-testid="clear-filters"
-                >
-                  {translate("table.filters.clear.filters")}
-                </Text>
-                {cities && cities.map((city) => (
-                  <FilterChip
-                    key={city}
-                    label={city}
-                    onClick={(): void =>
-                      onChange({
-                        cities: cities.filter((c) => c !== city),
-                      })
-                    }
-                  />
-                ))}
-                {filtersState.dateRange && (
-                  <FilterChip
-                    label={translate("table.filters.chip.date.range.label", {
-                      startDate: filtersState.dateRange.start?.toLocaleDateString(
-                        undefined,
-                        dateOptions
-                      ) || '',
-                      endDate: filtersState.dateRange.end?.toLocaleDateString(
-                        undefined,
-                        dateOptions
-                      ) || '',
-                    })}
-                    onClick={(): void =>
-                      onChange({
-                        dateRange: null,
-                      })
-                    }
-                  />
-                )}
-              </>
+            {/* Show active filters if any exist */}
+            {filtersAreActive && (
+              <ActiveFilters
+                filters={filtersState}
+                onClearFilters={handleClearAllFilters}
+                onRemoveCity={handleRemoveCity}
+                onRemoveDateRange={handleRemoveDateRange}
+              />
             )}
-            <ResultCount resultCount={resultCount} isLoading={isLoading ?? false} />
+            
+            {/* Result count display */}
+            <ResultCount 
+              resultCount={displayResultCount} 
+              totalCount={displayTotalCount}
+              isLoading={isLoading ?? false} 
+              hasActiveFilters={filtersAreActive}
+            />
           </Group>
         </Group>
-        {showFiltersState && (
-          <SimpleGrid data-testid="additional-filters" cols={3} spacing="xs" role="menu">
-            <DateRangeSelector
-              key={dateRangeSelectorRefreshKey}
-              label={translate("table.filters.applied.on")}
-              locale={locale}
-              onChange={handleDateChange}
-            />
-            <SelectFilter
-              label={translate("table.filters.city")}
-              onChange={(value): void => {
-                onChange({
-                  cities: value as City[] | null,
-                });
-              }}
-              selectedValue={(cities as string[]) || null}
-              data={[
-                {
-                  value: City.ATLANTA,
-                  label: translate("table.filters.city.atlanta"),
-                },
-                {
-                  value: City.AUSTIN,
-                  label: translate("table.filters.city.austin"),
-                },
-                {
-                  value: City.BOSTON,
-                  label: translate("table.filters.city.boston"),
-                },
-                {
-                  value: City.CHARLOTTE,
-                  label: translate("table.filters.city.charlotte"),
-                },
-                {
-                  value: City.CHICAGO,
-                  label: translate("table.filters.city.chicago"),
-                },
-                {
-                  value: City.COLUMBUS,
-                  label: translate("table.filters.city.columbus"),
-                },
-                {
-                  value: City.DENVER,
-                  label: translate("table.filters.city.denver"),
-                },
-                {
-                  value: City.DETROIT,
-                  label: translate("table.filters.city.detroit"),
-                },
-                {
-                  value: City.INDIANAPOLIS,
-                  label: translate("table.filters.city.indianapolis"),
-                },
-                {
-                  value: City.LAS_VEGAS,
-                  label: translate("table.filters.city.las.vegas"),
-                },
-                {
-                  value: City.LOS_ANGELES,
-                  label: translate("table.filters.city.los.angeles"),
-                },
-                {
-                  value: City.MIAMI,
-                  label: translate("table.filters.city.miami"),
-                },
-                {
-                  value: City.NASHVILLE,
-                  label: translate("table.filters.city.nashville"),
-                },
-                {
-                  value: City.NEW_YORK,
-                  label: translate("table.filters.city.new.york"),
-                },
-                {
-                  value: City.ORLANDO,
-                  label: translate("table.filters.city.orlando"),
-                },
-                {
-                  value: City.PHOENIX,
-                  label: translate("table.filters.city.phoenix"),
-                },
-                {
-                  value: City.PORTLAND,
-                  label: translate("table.filters.city.portland"),
-                },
-                {
-                  value: City.SAN_FRANCISCO,
-                  label: translate("table.filters.city.san.francisco"),
-                },
-                {
-                  value: City.SEATTLE,
-                  label: translate("table.filters.city.seattle"),
-                },
-                {
-                  value: City.TAMPA,
-                  label: translate("table.filters.city.tampa"),
-                },
-              ]}
-            />
-          </SimpleGrid>
-        )}
+
+        {/* Expandable filters section */}
+        <ExpandableFilters
+          visible={showFiltersState}
+          locale={locale}
+          cities={cities}
+          onDateChange={handleDateChange}
+          onCityChange={handleCityChange}
+          dateRangeSelectorKey={dateRangeSelectorRefreshKey}
+        />
       </Stack>
+
+      {/* Selection alert banner */}
       <MRTToolbarAlertBanner
         stackAlertBanner
-        table={table}
+        table={table as any}
         bg="blue"
         numberofselectedrows={numberOfSelectedRows}
         style={{

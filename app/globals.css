@@ -21,9 +21,23 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-inter), sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure Inter font takes precedence over Mantine defaults */
+html, body, * {
+  font-family: var(--font-inter), sans-serif !important;
+}
+
+/* Override Mantine's font family specifically */
+.mantine-Text-root,
+.mantine-Button-root,
+.mantine-InputBase-root,
+.mantine-Combobox-root,
+.mantine-DatePicker-root {
+  font-family: var(--font-inter), sans-serif !important;
 }
 
 * {
@@ -39,4 +53,26 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* =================================================================
+   TABLE ACTIONS COLUMN STYLING
+   ================================================================= */
+
+/* 
+ * Fix for actions column header alignment in Mantine React Table
+ * The nested .mrt-table-head-cell-content div needs float: right
+ * to properly align the column visibility button to the right side
+ * of the cell, matching the body cell alignment.
+ */
+.actions-header-cell .mrt-table-head-cell-content {
+  float: right;
+}
+
+/*
+ * Ensure the actions header cell maintains consistent width
+ * with the body cells (69px with 10px padding on each side)
+ */
+.actions-header-cell {
+  /* Additional styling can be added here if needed */
 }

@@ -1,4 +1,4 @@
-import { MantineThemeOverride, MantineColorsTuple } from '@mantine/core';
+import { MantineThemeOverride, MantineColorsTuple, MantineTheme } from '@mantine/core';
 import * as OpenColor from 'open-color';
 
 /**
@@ -71,4 +71,4 @@ export const theme: MantineThemeOverride = {
       },
     },
   },
-}; 
+};

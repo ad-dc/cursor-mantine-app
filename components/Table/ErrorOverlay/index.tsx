@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
-import { Stack, Text, Button } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
+import { Button } from '@/components/DesignSystem';
 import { translate } from '../translations';
 
 interface ErrorOverlayProps {

@@ -25,6 +25,98 @@ Use this prompt to instruct Cursor IDE to generate components, layouts, or utili
 
 ---
 
+## 📊 Data Table Requirements
+
+**ALWAYS use the custom Table component** for any data display requests, including synonyms:
+- "table", "data table", "datatable"
+- "grid", "data grid" 
+- "list", "list view", "data list"
+- "spreadsheet", "sheet"
+- "records", "data display"
+
+**Custom Table Component Location:** `@/components/Table`
+
+**Features included:**
+- Advanced filtering and search
+- Column sorting and visibility controls
+- Row selection with bulk actions
+- Pagination with cursor support
+- Loading states and error handling
+- Responsive design
+- Accessibility compliance
+
+**Usage Pattern:**
+```tsx
+import { Table } from '@/components/Table';
+
+<Table<DataType>
+  data={data}
+  columns={columnDefs}
+  totalCount={totalRecords}
+  onRowSelectionChange={handleSelection}
+  onPaginationChange={handlePagination}
+  filtersState={filters}
+  onFiltersChange={setFilters}
+/>
+```
+
+**Do NOT use:**
+- Basic Mantine `Table` components
+- Custom table implementations
+- Third-party table libraries
+
+---
+
+## 📄 Page Content Header Requirements
+
+**ALWAYS use the custom PageContentHeader component** for page header sections, including synonyms:
+- "page header", "content header", "section header"
+- "hero section", "page banner"
+- "info panel", "summary section"
+- "header card", "title section"
+
+**Custom Component Location:** `@/components/PageContentHeader`
+
+**Features included:**
+- Icon with customizable colors and sizes (58x58px ThemeIcon)
+- Title with optional badge and edit functionality
+- Kebab menu for additional actions
+- Action buttons row
+- **4 mutually exclusive content sections:**
+  1. **Key Insights** - Metrics display with large numbers
+  2. **Description** - Text content with optional title and links
+  3. **Name Value Pairs** - Structured data in grid layout
+  4. **Drawer** - Collapsible content with "View More" functionality
+
+**Usage Pattern:**
+```tsx
+import { PageContentHeader } from '@/components/PageContentHeader';
+
+<PageContentHeader
+  title="Page Title"
+  badge="BADGE"
+  icon={<IconComponent />}
+  editable={true}
+  onEdit={handleEdit}
+  actions={[
+    { label: "Action One", onClick: handleAction1 },
+    { label: "Action Two", onClick: handleAction2 }
+  ]}
+  contentSection="insights"
+  insights={[
+    { value: "150", title: "Total Users", color: "blue" },
+    { value: "23", title: "Active Sessions" }
+  ]}
+/>
+```
+
+**Do NOT use:**
+- Custom header implementations
+- Basic Mantine Paper/Group combinations
+- Third-party header components
+
+---
+
 ## 📝 Prompt Template
 
 > You are assisting with prototyping a web application using the following tech stack:

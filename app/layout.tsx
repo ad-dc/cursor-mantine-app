@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
+// Mantine CSS imports (load first)
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
+import '@mantine/notifications/styles.css';
+
+// Custom CSS (load after Mantine to override)
 import "./globals.css";
+import 'remixicon/fonts/remixicon.css';
+
 import { MantineProvider } from "@mantine/core";
 import { theme } from "@/styles/theme";
-import 'remixicon/fonts/remixicon.css';
 
 const inter = Inter({
   subsets: ["latin"],

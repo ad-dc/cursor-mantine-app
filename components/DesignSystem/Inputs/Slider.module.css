@@ -1,0 +1,17 @@
+/* Slider Design System Overrides */
+
+.slider {
+  /* Make the thumb fully round */
+}
+
+.slider :global(.mantine-Slider-thumb) {
+  border-radius: 50% !important;
+}
+
+.slider :global([data-mantine-color-scheme="light"] .mantine-Slider-thumb) {
+  border-radius: 50% !important;
+}
+
+.slider :global([data-mantine-color-scheme="dark"] .mantine-Slider-thumb) {
+  border-radius: 50% !important;
+} 

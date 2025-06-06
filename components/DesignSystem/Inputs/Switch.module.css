@@ -1,0 +1,32 @@
+/* Switch Design System Overrides */
+
+.switch {
+  /* Container for custom switch styling */
+}
+
+/* Make the switch track pill-shaped */
+.switch :global(.mantine-Switch-track) {
+  border-radius: 50px !important;
+}
+
+/* Make the thumb perfectly round */
+.switch :global(.mantine-Switch-thumb) {
+  border-radius: 50% !important;
+}
+
+/* Ensure styles work in both light and dark modes */
+.switch :global([data-mantine-color-scheme="light"] .mantine-Switch-track) {
+  border-radius: 50px !important;
+}
+
+.switch :global([data-mantine-color-scheme="light"] .mantine-Switch-thumb) {
+  border-radius: 50% !important;
+}
+
+.switch :global([data-mantine-color-scheme="dark"] .mantine-Switch-track) {
+  border-radius: 50px !important;
+}
+
+.switch :global([data-mantine-color-scheme="dark"] .mantine-Switch-thumb) {
+  border-radius: 50% !important;
+} 

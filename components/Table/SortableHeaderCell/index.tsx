@@ -1,33 +1,31 @@
 import React, { ReactElement } from "react";
-import { Group, Text, ActionIcon } from "@mantine/core";
+import { UnstyledButton, Group, Text, Center, rem } from "@mantine/core";
 import { IconArrowUp, IconArrowDown, IconArrowsSort } from '@tabler/icons-react';
 import { translate } from '../translations';
 
 interface SortableHeaderCellProps {
   label: string;
-  sortDirection: "asc" | "desc" | null;
-  onSort: () => void;
+  sortDirection?: 'asc' | 'desc' | null;
+  onSort?: () => void;
   isSortable?: boolean;
 }
 
 const SortableHeaderCell = ({
   label,
-  sortDirection,
+  sortDirection = null,
   onSort,
   isSortable = true,
 }: SortableHeaderCellProps): ReactElement => {
-  console.log('SortableHeader - label:', label, 'sortDirection:', sortDirection);
-  
   const renderSortIcon = () => {
     if (!isSortable) return null;
     
     switch (sortDirection) {
-      case "asc":
-        return <IconArrowUp size={16} />;
-      case "desc":
-        return <IconArrowDown size={16} />;
+      case 'asc':
+        return <IconArrowUp style={{ width: rem(16), height: rem(16) }} stroke={1.5} />;
+      case 'desc':
+        return <IconArrowDown style={{ width: rem(16), height: rem(16) }} stroke={1.5} />;
       default:
-        return <IconArrowsSort size={16} />;
+        return <IconArrowsSort style={{ width: rem(16), height: rem(16) }} stroke={1.5} />;
     }
   };
 
@@ -37,24 +35,21 @@ const SortableHeaderCell = ({
     direction: directionText
   });
   
-  console.log('SortableHeader - directionText:', directionText);
-  console.log('SortableHeader - ariaLabel:', ariaLabel);
-
   return (
-    <Group gap="xs" wrap="nowrap" style={{ cursor: isSortable ? "pointer" : "default" }}>
-      <Text size="sm" fw={500}>
-        {label}
-      </Text>
-      {isSortable && (
-        <ActionIcon
-          variant="subtle"
-          onClick={onSort}
-          aria-label={ariaLabel}
-        >
+    <UnstyledButton 
+      onClick={isSortable ? onSort : undefined}
+      disabled={!isSortable}
+      aria-label={ariaLabel}
+    >
+      <Group justify="space-between">
+        <Text fw={500} fz="sm">
+          {label}
+        </Text>
+        <Center>
           {renderSortIcon()}
-        </ActionIcon>
-      )}
-    </Group>
+        </Center>
+      </Group>
+    </UnstyledButton>
   );
 };
 

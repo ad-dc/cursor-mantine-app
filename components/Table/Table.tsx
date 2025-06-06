@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import {
   useMantineReactTable,
   MantineReactTable,
@@ -6,14 +6,12 @@ import {
   MRT_RowSelectionState as RowSelectionState,
   MRT_DensityState as DensityState,
   MRT_RowData,
-  MRT_SortingState as SortingState,
   MRT_ColumnDef as ColumnDef,
 } from 'mantine-react-table';
-import CustomTopToolbar, { type Filters, type DateRange, type City } from './CustomTopToolbar';
-import CustomBottomToolbar from './CustomBottomToolbar';
-import CustomToolbarAlertBannerContent from './CustomToolbarAlertBannerContent';
-import ErrorOverlay from './ErrorOverlay';
-import SortableHeaderCell from './SortableHeaderCell';
+import { useTableState } from '@/hooks/useTableState';
+import { useTableHandlers } from '@/hooks/useTableHandlers';
+import { useTableRenderFunctions } from '@/hooks/useTableRenderFunctions';
+import { type Filters, type DateRange, type City } from './CustomTopToolbar';
 
 // ========================== EXPORTS ==========================
 /**
@@ -22,13 +20,12 @@ import SortableHeaderCell from './SortableHeaderCell';
  */
 export type { Filters, DateRange, City };
 
-// ========================== TYPES ==========================
-/**
- * Generic type for state updater functions used by React state setters
- * Can accept either a direct value or a function that takes the previous value
- */
-type OnChangeFn<T> = (updater: T | ((old: T) => T)) => void;
+// TODO: Review integration with PageContentHeader Description feature
+// - Consider adding table description/subtitle support
+// - Evaluate if table metadata should be displayed in header area
+// - Review accessibility implications of description placement
 
+// ========================== TYPES ==========================
 /**
  * Union type for sort directions used throughout the table
  * null represents no sorting applied to a column
@@ -174,329 +171,159 @@ const FEATURE_FLAGS = {
   SHOW_FULL_SCREEN_TOGGLE: true,
 } as const;
 
-/**
- * Styling constants using Mantine design tokens
- * Ensures consistent theming and easy maintenance
- */
-const TABLE_STYLES = {
-  /** Styling for the table header row */
-  headerRow: {
-    borderBottom: '2px solid var(--mantine-color-gray-3)',
-  },
-  /** Styling for table body cells */
-  bodyCell: {
-    padding: 'var(--mantine-spacing-xs)',
-  },
-  /** Styling for table container and paper wrapper */
-  container: {
-    backgroundColor: 'var(--mantine-color-white)',
-  },
-  /** Styling for table header cells */
-  headerCell: {
-    fontWeight: 'bold',
-  },
-} as const;
-
-/**
- * ID used by Mantine React Table for the row selection column
- * Stored as constant to avoid magic strings
- */
-const SELECTION_COLUMN_ID = 'mrt-row-select';
-
 // ========================== CUSTOM HOOKS ==========================
-/**
- * Custom hook for managing all internal table state
- * Centralizes state management and provides computed values
- * 
- * @param defaultPageSize - Initial page size for pagination
- * @param defaultDensity - Initial density setting for table rows
- * @returns Object containing all state values and setters
- */
-const useTableState = (defaultPageSize: number, defaultDensity: DensityState) => {
-  // ==================== STATE DECLARATIONS ====================
-  /** Pagination state containing current page index and page size */
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0, // Start at first page (0-based)
-    pageSize: defaultPageSize,
-  });
-
-  /** Row selection state - object mapping row IDs to selection status */
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  
-  /** Current table density setting affecting row height */
-  const [density, setDensity] = useState<DensityState>(defaultDensity);
-
-  // ==================== COMPUTED VALUES ====================
-  /** 
-   * Number of currently selected rows across all pages
-   * Computed from the rowSelection object keys
-   */
-  const numberOfSelectedRows = useMemo(() => Object.keys(rowSelection).length, [rowSelection]);
-  
-  /** 
-   * Whether to show the alert banner indicating selected rows
-   * Only shown when there are selected rows
-   */
-  const showAlertBanner = useMemo(() => numberOfSelectedRows > 0, [numberOfSelectedRows]);
-
-  // Return all state and computed values for use in component
-  return {
-    pagination,
-    setPagination,
-    rowSelection,
-    setRowSelection,
-    density,
-    setDensity,
-    numberOfSelectedRows,
-    showAlertBanner,
-  };
-};
 
 /**
- * Custom hook for table event handlers
- * Manages all user interactions and state updates with proper memoization
+ * Table Component
  * 
- * @param tableState - Current table state from useTableState hook
- * @param props - Callback props passed from parent component
- * @returns Object containing all memoized event handlers
- */
-const useTableHandlers = (
-  tableState: ReturnType<typeof useTableState>,
-  props: {
-    onPaginationChange?: (pagination: PaginationState) => void;
-    onRowSelectionChange?: (rowSelection: RowSelectionState) => void;
-    onDensityChange?: (density: DensityState) => void;
-    onSortChange?: (field: string, direction: SortDirection) => void;
-  }
-) => {
-  // Extract state and callbacks for cleaner code
-  const { pagination, setPagination, rowSelection, setRowSelection, density, setDensity } = tableState;
-  const { onPaginationChange, onRowSelectionChange, onDensityChange, onSortChange } = props;
-
-  /**
-   * Handles pagination state changes (page navigation, page size changes)
-   * Updates internal state and notifies parent component
-   */
-  const handlePaginationChange: OnChangeFn<PaginationState> = useCallback((updater) => {
-    // Handle both direct values and updater functions
-    const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
-    setPagination(newPagination);
-    // Notify parent component of pagination change
-    onPaginationChange?.(newPagination);
-  }, [pagination, onPaginationChange, setPagination]);
-
-  /**
-   * Handles row selection state changes
-   * Maintains selection state across pagination and notifies parent
-   */
-  const handleRowSelectionChange: OnChangeFn<RowSelectionState> = useCallback((updater) => {
-    // Handle both direct values and updater functions
-    const newRowSelection = typeof updater === 'function' ? updater(rowSelection) : updater;
-    setRowSelection(newRowSelection);
-    // Notify parent component of selection change
-    onRowSelectionChange?.(newRowSelection);
-  }, [rowSelection, onRowSelectionChange, setRowSelection]);
-
-  /**
-   * Handles table density changes (affects row height and spacing)
-   * Updates UI density and notifies parent component
-   */
-  const handleDensityChange: OnChangeFn<DensityState> = useCallback((updater) => {
-    // Handle both direct values and updater functions
-    const newDensity = typeof updater === 'function' ? updater(density) : updater;
-    setDensity(newDensity);
-    // Notify parent component of density change
-    onDensityChange?.(newDensity);
-  }, [density, onDensityChange, setDensity]);
-
-  /**
-   * Clears all selected rows and notifies parent component
-   * Used by the "Clear Selection" button in the alert banner
-   */
-  const handleClearSelection = useCallback(() => {
-    setRowSelection({});
-    onRowSelectionChange?.({});
-  }, [onRowSelectionChange, setRowSelection]);
-
-  /**
-   * Handles column sorting changes
-   * Converts Mantine React Table sorting format to our simplified format
-   */
-  const handleSortingChange = useCallback((updater: SortingState | ((old: SortingState) => SortingState)) => {
-    // Handle both direct values and updater functions
-    const sorting = typeof updater === 'function' ? updater([]) : updater;
-    
-    if (sorting.length > 0) {
-      // Extract sorting information from first sort (single column sorting)
-      const { id, desc } = sorting[0];
-      onSortChange?.(id, desc ? 'desc' : 'asc');
-    } else {
-      // No sorting applied
-      onSortChange?.('', null);
-    }
-  }, [onSortChange]);
-
-  // Return all memoized handlers
-  return {
-    handlePaginationChange,
-    handleRowSelectionChange,
-    handleDensityChange,
-    handleClearSelection,
-    handleSortingChange,
-  };
-};
-
-/**
- * Custom hook for table render functions
- * Manages all custom rendering logic with proper memoization
+ * A powerful, feature-rich data table component built on top of Mantine React Table.
+ * Supports pagination, sorting, filtering, row selection, density controls, and more.
+ * Perfect for displaying large datasets with complex interaction requirements.
  * 
- * @param props - Props needed for rendering (data, filters, etc.)
- * @param tableState - Current table state (selection count, etc.)
- * @param handlers - Event handlers for user interactions
- * @returns Object containing all memoized render functions
- */
-const useTableRenderFunctions = <T extends MRT_RowData>(
-  props: {
-    filtersState: Filters;
-    locale: string;
-    onFiltersChange: (filters: Filters) => void;
-    data: T[];
-    showFilters: boolean;
-    isLoading: boolean;
-    totalCount: number;
-    pageInfo?: PageInfo;
-    error?: string;
-    onRetry?: () => void;
-  },
-  tableState: { numberOfSelectedRows: number },
-  handlers: { handleClearSelection: () => void }
-) => {
-  // Extract props for cleaner destructuring
-  const {
-    filtersState,
-    locale,
-    onFiltersChange,
-    data,
-    showFilters,
-    isLoading,
-    totalCount,
-    pageInfo,
-    error,
-    onRetry,
-  } = props;
-  const { numberOfSelectedRows } = tableState;
-  const { handleClearSelection } = handlers;
-
-  /**
-   * Renders the top toolbar with filters, search, and action buttons
-   * Memoized to prevent unnecessary re-renders
-   */
-  const renderTopToolbar = useCallback((toolbarProps: any) => (
-    <CustomTopToolbar
-      {...toolbarProps}
-      filtersState={filtersState}
-      locale={locale}
-      onChange={onFiltersChange}
-      resultCount={data.length}
-      showFilters={showFilters}
-      numberOfSelectedRows={numberOfSelectedRows}
-      onFilterToggleChange={() => {}} // TODO: Implement filter toggle functionality
-      isLoading={isLoading}
-    />
-  ), [filtersState, locale, onFiltersChange, data.length, showFilters, numberOfSelectedRows, isLoading]);
-
-  /**
-   * Renders the bottom toolbar with pagination controls and row count
-   * Includes custom cursor-based pagination with ActionIcon chevrons
-   */
-  const renderBottomToolbar = useCallback((toolbarProps: any) => (
-    <CustomBottomToolbar
-      {...toolbarProps}
-      totalCount={totalCount}
-      pageInfo={pageInfo}
-      numberOfSelectedRows={numberOfSelectedRows}
-    />
-  ), [totalCount, pageInfo, numberOfSelectedRows]);
-
-  /**
-   * Renders the alert banner content shown when rows are selected
-   * Displays selection count and clear selection button
-   */
-  const renderToolbarAlertBannerContent = useCallback(() => (
-    <CustomToolbarAlertBannerContent
-      numberOfSelectedRows={numberOfSelectedRows}
-      onClearSelection={handleClearSelection}
-    />
-  ), [numberOfSelectedRows, handleClearSelection]);
-
-  /**
-   * Renders the fallback content when the table is empty or has errors
-   * Shows error message with retry button when applicable
-   */
-  const renderEmptyRowsFallback = useCallback(() => (
-    <ErrorOverlay error={error} onRetry={onRetry} />
-  ), [error, onRetry]);
-
-  /**
-   * Custom renderer for table header cells
-   * Handles both string headers and JSX component headers
-   * Excludes the row selection column to let Mantine React Table handle it
-   */
-  const renderTableHeadCell = useCallback(({ column }: any) => {
-    // Don't override the select column header - let Mantine React Table handle it
-    if (column.id === SELECTION_COLUMN_ID) {
-      return {};
-    }
-    
-    const header = column.columnDef.header;
-    
-    // If header is a function (returns JSX), render it directly
-    if (typeof header === 'function') {
-      return {
-        style: TABLE_STYLES.headerCell,
-        children: header(),
-      };
-    }
-    
-    // If header is a string, use our custom SortableHeaderCell component
-    return {
-      style: TABLE_STYLES.headerCell,
-      children: (
-        <SortableHeaderCell
-          label={header as string}
-          sortDirection={column.getIsSorted() as "asc" | "desc" | null}
-          onSort={() => column.toggleSorting()}
-          isSortable={column.getCanSort()}
-        />
-      ),
-    };
-  }, []);
-
-  // Return all memoized render functions
-  return {
-    renderTopToolbar,
-    renderBottomToolbar,
-    renderToolbarAlertBannerContent,
-    renderEmptyRowsFallback,
-    renderTableHeadCell,
-  };
-};
-
-// ========================== MAIN COMPONENT ==========================
-/**
- * A comprehensive table component built on top of Mantine React Table
+ * @example
+ * // Basic usage with minimal configuration
+ * const userData = [
+ *   { id: '1', name: 'John Doe', email: 'john@example.com', status: 'Active' },
+ *   { id: '2', name: 'Jane Smith', email: 'jane@example.com', status: 'Inactive' },
+ * ];
  * 
- * Features include:
- * - Pagination with cursor-based navigation
- * - Row selection with cumulative selection across pages
- * - Column sorting and filtering
- * - Customizable density and fullscreen modes
- * - Error handling and loading states
- * - Internationalization support
- * - Fully customizable styling
+ * const columns = [
+ *   { accessorKey: 'name', header: 'Name' },
+ *   { accessorKey: 'email', header: 'Email' },
+ *   { accessorKey: 'status', header: 'Status' },
+ * ];
  * 
- * @param props - Table configuration and data props
- * @returns Rendered table component with all features enabled
+ * <Table
+ *   data={userData}
+ *   columns={columns}
+ * />
+ * 
+ * @example
+ * // Advanced usage with pagination and filtering
+ * const [tableData, setTableData] = useState([]);
+ * const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
+ * const [filters, setFilters] = useState({});
+ * const [isLoading, setIsLoading] = useState(false);
+ * 
+ * // Fetch data when pagination or filters change
+ * useEffect(() => {
+ *   fetchData(pagination, filters);
+ * }, [pagination, filters]);
+ * 
+ * <Table
+ *   data={tableData}
+ *   columns={columns}
+ *   isLoading={isLoading}
+ *   totalCount={1000}
+ *   defaultPageSize={20}
+ *   filtersState={filters}
+ *   onPaginationChange={setPagination}
+ *   onFiltersChange={setFilters}
+ *   pageInfo={{
+ *     hasNextPage: true,
+ *     hasPreviousPage: false,
+ *     startCursor: 'cursor-start',
+ *     endCursor: 'cursor-end'
+ *   }}
+ * />
+ * 
+ * @example
+ * // With row selection and custom actions
+ * const [selectedRows, setSelectedRows] = useState({});
+ * 
+ * const handleRowSelection = (rowSelection) => {
+ *   setSelectedRows(rowSelection);
+ *   console.log('Selected rows:', Object.keys(rowSelection));
+ * };
+ * 
+ * const handleBulkAction = () => {
+ *   const selectedIds = Object.keys(selectedRows);
+ *   // Perform bulk action on selected rows
+ * };
+ * 
+ * <Table
+ *   data={tableData}
+ *   columns={columns}
+ *   onRowSelectionChange={handleRowSelection}
+ *   // Custom toolbar actions will appear when rows are selected
+ * />
+ * 
+ * @example
+ * // Error handling and retry functionality
+ * const [error, setError] = useState(null);
+ * const [isError, setIsError] = useState(false);
+ * 
+ * const handleRetry = () => {
+ *   setError(null);
+ *   setIsError(false);
+ *   // Retry data fetching logic
+ *   fetchData();
+ * };
+ * 
+ * <Table
+ *   data={tableData}
+ *   columns={columns}
+ *   isError={isError}
+ *   error={error}
+ *   onRetry={handleRetry}
+ * />
+ * 
+ * @example
+ * // Customized table features and styling
+ * <Table
+ *   data={tableData}
+ *   columns={columns}
+ *   defaultDensity="md"
+ *   showFilters={true}
+ *   showSearch={true}
+ *   showDensityToggle={true}
+ *   showFullScreenToggle={false}
+ *   locale="en-US"
+ *   mantineTableContainerProps={{
+ *     style: { maxHeight: '600px' }
+ *   }}
+ *   mantinePaperProps={{
+ *     shadow: 'md',
+ *     radius: 'md'
+ *   }}
+ * />
+ * 
+ * @example
+ * // Dynamic columns with conditional rendering
+ * const columns = useMemo(() => [
+ *   { accessorKey: 'name', header: 'Name', enableSorting: true },
+ *   { accessorKey: 'email', header: 'Email', enableColumnFilter: true },
+ *   { 
+ *     accessorKey: 'status', 
+ *     header: () => <Text fw="bold">Status</Text>,
+ *     size: 120,
+ *     enableSorting: false
+ *   },
+ *   {
+ *     accessorKey: 'actions',
+ *     header: 'Actions',
+ *     enableSorting: false,
+ *     enableColumnFilter: false,
+ *     Cell: ({ row }) => (
+ *       <Group>
+ *         <Button size="xs" onClick={() => handleEdit(row.original)}>
+ *           Edit
+ *         </Button>
+ *         <Button size="xs" color="red" onClick={() => handleDelete(row.original)}>
+ *           Delete
+ *         </Button>
+ *       </Group>
+ *     )
+ *   }
+ * ], []);
+ * 
+ * <Table
+ *   data={tableData}
+ *   columns={columns}
+ *   onSortChange={(field, direction) => {
+ *     console.log(`Sorting ${field} in ${direction} order`);
+ *   }}
+ * />
  */
 export function Table<T extends MRT_RowData>({
   // ==================== DATA PROPS ====================
@@ -608,12 +435,22 @@ export function Table<T extends MRT_RowData>({
     enablePagination: true,
     /** Disable built-in row actions (we handle them manually) */
     enableRowActions: false,
+    /** Disable individual column actions - we'll use a custom column visibility button */
+    enableColumnActions: false,
+    /** Enable column hiding feature */
+    enableHiding: true,
     /** Use manual pagination (parent handles data slicing) */
     manualPagination: true,
     
     // ==================== DATA AND STATE ====================
     /** Total number of rows across all pages */
     rowCount: totalCount,
+    /** Initial state with pinned actions column */
+    initialState: {
+      columnPinning: {
+        right: ['actions'],
+      },
+    },
     /** Current state object passed to Mantine React Table */
     state: {
       pagination: tableState.pagination,
@@ -622,6 +459,19 @@ export function Table<T extends MRT_RowData>({
       isLoading,
       showAlertBanner: tableState.showAlertBanner,
     },
+    
+    // ==================== LAYOUT CONFIGURATION ====================
+    /** Use grid layout for better column control */
+    layoutMode: 'grid' as const,
+    /** Configure display columns (selection, etc.) */
+    displayColumnDefOptions: {
+      'mrt-row-select': {
+        size: 40, // Minimal width for checkbox
+        grow: false, // Don't grow this column
+      },
+    },
+    /** Enable column pinning to keep actions column fixed */
+    enablePinning: true,
     
     // ==================== EVENT HANDLERS ====================
     /** Handle pagination changes (page navigation, page size changes) */
@@ -642,6 +492,8 @@ export function Table<T extends MRT_RowData>({
     renderToolbarAlertBannerContent: renderFunctions.renderToolbarAlertBannerContent,
     /** Custom empty state with error handling */
     renderEmptyRowsFallback: renderFunctions.renderEmptyRowsFallback,
+    /** Custom header cell renderer */
+    mantineTableHeadCellProps: renderFunctions.renderTableHeadCell,
     
     // ==================== ACCESSIBILITY AND STYLING ====================
     /** Accessibility props for select all checkbox */
@@ -660,13 +512,15 @@ export function Table<T extends MRT_RowData>({
     },
     /** Header row styling */
     mantineTableHeadRowProps: {
-      style: TABLE_STYLES.headerRow,
+      style: {
+        borderBottom: '2px solid var(--mantine-color-gray-3)',
+      },
     },
-    /** Custom header cell renderer */
-    mantineTableHeadCellProps: renderFunctions.renderTableHeadCell,
     /** Body cell styling */
     mantineTableBodyCellProps: {
-      style: TABLE_STYLES.bodyCell,
+      style: {
+        padding: 'var(--mantine-spacing-xs)',
+      },
     },
     /** Alert banner styling */
     mantineToolbarAlertBannerProps: {
@@ -674,12 +528,16 @@ export function Table<T extends MRT_RowData>({
     },
     /** Table container styling */
     mantineTableContainerProps: {
-      style: TABLE_STYLES.container,
+      style: {
+        backgroundColor: 'var(--mantine-color-white)',
+      },
       ...mantineTableContainerProps, // Allow prop overrides
     },
     /** Paper wrapper styling */
     mantinePaperProps: {
-      style: TABLE_STYLES.container,
+      style: {
+        backgroundColor: 'var(--mantine-color-white)',
+      },
       ...mantinePaperProps, // Allow prop overrides
     },
   }), [

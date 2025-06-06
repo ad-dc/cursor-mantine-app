@@ -38,7 +38,7 @@ export function ExampleTable() {
       defaultPageSize={10}
       showFilters={true}
       showSearch={true}
-      onRowSelectionChange={(selection) => console.log('Selected rows:', selection)}
+      onRowSelectionChange={(selection) => {/* Row selection handler */}}
     />
   );
 }
@@ -63,7 +63,7 @@ export function ErrorExampleTable() {
       columns={columns}
       isError={true}
       error="Failed to load data. Please try again."
-      onRetry={() => console.log('Retrying...')}
+      onRetry={() => {/* Retry handler */}}
       defaultPageSize={10}
     />
   );

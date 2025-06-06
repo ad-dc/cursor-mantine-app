@@ -23,7 +23,7 @@ const FilterChip = ({ label, onClick }: FilterChipProps): JSX.Element => {
       styles={{
         root: {
           cursor: 'pointer',
-          '&[data-checked]': {
+          '&[dataChecked="true"]': {
             backgroundColor: 'transparent',
             border: '1px solid var(--mantine-color-gray-4)',
             color: 'var(--mantine-color-gray-7)',

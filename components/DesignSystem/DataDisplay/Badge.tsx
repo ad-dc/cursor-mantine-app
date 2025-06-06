@@ -1,0 +1,94 @@
+import React, { forwardRef } from 'react';
+import { Badge as MantineBadge, BadgeProps as MantineBadgeProps } from '@mantine/core';
+import { ComponentSize } from '../config';
+
+/**
+ * Enhanced Badge props extending Mantine's BadgeProps
+ */
+export interface DSBadgeProps extends Omit<MantineBadgeProps, 'size' | 'color' | 'variant'> {
+  /** Badge size from design system scale */
+  size?: ComponentSize;
+  /** Badge style variant */
+  variant?: 'filled' | 'outline';
+  /** Badge semantic color variant */
+  color?: 'info' | 'success' | 'danger' | 'pending' | 'default';
+}
+
+/**
+ * AppDirect Design System Badge Component
+ * 
+ * A semantic badge component built on top of Mantine's Badge with
+ * consistent design system styling and restricted color options.
+ * 
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <Badge>Default</Badge>
+ * 
+ * // Different variants
+ * <Badge variant="filled" color="info">Info</Badge>
+ * <Badge variant="outline" color="success">Success</Badge>
+ * <Badge variant="filled" color="danger">Danger</Badge>
+ * <Badge variant="outline" color="pending">Pending</Badge>
+ * ```
+ * 
+ * @example
+ * ```tsx
+ * // Different sizes
+ * <Badge size="sm" color="info">Small</Badge>
+ * <Badge size="md" color="success">Medium</Badge>
+ * <Badge size="lg" color="danger">Large</Badge>
+ * ```
+ * 
+ * @example
+ * ```tsx
+ * // All color variants
+ * <Badge color="default">Default</Badge>
+ * <Badge color="info">Info</Badge>
+ * <Badge color="success">Success</Badge>
+ * <Badge color="danger">Danger</Badge>
+ * <Badge color="pending">Pending</Badge>
+ * ```
+ */
+export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
+  (
+    {
+      variant = 'filled',
+      size = 'md',
+      color = 'default',
+      ...props
+    },
+    ref
+  ) => {
+    // Map design system colors to Mantine colors
+    const getMantineColor = (dsColor: DSBadgeProps['color']) => {
+      switch (dsColor) {
+        case 'info':
+          return 'blue';
+        case 'success':
+          return 'green';
+        case 'danger':
+          return 'red';
+        case 'pending':
+          return 'yellow';
+        case 'default':
+          return 'gray';
+        default:
+          return 'gray';
+      }
+    };
+
+    return (
+      <MantineBadge
+        ref={ref}
+        variant={variant}
+        size={size}
+        color={getMantineColor(color)}
+        radius="sm"
+        {...props}
+      />
+    );
+  }
+);
+
+Badge.displayName = 'Badge'; 

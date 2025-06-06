@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
-import { Group, Text, Button, ActionIcon } from "@mantine/core";
+import { Group, Text, ActionIcon } from "@mantine/core";
+import { Button } from '@/components/DesignSystem';
 import { IconX } from '@tabler/icons-react';
 import { RiFlashlightFill } from '@remixicon/react';
 import { translate } from '../translations';
@@ -46,17 +47,19 @@ const CustomToolbarAlertBannerContent = ({
       </ActionIcon>
       <Button
         variant="outline"
-        color="white"
+        color="gray"
         size="xs"
-        leftSection={<RiFlashlightFill size={16} />}
+        leftIcon={<RiFlashlightFill size={16} />}
+        style={{ borderColor: 'white', color: 'white' }}
       >
         Button one
       </Button>
       <Button
         variant="outline"
-        color="white"
+        color="gray"
         size="xs"
-        leftSection={<RiFlashlightFill size={16} />}
+        leftIcon={<RiFlashlightFill size={16} />}
+        style={{ borderColor: 'white', color: 'white' }}
       >
         Button two
       </Button>

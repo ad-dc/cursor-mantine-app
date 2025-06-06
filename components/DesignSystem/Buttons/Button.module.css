@@ -1,0 +1,26 @@
+/* ADDSButton CSS Module - Only customize what's different from Mantine defaults */
+
+/* Base button styles - Font weight to match Figma design */
+.addsButton {
+  font-weight: 600;
+}
+
+/* Link variant - looks like a text link */
+.addsButton--link {
+  min-height: auto;
+}
+
+.addsButton--link:hover {
+  text-decoration: none;
+}
+
+/* Secret variant - very minimal styling */
+.addsButton--secret {
+  opacity: 0.6;
+  background: transparent;
+  border: none;
+}
+
+.addsButton--secret:hover {
+  opacity: 1;
+} 

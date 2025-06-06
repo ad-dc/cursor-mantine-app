@@ -1,11 +1,7 @@
 import { translations, TranslationKey } from './en';
 
 export const translate = (key: TranslationKey, params?: Record<string, string | number>): string => {
-  console.log('translate - Input:', { key, params });
-  console.log('translate - Available translations:', translations);
-  
   const translation = translations[key];
-  console.log('translate - Found translation:', translation);
   
   if (!translation) {
     console.warn('translate - No translation found for key:', key);
@@ -13,16 +9,14 @@ export const translate = (key: TranslationKey, params?: Record<string, string | 
   }
 
   if (!params) {
-    console.log('translate - No params, returning translation:', translation);
-    return translation;
+    return translation as string;
   }
 
-  let result = translation;
-  for (const [key, value] of Object.entries(params)) {
-    result = result.replace(`{${key}}`, String(value));
+  let result: string = translation;
+  for (const [paramKey, value] of Object.entries(params)) {
+    result = result.replace(`{${paramKey}}`, String(value));
   }
-  console.log('translate - Final result:', result);
-  return result as unknown as string;
+  return result;
 };
 
 export { translations };

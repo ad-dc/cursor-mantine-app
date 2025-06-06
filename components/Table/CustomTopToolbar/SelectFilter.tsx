@@ -14,14 +14,26 @@ export interface SelectFilterProps {
   data: ComboboxData;
   selectedValue: string[] | null;
   onChange: (value: string[] | null) => void;
+  placeholderEmpty?: string;
+  placeholderWithSelection?: string;
 }
 
-const SelectFilter = ({ label, data, selectedValue, onChange }: SelectFilterProps): ReactElement => {
+const SelectFilter = ({ 
+  label, 
+  data, 
+  selectedValue, 
+  onChange, 
+  placeholderEmpty = "All", 
+  placeholderWithSelection = "Select more" 
+}: SelectFilterProps): ReactElement => {
+  const hasSelection = selectedValue && selectedValue.length > 0;
+  const placeholder = hasSelection ? placeholderWithSelection : placeholderEmpty;
+
   return (
     <MultiSelect
       size="xs"
       label={label}
-      placeholder={translate("table.filters.show.all")}
+      placeholder={placeholder}
       data={data}
       value={selectedValue || []}
       onChange={(value) => onChange(value.length > 0 ? value : null)}
