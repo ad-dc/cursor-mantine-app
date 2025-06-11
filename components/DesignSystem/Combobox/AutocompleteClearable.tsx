@@ -17,6 +17,8 @@ export interface DSAutocompleteClearableProps {
   label?: string;
   /** Placeholder text */
   placeholder?: string;
+  /** Data array for options - can be strings or objects with value/label */
+  data?: string[] | { value: string; label: string }[];
   /** Description text displayed below the input */
   description?: string;
   /** Error message */
@@ -36,6 +38,7 @@ export interface DSAutocompleteClearableProps {
 export function AutocompleteClearable({
   label,
   placeholder = "Pick a country or type anything",
+  data = countries,
   description,
   error,
   required = false,
@@ -48,14 +51,22 @@ export function AutocompleteClearable({
   const combobox = useCombobox();
   const [value, setValue] = useState('');
   
-  const shouldFilterOptions = !countries.some((item) => item === value);
+  // Convert data to consistent format
+  const normalizedData = data.map(item => 
+    typeof item === 'string' ? { value: item, label: item } : item
+  );
+
+  const shouldFilterOptions = !normalizedData.some((item) => item.value === value);
   const filteredOptions = shouldFilterOptions
-    ? countries.filter((item) => item.toLowerCase().includes(value.toLowerCase().trim()))
-    : countries;
+    ? normalizedData.filter((item) => 
+        item.label.toLowerCase().includes(value.toLowerCase().trim()) ||
+        item.value.toLowerCase().includes(value.toLowerCase().trim())
+      )
+    : normalizedData;
 
   const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
+    <Combobox.Option value={item.value} key={item.value}>
+      {item.label}
     </Combobox.Option>
   ));
 

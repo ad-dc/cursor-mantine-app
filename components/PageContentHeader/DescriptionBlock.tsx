@@ -49,13 +49,15 @@ export function DescriptionBlock({
           {title}
         </Title>
       )}
-      <Text size="md" style={{ lineHeight: 1.6 }}>
-        {allowHtml ? (
+      {allowHtml ? (
+        <Text size="md" component="div" style={{ lineHeight: 1.6 }}>
           <div dangerouslySetInnerHTML={{ __html: description }} />
-        ) : (
-          description
-        )}
-      </Text>
+        </Text>
+      ) : (
+        <Text size="md" style={{ lineHeight: 1.6 }}>
+          {description}
+        </Text>
+      )}
     </Group>
   );
 }

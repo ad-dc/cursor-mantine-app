@@ -17,10 +17,10 @@
 // Import components for category exports
 import { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup } from './Inputs';
 import { Button, ActionButton, CloseButton } from './Buttons';
-import { Alert, Badge, Chip, Pill, Indicator, Progress } from './DataDisplay';
+import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress } from './DataDisplay';
 import { SearchableSelect, AutocompleteClearable, Multiselect } from './Combobox';
 import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
-import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover } from './Overlays';
+import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
 import { Kbd } from './Typography';
 
 // ========================== INPUTS ==========================
@@ -42,12 +42,12 @@ export type { DSBreadcrumbProps, DSBackBreadcrumbProps, BreadcrumbItem, DSNavLin
 // ========================== FEEDBACK ==========================
 
 // ========================== OVERLAYS ==========================
-export { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover } from './Overlays';
-export type { DSDrawerProps, DSMenuProps, MenuItem, MenuSection, DSModalProps, ModalAction, ConfirmationModalProps, DSPopoverProps, PopoverAction, ConfirmationPopoverProps } from './Overlays';
+export { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
+export type { DSDrawerProps, DSMenuProps, MenuItem, MenuSection, DSModalProps, ModalAction, ConfirmationModalProps, DSPopoverProps, PopoverAction, ConfirmationPopoverProps, DSTooltipProps } from './Overlays';
 
 // ========================== DATA DISPLAY ==========================
-export { Alert, Badge, Chip, Pill, Indicator, Progress } from './DataDisplay';
-export type { DSAlertProps, DSBadgeProps, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps } from './DataDisplay';
+export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress } from './DataDisplay';
+export type { DSAlertProps, DSAvatarProps, AvatarVariant, AvatarSize, DSBadgeProps, DSCardProps, CardSize, CardVariant, CardPadding, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps } from './DataDisplay';
 
 // ========================== TYPOGRAPHY ==========================
 export { Kbd } from './Typography';
@@ -99,11 +99,14 @@ export const Overlays = {
   ConfirmationModal,
   Popover,
   ConfirmationPopover,
+  Tooltip,
 };
 
 export const DataDisplay = {
   Alert,
+  Avatar,
   Badge,
+  Card,
   Chip,
   Pill,
   Indicator,

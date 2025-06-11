@@ -17,6 +17,8 @@ export interface DSSearchableSelectProps {
   label?: string;
   /** Placeholder text */
   placeholder?: string;
+  /** Data array for options - can be strings or objects with value/label */
+  data?: string[] | { value: string; label: string }[];
   /** Description text displayed below the input */
   description?: string;
   /** Error message */
@@ -27,6 +29,8 @@ export interface DSSearchableSelectProps {
   showOptional?: boolean;
   /** Whether the input is disabled */
   disabled?: boolean;
+  /** Whether the select is searchable */
+  searchable?: boolean;
   /** Input size */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Style object for the component */
@@ -36,11 +40,13 @@ export interface DSSearchableSelectProps {
 export function SearchableSelect({
   label,
   placeholder = "Search programming languages",
+  data = languages,
   description,
   error,
   required = false,
   showOptional = false,
   disabled = false,
+  searchable = true,
   size = 'md',
   style,
   ...props
@@ -52,14 +58,22 @@ export function SearchableSelect({
   const [value, setValue] = useState<string | null>(null);
   const [search, setSearch] = useState('');
 
-  const shouldFilterOptions = languages.every((item) => item !== search);
-  const filteredOptions = shouldFilterOptions
-    ? languages.filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
-    : languages;
+  // Convert data to consistent format
+  const normalizedData = data.map(item => 
+    typeof item === 'string' ? { value: item, label: item } : item
+  );
+
+  const shouldFilterOptions = normalizedData.every((item) => item.value !== search);
+  const filteredOptions = shouldFilterOptions && searchable
+    ? normalizedData.filter((item) => 
+        item.label.toLowerCase().includes(search.toLowerCase().trim()) ||
+        item.value.toLowerCase().includes(search.toLowerCase().trim())
+      )
+    : normalizedData;
 
   const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
+    <Combobox.Option value={item.value} key={item.value}>
+      {item.label}
     </Combobox.Option>
   ));
 

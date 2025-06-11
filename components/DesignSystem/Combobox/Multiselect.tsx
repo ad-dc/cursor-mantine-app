@@ -11,6 +11,8 @@ export interface DSMultiselectProps {
   label?: string;
   /** Placeholder text */
   placeholder?: string;
+  /** Data array for options - can be strings or objects with value/label */
+  data?: string[] | { value: string; label: string }[];
   /** Description text displayed below the input */
   description?: string;
   /** Error message */
@@ -21,6 +23,8 @@ export interface DSMultiselectProps {
   showOptional?: boolean;
   /** Whether the input is disabled */
   disabled?: boolean;
+  /** Whether the select is searchable */
+  searchable?: boolean;
   /** Input size */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Style object for the component */
@@ -32,11 +36,13 @@ export interface DSMultiselectProps {
 export function Multiselect({
   label,
   placeholder = "Pick one or more technologies",
+  data = technologies,
   description,
   error,
   required = false,
   showOptional = false,
   disabled = false,
+  searchable = true,
   size = 'md',
   style,
   maxDisplayedValues = MAX_DISPLAYED_VALUES,
@@ -68,17 +74,22 @@ export function Multiselect({
       </Pill>
     ));
 
-  const options = technologies.map((item) => (
-    <Combobox.Option value={item} key={item} active={value.includes(item)}>
+  // Convert data to consistent format
+  const normalizedData = data.map(item => 
+    typeof item === 'string' ? { value: item, label: item } : item
+  );
+
+  const options = normalizedData.map((item) => (
+    <Combobox.Option value={item.value} key={item.value} active={value.includes(item.value)}>
       <Group gap="sm">
         <Checkbox
-          checked={value.includes(item)}
+          checked={value.includes(item.value)}
           onChange={() => {}} // Handled by onOptionSubmit
           aria-hidden
           tabIndex={-1}
           style={{ pointerEvents: 'none' }}
         />
-        <span>{item}</span>
+        <span>{item.label}</span>
       </Group>
     </Combobox.Option>
   ));

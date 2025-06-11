@@ -1,7 +1,7 @@
 'use client';
 
 import '@mantine/core/styles.layer.css';
-import { ActionIcon, Title, rem, Menu, Switch as MantineSwitch, Group, Divider, Stack } from '@mantine/core';
+import { ActionIcon, Title, Text, rem, Menu, Switch as MantineSwitch, Group, Divider, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { HeaderBar } from '@/components/HeaderBar';
 import { SidebarNav, NavItem } from '@/components/SidebarNav';
@@ -9,7 +9,7 @@ import { MainLayout } from '@/components/MainLayout';
 import { Table } from '@/components/Table';
 import { PageContentHeader } from '@/components/PageContentHeader';
 import { NameValue } from '@/components/NameValue';
-import { Alert, Button as DSButton, ActionButton, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Chip, Pill, Indicator, Progress, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Kbd, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from '@/components/DesignSystem';
+import { Alert, Avatar, Button as DSButton, ActionButton, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Card, Chip, Pill, Indicator, Progress, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip, Kbd, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from '@/components/DesignSystem';
 import { useState, useMemo, useEffect } from 'react';
 import { RiMore2Fill, RiEyeLine, RiUserLine, RiServerLine, RiAddLine, RiCircleLine } from '@remixicon/react';
 import { MRT_PaginationState as PaginationState, MRT_ColumnDef as ColumnDef, MRT_TableInstance } from 'mantine-react-table';
@@ -335,7 +335,7 @@ export default function Home() {
       />
       
       {/* Design System Components Demo */}
-      <Stack gap="xl" p="md" style={{ backgroundColor: '#f8f9fa', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+      <Stack gap="xl" p="md" style={{ backgroundColor: '#ffffff', borderRadius: '8px', border: '1px solid #e9ecef' }}>
         <Title order={3} size="h4">Design System Components</Title>
         
         {/* TextInput Demo */}
@@ -1322,17 +1322,22 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="h5">NavLink Examples</Title>
           <Stack gap="md" style={{ maxWidth: 300 }}>
-            <NavLink label="Dashboard" icon="ri-dashboard-line" active />
-            <NavLink label="Users" icon="ri-user-line" />
+            <NavLink label="Dashboard" icon={<RiEyeLine size={18} />} active />
+            <NavLink label="Users" icon={<RiUserLine size={18} />} />
             <NavLink 
               label="Settings" 
-              icon="ri-settings-line" 
+              icon={<RiServerLine size={18} />} 
               rightSection={<Badge size="xs" color="info">3</Badge>}
             />
             <NavLink 
               label="Messages" 
-              icon="ri-message-line"
-              rightSection={<Indicator count={5} type="danger" />}
+              icon={<RiAddLine size={18} />}
+              rightSection={<Indicator count={5} type="danger"><span></span></Indicator>}
+            />
+            <NavLink 
+              label="Reports" 
+              icon={<RiCircleLine size={18} />}
+              hasChildren
             />
           </Stack>
         </Stack>
@@ -1347,11 +1352,11 @@ export default function Home() {
             <Stepper
               orientation="horizontal"
               steps={[
-                { label: 'Account Setup', description: 'Create your account' },
-                { label: 'Profile Information', description: 'Fill in your details' },
-                { label: 'Preferences', description: 'Customize your experience' },
-                { label: 'Review', description: 'Review and confirm' },
-                { label: 'Complete', description: 'All done!' }
+                { id: 'account', label: 'Account Setup', description: 'Create your account' },
+                { id: 'profile', label: 'Profile Information', description: 'Fill in your details' },
+                { id: 'preferences', label: 'Preferences', description: 'Customize your experience' },
+                { id: 'review', label: 'Review', description: 'Review and confirm' },
+                { id: 'complete', label: 'Complete', description: 'All done!' }
               ]}
               active={2}
             />
@@ -1362,10 +1367,10 @@ export default function Home() {
             <Stepper
               orientation="vertical"
               steps={[
-                { label: 'Planning', description: 'Define project requirements' },
-                { label: 'Development', description: 'Build the application' },
-                { label: 'Testing', description: 'Quality assurance testing' },
-                { label: 'Deployment', description: 'Deploy to production' }
+                { id: 'planning', label: 'Planning', description: 'Define project requirements' },
+                { id: 'development', label: 'Development', description: 'Build the application' },
+                { id: 'testing', label: 'Testing', description: 'Quality assurance testing' },
+                { id: 'deployment', label: 'Deployment', description: 'Deploy to production' }
               ]}
               active={1}
               style={{ maxWidth: 400 }}
@@ -1399,7 +1404,7 @@ export default function Home() {
                 { 
                   id: 'settings', 
                   label: 'Settings',
-                  rightSection: <Indicator count={3} type="danger"><span></span></Indicator>,
+                  rightSection: <Badge size="xs" color="danger">3</Badge>,
                   children: <div>Settings content goes here...</div>
                 }
               ]}
@@ -1417,18 +1422,40 @@ export default function Home() {
                     id: 'profile', 
                     label: 'Profile', 
                     leftSection: <RiUserLine size={16} />,
-                    children: <div>Profile settings content...</div>
+                    children: (
+                      <Stack gap="md" p="md">
+                        <TextInput label="Display Name" placeholder="Enter your display name..." size="sm" />
+                        <TextInput label="Email" placeholder="your.email@example.com" size="sm" />
+                        <TextArea label="Bio" placeholder="Tell us about yourself..." rows={3} size="sm" />
+                        <DSButton size="sm">Save Profile</DSButton>
+                      </Stack>
+                    )
                   },
                   { 
                     id: 'security', 
                     label: 'Security',
-                    children: <div>Security settings content...</div>
+                    children: (
+                      <Stack gap="md" p="md">
+                        <TextInput label="Current Password" type="password" size="sm" />
+                        <TextInput label="New Password" type="password" size="sm" />
+                        <TextInput label="Confirm Password" type="password" size="sm" />
+                        <DSButton size="sm" variant="outline">Change Password</DSButton>
+                      </Stack>
+                    )
                   },
                   { 
                     id: 'notifications', 
                     label: 'Notifications', 
                     rightSection: <Badge size="xs" color="success">On</Badge>,
-                    children: <div>Notification preferences content...</div>
+                    children: (
+                      <Stack gap="md" p="md">
+                        <Switch label="Email notifications" defaultChecked />
+                        <Switch label="Push notifications" />
+                        <Switch label="SMS notifications" defaultChecked />
+                        <Switch label="Marketing emails" />
+                        <DSButton size="sm" variant="default">Save Preferences</DSButton>
+                      </Stack>
+                    )
                   }
                 ]}
                 value="profile"
@@ -1543,10 +1570,10 @@ export default function Home() {
           size="sm"
         >
           <Stack gap="sm">
-            <NavLink label="Dashboard" icon="ri-dashboard-line" active />
-            <NavLink label="Users" icon="ri-user-line" />
-            <NavLink label="Settings" icon="ri-settings-line" />
-            <NavLink label="Reports" icon="ri-file-text-line" />
+            <NavLink label="Dashboard" icon={<RiEyeLine size={18} />} active />
+            <NavLink label="Users" icon={<RiUserLine size={18} />} />
+            <NavLink label="Settings" icon={<RiServerLine size={18} />} />
+            <NavLink label="Reports" icon={<RiCircleLine size={18} />} />
           </Stack>
         </Drawer>
 
@@ -1586,29 +1613,29 @@ export default function Home() {
               sections={[
                 {
                   items: [
-                    { key: 'profile', label: 'Profile', icon: <RiUserLine size={16} /> },
-                    { key: 'settings', label: 'Settings', icon: <RiServerLine size={16} /> },
-                    { key: 'logout', label: 'Logout' }
+                    { id: 'profile', label: 'Profile', leftSection: <RiUserLine size={16} /> },
+                    { id: 'settings', label: 'Settings', leftSection: <RiServerLine size={16} /> },
+                    { id: 'logout', label: 'Logout' }
                   ]
                 }
               ]}
             />
             
             <DSMenu
-              trigger={<ActionButton icon={<RiMore2Fill size={16} />} />}
+              trigger={<ActionButton><RiMore2Fill size={16} /></ActionButton>}
               position="bottom-end"
               sections={[
                 {
                   title: 'Actions',
                   items: [
                     { 
-                      key: 'edit', 
+                      id: 'edit', 
                       label: 'Edit', 
-                      icon: <RiEyeLine size={16} />,
+                      leftSection: <RiEyeLine size={16} />,
                       rightSection: <Kbd size="xs">E</Kbd>
                     },
                     { 
-                      key: 'duplicate', 
+                      id: 'duplicate', 
                       label: 'Duplicate',
                       rightSection: <Badge size="xs" color="info">Pro</Badge>
                     }
@@ -1617,7 +1644,7 @@ export default function Home() {
                 {
                   items: [
                     { 
-                      key: 'delete', 
+                      id: 'delete', 
                       label: 'Delete', 
                       color: 'red',
                       rightSection: <Kbd size="xs">Del</Kbd>
@@ -1762,6 +1789,532 @@ export default function Home() {
                 This action cannot be undone.
               </ConfirmationPopover>
             </Group>
+          </Stack>
+        </Stack>
+
+        {/* Tooltip Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Tooltip Examples</Title>
+          
+          {/* Basic Tooltips */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Basic Tooltips - Different Positions</Title>
+            <Group gap="md">
+              <Tooltip label="This is a tooltip! Rejoice!" position="top">
+                <DSButton size="xs">Top</DSButton>
+              </Tooltip>
+              
+              <Tooltip label="Bottom tooltip with helpful information" position="bottom">
+                <DSButton size="xs">Bottom</DSButton>
+              </Tooltip>
+              
+              <Tooltip label="Left side tooltip" position="left">
+                <DSButton size="xs">Left</DSButton>
+              </Tooltip>
+              
+              <Tooltip label="Right side tooltip" position="right">
+                <DSButton size="xs">Right</DSButton>
+              </Tooltip>
+            </Group>
+          </Stack>
+
+          {/* Corner Positions */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Corner Positions</Title>
+            <Group gap="md">
+              <Tooltip label="Top-start position" position="top-start">
+                <DSButton size="xs">Top Start</DSButton>
+              </Tooltip>
+              
+              <Tooltip label="Top-end position" position="top-end">
+                <DSButton size="xs">Top End</DSButton>
+              </Tooltip>
+              
+              <Tooltip label="Bottom-start position" position="bottom-start">
+                <DSButton size="xs">Bottom Start</DSButton>
+              </Tooltip>
+              
+              <Tooltip label="Bottom-end position" position="bottom-end">
+                <DSButton size="xs">Bottom End</DSButton>
+              </Tooltip>
+            </Group>
+          </Stack>
+
+          {/* Different Content Types */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Different Content & Styling</Title>
+            <Group gap="md">
+              <Tooltip 
+                label="This is a longer tooltip that demonstrates multi-line content and how it wraps nicely."
+                width={200}
+                position="top"
+              >
+                <DSButton size="xs">Long Text</DSButton>
+              </Tooltip>
+              
+              <Tooltip 
+                label="Tooltip with custom width"
+                width={150}
+                position="bottom"
+              >
+                <DSButton size="xs">Custom Width</DSButton>
+              </Tooltip>
+              
+              <Tooltip 
+                label="No arrow tooltip"
+                withArrow={false}
+                position="right"
+              >
+                <DSButton size="xs">No Arrow</DSButton>
+              </Tooltip>
+            </Group>
+          </Stack>
+
+          {/* With Delays */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">With Delays</Title>
+            <Group gap="md">
+              <Tooltip 
+                label="Shows after 500ms delay"
+                openDelay={500}
+                position="top"
+              >
+                <DSButton size="xs">Open Delay</DSButton>
+              </Tooltip>
+              
+              <Tooltip 
+                label="Hides after 300ms delay"
+                closeDelay={300}
+                position="bottom"
+              >
+                <DSButton size="xs">Close Delay</DSButton>
+              </Tooltip>
+              
+              <Tooltip 
+                label="Both delays: 300ms open, 200ms close"
+                openDelay={300}
+                closeDelay={200}
+                position="right"
+              >
+                <DSButton size="xs">Both Delays</DSButton>
+              </Tooltip>
+            </Group>
+          </Stack>
+
+          {/* Interactive Elements */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">On Different Elements</Title>
+            <Group gap="md">
+              <Tooltip label="Tooltip on icon button">
+                <ActionButton size="xs">
+                  <RiEyeLine size={16} />
+                </ActionButton>
+              </Tooltip>
+              
+              <Tooltip label="Tooltip on badge">
+                <Badge color="success">Hover me</Badge>
+              </Tooltip>
+              
+              <Tooltip label="Tooltip on text input">
+                <TextInput placeholder="Hover over this input" size="xs" style={{ width: 150 }} />
+              </Tooltip>
+              
+              <Tooltip label="Disabled tooltip" disabled>
+                <DSButton size="xs">Disabled Tooltip</DSButton>
+              </Tooltip>
+            </Group>
+          </Stack>
+        </Stack>
+
+        {/* Avatar Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Avatar Examples</Title>
+          
+          {/* All Sizes */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">All T-Shirt Sizes</Title>
+            
+            <Stack gap="md">
+              <Group gap="md" align="center">
+                <Text size="sm" style={{ minWidth: 60 }}>Icon:</Text>
+                <Avatar variant="icon" size="xs" />
+                <Avatar variant="icon" size="sm" />
+                <Avatar variant="icon" size="md" />
+                <Avatar variant="icon" size="lg" />
+                <Avatar variant="icon" size="xl" />
+                <Text size="xs" c="dimmed">xs (16px) → xl (84px)</Text>
+              </Group>
+              
+              <Group gap="md" align="center">
+                <Text size="sm" style={{ minWidth: 60 }}>Initials:</Text>
+                <Avatar variant="initials" initials="AB" size="xs" />
+                <Avatar variant="initials" initials="CD" size="sm" />
+                <Avatar variant="initials" initials="EF" size="md" />
+                <Avatar variant="initials" initials="GH" size="lg" />
+                <Avatar variant="initials" initials="JK" size="xl" />
+                <Text size="xs" c="dimmed">Two character initials</Text>
+              </Group>
+              
+              <Group gap="md" align="center">
+                <Text size="sm" style={{ minWidth: 60 }}>Image:</Text>
+                <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" alt="User 1" size="xs" />
+                <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png" alt="User 2" size="sm" />
+                <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png" alt="User 3" size="md" />
+                <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-4.png" alt="User 4" size="lg" />
+                <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png" alt="User 5" size="xl" />
+                <Text size="xs" c="dimmed">With profile images</Text>
+              </Group>
+            </Stack>
+          </Stack>
+
+          {/* Three Variants */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Three Main Variants</Title>
+            <Group gap="lg" align="center">
+              <Stack gap="xs" align="center">
+                <Avatar variant="icon" size="lg" />
+                <Text size="xs" c="dimmed">Icon (Default)</Text>
+              </Stack>
+              
+              <Stack gap="xs" align="center">
+                <Avatar variant="initials" initials="JD" size="lg" />
+                <Text size="xs" c="dimmed">Initials</Text>
+              </Stack>
+              
+              <Stack gap="xs" align="center">
+                <Avatar 
+                  variant="image" 
+                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" 
+                  alt="John Doe"
+                  size="lg" 
+                />
+                <Text size="xs" c="dimmed">Image</Text>
+              </Stack>
+            </Group>
+          </Stack>
+
+          {/* Custom Icons */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Custom Icons</Title>
+            <Group gap="md">
+              <Avatar variant="icon" size="md" />
+              <Avatar variant="icon" icon={<RiUserLine />} size="md" />
+              <Avatar variant="icon" icon={<RiServerLine />} size="md" />
+              <Avatar variant="icon" icon={<RiEyeLine />} size="md" />
+            </Group>
+          </Stack>
+
+          {/* Fallback Behavior */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Fallback Behavior</Title>
+            <Group gap="md" align="center">
+              <Stack gap="xs" align="center">
+                <Avatar 
+                  variant="image" 
+                  src="https://example.com/broken-image.jpg" 
+                  fallback="icon"
+                  size="md"
+                />
+                <Text size="xs" c="dimmed">Image → Icon</Text>
+              </Stack>
+              
+              <Stack gap="xs" align="center">
+                <Avatar 
+                  variant="image" 
+                  src="https://example.com/broken-image.jpg" 
+                  fallback="initials"
+                  fallbackInitials="FB"
+                  size="md"
+                />
+                <Text size="xs" c="dimmed">Image → Initials</Text>
+              </Stack>
+              
+              <Stack gap="xs" align="center">
+                <Avatar 
+                  variant="image" 
+                  src="" 
+                  fallback="initials"
+                  fallbackInitials="NU"
+                  size="md"
+                />
+                <Text size="xs" c="dimmed">No URL → Initials</Text>
+              </Stack>
+            </Group>
+          </Stack>
+
+          {/* Real World Examples */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Real World Usage</Title>
+            <Stack gap="md">
+              {/* User List Example */}
+              <Group gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
+                <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" alt="John Doe" size="md" />
+                <Stack gap="0">
+                  <Text size="sm" fw={500}>John Doe</Text>
+                  <Text size="xs" c="dimmed">john.doe@example.com</Text>
+                </Stack>
+              </Group>
+              
+              {/* Chat Message Example */}
+              <Group gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
+                <Avatar variant="initials" initials="AS" size="sm" />
+                <Stack gap="0">
+                  <Text size="sm" fw={500}>Alice Smith</Text>
+                  <Text size="sm">Hey! How's the project coming along?</Text>
+                </Stack>
+              </Group>
+              
+              {/* System User Example */}
+              <Group gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
+                <Avatar variant="icon" icon={<RiServerLine />} size="sm" />
+                <Stack gap="0">
+                  <Text size="sm" fw={500}>System Notification</Text>
+                  <Text size="sm" c="dimmed">Your deployment was successful</Text>
+                </Stack>
+              </Group>
+            </Stack>
+          </Stack>
+        </Stack>
+
+        {/* Card Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Card Examples</Title>
+          
+          {/* Basic Cards */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Basic Cards</Title>
+            <Group gap="md" align="flex-start">
+              <Card>
+                <Title order={6}>Simple Card</Title>
+                <Text size="sm" c="dimmed">
+                  This is a basic card with default styling.
+                </Text>
+              </Card>
+              
+              <Card withShadow>
+                <Title order={6}>Card with Shadow</Title>
+                <Text size="sm" c="dimmed">
+                  This card has a medium shadow for elevation.
+                </Text>
+              </Card>
+            </Group>
+          </Stack>
+
+          {/* Interactive Cards */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Interactive Cards</Title>
+            <Group gap="md" align="flex-start">
+              <Card 
+                interactive 
+                withShadow 
+                onClick={() => console.log('Card clicked!')}
+                style={{ cursor: 'pointer' }}
+              >
+                <Title order={6}>Clickable Card</Title>
+                <Text size="sm" c="dimmed">
+                  Click me! I have hover effects and handle click events.
+                </Text>
+                <DSButton size="xs" mt="sm">Learn More</DSButton>
+              </Card>
+            </Group>
+          </Stack>
+          {/* Image Cards */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Cards with Images</Title>
+            <Group gap="md" align="flex-start">
+              {/* Card with full-width image on top */}
+              <Card withShadow style={{ width: 300 }} padding="none">
+                {/* Image Section - uses padding="none" on card to allow full-width image */}
+                <div style={{ 
+                  width: '100%', 
+                  height: 180, 
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  borderTopLeftRadius: '4px',
+                  borderTopRightRadius: '4px'
+                }} />
+                
+                {/* Content Section - manually add padding here */}
+                <div style={{ padding: '16px' }}>
+                  <Title order={6} mb="xs">Mountain Adventure</Title>
+                  <Text size="sm" c="dimmed" mb="sm">
+                    Experience breathtaking views and challenging trails in the heart of nature.
+                  </Text>
+                  <Group justify="space-between" align="center">
+                    <Badge color="success" variant="outline">Featured</Badge>
+                    <Text size="sm" fw={600}>$299</Text>
+                  </Group>
+                  <DSButton variant="primary" size="sm" mt="md" fullWidth>
+                    Book Now
+                  </DSButton>
+                </div>
+              </Card>
+
+              {/* Card with rounded image and normal padding */}
+              <Card withShadow style={{ width: 300 }}>
+                <div style={{ 
+                  width: '100%', 
+                  height: 160, 
+                  backgroundImage: 'url(https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=300&fit=crop)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  borderRadius: '4px',
+                  marginBottom: '12px'
+                }} />
+                
+                <Title order={6} mb="xs">City Explorer</Title>
+                <Text size="sm" c="dimmed" mb="sm">
+                  Discover hidden gems and local culture in vibrant urban landscapes.
+                </Text>
+                <Group justify="space-between" align="center">
+                  <Badge color="info" variant="outline">Popular</Badge>
+                  <Text size="sm" fw={600}>$149</Text>
+                </Group>
+                <DSButton variant="outline" size="sm" mt="md" fullWidth>
+                  Learn More
+                </DSButton>
+              </Card>
+            </Group>
+          </Stack>
+
+          {/* Complex Content Examples */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Complex Content</Title>
+            <Group gap="md" align="flex-start">
+              {/* User Profile Card */}
+              <Card withShadow style={{ width: 250 }}>
+                <Group gap="sm" mb="md">
+                  <Avatar 
+                    variant="image" 
+                    src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" 
+                    size="md" 
+                  />
+                  <Stack gap="0">
+                    <Text fw={500}>John Doe</Text>
+                    <Text size="sm" c="dimmed">Senior Developer</Text>
+                  </Stack>
+                </Group>
+                <Text size="sm" mb="md">
+                  Passionate about creating beautiful user interfaces and excellent user experiences.
+                </Text>
+                <Group gap="xs">
+                  <DSButton size="xs" variant="primary">Follow</DSButton>
+                  <DSButton size="xs" variant="outline">Message</DSButton>
+                </Group>
+              </Card>
+
+              {/* Stats Card */}
+              <Card withShadow style={{ width: 250 }}>
+                <Title order={6} mb="md">Project Stats</Title>
+                <Stack gap="sm">
+                  <Group justify="space-between">
+                    <Text size="sm">Tasks Completed</Text>
+                                         <Badge variant="outline" color="success">24/30</Badge>
+                  </Group>
+                  <Group justify="space-between">
+                    <Text size="sm">Team Members</Text>
+                    <Text size="sm" fw={500}>8</Text>
+                  </Group>
+                  <Group justify="space-between">
+                    <Text size="sm">Progress</Text>
+                    <Text size="sm" fw={500}>80%</Text>
+                  </Group>
+                  <Progress value={80} size="sm" mt="xs" />
+                </Stack>
+              </Card>
+
+              {/* Feature Card */}
+              <Card 
+                variant="outline" 
+                style={{ width: 250, borderColor: 'var(--mantine-color-green-4)' }}
+              >
+                <Group gap="sm" mb="md">
+                  <div style={{ 
+                    padding: '8px', 
+                    borderRadius: '6px', 
+                    backgroundColor: 'var(--mantine-color-green-0)' 
+                  }}>
+                    <RiAddLine size={20} style={{ color: 'var(--mantine-color-green-6)' }} />
+                  </div>
+                  <Title order={6}>New Feature</Title>
+                </Group>
+                <Text size="sm" c="dimmed" mb="md">
+                  Enhanced dashboard with real-time analytics and improved performance.
+                </Text>
+                                 <Badge color="success" variant="outline">Just Released</Badge>
+              </Card>
+            </Group>
+          </Stack>
+
+          {/* Usage Examples */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Real World Usage</Title>
+            <Stack gap="md">
+              {/* Dashboard Cards Grid */}
+              <Group gap="md" align="flex-start" style={{ flexWrap: 'wrap' }}>
+                <Card withShadow style={{ width: 200 }}>
+                  <Group justify="space-between" align="flex-start" mb="sm">
+                    <Stack gap="0">
+                      <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Total Users</Text>
+                      <Text size="xl" fw={700}>12,543</Text>
+                    </Stack>
+                                         <Indicator type="success" size={8}><div /></Indicator>
+                  </Group>
+                  <Text size="xs" c="green">+12% from last month</Text>
+                </Card>
+
+                                 <Card withShadow style={{ width: 200 }}>
+                   <Group justify="space-between" align="flex-start" mb="sm">
+                     <Stack gap="0">
+                       <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Revenue</Text>
+                       <Text size="xl" fw={700}>$24,680</Text>
+                     </Stack>
+                     <Indicator type="info" size={8}><div /></Indicator>
+                   </Group>
+                   <Text size="xs" c="blue">+8% from last month</Text>
+                 </Card>
+
+                                  <Card withShadow style={{ width: 200 }}>
+                   <Group justify="space-between" align="flex-start" mb="sm">
+                     <Stack gap="0">
+                       <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Orders</Text>
+                       <Text size="xl" fw={700}>1,423</Text>
+                     </Stack>
+                     <Indicator type="pending" size={8}><div /></Indicator>
+                   </Group>
+                   <Text size="xs" c="red">-3% from last month</Text>
+                 </Card>
+              </Group>
+
+              {/* List Card */}
+              <Card withShadow style={{ maxWidth: 400 }}>
+                <Title order={6} mb="md">Recent Activity</Title>
+                <Stack gap="sm">
+                  <Group gap="sm">
+                    <Avatar variant="initials" initials="JD" size="sm" />
+                    <Stack gap="0" style={{ flex: 1 }}>
+                      <Text size="sm" fw={500}>John created a new project</Text>
+                      <Text size="xs" c="dimmed">2 minutes ago</Text>
+                    </Stack>
+                  </Group>
+                  <Group gap="sm">
+                    <Avatar variant="initials" initials="AS" size="sm" />
+                    <Stack gap="0" style={{ flex: 1 }}>
+                      <Text size="sm" fw={500}>Alice updated the design system</Text>
+                      <Text size="xs" c="dimmed">1 hour ago</Text>
+                    </Stack>
+                  </Group>
+                  <Group gap="sm">
+                    <Avatar variant="icon" icon={<RiServerLine />} size="sm" />
+                    <Stack gap="0" style={{ flex: 1 }}>
+                      <Text size="sm" fw={500}>Deployment completed successfully</Text>
+                      <Text size="xs" c="dimmed">3 hours ago</Text>
+                    </Stack>
+                  </Group>
+                </Stack>
+              </Card>
+            </Stack>
           </Stack>
         </Stack>
       </Stack>

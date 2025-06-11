@@ -253,13 +253,15 @@ export function PageContentHeader({
           {descriptionTitle}
         </Text>
       )}
-      <Text size="sm" c="dimmed" style={{ lineHeight: 1.6 }}>
-        {allowLinks ? (
+      {allowLinks ? (
+        <Text size="sm" c="dimmed" component="div" style={{ lineHeight: 1.6 }}>
           <div dangerouslySetInnerHTML={{ __html: description || '' }} />
-        ) : (
-          description
-        )}
-      </Text>
+        </Text>
+      ) : (
+        <Text size="sm" c="dimmed" style={{ lineHeight: 1.6 }}>
+          {description}
+        </Text>
+      )}
     </Stack>
   );
   

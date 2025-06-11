@@ -104,13 +104,13 @@ export const Tabs = forwardRef<HTMLDivElement, DSTabsProps>(
           ))}
         </MantineTabs.List>
 
-        {tabs.map((tab) => (
-          tab.children && (
+        {tabs
+          .filter((tab) => tab.children)
+          .map((tab) => (
             <MantineTabs.Panel key={tab.id} value={tab.id}>
               {tab.children}
             </MantineTabs.Panel>
-          )
-        ))}
+          ))}
       </MantineTabs>
     );
   }
