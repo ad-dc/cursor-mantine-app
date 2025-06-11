@@ -9,7 +9,7 @@ import { MainLayout } from '@/components/MainLayout';
 import { Table } from '@/components/Table';
 import { PageContentHeader } from '@/components/PageContentHeader';
 import { NameValue } from '@/components/NameValue';
-import { Button as DSButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Chip, Checkbox, Radio, RadioGroup } from '@/components/DesignSystem';
+import { Alert, Button as DSButton, ActionButton, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Chip, Pill, Indicator, Progress, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Kbd, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from '@/components/DesignSystem';
 import { useState, useMemo, useEffect } from 'react';
 import { RiMore2Fill, RiEyeLine, RiUserLine, RiServerLine, RiAddLine, RiCircleLine } from '@remixicon/react';
 import { MRT_PaginationState as PaginationState, MRT_ColumnDef as ColumnDef, MRT_TableInstance } from 'mantine-react-table';
@@ -240,6 +240,14 @@ export default function Home() {
     pageIndex: 0,
     pageSize: 5,
   });
+
+  // Modal and Drawer state management
+  const [modalOpened, setModalOpened] = useState(false);
+  const [confirmModalOpened, setConfirmModalOpened] = useState(false);
+  const [rightDrawerOpened, setRightDrawerOpened] = useState(false);
+  const [leftDrawerOpened, setLeftDrawerOpened] = useState(false);
+  const [topDrawerOpened, setTopDrawerOpened] = useState(false);
+  const [bottomDrawerOpened, setBottomDrawerOpened] = useState(false);
 
   // Add filter state management
   const [filters, setFilters] = useState<Filters>({
@@ -1013,6 +1021,748 @@ export default function Home() {
               Outline
             </DSButton>
           </Group>
+        </Stack>
+
+        {/* ActionButton Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">ActionButton Examples</Title>
+          <Group gap="md">
+            <ActionButton><RiEyeLine size={16} /></ActionButton>
+            <ActionButton><RiAddLine size={16} /></ActionButton>
+            <ActionButton><RiMore2Fill size={16} /></ActionButton>
+            <ActionButton disabled><RiCircleLine size={16} /></ActionButton>
+          </Group>
+        </Stack>
+
+        {/* CloseButton Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">CloseButton Examples</Title>
+          <Group gap="md">
+            <CloseButton />
+            <CloseButton size="sm" />
+            <CloseButton size="lg" />
+            <CloseButton disabled />
+          </Group>
+        </Stack>
+
+        {/* Pill Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Pill Examples</Title>
+          <Group gap="md">
+            <Pill>Default Pill</Pill>
+            <Pill>Info Pill</Pill>
+            <Pill>Success Pill</Pill>
+            <Pill>Danger Pill</Pill>
+            <Pill>Pending Pill</Pill>
+          </Group>
+          <Group gap="md">
+            <Pill withRemoveButton onRemove={() => console.log('Remove clicked')}>Removable Pill</Pill>
+            <Pill size="xs">XS Size</Pill>
+            <Pill size="lg">LG Size</Pill>
+            <Pill disabled>Disabled Pill</Pill>
+          </Group>
+        </Stack>
+
+        {/* Indicator Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Indicator Examples</Title>
+          <Stack gap="md">
+            <Group gap="md">
+              <Title order={5} size="h6">Semantic Colors</Title>
+            </Group>
+            <Group gap="md">
+              <Indicator type="default"><DSButton size="xs">Default</DSButton></Indicator>
+              <Indicator type="info"><DSButton size="xs">Info</DSButton></Indicator>
+              <Indicator type="success"><DSButton size="xs">Success</DSButton></Indicator>
+              <Indicator type="danger"><DSButton size="xs">Danger</DSButton></Indicator>
+              <Indicator type="pending"><DSButton size="xs">Pending</DSButton></Indicator>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="h6">With Numbers</Title>
+            </Group>
+            <Group gap="md">
+              <Indicator count={5} type="info"><DSButton size="xs">Messages</DSButton></Indicator>
+              <Indicator count={23} type="danger"><DSButton size="xs">Errors</DSButton></Indicator>
+              <Indicator count={100} type="success"><DSButton size="xs">Tasks</DSButton></Indicator>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="h6">With Outline</Title>
+            </Group>
+            <Group gap="md">
+              <Indicator type="info" withOutline><DSButton size="xs">Outlined Info</DSButton></Indicator>
+              <Indicator count={8} type="danger" withOutline><DSButton size="xs">Notifications</DSButton></Indicator>
+              <Indicator type="success" withOutline><DSButton size="xs">Complete</DSButton></Indicator>
+            </Group>
+          </Stack>
+        </Stack>
+
+        {/* Progress Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Progress Examples</Title>
+          <Stack gap="md">
+            <Group gap="md">
+              <Title order={5} size="h6">Progress Sizes</Title>
+            </Group>
+            <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
+              <div><span>Extra Small (30%)</span><Progress size="xs" value={30} /></div>
+              <div><span>Small (50%)</span><Progress size="sm" value={50} /></div>
+              <div><span>Medium (65%)</span><Progress size="md" value={65} /></div>
+              <div><span>Large (80%)</span><Progress size="lg" value={80} /></div>
+              <div><span>Extra Large (95%)</span><Progress size="xl" value={95} /></div>
+            </Stack>
+
+            <Group gap="md">
+              <Title order={5} size="h6">Different Progress Levels</Title>
+            </Group>
+            <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
+              <div><span>25% Complete</span><Progress value={25} /></div>
+              <div><span>50% Complete</span><Progress value={50} /></div>
+              <div><span>75% Complete</span><Progress value={75} /></div>
+              <div><span>Completed!</span><Progress value={100} /></div>
+            </Stack>
+
+            <Group gap="md">
+              <Title order={5} size="h6">Animated Progress</Title>
+            </Group>
+            <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
+              <div><span>Uploading... 60%</span><Progress value={60} animated /></div>
+              <div><span>Processing... 85%</span><Progress value={85} animated /></div>
+            </Stack>
+          </Stack>
+        </Stack>
+
+        {/* Alert Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Alert Examples</Title>
+          <Stack gap="md">
+            <Alert type="info" title="Information">
+              This is an informational alert with useful details.
+            </Alert>
+            <Alert type="success" title="Success!">
+              Your action was completed successfully.
+            </Alert>
+            <Alert type="danger" title="Error Occurred">
+              Something went wrong. Please try again.
+            </Alert>
+            <Alert type="pending" title="Processing">
+              Your request is being processed. Please wait.
+            </Alert>
+            <Alert type="default" title="Notice">
+              This is a general notice or announcement.
+            </Alert>
+            
+            <Group gap="md">
+              <Title order={5} size="h6">Dismissible Alerts</Title>
+            </Group>
+            <Alert type="info" title="Dismissible Alert">
+              You can close this alert by clicking the X button.
+            </Alert>
+            
+            <Alert type="success" title="Custom Icon" icon={<RiCircleLine size={16} />}>
+              This alert has a custom icon instead of the default semantic icon.
+            </Alert>
+          </Stack>
+        </Stack>
+
+        {/* Kbd Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Kbd (Keyboard Key) Examples</Title>
+          <Stack gap="md">
+            <Group gap="md">
+              <Title order={5} size="h6">Single Keys</Title>
+            </Group>
+            <Group gap="sm">
+              <Kbd>Ctrl</Kbd>
+              <Kbd>Alt</Kbd>
+              <Kbd>Shift</Kbd>
+              <Kbd>Enter</Kbd>
+              <Kbd>Esc</Kbd>
+              <Kbd>Tab</Kbd>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="h6">Key Combinations</Title>
+            </Group>
+            <Stack gap="sm">
+              <div>Save: <Kbd>Ctrl</Kbd> + <Kbd>S</Kbd></div>
+              <div>Copy: <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd></div>
+              <div>Paste: <Kbd>Ctrl</Kbd> + <Kbd>V</Kbd></div>
+              <div>Search: <Kbd>Ctrl</Kbd> + <Kbd>F</Kbd></div>
+            </Stack>
+
+            <Group gap="md">
+              <Title order={5} size="h6">Different Sizes</Title>
+            </Group>
+            <Group gap="sm" align="center">
+              <Kbd size="xs">xs</Kbd>
+              <Kbd size="sm">sm</Kbd>
+              <Kbd size="md">md</Kbd>
+              <Kbd size="lg">lg</Kbd>
+              <Kbd size="xl">xl</Kbd>
+            </Group>
+          </Stack>
+        </Stack>
+
+        {/* SearchableSelect Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">SearchableSelect Examples</Title>
+          <Stack gap="md">
+            <SearchableSelect
+              label="Choose Country"
+              placeholder="Search countries..."
+              data={[
+                'United States', 'Canada', 'United Kingdom', 'Germany', 
+                'France', 'Japan', 'Australia', 'Brazil', 'India', 'China'
+              ]}
+              searchable
+            />
+            <SearchableSelect
+              label="Select Technology"
+              placeholder="Search technologies..."
+              data={[
+                { value: 'react', label: 'React' },
+                { value: 'vue', label: 'Vue.js' },
+                { value: 'angular', label: 'Angular' },
+                { value: 'svelte', label: 'Svelte' }
+              ]}
+              required
+            />
+          </Stack>
+        </Stack>
+
+        {/* AutocompleteClearable Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">AutocompleteClearable Examples</Title>
+          <Stack gap="md">
+            <AutocompleteClearable
+              label="Search Cities"
+              placeholder="Type to search..."
+              data={[
+                'New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix',
+                'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'
+              ]}
+            />
+            <AutocompleteClearable
+              label="Search Products"
+              placeholder="Start typing..."
+              data={['Laptop', 'Desktop', 'Tablet', 'Phone', 'Monitor', 'Keyboard', 'Mouse']}
+              required
+            />
+          </Stack>
+        </Stack>
+
+        {/* Multiselect Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Multiselect Examples</Title>
+          <Stack gap="md">
+            <Multiselect
+              label="Select Skills"
+              placeholder="Choose multiple skills..."
+              data={[
+                'JavaScript', 'TypeScript', 'React', 'Vue', 'Angular',
+                'Node.js', 'Python', 'Java', 'C++', 'Go'
+              ]}
+              searchable
+            />
+            <Multiselect
+              label="Select Categories"
+              placeholder="Choose categories..."
+              data={[
+                { value: 'tech', label: 'Technology' },
+                { value: 'science', label: 'Science' },
+                { value: 'art', label: 'Art & Design' },
+                { value: 'business', label: 'Business' }
+              ]}
+              required
+            />
+          </Stack>
+        </Stack>
+
+        {/* Breadcrumb Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Breadcrumb Examples</Title>
+          <Stack gap="md">
+            <Breadcrumb
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Products', href: '/products' },
+                { label: 'Electronics', href: '/products/electronics' },
+                { label: 'Smartphones' }
+              ]}
+            />
+            <Breadcrumb
+              items={[
+                { label: 'Dashboard', href: '/dashboard' },
+                { label: 'Users', href: '/dashboard/users' },
+                { label: 'John Doe' }
+              ]}
+              separator=">"
+            />
+          </Stack>
+        </Stack>
+
+        {/* BackBreadcrumb Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">BackBreadcrumb Examples</Title>
+          <Stack gap="md">
+            <BackBreadcrumb 
+              label="Back to Dashboard"
+              onClick={() => console.log('Navigate back to dashboard')}
+            />
+            <BackBreadcrumb 
+              label="Back to Products" 
+              onClick={() => console.log('Navigate back to products')}
+            />
+          </Stack>
+        </Stack>
+
+        {/* NavLink Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">NavLink Examples</Title>
+          <Stack gap="md" style={{ maxWidth: 300 }}>
+            <NavLink label="Dashboard" icon="ri-dashboard-line" active />
+            <NavLink label="Users" icon="ri-user-line" />
+            <NavLink 
+              label="Settings" 
+              icon="ri-settings-line" 
+              rightSection={<Badge size="xs" color="info">3</Badge>}
+            />
+            <NavLink 
+              label="Messages" 
+              icon="ri-message-line"
+              rightSection={<Indicator count={5} type="danger" />}
+            />
+          </Stack>
+        </Stack>
+
+        {/* Stepper Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Stepper Examples</Title>
+          <Stack gap="lg">
+            <Group gap="md">
+              <Title order={5} size="h6">Horizontal Stepper</Title>
+            </Group>
+            <Stepper
+              orientation="horizontal"
+              steps={[
+                { label: 'Account Setup', description: 'Create your account' },
+                { label: 'Profile Information', description: 'Fill in your details' },
+                { label: 'Preferences', description: 'Customize your experience' },
+                { label: 'Review', description: 'Review and confirm' },
+                { label: 'Complete', description: 'All done!' }
+              ]}
+              active={2}
+            />
+
+            <Group gap="md">
+              <Title order={5} size="h6">Vertical Stepper</Title>
+            </Group>
+            <Stepper
+              orientation="vertical"
+              steps={[
+                { label: 'Planning', description: 'Define project requirements' },
+                { label: 'Development', description: 'Build the application' },
+                { label: 'Testing', description: 'Quality assurance testing' },
+                { label: 'Deployment', description: 'Deploy to production' }
+              ]}
+              active={1}
+              style={{ maxWidth: 400 }}
+            />
+          </Stack>
+        </Stack>
+
+        {/* Tabs Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Tabs Examples</Title>
+          <Stack gap="lg">
+            <Group gap="md">
+              <Title order={5} size="h6">Horizontal Tabs</Title>
+            </Group>
+            <Tabs
+              orientation="horizontal"
+              tabs={[
+                { 
+                  id: 'overview', 
+                  label: 'Overview', 
+                  leftSection: <RiEyeLine size={16} />,
+                  rightSection: <Badge size="xs" color="info">12</Badge>,
+                  children: <div>Overview content goes here...</div>
+                },
+                { 
+                  id: 'analytics', 
+                  label: 'Analytics',
+                  leftSection: <RiServerLine size={16} />,
+                  children: <div>Analytics content goes here...</div>
+                },
+                { 
+                  id: 'settings', 
+                  label: 'Settings',
+                  rightSection: <Indicator count={3} type="danger"><span></span></Indicator>,
+                  children: <div>Settings content goes here...</div>
+                }
+              ]}
+              value="overview"
+            />
+
+            <Group gap="md">
+              <Title order={5} size="h6">Vertical Tabs</Title>
+            </Group>
+            <div style={{ maxWidth: 500 }}>
+              <Tabs
+                orientation="vertical"
+                tabs={[
+                  { 
+                    id: 'profile', 
+                    label: 'Profile', 
+                    leftSection: <RiUserLine size={16} />,
+                    children: <div>Profile settings content...</div>
+                  },
+                  { 
+                    id: 'security', 
+                    label: 'Security',
+                    children: <div>Security settings content...</div>
+                  },
+                  { 
+                    id: 'notifications', 
+                    label: 'Notifications', 
+                    rightSection: <Badge size="xs" color="success">On</Badge>,
+                    children: <div>Notification preferences content...</div>
+                  }
+                ]}
+                value="profile"
+              />
+            </div>
+          </Stack>
+        </Stack>
+
+        {/* Modal Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Modal Examples</Title>
+          <Group gap="md">
+            <DSButton onClick={() => setModalOpened(true)}>Open Modal</DSButton>
+            <DSButton variant="danger" onClick={() => setConfirmModalOpened(true)}>Confirmation Modal</DSButton>
+          </Group>
+        </Stack>
+
+        <Modal
+          opened={modalOpened}
+          onClose={() => setModalOpened(false)}
+          title="Edit User Profile"
+          size="md"
+          actions={[
+            {
+              id: 'save',
+              label: 'Save Changes',
+              variant: 'primary',
+              onClick: () => {
+                console.log('Save clicked');
+                setModalOpened(false);
+              }
+            },
+            {
+              id: 'cancel',
+              label: 'Cancel',
+              variant: 'outline',
+              onClick: () => setModalOpened(false)
+            }
+          ]}
+          tertiaryActions={[
+            {
+              id: 'help',
+              label: 'Help',
+              variant: 'default',
+              onClick: () => console.log('Help clicked')
+            }
+          ]}
+        >
+          <Stack gap="md">
+            <TextInput label="Full Name" placeholder="Enter full name..." />
+            <TextInput label="Email" placeholder="Enter email address..." />
+            <TextArea label="Bio" placeholder="Tell us about yourself..." rows={3} />
+            <Alert type="info" title="Button Layout">
+              <div style={{ fontSize: '14px' }}>
+                • <strong>Left side:</strong> Primary Action (blue), Cancel (outline)<br/>
+                • <strong>Right side:</strong> More Options, Help (both gray)
+              </div>
+            </Alert>
+          </Stack>
+        </Modal>
+
+        <ConfirmationModal
+          opened={confirmModalOpened}
+          onClose={() => setConfirmModalOpened(false)}
+          title="Delete User"
+          confirmLabel="Delete"
+          cancelLabel="Keep"
+          confirmVariant="danger"
+          onConfirm={() => {
+            console.log('User deleted');
+            setConfirmModalOpened(false);
+          }}
+          onCancel={() => setConfirmModalOpened(false)}
+        >
+          Are you sure you want to delete this user? This action cannot be undone.
+        </ConfirmationModal>
+
+        {/* Drawer Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Drawer Examples</Title>
+          <Group gap="md">
+            <DSButton onClick={() => setRightDrawerOpened(true)}>Right Drawer</DSButton>
+            <DSButton onClick={() => setLeftDrawerOpened(true)}>Left Drawer</DSButton>
+            <DSButton onClick={() => setTopDrawerOpened(true)}>Top Drawer</DSButton>
+            <DSButton onClick={() => setBottomDrawerOpened(true)}>Bottom Drawer</DSButton>
+          </Group>
+        </Stack>
+
+        <Drawer
+          opened={rightDrawerOpened}
+          onClose={() => setRightDrawerOpened(false)}
+          title="User Details"
+          position="right"
+          size="md"
+        >
+          <Stack gap="md">
+            <TextInput label="Name" defaultValue="John Doe" />
+            <TextInput label="Email" defaultValue="john@example.com" />
+            <TextArea label="Notes" defaultValue="Customer since 2020" rows={4} />
+            <Group gap="sm" justify="flex-end" mt="md">
+              <DSButton variant="outline" onClick={() => setRightDrawerOpened(false)}>Cancel</DSButton>
+              <DSButton onClick={() => setRightDrawerOpened(false)}>Save</DSButton>
+            </Group>
+          </Stack>
+        </Drawer>
+
+        <Drawer
+          opened={leftDrawerOpened}
+          onClose={() => setLeftDrawerOpened(false)}
+          title="Navigation Menu"
+          position="left"
+          size="sm"
+        >
+          <Stack gap="sm">
+            <NavLink label="Dashboard" icon="ri-dashboard-line" active />
+            <NavLink label="Users" icon="ri-user-line" />
+            <NavLink label="Settings" icon="ri-settings-line" />
+            <NavLink label="Reports" icon="ri-file-text-line" />
+          </Stack>
+        </Drawer>
+
+        <Drawer
+          opened={topDrawerOpened}
+          onClose={() => setTopDrawerOpened(false)}
+          title="Notifications"
+          position="top"
+          size="xs"
+        >
+          <Stack gap="sm">
+            <Alert type="info" title="New Message">You have a new message from John</Alert>
+            <Alert type="success" title="Task Completed">Your report has been generated</Alert>
+          </Stack>
+        </Drawer>
+
+        <Drawer
+          opened={bottomDrawerOpened}
+          onClose={() => setBottomDrawerOpened(false)}
+          title="Quick Actions"
+          position="bottom"
+          size="xs"
+        >
+          <Group gap="md" justify="center">
+            <DSButton leftIcon={<RiAddLine size={16} />}>Add Item</DSButton>
+            <DSButton leftIcon={<RiEyeLine size={16} />} variant="outline">View All</DSButton>
+            <DSButton leftIcon={<RiServerLine size={16} />} variant="default">Export</DSButton>
+          </Group>
+        </Drawer>
+
+        {/* Menu Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Menu Examples</Title>
+          <Group gap="md">
+            <DSMenu
+              trigger={<DSButton>Basic Menu</DSButton>}
+              sections={[
+                {
+                  items: [
+                    { key: 'profile', label: 'Profile', icon: <RiUserLine size={16} /> },
+                    { key: 'settings', label: 'Settings', icon: <RiServerLine size={16} /> },
+                    { key: 'logout', label: 'Logout' }
+                  ]
+                }
+              ]}
+            />
+            
+            <DSMenu
+              trigger={<ActionButton icon={<RiMore2Fill size={16} />} />}
+              position="bottom-end"
+              sections={[
+                {
+                  title: 'Actions',
+                  items: [
+                    { 
+                      key: 'edit', 
+                      label: 'Edit', 
+                      icon: <RiEyeLine size={16} />,
+                      rightSection: <Kbd size="xs">E</Kbd>
+                    },
+                    { 
+                      key: 'duplicate', 
+                      label: 'Duplicate',
+                      rightSection: <Badge size="xs" color="info">Pro</Badge>
+                    }
+                  ]
+                },
+                {
+                  items: [
+                    { 
+                      key: 'delete', 
+                      label: 'Delete', 
+                      color: 'red',
+                      rightSection: <Kbd size="xs">Del</Kbd>
+                    }
+                  ]
+                }
+              ]}
+            />
+          </Group>
+        </Stack>
+
+        {/* Popover Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="h5">Popover Examples</Title>
+          
+          {/* Basic Popovers */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Basic Popovers</Title>
+            <Group gap="md">
+              <Popover
+                trigger={<DSButton size="xs">Info (Top)</DSButton>}
+                title="Information"
+                position="top"
+              >
+                This is a simple information popover positioned at the top.
+              </Popover>
+              
+              <Popover
+                trigger={<DSButton size="xs">Help (Bottom)</DSButton>}
+                title="Help"
+                position="bottom"
+              >
+                This popover appears at the bottom and provides helpful information.
+              </Popover>
+              
+              <Popover
+                trigger={<DSButton size="xs">Settings (Left)</DSButton>}
+                title="Quick Settings"
+                position="left"
+                width={250}
+              >
+                <Stack gap="sm">
+                  <Switch label="Enable notifications" />
+                  <Switch label="Dark mode" />
+                  <Switch label="Auto-save" />
+                </Stack>
+              </Popover>
+              
+              <Popover
+                trigger={<DSButton size="xs">Actions (Right)</DSButton>}
+                title="Quick Actions"
+                position="right"
+                width={200}
+              >
+                <Stack gap="xs">
+                  <DSButton variant="outline" size="xs">Edit</DSButton>
+                  <DSButton variant="outline" size="xs">Duplicate</DSButton>
+                  <DSButton variant="danger" size="xs">Delete</DSButton>
+                </Stack>
+              </Popover>
+            </Group>
+          </Stack>
+
+          {/* Popovers with Actions */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Popovers with Button Actions</Title>
+            <Group gap="md">
+              <Popover
+                trigger={<DSButton size="xs">Confirm Action</DSButton>}
+                title="Confirm"
+                position="top"
+                actions={[
+                  {
+                    id: "yes",
+                    label: "Yes",
+                    variant: "primary",
+                    onClick: () => console.log('Confirmed'),
+                    closeOnClick: true
+                  },
+                  {
+                    id: "no",
+                    label: "No",
+                    variant: "outline",
+                    closeOnClick: true
+                  }
+                ]}
+              >
+                Are you sure you want to continue?
+              </Popover>
+              
+              <Popover
+                trigger={<DSButton size="xs">Form Popover</DSButton>}
+                title="Quick Form"
+                position="bottom"
+                width={300}
+                actions={[
+                  {
+                    id: "save",
+                    label: "Save",
+                    variant: "primary",
+                    onClick: () => console.log('Form saved'),
+                    closeOnClick: true
+                  },
+                  {
+                    id: "cancel",
+                    label: "Cancel",
+                    variant: "outline",
+                    closeOnClick: true
+                  }
+                ]}
+                tertiaryActions={[
+                  {
+                    id: "reset",
+                    label: "Reset",
+                    variant: "default",
+                    onClick: () => console.log('Form reset')
+                  }
+                ]}
+              >
+                <Stack gap="sm">
+                  <TextInput label="Name" placeholder="Enter name..." size="xs" />
+                  <TextArea label="Notes" placeholder="Add notes..." rows={2} size="xs" />
+                </Stack>
+              </Popover>
+            </Group>
+          </Stack>
+
+          {/* Confirmation Popover Variant */}
+          <Stack gap="sm">
+            <Title order={5} size="h6">Pre-configured Confirmation Popover</Title>
+            <Group gap="md">
+              <ConfirmationPopover
+                trigger={<DSButton variant="danger" size="xs">Delete Item</DSButton>}
+                title="Delete Confirmation"
+                position="top"
+                confirmLabel="Delete"
+                cancelLabel="Keep"
+                confirmVariant="danger"
+                onConfirm={() => console.log('Item deleted')}
+                onCancel={() => console.log('Delete cancelled')}
+              >
+                This action cannot be undone.
+              </ConfirmationPopover>
+            </Group>
+          </Stack>
         </Stack>
       </Stack>
       

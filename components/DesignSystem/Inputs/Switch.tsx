@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch as MantineSwitch, SwitchProps as MantineSwitchProps } from '@mantine/core';
-import classes from './Switch.module.css';
 
 // Define the DS Switch props interface
 export interface DSSwitchProps extends Omit<MantineSwitchProps, 'color' | 'radius'> {
@@ -10,7 +9,10 @@ export interface DSSwitchProps extends Omit<MantineSwitchProps, 'color' | 'radiu
 
 /**
  * Switch component with consistent design system styling.
- * Built on top of Mantine's Switch component with enforced green color and radius.
+ * Built on top of Mantine's Switch component with enforced green color and xl radius.
+ * 
+ * NOTE: Prefer using Mantine's built-in props over CSS overrides when possible.
+ * Only add CSS overrides as a last resort when built-in props don't achieve the desired result.
  * 
  * @example
  * ```tsx
@@ -54,8 +56,7 @@ export const Switch: React.FC<DSSwitchProps> = ({
     <MantineSwitch
       label={labelWithOptional}
       color="green"
-      radius="sm"
-      className={classes.switch}
+      radius="xl"
       {...props}
     />
   );

@@ -25,6 +25,80 @@ Use this prompt to instruct Cursor IDE to generate components, layouts, or utili
 
 ---
 
+## 🎨 Design System Component Requirements
+
+**ALWAYS use Design System components** when available instead of raw Mantine components:
+
+**Design System Location:** `@/components/DesignSystem`
+
+**Available Categories:**
+- **Buttons** - Button, ActionButton, CloseButton
+- **Inputs** - TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup
+- **Combobox** - SearchableSelect, AutocompleteClearable, Multiselect
+- **Navigation** - Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs
+- **DataDisplay** - Alert, Badge, Chip, Pill, Indicator, Progress
+- **Overlays** - Drawer, Menu
+- **Typography** - Kbd
+- **Feedback** - (Future components)
+- **Misc** - (Future components)
+
+**Usage Pattern:**
+```tsx
+// ✅ CORRECT - Use Design System components
+import { Button, TextInput, Alert, Menu, Kbd } from '@/components/DesignSystem';
+
+// ❌ INCORRECT - Don't use raw Mantine components directly
+import { Button, TextInput, Alert, Menu, Kbd } from '@mantine/core';
+```
+
+**Design System Rules:**
+1. **Always check Design System first** - Before using any Mantine component, check if a Design System wrapper exists
+2. **Create new Design System components** - If a Mantine component isn't wrapped yet, create a new Design System component following established patterns:
+   - Use `forwardRef` for DOM element references
+   - Extend Mantine props with `interface DS[ComponentName]Props`
+   - Add comprehensive JSDoc documentation with examples
+   - Follow t-shirt sizing (xs, sm, md, lg, xl) where applicable
+   - Use semantic color systems (success, danger, info, pending, default)
+   - Place in appropriate category directory
+   - Export through category index and main Design System index
+3. **Maintain consistency** - Follow the established patterns seen in existing Design System components
+4. **Organize by category** - Group related components in logical categories (Buttons, Inputs, etc.)
+
+**Component Structure Template:**
+```tsx
+import React, { forwardRef } from 'react';
+import { [MantineComponent] as Mantine[Component], [MantineComponent]Props as Mantine[Component]Props } from '@mantine/core';
+
+export interface DS[Component]Props extends Mantine[Component]Props {
+  // Enhanced props here
+}
+
+/**
+ * AppDirect Design System [Component] Component
+ * 
+ * [Description and usage examples]
+ */
+export const [Component] = forwardRef<HTML[Element]Element, DS[Component]Props>(
+  ({ ...props }, ref) => {
+    return (
+      <Mantine[Component]
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+
+[Component].displayName = '[Component]';
+```
+
+**Do NOT use:**
+- Raw Mantine components when Design System wrappers exist
+- Inconsistent prop naming or sizing conventions
+- Direct styling overrides that bypass the Design System
+
+---
+
 ## 📊 Data Table Requirements
 
 **ALWAYS use the custom Table component** for any data display requests, including synonyms:
@@ -126,6 +200,8 @@ import { PageContentHeader } from '@/components/PageContentHeader';
 > - TypeScript
 >
 > Use server/client components appropriately. Style exclusively with Mantine. Use Mantine theming where applicable. Avoid other UI libraries unless explicitly asked.
+>
+> **For all UI components, prioritize using the Design System components from `@/components/DesignSystem` before raw Mantine components.**
 >
 > **Task:**  
 > Generate a [component / layout / page / utility] that does the following:

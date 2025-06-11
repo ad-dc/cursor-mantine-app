@@ -1,6 +1,5 @@
 import React from 'react';
 import { Slider as MantineSlider, SliderProps as MantineSliderProps } from '@mantine/core';
-import classes from './Slider.module.css';
 
 // Define the DS Slider props interface
 export interface DSSliderProps extends Omit<MantineSliderProps, 'radius'> {
@@ -10,7 +9,10 @@ export interface DSSliderProps extends Omit<MantineSliderProps, 'radius'> {
 
 /**
  * Slider component with consistent design system styling.
- * Built on top of Mantine's Slider component with enforced radius.
+ * Built on top of Mantine's Slider component with enforced xl radius.
+ * 
+ * NOTE: Prefer using Mantine's built-in props over CSS overrides when possible.
+ * Only add CSS overrides as a last resort when built-in props don't achieve the desired result.
  * 
  * @example
  * ```tsx
@@ -56,8 +58,7 @@ export const Slider: React.FC<DSSliderProps> = ({
   return (
     <MantineSlider
       label={labelWithOptional}
-      radius="sm"
-      className={classes.slider}
+      radius="xl"
       {...props}
     />
   );

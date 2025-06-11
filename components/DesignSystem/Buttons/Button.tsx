@@ -6,7 +6,7 @@ import styles from './Button.module.css';
 /**
  * Enhanced Button props extending Mantine's ButtonProps
  */
-export interface DSButtonProps extends Omit<MantineButtonProps, 'size' | 'color'> {
+export interface DSButtonProps extends Omit<MantineButtonProps, 'size' | 'color' | 'variant'> {
   /** Button size from design system scale */
   size?: ComponentSize;
   /** Button color from design system palette */
@@ -23,6 +23,8 @@ export interface DSButtonProps extends Omit<MantineButtonProps, 'size' | 'color'
   leftIcon?: React.ReactNode;
   /** Icon to display on the right */
   rightIcon?: React.ReactNode;
+  /** Click handler */
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**
@@ -96,7 +98,7 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
         case 'link':
           return 'subtle';  // Link-style button using subtle variant
         case 'secret':
-          return 'transparent';  // Minimal visibility
+          return 'subtle';  // Use Mantine's subtle variant
         case 'outline':
           return 'outline';
         case 'danger':
@@ -121,6 +123,8 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
           return 'blue';    
         case 'disabled':
           return 'gray';
+        case 'secret':
+          return 'gray';  // Use gray color for subtle secret variant
         default:
           return defaultColor;
       }
