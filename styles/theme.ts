@@ -46,6 +46,7 @@ const THEME_CONSTANTS = {
   primaryColor: 'blue' as const,
   defaultRadius: 'sm' as const,
   fontFamily: 'var(--font-inter), sans-serif',
+  fontFamilyMonospace: 'var(--font-roboto-mono), monospace',
 } as const;
 
 /**
@@ -62,6 +63,7 @@ export const theme: MantineThemeOverride = {
   // Design system defaults
   defaultRadius: THEME_CONSTANTS.defaultRadius,
   fontFamily: THEME_CONSTANTS.fontFamily,
+  fontFamilyMonospace: THEME_CONSTANTS.fontFamilyMonospace,
   
   // Component customizations
   components: {

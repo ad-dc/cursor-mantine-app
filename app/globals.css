@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -26,18 +30,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure Inter font takes precedence over Mantine defaults */
-html, body, * {
+/* Ensure Inter font takes precedence over Mantine defaults, but exclude monospace components */
+html, body {
   font-family: var(--font-inter), sans-serif !important;
 }
 
-/* Override Mantine's font family specifically */
+/* Override Mantine's font family specifically for non-monospace components */
 .mantine-Text-root,
 .mantine-Button-root,
 .mantine-InputBase-root,
 .mantine-Combobox-root,
-.mantine-DatePicker-root {
+.mantine-DatePicker-root,
+.mantine-Title-root {
   font-family: var(--font-inter), sans-serif !important;
+}
+
+/* Ensure monospace components use Roboto Mono */
+.mantine-Code-root,
+.mantine-Kbd-root {
+  font-family: var(--font-roboto-mono), monospace !important;
 }
 
 * {

@@ -15,17 +15,18 @@
  */
 
 // Import components for category exports
-import { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup } from './Inputs';
+import { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
 import { Button, ActionButton, CloseButton } from './Buttons';
-import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress } from './DataDisplay';
+import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon } from './DataDisplay';
 import { SearchableSelect, AutocompleteClearable, Multiselect } from './Combobox';
 import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
 import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
-import { Kbd } from './Typography';
+import { Kbd, Code, Text, Title } from './Typography';
+import { Divider, Paper } from './Misc';
 
 // ========================== INPUTS ==========================
-export { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup } from './Inputs';
-export type { DSTextInputProps, DSTextAreaProps, DSNumberInputProps, DSColorInputProps, DSSliderProps, DSSwitchProps, DSSegmentedControlProps, DSCheckboxProps, DSRadioProps, DSRadioGroupProps } from './Inputs';
+export { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
+export type { DSTextInputProps, DSTextAreaProps, DSNumberInputProps, DSColorInputProps, DSSliderProps, DSSwitchProps, DSSegmentedControlProps, DSCheckboxProps, DSRadioProps, DSRadioGroupProps, DropZoneProps, DSFileInputProps } from './Inputs';
 
 // ========================== BUTTONS ==========================
 export { Button, ActionButton, CloseButton } from './Buttons';
@@ -46,14 +47,16 @@ export { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, T
 export type { DSDrawerProps, DSMenuProps, MenuItem, MenuSection, DSModalProps, ModalAction, ConfirmationModalProps, DSPopoverProps, PopoverAction, ConfirmationPopoverProps, DSTooltipProps } from './Overlays';
 
 // ========================== DATA DISPLAY ==========================
-export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress } from './DataDisplay';
-export type { DSAlertProps, DSAvatarProps, AvatarVariant, AvatarSize, DSBadgeProps, DSCardProps, CardSize, CardVariant, CardPadding, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps } from './DataDisplay';
+export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon } from './DataDisplay';
+export type { DSAlertProps, DSAvatarProps, AvatarVariant, AvatarSize, DSBadgeProps, DSCardProps, CardSize, CardVariant, CardPadding, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps, DSThemeIconProps, ThemeIconSize, ThemeIconColor } from './DataDisplay';
 
 // ========================== TYPOGRAPHY ==========================
-export { Kbd } from './Typography';
-export type { DSKbdProps } from './Typography';
+export { Kbd, Code, Text, Title } from './Typography';
+export type { DSKbdProps, CodeProps, DSTextProps, DSTitleProps } from './Typography';
 
 // ========================== MISC ==========================
+export { Divider, Paper } from './Misc';
+export type { DividerProps, PaperProps } from './Misc';
 
 // ========================== CATEGORY EXPORTS ==========================
 // Export components grouped by category for convenient importing
@@ -68,6 +71,8 @@ export const Inputs = {
   Checkbox,
   Radio,
   RadioGroup,
+  DropZone,
+  FileInput,
 };
 
 export const Buttons = {
@@ -111,13 +116,20 @@ export const DataDisplay = {
   Pill,
   Indicator,
   Progress,
+  ThemeIcon,
 };
 
 export const Typography = {
   Kbd,
+  Code,
+  Text,
+  Title,
 };
 
-export const Misc = {};
+export const Misc = {
+  Divider,
+  Paper,
+};
 
 // Placeholder export to prevent empty module errors
 export {}; 

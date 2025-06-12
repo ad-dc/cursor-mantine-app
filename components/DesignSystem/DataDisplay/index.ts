@@ -28,6 +28,8 @@ export type { DSIndicatorProps } from './Indicator';
 export { Progress } from './Progress';
 export type { DSProgressProps } from './Progress';
 
+export { ThemeIcon } from './ThemeIcon';
+export type { DSThemeIconProps, ThemeIconSize, ThemeIconColor } from './ThemeIcon';
+
 // Future data display component exports will go here:
-// export { ADDSKbd } from './Kbd';
-// export { ADDSThemeIcon } from './ThemeIcon'; 
+// export { ADDSKbd } from './Kbd'; 

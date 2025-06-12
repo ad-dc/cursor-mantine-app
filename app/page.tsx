@@ -1,7 +1,7 @@
 'use client';
 
 import '@mantine/core/styles.layer.css';
-import { ActionIcon, Title, Text, rem, Menu, Switch as MantineSwitch, Group, Divider, Stack } from '@mantine/core';
+import { ActionIcon, Title as MantineTitle, Text as MantineText, rem, Menu, Switch as MantineSwitch, Group, Divider, Stack, SimpleGrid, FileInput as MantineFileInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { HeaderBar } from '@/components/HeaderBar';
 import { SidebarNav, NavItem } from '@/components/SidebarNav';
@@ -9,7 +9,7 @@ import { MainLayout } from '@/components/MainLayout';
 import { Table } from '@/components/Table';
 import { PageContentHeader } from '@/components/PageContentHeader';
 import { NameValue } from '@/components/NameValue';
-import { Alert, Avatar, Button as DSButton, ActionButton, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Card, Chip, Pill, Indicator, Progress, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip, Kbd, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from '@/components/DesignSystem';
+import { Alert, Avatar, Button as DSButton, ActionButton, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip, Kbd, Code, Text, Title, Divider as DSDivider, Paper as DSPaper, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs, DropZone, FileInput } from '@/components/DesignSystem';
 import { useState, useMemo, useEffect } from 'react';
 import { RiMore2Fill, RiEyeLine, RiUserLine, RiServerLine, RiAddLine, RiCircleLine } from '@remixicon/react';
 import { MRT_PaginationState as PaginationState, MRT_ColumnDef as ColumnDef, MRT_TableInstance } from 'mantine-react-table';
@@ -313,6 +313,39 @@ export default function Home() {
 
   return (
     <MainLayout header={<HeaderBar />} navbar={<SidebarNav navItems={navItems} title="Some Title" />}>
+      {/* Typography Example Section */}
+      <Stack gap="xl" p="md" mb="xl" style={{ backgroundColor: '#ffffff', borderRadius: '8px', border: '1px solid #e9ecef' }}>
+        <Title order={1}>Typography Examples</Title>
+        <DSDivider />
+        
+        <Group align="flex-start">
+          <DSPaper variant="border" style={{ width: '48%' }}>
+            <Title order={2} size="lg" mb="md">Title Component</Title>
+            <Title order={1} size="xl">Title XL (h1)</Title>
+            <Title order={2} size="lg">Title LG (h2)</Title>
+            <Title order={3} size="md">Title MD (h3)</Title>
+            <Title order={4} size="sm">Title SM (h4)</Title>
+            <Title order={5} size="xs">Title XS (h5)</Title>
+            <Title order={2} size="lg" c="blue" mt="md">Colored Title</Title>
+            <Title order={3} size="md" fw={400}>Light Weight Title</Title>
+          </DSPaper>
+          
+          <DSPaper variant="border" style={{ width: '48%' }}>
+            <Title order={2} size="lg" mb="md">Text Component</Title>
+            <Text size="xl">Text XL Size</Text>
+            <Text size="lg">Text LG Size</Text>
+            <Text size="md">Text MD Size</Text>
+            <Text size="sm">Text SM Size</Text>
+            <Text size="xs">Text XS Size</Text>
+            <Text size="md" fw={700} mt="md">Bold Text</Text>
+            <Text size="md" fs="italic">Italic Text</Text>
+            <Text size="md" td="underline">Underlined Text</Text>
+            <Text size="md" c="blue">Blue Text</Text>
+            <Text size="md" c="dimmed">Dimmed Text</Text>
+          </DSPaper>
+        </Group>
+      </Stack>
+      
       <PageContentHeader
         subhead="Admin Dashboard"
         title="User Management"
@@ -336,11 +369,11 @@ export default function Home() {
       
       {/* Design System Components Demo */}
       <Stack gap="xl" p="md" style={{ backgroundColor: '#ffffff', borderRadius: '8px', border: '1px solid #e9ecef' }}>
-        <Title order={3} size="h4">Design System Components</Title>
+        <Title order={3} size="md">Design System Components</Title>
         
         {/* TextInput Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">TextInput - All Sizes</Title>
+          <Title order={4} size="sm">TextInput - All Sizes</Title>
           <Stack gap="md">
             <TextInput size="xs" label="Extra Small" placeholder="xs size input" />
             <TextInput size="sm" label="Small" placeholder="sm size input" />
@@ -349,14 +382,14 @@ export default function Home() {
             <TextInput size="xl" label="Extra Large" placeholder="xl size input" />
           </Stack>
           
-          <Title order={5} size="h6">TextInput Label States</Title>
+          <Title order={5} size="xs">TextInput Label States</Title>
           <Stack gap="sm">
             <TextInput label="Neither Required nor Optional" placeholder="Enter text" />
             <TextInput label="Required Field" placeholder="Enter text" required />
             <TextInput label="Optional Field" placeholder="Enter text" showOptional />
           </Stack>
           
-          <Title order={5} size="h6">TextInput States</Title>
+          <Title order={5} size="xs">TextInput States</Title>
           <Group gap="md">
             <TextInput label="Default" placeholder="Enter text" />
             <TextInput label="With Error" placeholder="Enter text" error="This field is required" />
@@ -366,7 +399,7 @@ export default function Home() {
 
         {/* TextArea Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">TextArea - All Sizes</Title>
+          <Title order={4} size="sm">TextArea - All Sizes</Title>
           <Stack gap="md">
             <TextArea size="xs" label="Extra Small" placeholder="This is some text in a textarea. It is sized to show five lines of text." rows={3} />
             <TextArea size="sm" label="Small" placeholder="This is some text in a textarea. It is sized to show five lines of text." rows={4} />
@@ -375,14 +408,14 @@ export default function Home() {
             <TextArea size="xl" label="Extra Large" placeholder="This is some text in a textarea. It is sized to show five lines of text." rows={5} />
           </Stack>
           
-          <Title order={5} size="h6">TextArea Label States</Title>
+          <Title order={5} size="xs">TextArea Label States</Title>
           <Stack gap="sm">
             <TextArea label="Comments" placeholder="Enter your comments..." rows={4} />
             <TextArea label="Description" placeholder="Enter description..." required rows={4} />
             <TextArea label="Additional Notes" placeholder="Any additional notes..." showOptional rows={4} />
           </Stack>
           
-          <Title order={5} size="h6">TextArea Features</Title>
+          <Title order={5} size="xs">TextArea Features</Title>
           <Stack gap="sm">
             <TextArea 
               label="Fixed Height" 
@@ -420,10 +453,10 @@ export default function Home() {
 
         {/* NumberInput Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">NumberInput Examples</Title>
+          <Title order={4} size="sm">NumberInput Examples</Title>
           <Stack gap="lg">
             <Group gap="md">
-              <Title order={5} size="h6">NumberInput Sizes</Title>
+              <Title order={5} size="xs">NumberInput Sizes</Title>
             </Group>
             <Stack gap="md">
               <NumberInput size="xs" label="Extra Small" placeholder="Enter a number" style={{ width: 200 }} />
@@ -434,7 +467,7 @@ export default function Home() {
             </Stack>
             
             <Group gap="md">
-              <Title order={5} size="h6">Label States</Title>
+              <Title order={5} size="xs">Label States</Title>
             </Group>
             <Group gap="md" align="flex-end">
               <NumberInput 
@@ -457,7 +490,7 @@ export default function Home() {
             </Group>
             
             <Group gap="md">
-              <Title order={5} size="h6">With Constraints & Formatting</Title>
+              <Title order={5} size="xs">With Constraints & Formatting</Title>
             </Group>
             <Group gap="md" align="flex-end">
               <NumberInput 
@@ -487,7 +520,7 @@ export default function Home() {
             </Group>
             
             <Group gap="md">
-              <Title order={5} size="h6">States</Title>
+              <Title order={5} size="xs">States</Title>
             </Group>
             <Group gap="md" align="flex-end">
               <NumberInput 
@@ -514,7 +547,7 @@ export default function Home() {
 
         {/* ColorInput Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">ColorInput Examples</Title>
+          <Title order={4} size="sm">ColorInput Examples</Title>
           <Stack gap="lg">
             <Group gap="md" align="flex-end">
               <ColorInput 
@@ -583,7 +616,7 @@ export default function Home() {
             </Group>
             
             <Group gap="md">
-              <Title order={5} size="h6">ColorInput Sizes</Title>
+              <Title order={5} size="xs">ColorInput Sizes</Title>
             </Group>
             <Stack gap="md">
               <ColorInput size="xs" label="Extra Small" placeholder="#000000" style={{ width: 200 }} />
@@ -597,10 +630,10 @@ export default function Home() {
 
         {/* Switch Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Switch Examples</Title>
+          <Title order={4} size="sm">Switch Examples</Title>
           <Stack gap="lg">
             <Group gap="md">
-              <Title order={5} size="h6">Switch Sizes</Title>
+              <Title order={5} size="xs">Switch Sizes</Title>
             </Group>
             <Stack gap="md">
               <Switch size="xs" label="Extra Small Switch" />
@@ -611,7 +644,7 @@ export default function Home() {
             </Stack>
             
             <Group gap="md">
-              <Title order={5} size="h6">Label States</Title>
+              <Title order={5} size="xs">Label States</Title>
             </Group>
             <Stack gap="md">
               <Switch label="Default Switch" />
@@ -619,7 +652,7 @@ export default function Home() {
             </Stack>
             
             <Group gap="md">
-              <Title order={5} size="h6">Switch States</Title>
+              <Title order={5} size="xs">Switch States</Title>
             </Group>
             <Stack gap="md">
               <Switch label="Default (Off)" />
@@ -629,7 +662,7 @@ export default function Home() {
             </Stack>
             
             <Group gap="md">
-              <Title order={5} size="h6">With On/Off Labels</Title>
+              <Title order={5} size="xs">With On/Off Labels</Title>
             </Group>
             <Stack gap="md">
               <Switch 
@@ -653,7 +686,7 @@ export default function Home() {
             </Stack>
             
             <Group gap="md">
-              <Title order={5} size="h6">Common Use Cases</Title>
+              <Title order={5} size="xs">Common Use Cases</Title>
             </Group>
             <Stack gap="md">
               <Switch label="Enable notifications" defaultChecked />
@@ -667,10 +700,10 @@ export default function Home() {
 
         {/* SegmentedControl Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">SegmentedControl Examples</Title>
+          <Title order={4} size="sm">SegmentedControl Examples</Title>
           <Stack gap="lg">
             <Group gap="md">
-              <Title order={5} size="h6">Basic SegmentedControl</Title>
+              <Title order={5} size="xs">Basic SegmentedControl</Title>
             </Group>
             <SegmentedControl 
               data={['Segment 1', 'Segment 2', 'Segment 3', 'Segment 4', 'Segment 5']}
@@ -678,7 +711,7 @@ export default function Home() {
             />
             
             <Group gap="md">
-              <Title order={5} size="h6">Different Sizes</Title>
+              <Title order={5} size="xs">Different Sizes</Title>
             </Group>
             <Stack gap="md">
               <SegmentedControl 
@@ -709,7 +742,7 @@ export default function Home() {
             </Stack>
             
             <Group gap="md">
-              <Title order={5} size="h6">Custom Data Structure</Title>
+              <Title order={5} size="xs">Custom Data Structure</Title>
             </Group>
             <SegmentedControl 
               data={[
@@ -722,7 +755,7 @@ export default function Home() {
             />
             
             <Group gap="md">
-              <Title order={5} size="h6">Different Use Cases</Title>
+              <Title order={5} size="xs">Different Use Cases</Title>
             </Group>
             <Stack gap="md">
               <SegmentedControl 
@@ -740,7 +773,7 @@ export default function Home() {
             </Stack>
             
             <Group gap="md">
-              <Title order={5} size="h6">States</Title>
+              <Title order={5} size="xs">States</Title>
             </Group>
             <Stack gap="md">
               <SegmentedControl 
@@ -759,10 +792,10 @@ export default function Home() {
 
         {/* Slider Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Slider Examples</Title>
+          <Title order={4} size="sm">Slider Examples</Title>
           <Stack gap="lg" style={{ width: '100%', maxWidth: 400 }}>
             <Group gap="md">
-              <Title order={5} size="h6">Basic Slider</Title>
+              <Title order={5} size="xs">Basic Slider</Title>
             </Group>
             <Slider 
               label="Volume"
@@ -772,7 +805,7 @@ export default function Home() {
             />
             
             <Group gap="md">
-              <Title order={5} size="h6">With Optional Label</Title>
+              <Title order={5} size="xs">With Optional Label</Title>
             </Group>
             <Slider 
               label="Opacity"
@@ -783,7 +816,7 @@ export default function Home() {
             />
             
             <Group gap="md">
-              <Title order={5} size="h6">With Marks</Title>
+              <Title order={5} size="xs">With Marks</Title>
             </Group>
             <Slider 
               label="Rating"
@@ -801,7 +834,7 @@ export default function Home() {
             />
             
             <Group gap="md">
-              <Title order={5} size="h6">With Custom Values</Title>
+              <Title order={5} size="xs">With Custom Values</Title>
             </Group>
             <Slider 
               label="Temperature"
@@ -818,7 +851,7 @@ export default function Home() {
             />
             
             <Group gap="md">
-              <Title order={5} size="h6">States</Title>
+              <Title order={5} size="xs">States</Title>
             </Group>
             <Stack gap="md">
               <Slider 
@@ -841,7 +874,7 @@ export default function Home() {
 
         {/* Checkbox Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Checkbox - All Sizes</Title>
+          <Title order={4} size="sm">Checkbox - All Sizes</Title>
           <Stack gap="md">
             <Checkbox size="xs" label="Extra Small checkbox" />
             <Checkbox size="sm" label="Small checkbox" />
@@ -850,7 +883,7 @@ export default function Home() {
             <Checkbox size="xl" label="Extra Large checkbox" />
           </Stack>
           
-          <Title order={5} size="h6">Checkbox States</Title>
+          <Title order={5} size="xs">Checkbox States</Title>
           <Stack gap="sm">
             <Checkbox label="I want to receive email updates" />
             <Checkbox label="I want to receive SMS notifications" defaultChecked />
@@ -863,7 +896,7 @@ export default function Home() {
 
         {/* Radio Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Radio - All Sizes</Title>
+          <Title order={4} size="sm">Radio - All Sizes</Title>
           <Stack gap="md">
             <Radio size="xs" label="Extra Small radio" value="xs" />
             <Radio size="sm" label="Small radio" value="sm" />
@@ -872,7 +905,7 @@ export default function Home() {
             <Radio size="xl" label="Extra Large radio" value="xl" />
           </Stack>
           
-          <Title order={5} size="h6">Radio States</Title>
+          <Title order={5} size="xs">Radio States</Title>
           <Stack gap="sm">
             <Radio label="Default radio button" value="default" />
             <Radio label="Checked radio button" value="checked" defaultChecked />
@@ -880,7 +913,7 @@ export default function Home() {
             <Radio label="Required radio button" value="required" required />
           </Stack>
           
-          <Title order={5} size="h6">Radio Groups</Title>
+          <Title order={5} size="xs">Radio Groups</Title>
           <Stack gap="md">
             <RadioGroup label="Choose your preferred plan" defaultValue="basic">
               <Stack gap="xs">
@@ -902,10 +935,10 @@ export default function Home() {
 
         {/* Badge Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Badge - All Variants</Title>
+          <Title order={4} size="sm">Badge - All Variants</Title>
           <Stack gap="md">
             <Group gap="md">
-              <Title order={5} size="h6">Filled Badges</Title>
+              <Title order={5} size="xs">Filled Badges</Title>
             </Group>
             <Group gap="md">
               <Badge variant="filled" color="default">Default</Badge>
@@ -916,7 +949,7 @@ export default function Home() {
             </Group>
             
             <Group gap="md">
-              <Title order={5} size="h6">Outline Badges</Title>
+              <Title order={5} size="xs">Outline Badges</Title>
             </Group>
             <Group gap="md">
               <Badge variant="outline" color="default">Default</Badge>
@@ -927,7 +960,7 @@ export default function Home() {
             </Group>
             
             <Group gap="md">
-              <Title order={5} size="h6">Badge Sizes</Title>
+              <Title order={5} size="xs">Badge Sizes</Title>
             </Group>
             <Group gap="md" align="center">
               <Badge size="xs" color="info">XS</Badge>
@@ -941,10 +974,10 @@ export default function Home() {
 
         {/* Chip Variants Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Chip Variants</Title>
+          <Title order={4} size="sm">Chip Variants</Title>
           <Stack gap="lg">
             <Group gap="md">
-              <Title order={5} size="h6">Unselected Chips</Title>
+              <Title order={5} size="xs">Unselected Chips</Title>
             </Group>
             <Group gap="md">
               <Chip variant="default">Default</Chip>
@@ -955,7 +988,7 @@ export default function Home() {
             </Group>
             
             <Group gap="md">
-              <Title order={5} size="h6">Selected Chips</Title>
+              <Title order={5} size="xs">Selected Chips</Title>
             </Group>
             <Group gap="md">
               <Chip variant="default" checked>Default</Chip>
@@ -966,7 +999,7 @@ export default function Home() {
             </Group>
             
             <Group gap="md">
-              <Title order={5} size="h6">Interactive Chips</Title>
+              <Title order={5} size="xs">Interactive Chips</Title>
             </Group>
             <Group gap="md">
               <Chip variant="info" onChange={(checked) => console.log('Info chip:', checked)}>Toggle Info</Chip>
@@ -978,7 +1011,7 @@ export default function Home() {
 
         {/* Button Variants Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">All Button Variants</Title>
+          <Title order={4} size="sm">All Button Variants</Title>
           <Group gap="md">
             <DSButton variant="primary" size="xs">Primary</DSButton>
             <DSButton variant="secondary" size="xs">Secondary</DSButton>
@@ -990,7 +1023,7 @@ export default function Home() {
             <DSButton variant="secret" size="xs">Secret</DSButton>
           </Group>
           
-          <Title order={4} size="h5">With Icons</Title>
+          <Title order={4} size="sm">With Icons</Title>
           <Group gap="md">
             <DSButton 
               variant="primary" 
@@ -1025,7 +1058,7 @@ export default function Home() {
 
         {/* ActionButton Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">ActionButton Examples</Title>
+          <Title order={4} size="sm">ActionButton Examples</Title>
           <Group gap="md">
             <ActionButton><RiEyeLine size={16} /></ActionButton>
             <ActionButton><RiAddLine size={16} /></ActionButton>
@@ -1036,7 +1069,7 @@ export default function Home() {
 
         {/* CloseButton Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">CloseButton Examples</Title>
+          <Title order={4} size="sm">CloseButton Examples</Title>
           <Group gap="md">
             <CloseButton />
             <CloseButton size="sm" />
@@ -1047,7 +1080,7 @@ export default function Home() {
 
         {/* Pill Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Pill Examples</Title>
+          <Title order={4} size="sm">Pill Examples</Title>
           <Group gap="md">
             <Pill>Default Pill</Pill>
             <Pill>Info Pill</Pill>
@@ -1065,10 +1098,10 @@ export default function Home() {
 
         {/* Indicator Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Indicator Examples</Title>
+          <Title order={4} size="sm">Indicator Examples</Title>
           <Stack gap="md">
             <Group gap="md">
-              <Title order={5} size="h6">Semantic Colors</Title>
+              <Title order={5} size="xs">Semantic Colors</Title>
             </Group>
             <Group gap="md">
               <Indicator type="default"><DSButton size="xs">Default</DSButton></Indicator>
@@ -1079,7 +1112,7 @@ export default function Home() {
             </Group>
 
             <Group gap="md">
-              <Title order={5} size="h6">With Numbers</Title>
+              <Title order={5} size="xs">With Numbers</Title>
             </Group>
             <Group gap="md">
               <Indicator count={5} type="info"><DSButton size="xs">Messages</DSButton></Indicator>
@@ -1088,7 +1121,7 @@ export default function Home() {
             </Group>
 
             <Group gap="md">
-              <Title order={5} size="h6">With Outline</Title>
+              <Title order={5} size="xs">With Outline</Title>
             </Group>
             <Group gap="md">
               <Indicator type="info" withOutline><DSButton size="xs">Outlined Info</DSButton></Indicator>
@@ -1100,10 +1133,10 @@ export default function Home() {
 
         {/* Progress Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Progress Examples</Title>
+          <Title order={4} size="sm">Progress Examples</Title>
           <Stack gap="md">
             <Group gap="md">
-              <Title order={5} size="h6">Progress Sizes</Title>
+              <Title order={5} size="xs">Progress Sizes</Title>
             </Group>
             <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
               <div><span>Extra Small (30%)</span><Progress size="xs" value={30} /></div>
@@ -1114,7 +1147,7 @@ export default function Home() {
             </Stack>
 
             <Group gap="md">
-              <Title order={5} size="h6">Different Progress Levels</Title>
+              <Title order={5} size="xs">Different Progress Levels</Title>
             </Group>
             <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
               <div><span>25% Complete</span><Progress value={25} /></div>
@@ -1124,7 +1157,7 @@ export default function Home() {
             </Stack>
 
             <Group gap="md">
-              <Title order={5} size="h6">Animated Progress</Title>
+              <Title order={5} size="xs">Animated Progress</Title>
             </Group>
             <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
               <div><span>Uploading... 60%</span><Progress value={60} animated /></div>
@@ -1133,9 +1166,61 @@ export default function Home() {
           </Stack>
         </Stack>
 
+        {/* ThemeIcon Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="sm">ThemeIcon Examples</Title>
+          <Stack gap="md">
+            <Group gap="md">
+              <Title order={5} size="xs">All Sizes (xs to xxl)</Title>
+            </Group>
+            <Group gap="md">
+              <ThemeIcon size="xs"><RiUserLine size={11} /></ThemeIcon>
+              <ThemeIcon size="sm"><RiUserLine size={14} /></ThemeIcon>
+              <ThemeIcon size="md"><RiUserLine size={18} /></ThemeIcon>
+              <ThemeIcon size="lg"><RiUserLine size={22} /></ThemeIcon>
+              <ThemeIcon size="xl"><RiUserLine size={28} /></ThemeIcon>
+              <ThemeIcon size="xxl"><RiUserLine size={39} /></ThemeIcon>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Blue and Dark Colors</Title>
+            </Group>
+            <Group gap="md">
+              <ThemeIcon color="blue">
+                <RiEyeLine size={18} />
+              </ThemeIcon>
+              <ThemeIcon color="default">
+                <RiEyeLine size={18} />
+              </ThemeIcon>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Custom XXL Size from Figma</Title>
+            </Group>
+            <Group gap="md">
+              <ThemeIcon size="xxl" color="blue">
+                <RiAddLine size={39} />
+              </ThemeIcon>
+              <ThemeIcon size="xxl" color="default">
+                <RiAddLine size={39} />
+              </ThemeIcon>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Different Icons</Title>
+            </Group>
+            <Group gap="md">
+              <ThemeIcon color="blue"><RiServerLine size={18} /></ThemeIcon>
+              <ThemeIcon color="default"><RiCircleLine size={18} /></ThemeIcon>
+              <ThemeIcon color="blue"><RiMore2Fill size={18} /></ThemeIcon>
+              <ThemeIcon color="default"><RiAddLine size={18} /></ThemeIcon>
+            </Group>
+          </Stack>
+        </Stack>
+
         {/* Alert Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Alert Examples</Title>
+          <Title order={4} size="sm">Alert Examples</Title>
           <Stack gap="md">
             <Alert type="info" title="Information">
               This is an informational alert with useful details.
@@ -1154,7 +1239,7 @@ export default function Home() {
             </Alert>
             
             <Group gap="md">
-              <Title order={5} size="h6">Dismissible Alerts</Title>
+              <Title order={5} size="xs">Dismissible Alerts</Title>
             </Group>
             <Alert type="info" title="Dismissible Alert">
               You can close this alert by clicking the X button.
@@ -1168,10 +1253,10 @@ export default function Home() {
 
         {/* Kbd Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Kbd (Keyboard Key) Examples</Title>
+          <Title order={4} size="sm">Kbd (Keyboard Key) Examples</Title>
           <Stack gap="md">
             <Group gap="md">
-              <Title order={5} size="h6">Single Keys</Title>
+              <Title order={5} size="xs">Single Keys</Title>
             </Group>
             <Group gap="sm">
               <Kbd>Ctrl</Kbd>
@@ -1183,7 +1268,7 @@ export default function Home() {
             </Group>
 
             <Group gap="md">
-              <Title order={5} size="h6">Key Combinations</Title>
+              <Title order={5} size="xs">Key Combinations</Title>
             </Group>
             <Stack gap="sm">
               <div>Save: <Kbd>Ctrl</Kbd> + <Kbd>S</Kbd></div>
@@ -1193,7 +1278,7 @@ export default function Home() {
             </Stack>
 
             <Group gap="md">
-              <Title order={5} size="h6">Different Sizes</Title>
+              <Title order={5} size="xs">Different Sizes</Title>
             </Group>
             <Group gap="sm" align="center">
               <Kbd size="xs">xs</Kbd>
@@ -1205,9 +1290,290 @@ export default function Home() {
           </Stack>
         </Stack>
 
+        {/* Code Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="sm">Code Examples</Title>
+          <Stack gap="md">
+            <Group gap="md">
+              <Title order={5} size="xs">Inline Code</Title>
+            </Group>
+            <Text>
+              Use <Code>React.createElement()</Code> to create elements programmatically.
+              The <Code>useState</Code> hook manages component state.
+            </Text>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Block Code</Title>
+            </Group>
+            <Code block>
+{`import { useState } from 'react';
+import { Code } from '@mantine/core';
+
+function Demo() {
+  const [count, setCount] = useState(0);
+  return <Code>Hello World</Code>;
+}`}
+            </Code>
+            <Group gap="md">
+              <Title order={5} size="xs">Different Sizes</Title>
+            </Group>
+            <Group gap="sm" align="center">
+              <Code size="xs">xs size</Code>
+              <Code size="sm">sm size</Code>
+              <Code size="md">md size</Code>
+              <Code size="lg">lg size</Code>
+              <Code size="xl">xl size</Code>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Code with Roboto Mono Font</Title>
+            </Group>
+            <Text size="sm" c="dimmed">
+              All code examples use Roboto Mono font as specified in Figma design.
+            </Text>
+            <Code>console.log('Roboto Mono font applied');</Code>
+          </Stack>
+        </Stack>
+
+        {/* Divider Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="sm">Divider Examples</Title>
+          <Stack gap="md">
+            <Group gap="md">
+              <Title order={5} size="xs">Different Thicknesses</Title>
+            </Group>
+            <Text size="sm" c="dimmed">
+              Dividers support sm, md, lg, xl thickness sizes.
+            </Text>
+            <Stack gap="sm">
+              <Text size="xs" c="dimmed">Size: sm (default)</Text>
+              <DSDivider size="sm" />
+              <Text size="xs" c="dimmed">Size: md</Text>
+              <DSDivider size="md" />
+              <Text size="xs" c="dimmed">Size: lg</Text>
+              <DSDivider size="lg" />
+              <Text size="xs" c="dimmed">Size: xl</Text>
+              <DSDivider size="xl" />
+            </Stack>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Horizontal Divider</Title>
+            </Group>
+            <Stack gap="md">
+              <Text>Content above the divider</Text>
+              <DSDivider orientation="horizontal" />
+              <Text>Content below the divider</Text>
+            </Stack>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Vertical Divider</Title>
+            </Group>
+            <Group gap="md" align="center">
+              <Text>Left content</Text>
+              <DSDivider orientation="vertical" />
+              <Text>Right content</Text>
+            </Group>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Gray.4 Color</Title>
+            </Group>
+            <Text size="sm" c="dimmed">
+              All dividers use gray.4 color as specified in Figma design.
+            </Text>
+            <DSDivider />
+          </Stack>
+        </Stack>
+
+        {/* Paper Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="sm">Paper Examples</Title>
+          <Stack gap="md">
+            <Group gap="md">
+              <Title order={5} size="xs">Four Variants</Title>
+            </Group>
+            <Text size="sm" c="dimmed">
+              Paper supports four variants: default (no border/shadow), shadow, border, and border-shadow. All use sm spacing.
+            </Text>
+            <SimpleGrid cols={2} spacing="md">
+              <DSPaper variant="default">
+                <Text fw={500} mb="xs">Default</Text>
+                <Text size="sm" c="dimmed">No border or shadow</Text>
+              </DSPaper>
+              
+              <DSPaper variant="shadow">
+                <Text fw={500} mb="xs">Shadow</Text>
+                <Text size="sm" c="dimmed">With shadow only</Text>
+              </DSPaper>
+              
+              <DSPaper variant="border">
+                <Text fw={500} mb="xs">Border</Text>
+                <Text size="sm" c="dimmed">With border only</Text>
+              </DSPaper>
+              
+              <DSPaper variant="border-shadow">
+                <Text fw={500} mb="xs">Border + Shadow</Text>
+                <Text size="sm" c="dimmed">With both border and shadow</Text>
+              </DSPaper>
+            </SimpleGrid>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Content Examples</Title>
+            </Group>
+            <DSPaper variant="border-shadow">
+              <Text fw={500} mb="sm">Paper with Content</Text>
+              <Text size="sm" c="dimmed" mb="md">
+                This is an example of Paper being used as a container for content. 
+                It has sm spacing applied automatically.
+              </Text>
+              <Group gap="sm">
+                <Badge color="info">Feature</Badge>
+                <Badge color="success">Ready</Badge>
+              </Group>
+            </DSPaper>
+          </Stack>
+        </Stack>
+
+        {/* DropZone Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="sm">DropZone Examples</Title>
+          <Text size="sm" c="dimmed" mb="md">
+            File upload component with drag and drop functionality. Supports different file types, size limits, and states.
+          </Text>
+          <Stack gap="lg">
+            <Group gap="md">
+              <Title order={5} size="xs">Basic Usage</Title>
+            </Group>
+            <DropZone 
+              title="Upload your files"
+              description="Drag files here or click to select files"
+              onDrop={(files) => console.log('Dropped files:', files)}
+            />
+
+            <Group gap="md">
+              <Title order={5} size="xs">Different States</Title>
+            </Group>
+            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+              <DropZone 
+                title="Loading State"
+                description="Processing your files..."
+                loading
+              />
+              <DropZone 
+                title="Disabled State"
+                description="File upload is currently disabled"
+                disabled
+              />
+            </SimpleGrid>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Custom File Types</Title>
+            </Group>
+            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+              <DropZone 
+                title="Images Only"
+                description="PNG, JPG, GIF files accepted (max 5MB)"
+                accept={['image/png', 'image/jpeg', 'image/gif']}
+                onDrop={(files) => console.log('Image files:', files)}
+              />
+              <DropZone 
+                title="Documents Only"
+                description="PDF and Word documents accepted"
+                accept={['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']}
+                onDrop={(files) => console.log('Document files:', files)}
+              />
+            </SimpleGrid>
+          </Stack>
+        </Stack>
+
+        {/* FileInput Demo */}
+        <Stack gap="sm">
+          <Title order={4} size="sm">FileInput Examples</Title>
+          <Text size="sm" c="dimmed" mb="md">
+            File input component with consistent design system styling. Supports all standard file input features.
+          </Text>
+          <Stack gap="lg">
+            <Group gap="md">
+              <Title order={5} size="xs">All Sizes</Title>
+            </Group>
+            <Stack gap="md">
+              <FileInput size="xs" label="Extra Small" placeholder="Choose file" />
+              <FileInput size="sm" label="Small" placeholder="Choose file" />
+              <FileInput size="md" label="Medium" placeholder="Choose file" />
+              <FileInput size="lg" label="Large" placeholder="Choose file" />
+              <FileInput size="xl" label="Extra Large" placeholder="Choose file" />
+            </Stack>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Label States</Title>
+            </Group>
+            <Stack gap="sm">
+              <FileInput label="Document Upload" placeholder="Select document" />
+              <FileInput label="Resume" placeholder="Upload your resume" required />
+              <FileInput label="Profile Picture" placeholder="Upload image" showOptional />
+            </Stack>
+
+            <Group gap="md">
+              <Title order={5} size="xs">File Type Restrictions</Title>
+            </Group>
+            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+              <FileInput 
+                label="Images Only"
+                placeholder="Upload image"
+                accept="image/png,image/jpeg,image/gif"
+              />
+              <FileInput 
+                label="Documents Only"
+                placeholder="Upload document"
+                accept="application/pdf,.doc,.docx"
+              />
+            </SimpleGrid>
+
+            <Group gap="md">
+              <Title order={5} size="xs">Features</Title>
+            </Group>
+            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+              <MantineFileInput 
+                label="Multiple Files"
+                placeholder="Select multiple files"
+                multiple
+                size="md"
+                radius="sm"
+              />
+              <FileInput 
+                label="Clearable"
+                placeholder="Upload file (clearable)"
+                clearable
+              />
+            </SimpleGrid>
+
+            <Group gap="md">
+              <Title order={5} size="xs">States</Title>
+            </Group>
+            <Group gap="md" align="flex-end">
+              <FileInput 
+                label="Default" 
+                placeholder="Choose file"
+                style={{ width: 200 }}
+              />
+              <FileInput 
+                label="With Error" 
+                placeholder="Choose file"
+                error="File is required"
+                style={{ width: 200 }}
+              />
+              <FileInput 
+                label="Disabled" 
+                placeholder="Choose file"
+                disabled
+                style={{ width: 200 }}
+              />
+            </Group>
+          </Stack>
+        </Stack>
+
         {/* SearchableSelect Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">SearchableSelect Examples</Title>
+          <Title order={4} size="sm">SearchableSelect Examples</Title>
           <Stack gap="md">
             <SearchableSelect
               label="Choose Country"
@@ -1234,7 +1600,7 @@ export default function Home() {
 
         {/* AutocompleteClearable Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">AutocompleteClearable Examples</Title>
+          <Title order={4} size="sm">AutocompleteClearable Examples</Title>
           <Stack gap="md">
             <AutocompleteClearable
               label="Search Cities"
@@ -1255,7 +1621,7 @@ export default function Home() {
 
         {/* Multiselect Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Multiselect Examples</Title>
+          <Title order={4} size="sm">Multiselect Examples</Title>
           <Stack gap="md">
             <Multiselect
               label="Select Skills"
@@ -1282,7 +1648,7 @@ export default function Home() {
 
         {/* Breadcrumb Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Breadcrumb Examples</Title>
+          <Title order={4} size="sm">Breadcrumb Examples</Title>
           <Stack gap="md">
             <Breadcrumb
               items={[
@@ -1305,7 +1671,7 @@ export default function Home() {
 
         {/* BackBreadcrumb Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">BackBreadcrumb Examples</Title>
+          <Title order={4} size="sm">BackBreadcrumb Examples</Title>
           <Stack gap="md">
             <BackBreadcrumb 
               label="Back to Dashboard"
@@ -1320,7 +1686,7 @@ export default function Home() {
 
         {/* NavLink Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">NavLink Examples</Title>
+          <Title order={4} size="sm">NavLink Examples</Title>
           <Stack gap="md" style={{ maxWidth: 300 }}>
             <NavLink label="Dashboard" icon={<RiEyeLine size={18} />} active />
             <NavLink label="Users" icon={<RiUserLine size={18} />} />
@@ -1332,7 +1698,7 @@ export default function Home() {
             <NavLink 
               label="Messages" 
               icon={<RiAddLine size={18} />}
-              rightSection={<Indicator count={5} type="danger"><span></span></Indicator>}
+              rightSection={<Badge size="xs" color="danger">184</Badge>}
             />
             <NavLink 
               label="Reports" 
@@ -1344,10 +1710,10 @@ export default function Home() {
 
         {/* Stepper Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Stepper Examples</Title>
+          <Title order={4} size="sm">Stepper Examples</Title>
           <Stack gap="lg">
             <Group gap="md">
-              <Title order={5} size="h6">Horizontal Stepper</Title>
+              <Title order={5} size="xs">Horizontal Stepper</Title>
             </Group>
             <Stepper
               orientation="horizontal"
@@ -1362,7 +1728,7 @@ export default function Home() {
             />
 
             <Group gap="md">
-              <Title order={5} size="h6">Vertical Stepper</Title>
+              <Title order={5} size="xs">Vertical Stepper</Title>
             </Group>
             <Stepper
               orientation="vertical"
@@ -1380,10 +1746,10 @@ export default function Home() {
 
         {/* Tabs Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Tabs Examples</Title>
+          <Title order={4} size="sm">Tabs Examples</Title>
           <Stack gap="lg">
             <Group gap="md">
-              <Title order={5} size="h6">Horizontal Tabs</Title>
+              <Title order={5} size="xs">Horizontal Tabs</Title>
             </Group>
             <Tabs
               orientation="horizontal"
@@ -1412,7 +1778,7 @@ export default function Home() {
             />
 
             <Group gap="md">
-              <Title order={5} size="h6">Vertical Tabs</Title>
+              <Title order={5} size="xs">Vertical Tabs</Title>
             </Group>
             <div style={{ maxWidth: 500 }}>
               <Tabs
@@ -1466,7 +1832,7 @@ export default function Home() {
 
         {/* Modal Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Modal Examples</Title>
+          <Title order={4} size="sm">Modal Examples</Title>
           <Group gap="md">
             <DSButton onClick={() => setModalOpened(true)}>Open Modal</DSButton>
             <DSButton variant="danger" onClick={() => setConfirmModalOpened(true)}>Confirmation Modal</DSButton>
@@ -1535,7 +1901,7 @@ export default function Home() {
 
         {/* Drawer Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Drawer Examples</Title>
+          <Title order={4} size="sm">Drawer Examples</Title>
           <Group gap="md">
             <DSButton onClick={() => setRightDrawerOpened(true)}>Right Drawer</DSButton>
             <DSButton onClick={() => setLeftDrawerOpened(true)}>Left Drawer</DSButton>
@@ -1606,7 +1972,7 @@ export default function Home() {
 
         {/* Menu Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Menu Examples</Title>
+          <Title order={4} size="sm">Menu Examples</Title>
           <Group gap="md">
             <DSMenu
               trigger={<DSButton>Basic Menu</DSButton>}
@@ -1658,11 +2024,11 @@ export default function Home() {
 
         {/* Popover Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Popover Examples</Title>
+          <Title order={4} size="sm">Popover Examples</Title>
           
           {/* Basic Popovers */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Basic Popovers</Title>
+            <Title order={5} size="xs">Basic Popovers</Title>
             <Group gap="md">
               <Popover
                 trigger={<DSButton size="xs">Info (Top)</DSButton>}
@@ -1710,7 +2076,7 @@ export default function Home() {
 
           {/* Popovers with Actions */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Popovers with Button Actions</Title>
+            <Title order={5} size="xs">Popovers with Button Actions</Title>
             <Group gap="md">
               <Popover
                 trigger={<DSButton size="xs">Confirm Action</DSButton>}
@@ -1774,7 +2140,7 @@ export default function Home() {
 
           {/* Confirmation Popover Variant */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Pre-configured Confirmation Popover</Title>
+            <Title order={5} size="xs">Pre-configured Confirmation Popover</Title>
             <Group gap="md">
               <ConfirmationPopover
                 trigger={<DSButton variant="danger" size="xs">Delete Item</DSButton>}
@@ -1794,11 +2160,11 @@ export default function Home() {
 
         {/* Tooltip Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Tooltip Examples</Title>
+          <Title order={4} size="sm">Tooltip Examples</Title>
           
           {/* Basic Tooltips */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Basic Tooltips - Different Positions</Title>
+            <Title order={5} size="xs">Basic Tooltips - Different Positions</Title>
             <Group gap="md">
               <Tooltip label="This is a tooltip! Rejoice!" position="top">
                 <DSButton size="xs">Top</DSButton>
@@ -1820,7 +2186,7 @@ export default function Home() {
 
           {/* Corner Positions */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Corner Positions</Title>
+            <Title order={5} size="xs">Corner Positions</Title>
             <Group gap="md">
               <Tooltip label="Top-start position" position="top-start">
                 <DSButton size="xs">Top Start</DSButton>
@@ -1842,7 +2208,7 @@ export default function Home() {
 
           {/* Different Content Types */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Different Content & Styling</Title>
+            <Title order={5} size="xs">Different Content & Styling</Title>
             <Group gap="md">
               <Tooltip 
                 label="This is a longer tooltip that demonstrates multi-line content and how it wraps nicely."
@@ -1872,7 +2238,7 @@ export default function Home() {
 
           {/* With Delays */}
           <Stack gap="sm">
-            <Title order={5} size="h6">With Delays</Title>
+            <Title order={5} size="xs">With Delays</Title>
             <Group gap="md">
               <Tooltip 
                 label="Shows after 500ms delay"
@@ -1903,7 +2269,7 @@ export default function Home() {
 
           {/* Interactive Elements */}
           <Stack gap="sm">
-            <Title order={5} size="h6">On Different Elements</Title>
+            <Title order={5} size="xs">On Different Elements</Title>
             <Group gap="md">
               <Tooltip label="Tooltip on icon button">
                 <ActionButton size="xs">
@@ -1928,11 +2294,11 @@ export default function Home() {
 
         {/* Avatar Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Avatar Examples</Title>
+          <Title order={4} size="sm">Avatar Examples</Title>
           
           {/* All Sizes */}
           <Stack gap="sm">
-            <Title order={5} size="h6">All T-Shirt Sizes</Title>
+            <Title order={5} size="xs">All T-Shirt Sizes</Title>
             
             <Stack gap="md">
               <Group gap="md" align="center">
@@ -1969,7 +2335,7 @@ export default function Home() {
 
           {/* Three Variants */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Three Main Variants</Title>
+            <Title order={5} size="xs">Three Main Variants</Title>
             <Group gap="lg" align="center">
               <Stack gap="xs" align="center">
                 <Avatar variant="icon" size="lg" />
@@ -1995,7 +2361,7 @@ export default function Home() {
 
           {/* Custom Icons */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Custom Icons</Title>
+            <Title order={5} size="xs">Custom Icons</Title>
             <Group gap="md">
               <Avatar variant="icon" size="md" />
               <Avatar variant="icon" icon={<RiUserLine />} size="md" />
@@ -2006,7 +2372,7 @@ export default function Home() {
 
           {/* Fallback Behavior */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Fallback Behavior</Title>
+            <Title order={5} size="xs">Fallback Behavior</Title>
             <Group gap="md" align="center">
               <Stack gap="xs" align="center">
                 <Avatar 
@@ -2044,7 +2410,7 @@ export default function Home() {
 
           {/* Real World Examples */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Real World Usage</Title>
+            <Title order={5} size="xs">Real World Usage</Title>
             <Stack gap="md">
               {/* User List Example */}
               <Group gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
@@ -2078,11 +2444,11 @@ export default function Home() {
 
         {/* Card Demo */}
         <Stack gap="sm">
-          <Title order={4} size="h5">Card Examples</Title>
+          <Title order={4} size="sm">Card Examples</Title>
           
           {/* Basic Cards */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Basic Cards</Title>
+            <Title order={5} size="xs">Basic Cards</Title>
             <Group gap="md" align="flex-start">
               <Card>
                 <Title order={6}>Simple Card</Title>
@@ -2102,10 +2468,9 @@ export default function Home() {
 
           {/* Interactive Cards */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Interactive Cards</Title>
+            <Title order={5} size="xs">Interactive Cards</Title>
             <Group gap="md" align="flex-start">
               <Card 
-                interactive 
                 withShadow 
                 onClick={() => console.log('Card clicked!')}
                 style={{ cursor: 'pointer' }}
@@ -2120,7 +2485,7 @@ export default function Home() {
           </Stack>
           {/* Image Cards */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Cards with Images</Title>
+            <Title order={5} size="xs">Cards with Images</Title>
             <Group gap="md" align="flex-start">
               {/* Card with full-width image on top */}
               <Card withShadow style={{ width: 300 }} padding="none">
@@ -2180,7 +2545,7 @@ export default function Home() {
 
           {/* Complex Content Examples */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Complex Content</Title>
+            <Title order={5} size="xs">Complex Content</Title>
             <Group gap="md" align="flex-start">
               {/* User Profile Card */}
               <Card withShadow style={{ width: 250 }}>
@@ -2249,7 +2614,7 @@ export default function Home() {
 
           {/* Usage Examples */}
           <Stack gap="sm">
-            <Title order={5} size="h6">Real World Usage</Title>
+            <Title order={5} size="xs">Real World Usage</Title>
             <Stack gap="md">
               {/* Dashboard Cards Grid */}
               <Group gap="md" align="flex-start" style={{ flexWrap: 'wrap' }}>

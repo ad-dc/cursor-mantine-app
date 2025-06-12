@@ -6,10 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@mantine/core": "^7.9.0",
+    "@mantine/dropzone": "^7.17.8",
     "@mantine/hooks": "^7.9.0",
     "@mantine/notifications": "^7.9.0",
     "@mantinex/mantine-logo": "^2.0.0",
@@ -23,12 +26,24 @@
     "remixicon": "^4.6.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.0",
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-a11y": "^9.0.9",
+    "@storybook/addon-docs": "^9.0.9",
+    "@storybook/addon-onboarding": "^9.0.9",
+    "@storybook/addon-vitest": "^9.0.9",
+    "@storybook/nextjs-vite": "^9.0.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitest/browser": "^3.2.3",
+    "@vitest/coverage-v8": "^3.2.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
-    "typescript": "^5"
+    "eslint-plugin-storybook": "^9.0.9",
+    "playwright": "^1.53.0",
+    "storybook": "^9.0.9",
+    "typescript": "^5",
+    "vitest": "^3.2.3"
   }
 }

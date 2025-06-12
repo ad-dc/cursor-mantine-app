@@ -42,3 +42,6 @@ next-env.d.ts
 
 # symlinked directories
 /helper
+
+*storybook.log
+storybook-static

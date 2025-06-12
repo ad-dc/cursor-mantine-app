@@ -34,6 +34,12 @@ export type { DSRadioProps } from './Radio';
 export { RadioGroup } from './RadioGroup';
 export type { DSRadioGroupProps } from './RadioGroup';
 
+export { DropZone } from './DropZone';
+export type { DropZoneProps } from './DropZone';
+
+export { FileInput } from './FileInput';
+export type { DSFileInputProps } from './FileInput';
+
 // Future input component exports will go here:
 // export { ADDSCheckbox } from './Checkbox';
 // export { ADDSNumberInput } from './NumberInput';

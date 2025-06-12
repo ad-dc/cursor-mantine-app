@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 
 // Mantine CSS imports (load first)
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dropzone/styles.css';
 
 // Custom CSS (load after Mantine to override)
 import "./globals.css";
@@ -16,6 +17,11 @@ import { theme } from "@/styles/theme";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.variable}>
+      <body className={`${inter.variable} ${robotoMono.variable}`}>
         <MantineProvider theme={theme} defaultColorScheme="light" cssVariablesSelector=":root">
           {children}
         </MantineProvider>
