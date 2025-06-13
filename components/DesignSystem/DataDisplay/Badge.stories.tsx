@@ -3,6 +3,7 @@ import { Stack, Group } from '@mantine/core';
 import { Badge } from './Badge';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
+import { Paper } from '../Misc/Paper';
 
 const meta: Meta<typeof Badge> = {
   title: 'Design System/Data Display/Badge',
@@ -64,7 +65,7 @@ export const Variants: Story = {
   render: () => (
     <Stack gap="md">
       <Group gap="xs" align="center">
-        <Text size="sm" fw={500} c="dimmed" mb="xs">Filled:</Text>
+        <Text size="sm" fw={500} c="dimmed">Filled:</Text>
         <Badge variant="filled" color="default">Default</Badge>
         <Badge variant="filled" color="info">Info</Badge>
         <Badge variant="filled" color="success">Success</Badge>
@@ -72,7 +73,7 @@ export const Variants: Story = {
         <Badge variant="filled" color="pending">Pending</Badge>
       </Group>
       <Group gap="xs" align="center">
-        <Text size="sm" fw={500} c="dimmed" mb="xs">Outline:</Text>
+        <Text size="sm" fw={500} c="dimmed">Outline:</Text>
         <Badge variant="outline" color="default">Default</Badge>
         <Badge variant="outline" color="info">Info</Badge>
         <Badge variant="outline" color="success">Success</Badge>
@@ -99,21 +100,21 @@ export const StatusExamples: Story = {
   render: () => (
     <Stack gap="md">
       <Group gap="xs" align="center">
-        <Text size="sm" fw={500} c="dimmed" mb="xs" style={{ minWidth: '80px' }}>User Status:</Text>
+        <Text size="sm" fw={500} c="dimmed">User Status:</Text>
         <Badge color="success">Active</Badge>
         <Badge color="pending">Pending</Badge>
         <Badge color="danger">Suspended</Badge>
         <Badge color="default">Inactive</Badge>
       </Group>
       <Group gap="xs" align="center">
-        <Text size="sm" fw={500} c="dimmed" mb="xs" style={{ minWidth: '80px' }}>Order Status:</Text>
+        <Text size="sm" fw={500} c="dimmed">Order Status:</Text>
         <Badge color="info">Processing</Badge>
         <Badge color="pending">Shipped</Badge>
         <Badge color="success">Delivered</Badge>
         <Badge color="danger">Cancelled</Badge>
       </Group>
       <Group gap="xs" align="center">
-        <Text size="sm" fw={500} c="dimmed" mb="xs" style={{ minWidth: '80px' }}>Priority:</Text>
+        <Text size="sm" fw={500} c="dimmed">Priority:</Text>
         <Badge color="danger">High</Badge>
         <Badge color="pending">Medium</Badge>
         <Badge color="info">Low</Badge>
@@ -126,23 +127,13 @@ export const InContext: Story = {
   render: () => (
     <Stack gap="md" maw={400}>
       {/* List item with badge */}
-      <Group justify="space-between" align="center" p="sm" style={{ 
-        border: '1px solid var(--mantine-color-gray-3)',
-        borderRadius: '8px'
-      }}>
-        <div>
-          <Text fw={500}>John Doe</Text>
-          <Text size="sm" c="dimmed">john@example.com</Text>
-        </div>
+      <Paper variant="border">
+        <Text fw={500}>John Doe</Text>
+        <Text size="sm" c="dimmed">john@example.com</Text>
         <Badge color="success" size="sm">Active</Badge>
-      </Group>
-
+      </Paper>
       {/* Card header with badge */}
-      <div style={{ 
-        padding: '16px',
-        border: '1px solid var(--mantine-color-gray-3)',
-        borderRadius: '8px'
-      }}>
+      <Paper variant="border">
         <Group justify="space-between" align="center" mb="sm">
           <Title order={4}>Project Alpha</Title>
           <Badge color="pending" variant="outline">In Progress</Badge>
@@ -150,22 +141,16 @@ export const InContext: Story = {
         <Text size="sm" c="dimmed">
           A comprehensive project management solution for enterprise clients.
         </Text>
-      </div>
+      </Paper>
 
       {/* Notification with badge */}
-      <Group gap="sm" p="sm" style={{ 
-        backgroundColor: 'var(--mantine-color-blue-0)',
-        border: '1px solid var(--mantine-color-blue-3)',
-        borderRadius: '8px'
-      }}>
+      <Paper variant="border">
         <Badge color="info" size="xs">New</Badge>
-        <div>
-          <Text fw={500} size="sm">System Update Available</Text>
-          <Text size="xs" c="dimmed">
-            Version 2.1.0 includes security improvements and bug fixes.
-          </Text>
-        </div>
-      </Group>
+        <Text fw={500} size="sm">System Update Available</Text>
+        <Text size="xs" c="dimmed">
+          Version 2.1.0 includes security improvements and bug fixes.
+        </Text>
+      </Paper>
     </Stack>
   ),
   parameters: {

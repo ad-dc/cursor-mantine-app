@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Text, Title } from '@mantine/core';
+import { Box } from '@mantine/core';
+import { Text } from '../../Typography/Text';
+import { Title } from '../../Typography/Title';
 
 export interface KeyInsightProps {
   /** Value to display (can be number or string) */

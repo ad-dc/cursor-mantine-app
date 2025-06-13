@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ActionIcon, Tooltip } from '@mantine/core';
+import { ActionIcon } from '@mantine/core';
+import { Tooltip } from '../../Overlays/Tooltip';
 import { RiFileCopyLine } from '@remixicon/react';
 
 export interface CopyButtonProps {

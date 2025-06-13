@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { translate } from '@/components/Table/translations';
+import { translate } from '@/components/DesignSystem/ComplexComponents/Table/translations';
 
 /**
  * Custom hook for generating selected rows text

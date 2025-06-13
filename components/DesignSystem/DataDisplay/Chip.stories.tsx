@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack, Group, Box } from '@mantine/core';
 import { Chip } from './Chip';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -80,13 +80,6 @@ export const Sizes: Story = {
         <Chip size="md" variant="info">Medium</Chip>
         <Chip size="lg" variant="info">Large</Chip>
         <Chip size="xl" variant="info">Extra Large</Chip>
-      </Group>
-      <Group gap="sm">
-        <Chip size="xs" variant="success">XS</Chip>
-        <Chip size="sm" variant="success">SM</Chip>
-        <Chip size="md" variant="success">MD</Chip>
-        <Chip size="lg" variant="success">LG</Chip>
-        <Chip size="xl" variant="success">XL</Chip>
       </Group>
     </Stack>
   ),
@@ -244,7 +237,7 @@ export const FilterChips: Story = {
 export const TagChips: Story = {
   render: () => (
     <Stack gap="lg" w={500}>
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="xs">Article Tags:</Text>
         <Group gap="xs">
           <Chip variant="info" size="sm">JavaScript</Chip>
@@ -252,9 +245,9 @@ export const TagChips: Story = {
           <Chip variant="success" size="sm">Tutorial</Chip>
           <Chip variant="pending" size="sm">Beginner</Chip>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="xs">Project Categories:</Text>
         <Group gap="xs">
           <Chip variant="danger" size="sm">Urgent</Chip>
@@ -263,9 +256,9 @@ export const TagChips: Story = {
           <Chip variant="default" size="sm">Design</Chip>
           <Chip variant="pending" size="sm">Review</Chip>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="xs">Skills:</Text>
         <Group gap="xs">
           <Chip variant="info">TypeScript</Chip>
@@ -275,7 +268,7 @@ export const TagChips: Story = {
           <Chip variant="success">Docker</Chip>
           <Chip variant="danger">Redis</Chip>
         </Group>
-      </div>
+      </Box>
     </Stack>
   ),
   parameters: {
@@ -302,7 +295,7 @@ export const ControlledExample: Story = {
     
     return (
       <Stack gap="lg" w={500}>
-        <div>
+        <Box>
           <Text size="sm" fw={500} mb="sm">Priority Levels:</Text>
           <Group gap="sm">
             <Chip
@@ -334,9 +327,9 @@ export const ControlledExample: Story = {
               Low
             </Chip>
           </Group>
-        </div>
+        </Box>
         
-        <div>
+        <Box>
           <Text size="sm" fw={500} mb="sm">Issue Categories:</Text>
           <Group gap="sm">
             <Chip
@@ -368,9 +361,9 @@ export const ControlledExample: Story = {
               Documentation
             </Chip>
           </Group>
-        </div>
+        </Box>
         
-        <div>
+        <Box>
           <Text size="sm" fw={500} mb="sm">Assignees:</Text>
           <Group gap="sm">
             <Chip
@@ -395,9 +388,9 @@ export const ControlledExample: Story = {
               Bob Johnson
             </Chip>
           </Group>
-        </div>
+        </Box>
         
-        <div style={{ 
+        <Box style={{ 
           padding: '12px', 
           backgroundColor: 'var(--mantine-color-gray-0)', 
           borderRadius: '8px',
@@ -407,7 +400,7 @@ export const ControlledExample: Story = {
           <Text size="sm">Priorities: {priorities.join(', ') || 'None'}</Text>
           <Text size="sm">Categories: {categories.join(', ') || 'None'}</Text>
           <Text size="sm">Assignees: {assignees.join(', ') || 'None'}</Text>
-        </div>
+        </Box>
       </Stack>
     );
   },
@@ -425,7 +418,7 @@ export const UseCases: Story = {
     <Stack gap="lg" w={600}>
       <Title order={3} size="md" fw={500} mb="xs">Common Use Cases</Title>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">1. Content Tags (Non-interactive):</Text>
         <Group gap="xs">
           <Chip variant="info" size="sm">React</Chip>
@@ -433,9 +426,9 @@ export const UseCases: Story = {
           <Chip variant="pending" size="sm">Tutorial</Chip>
           <Chip variant="default" size="sm">Beginner</Chip>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">2. Status Indicators:</Text>
         <Group gap="xs">
           <Chip variant="success">Active</Chip>
@@ -443,9 +436,9 @@ export const UseCases: Story = {
           <Chip variant="danger">Inactive</Chip>
           <Chip variant="info">Processing</Chip>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">3. Multi-select Filters:</Text>
         <Group gap="xs">
           <Chip variant="info" checked>Frontend</Chip>
@@ -453,9 +446,9 @@ export const UseCases: Story = {
           <Chip variant="pending" checked>Mobile</Chip>
           <Chip variant="default">DevOps</Chip>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">4. Skill Tags:</Text>
         <Group gap="xs">
           <Chip variant="info" size="sm">JavaScript</Chip>
@@ -464,9 +457,9 @@ export const UseCases: Story = {
           <Chip variant="success" size="sm">AWS</Chip>
           <Chip variant="pending" size="sm">GraphQL</Chip>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">5. Priority Labels:</Text>
         <Group gap="xs">
           <Chip variant="danger">Critical</Chip>
@@ -474,7 +467,7 @@ export const UseCases: Story = {
           <Chip variant="info">Medium</Chip>
           <Chip variant="default">Low</Chip>
         </Group>
-      </div>
+      </Box>
     </Stack>
   ),
   parameters: {

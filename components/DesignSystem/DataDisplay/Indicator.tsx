@@ -8,8 +8,8 @@ export interface DSIndicatorProps extends Omit<MantineIndicatorProps, 'color'> {
   type?: 'success' | 'danger' | 'pending' | 'info' | 'default';
   /** Custom indicator color (overrides type) */
   color?: string;
-  /** Indicator size */
-  size?: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  /** Indicator size in pixels */
+  size?: number;
   /** Indicator position */
   position?: 'top-start' | 'top-center' | 'top-end' | 'middle-start' | 'middle-center' | 'middle-end' | 'bottom-start' | 'bottom-center' | 'bottom-end';
   /** Whether indicator should have border */
@@ -36,27 +36,32 @@ export interface DSIndicatorProps extends Omit<MantineIndicatorProps, 'color'> {
  * Built on top of Mantine's Indicator component with design system styling.
  * Used to show notifications, status, or other supplementary information.
  * 
+ * Mantine's Indicator automatically handles:
+ * - Minimum size constraints (always at least a circle)
+ * - Pill shape when content is added (label/count)
+ * - Proper sizing and positioning
+ * 
  * @example
- * // Basic semantic indicators
- * <Indicator type="success">
+ * // Basic semantic indicators (dots)
+ * <Indicator type="success" size={12}>
  *   <Avatar />
  * </Indicator>
  * 
  * @example
- * // With count
- * <Indicator type="danger" count={5}>
+ * // With count (pill-shaped)
+ * <Indicator type="danger" count={5} size={16}>
  *   <Button>Messages</Button>
  * </Indicator>
  * 
  * @example
  * // With outline variant
- * <Indicator type="info" count={12} withOutline>
+ * <Indicator type="info" count={12} withOutline size={20}>
  *   <IconBell />
  * </Indicator>
  * 
  * @example
  * // Processing/animated indicator
- * <Indicator type="pending" processing>
+ * <Indicator type="pending" processing size={14}>
  *   <Avatar />
  * </Indicator>
  */
@@ -64,7 +69,7 @@ export const Indicator = forwardRef<HTMLDivElement, DSIndicatorProps>(
   ({ 
     type = 'default',
     color,
-    size = 'sm',
+    size = 12,
     position = 'top-end',
     withBorder = false,
     disabled = false,

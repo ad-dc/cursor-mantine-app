@@ -108,7 +108,7 @@ export const [Component] = forwardRef<HTML[Element]Element, DS[Component]Props>(
 - "spreadsheet", "sheet"
 - "records", "data display"
 
-**Custom Table Component Location:** `@/components/Table`
+**Custom Table Component Location:** `@/components/DesignSystem`
 
 **Features included:**
 - Advanced filtering and search
@@ -121,7 +121,7 @@ export const [Component] = forwardRef<HTML[Element]Element, DS[Component]Props>(
 
 **Usage Pattern:**
 ```tsx
-import { Table } from '@/components/Table';
+import { Table } from '@/components/DesignSystem';
 
 <Table<DataType>
   data={data}
@@ -149,7 +149,7 @@ import { Table } from '@/components/Table';
 - "info panel", "summary section"
 - "header card", "title section"
 
-**Custom Component Location:** `@/components/PageContentHeader`
+**Custom Component Location:** `@/components/DesignSystem`
 
 **Features included:**
 - Icon with customizable colors and sizes (58x58px ThemeIcon)
@@ -164,7 +164,7 @@ import { Table } from '@/components/Table';
 
 **Usage Pattern:**
 ```tsx
-import { PageContentHeader } from '@/components/PageContentHeader';
+import { PageContentHeader } from '@/components/DesignSystem';
 
 <PageContentHeader
   title="Page Title"

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, Stack, Group } from '@mantine/core';
+import { Group, Stack } from '@mantine/core';
+import { Text } from '../../Typography/Text';
 import { CopyButton } from '../Utilities/CopyButton';
 
 export interface NameValueItemProps {

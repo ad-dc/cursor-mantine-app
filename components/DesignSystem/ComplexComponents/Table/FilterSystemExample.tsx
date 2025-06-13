@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Stack, Title, Code, Text } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Title } from '../../Typography/Title';
+import { Code } from '../../Typography/Code';
+import { Text } from '../../Typography/Text';
 import { 
   FilterSystem, 
   FilterType, 

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Group, Title, Text } from '@mantine/core';
+import { Group } from '@mantine/core';
+import { Title } from '../../Typography/Title';
+import { Text } from '../../Typography/Text';
 
 export interface DescriptionBlockProps {
   /** Optional title for the description block */
@@ -50,7 +52,7 @@ export function DescriptionBlock({
         </Title>
       )}
       {allowHtml ? (
-        <Text size="md" component="div" style={{ lineHeight: 1.6 }}>
+        <Text size="md" style={{ lineHeight: 1.6 }}>
           <div dangerouslySetInnerHTML={{ __html: description }} />
         </Text>
       ) : (
@@ -60,4 +62,4 @@ export function DescriptionBlock({
       )}
     </Group>
   );
-}
+} 

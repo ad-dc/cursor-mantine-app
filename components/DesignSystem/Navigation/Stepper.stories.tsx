@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Button, Paper } from '@mantine/core';
+import { Stack, Group } from '@mantine/core';
 import { Stepper } from './Stepper';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
+import { Button } from '../Buttons/Button';
+import { Paper } from '../Misc/Paper';
 import { 
   IconUser, 
   IconCreditCard, 
@@ -214,7 +216,7 @@ export const VerticalOrientation: Story = {
     ];
 
     return (
-      <Paper p="lg" withBorder>
+      <Paper variant="border">
         <Stepper
           steps={verticalSteps}
           active={1}
@@ -358,7 +360,7 @@ export const EcommerceCheckout: Story = {
           size="lg"
         />
         
-        <Paper p="lg" withBorder>
+        <Paper variant="border">
           <Text fw={500} mb="sm">
             Step {currentStep + 1}: {checkoutSteps[currentStep]?.label}
           </Text>
@@ -470,7 +472,7 @@ export const FormWizard: Story = {
     ];
 
     return (
-      <Paper p="xl" withBorder>
+      <Paper variant="border">
         <Stack gap="lg">
           <Title order={3} size="md" fw={500} ta="center">
             Application Form Wizard
@@ -565,7 +567,7 @@ export const ProjectSetup: Story = {
             <Title order={3} size="md" fw={500} mb="sm">
               Vertical Layout
             </Title>
-            <Paper p="lg" withBorder>
+            <Paper variant="border">
               <Stepper
                 steps={setupSteps}
                 active={1}

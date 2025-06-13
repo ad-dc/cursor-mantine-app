@@ -8,9 +8,9 @@ import {
   MRT_RowData,
   MRT_ColumnDef as ColumnDef,
 } from 'mantine-react-table';
-import { useTableState } from '@/hooks/useTableState';
-import { useTableHandlers } from '@/hooks/useTableHandlers';
-import { useTableRenderFunctions } from '@/hooks/useTableRenderFunctions';
+import { useTableState } from '../../../../hooks/useTableState';
+import { useTableHandlers } from '../../../../hooks/useTableHandlers';
+import { useTableRenderFunctions } from '../../../../hooks/useTableRenderFunctions';
 import { type Filters, type DateRange, type City } from './CustomTopToolbar';
 
 // ========================== EXPORTS ==========================

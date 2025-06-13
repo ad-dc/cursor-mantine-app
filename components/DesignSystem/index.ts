@@ -23,6 +23,12 @@ import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation
 import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
 import { Kbd, Code, Text, Title } from './Typography';
 import { Divider, Paper } from './Misc';
+import { Stack, Inline, Box, Grid } from './Layout';
+import { KeyInsight } from './ComplexComponents/KeyInsights';
+import { NameValue, NameValueItem } from './ComplexComponents/NameValue';
+import { CopyButton } from './ComplexComponents/Utilities';
+import { PageContentHeader, DescriptionBlock } from './ComplexComponents/PageContentHeader';
+import { Table } from './ComplexComponents/Table';
 
 // ========================== INPUTS ==========================
 export { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
@@ -57,6 +63,22 @@ export type { DSKbdProps, CodeProps, DSTextProps, DSTitleProps } from './Typogra
 // ========================== MISC ==========================
 export { Divider, Paper } from './Misc';
 export type { DividerProps, PaperProps } from './Misc';
+
+// ========================== LAYOUT ==========================
+export { Stack, Inline, Box, Grid } from './Layout';
+export type { DSStackProps, DSInlineProps, DSBoxProps, DSGridProps, SpacingScale } from './Layout';
+
+// ========================== COMPLEX COMPONENTS ==========================
+export { KeyInsight } from './ComplexComponents/KeyInsights';
+export type { KeyInsightProps } from './ComplexComponents/KeyInsights';
+export { NameValue, NameValueItem } from './ComplexComponents/NameValue';
+export type { NameValueProps, NameValuePair, NameValueItemProps } from './ComplexComponents/NameValue';
+export { CopyButton } from './ComplexComponents/Utilities';
+export type { CopyButtonProps } from './ComplexComponents/Utilities';
+export { PageContentHeader, DescriptionBlock } from './ComplexComponents/PageContentHeader';
+export type { PageContentHeaderProps, ContentSection, DescriptionBlockProps } from './ComplexComponents/PageContentHeader';
+export { Table } from './ComplexComponents/Table';
+export type { TableProps, TableColumn, PageInfo } from './ComplexComponents/Table';
 
 // ========================== CATEGORY EXPORTS ==========================
 // Export components grouped by category for convenient importing
@@ -129,6 +151,23 @@ export const Typography = {
 export const Misc = {
   Divider,
   Paper,
+};
+
+export const Layout = {
+  Stack,
+  Inline,
+  Box,
+  Grid,
+};
+
+export const ComplexComponents = {
+  KeyInsight,
+  NameValue,
+  NameValueItem,
+  CopyButton,
+  PageContentHeader,
+  DescriptionBlock,
+  Table,
 };
 
 // Placeholder export to prevent empty module errors

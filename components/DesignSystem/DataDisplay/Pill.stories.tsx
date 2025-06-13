@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack, Group, Box } from '@mantine/core';
 import { Pill } from './Pill';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
+import { Button } from '../Buttons/Button';
+import { Paper } from '../Misc/Paper';
 
 const meta: Meta<typeof Pill> = {
   title: 'Design System/Data Display/Pill',
@@ -175,19 +177,13 @@ export const RemovablePills: Story = {
           )}
         </Group>
         {pills.length < 5 && (
-          <button 
+          <Button 
+            variant="outline"
+            size="xs"
             onClick={resetPills}
-            style={{ 
-              padding: '4px 8px', 
-              fontSize: '12px',
-              border: '1px solid var(--mantine-color-gray-3)',
-              borderRadius: '4px',
-              background: 'white',
-              cursor: 'pointer'
-            }}
           >
             Reset Pills
-          </button>
+          </Button>
         )}
       </Stack>
     );
@@ -204,7 +200,7 @@ export const RemovablePills: Story = {
 export const TagExamples: Story = {
   render: () => (
     <Stack gap="lg" w={500}>
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="xs">Article Tags:</Text>
         <Group gap="xs">
           <Pill size="sm">JavaScript</Pill>
@@ -213,9 +209,9 @@ export const TagExamples: Story = {
           <Pill size="sm">Beginner</Pill>
           <Pill size="sm">Frontend</Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="xs">Skills:</Text>
         <Group gap="xs">
           <Pill>TypeScript</Pill>
@@ -225,9 +221,9 @@ export const TagExamples: Story = {
           <Pill>Docker</Pill>
           <Pill>AWS</Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="xs">Categories:</Text>
         <Group gap="xs">
           <Pill size="lg">Web Development</Pill>
@@ -235,9 +231,9 @@ export const TagExamples: Story = {
           <Pill size="lg">DevOps</Pill>
           <Pill size="lg">Design</Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="xs">Project Labels:</Text>
         <Group gap="xs">
           <Pill size="xs">v1.0</Pill>
@@ -246,7 +242,7 @@ export const TagExamples: Story = {
           <Pill size="xs">deprecated</Pill>
           <Pill size="xs">experimental</Pill>
         </Group>
-      </div>
+      </Box>
     </Stack>
   ),
   parameters: {
@@ -302,21 +298,14 @@ export const FilterPills: Story = {
           {filters
             .filter(filter => !selectedFilters.includes(filter.toLowerCase().replace(' ', '')))
             .map(filter => (
-              <button
+              <Button
                 key={filter}
+                variant="outline"
+                size="xs"
                 onClick={() => toggleFilter(filter)}
-                style={{
-                  padding: '4px 8px',
-                  fontSize: '12px',
-                  border: '1px solid var(--mantine-color-gray-3)',
-                  borderRadius: '12px',
-                  background: 'white',
-                  cursor: 'pointer',
-                  color: 'var(--mantine-color-gray-7)'
-                }}
               >
                 + {filter}
-              </button>
+              </Button>
             ))}
         </Group>
       </Stack>
@@ -366,7 +355,7 @@ export const ControlledExample: Story = {
     
     return (
       <Stack gap="lg" w={500}>
-        <div>
+        <Box>
           <Text size="sm" fw={500} mb="sm">Technology Tags:</Text>
           <Group gap="xs">
             {selectedTags.map(tag => (
@@ -383,9 +372,9 @@ export const ControlledExample: Story = {
               <Text size="sm" c="dimmed">No tags selected</Text>
             )}
           </Group>
-        </div>
+        </Box>
         
-        <div>
+        <Box>
           <Text size="sm" fw={500} mb="sm">Categories:</Text>
           <Group gap="xs">
             {selectedCategories.map(category => (
@@ -401,9 +390,9 @@ export const ControlledExample: Story = {
               <Text size="sm" c="dimmed">No categories selected</Text>
             )}
           </Group>
-        </div>
+        </Box>
         
-        <div>
+        <Box>
           <Text size="sm" fw={500} mb="sm">Skills:</Text>
           <Group gap="xs">
             {selectedSkills.map(skill => (
@@ -420,21 +409,16 @@ export const ControlledExample: Story = {
               <Text size="sm" c="dimmed">No skills selected</Text>
             )}
           </Group>
-        </div>
+        </Box>
         
-        <div style={{ 
-          padding: '12px', 
-          backgroundColor: 'var(--mantine-color-gray-0)', 
-          borderRadius: '8px',
-          border: '1px solid var(--mantine-color-gray-3)'
-        }}>
+        <Paper variant="border">
           <Text size="sm" fw={500} mb="xs">Summary:</Text>
           <Text size="sm">
             Tags: {selectedTags.length} | 
             Categories: {selectedCategories.length} | 
             Skills: {selectedSkills.length}
           </Text>
-        </div>
+        </Paper>
       </Stack>
     );
   },
@@ -452,7 +436,7 @@ export const UseCases: Story = {
     <Stack gap="lg" w={600}>
       <Title order={3} size="md" fw={500} mb="xs">Common Use Cases</Title>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">1. Content Tags (Non-removable):</Text>
         <Group gap="xs">
           <Pill size="sm">React</Pill>
@@ -460,9 +444,9 @@ export const UseCases: Story = {
           <Pill size="sm">Tutorial</Pill>
           <Pill size="sm">Beginner</Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">2. Selected Items (Removable):</Text>
         <Group gap="xs">
           <Pill withRemoveButton onRemove={() => console.log('Remove JavaScript')}>
@@ -475,9 +459,9 @@ export const UseCases: Story = {
             Java
           </Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">3. User Skills:</Text>
         <Group gap="xs">
           <Pill>Frontend Development</Pill>
@@ -485,9 +469,9 @@ export const UseCases: Story = {
           <Pill>Project Management</Pill>
           <Pill>Team Leadership</Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">4. Version Labels:</Text>
         <Group gap="xs">
           <Pill size="xs">v2.1.0</Pill>
@@ -495,9 +479,9 @@ export const UseCases: Story = {
           <Pill size="xs">LTS</Pill>
           <Pill size="xs">production</Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">5. Filter Chips:</Text>
         <Group gap="xs">
           <Pill size="lg" withRemoveButton onRemove={() => console.log('Remove Web Dev')}>
@@ -510,9 +494,9 @@ export const UseCases: Story = {
             DevOps
           </Pill>
         </Group>
-      </div>
+      </Box>
       
-      <div>
+      <Box>
         <Text size="sm" fw={500} mb="sm">6. Disabled Pills:</Text>
         <Group gap="xs">
           <Pill disabled>Unavailable</Pill>
@@ -523,7 +507,7 @@ export const UseCases: Story = {
             Disabled Small
           </Pill>
         </Group>
-      </div>
+      </Box>
     </Stack>
   ),
   parameters: {

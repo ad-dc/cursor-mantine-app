@@ -2,17 +2,18 @@ import React from 'react';
 import {
   Stack,
   Group,
-  Paper,
-  Text,
-  ActionIcon,
-  ThemeIcon,
   SimpleGrid,
   Collapse,
   rem,
   Box,
-  Title,
 } from '@mantine/core';
-import { Button, Badge } from '@/components/DesignSystem';
+import { Button } from '../../Buttons/Button';
+import { ActionButton } from '../../Buttons/ActionButton';
+import { Badge } from '../../DataDisplay/Badge';
+import { ThemeIcon } from '../../DataDisplay/ThemeIcon';
+import { Text } from '../../Typography/Text';
+import { Title } from '../../Typography/Title';
+import { Paper } from '../../Misc/Paper';
 import { useDisclosure } from '@mantine/hooks';
 import { RiEditLine, RiArrowDownSLine, RiArrowUpSLine } from '@remixicon/react';
 import { KeyInsight, KeyInsightProps } from '../KeyInsights';
@@ -43,16 +44,16 @@ export interface PageContentHeaderProps {
   onEdit?: () => void;
   
   // ==================== ACTION BUTTONS ====================
-  /** Array of action buttons */
+  /** Array of action buttons. Uses semantic variants instead of explicit colors. */
   actions?: Array<{
     label: string;
     onClick: () => void;
+    /** Semantic variant that automatically determines appropriate color */
     variant?: 'primary' | 'secondary' | 'default' | 'disabled' | 'link' | 'secret' | 'outline' | 'danger';
-    color?: 'primary' | 'secondary' | 'gray' | 'red' | 'pink' | 'grape' | 'violet' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'green' | 'lime' | 'yellow' | 'orange';
   }>;
   
   // ==================== CONTENT SECTIONS (MUTUALLY EXCLUSIVE) ====================
-  /** Which content section to display */
+  /** Which content section to display. Content sections bleed to edges like Card.Section */
   contentSection: ContentSection;
   
   // Key Insights Section
@@ -154,7 +155,7 @@ export function PageContentHeader({
           <ThemeIcon 
             variant="outline"
             c="gray.9"
-            size={iconContainerSize}
+            size="xxl"
             radius="md"
             style={{
               ...ICON_STYLES,
@@ -195,15 +196,14 @@ export function PageContentHeader({
               {title}
             </Title>
             {editable && (
-              <ActionIcon
-                variant="subtle"
+              <ActionButton
                 size="sm"
                 onClick={onEdit}
                 aria-label="Edit title"
                 style={{ marginLeft: rem(4) }}
               >
                 <RiEditLine size={16} />
-              </ActionIcon>
+              </ActionButton>
             )}
           </Group>
         </Stack>
@@ -220,7 +220,6 @@ export function PageContentHeader({
           <Button
             key={index}
             variant={action.variant || 'default'}
-            color={action.color}
             onClick={action.onClick}
             size="sm"
           >
@@ -232,42 +231,47 @@ export function PageContentHeader({
   };
   
   const renderKeyInsights = () => (
-    <SimpleGrid cols={insights.length} spacing="sm">
-      {insights.map((insight, index) => (
-        <KeyInsight
-          key={index}
-          value={insight.value}
-          title={insight.title}
-          subtitle={insight.subtitle}
-          color={insight.color}
-          showBorder={index < insights.length - 1}
-        />
-      ))}
-    </SimpleGrid>
+    <Box p={spacing}>
+      <SimpleGrid cols={insights.length} spacing="sm">
+        {insights.map((insight, index) => (
+          <KeyInsight
+            key={index}
+            value={insight.value}
+            title={insight.title}
+            subtitle={insight.subtitle}
+            color={insight.color}
+            showBorder={index < insights.length - 1}
+          />
+        ))}
+      </SimpleGrid>
+    </Box>
   );
   
   const renderDescription = () => (
-    <Stack gap="sm">
-      {descriptionTitle && (
-        <Text size="lg" fw={500}>
-          {descriptionTitle}
-        </Text>
-      )}
-      {allowLinks ? (
-        <Text size="sm" c="dimmed" component="div" style={{ lineHeight: 1.6 }}>
-          <div dangerouslySetInnerHTML={{ __html: description || '' }} />
-        </Text>
-      ) : (
-        <Text size="sm" c="dimmed" style={{ lineHeight: 1.6 }}>
-          {description}
-        </Text>
-      )}
-    </Stack>
+    <Box p={spacing}>
+      <Stack gap="sm">
+        {descriptionTitle && (
+          <Text size="lg" fw={500}>
+            {descriptionTitle}
+          </Text>
+        )}
+        {allowLinks ? (
+          <Text size="sm" c="dimmed" style={{ lineHeight: 1.6 }}>
+            <div dangerouslySetInnerHTML={{ __html: description || '' }} />
+          </Text>
+        ) : (
+          <Text size="sm" c="dimmed" style={{ lineHeight: 1.6 }}>
+            {description}
+          </Text>
+        )}
+      </Stack>
+    </Box>
   );
   
   const renderDescriptionBlock = () => {
     if (!descriptionBlockText) return null;
     
+    // DescriptionBlock bleeds to edges - no padding wrapper
     return (
       <DescriptionBlock
         title={descriptionBlockTitle}
@@ -278,35 +282,39 @@ export function PageContentHeader({
   };
   
   const renderNameValuePairs = () => (
-    <NameValue 
-      pairs={nameValuePairs}
-      columns={nameValueColumns}
-      spacing="md"
-      labelSize="xs"
-      valueSize="sm"
-    />
+    <Box p={spacing}>
+      <NameValue 
+        pairs={nameValuePairs}
+        columns={nameValueColumns}
+        spacing="md"
+        labelSize="xs"
+        valueSize="sm"
+      />
+    </Box>
   );
   
   const renderDrawer = () => (
-    <Stack gap="sm">
-      <Button
-        variant="default"
-        onClick={toggleDrawer}
-        rightIcon={
-          drawerOpened ? <RiArrowUpSLine size={16} /> : <RiArrowDownSLine size={16} />
-        }
-        fullWidth
-        size="sm"
-      >
-        {drawerLabel}
-      </Button>
-      
-      <Collapse in={drawerOpened}>
-        <Box mt="sm">
-          {drawerContent}
-        </Box>
-      </Collapse>
-    </Stack>
+    <Box p={spacing}>
+      <Stack gap="sm">
+        <Button
+          variant="default"
+          onClick={toggleDrawer}
+          rightIcon={
+            drawerOpened ? <RiArrowUpSLine size={16} /> : <RiArrowDownSLine size={16} />
+          }
+          fullWidth
+          size="sm"
+        >
+          {drawerLabel}
+        </Button>
+        
+        <Collapse in={drawerOpened}>
+          <Box mt="sm">
+            {drawerContent}
+          </Box>
+        </Collapse>
+      </Stack>
+    </Box>
   );
   
   const renderContentSection = () => {
@@ -330,8 +338,7 @@ export function PageContentHeader({
   
   return (
     <Paper 
-      radius="sm"
-      shadow="xs"
+      variant="border-shadow"
       {...paperProps}
     >
       {/* CORE STACK */}
@@ -341,18 +348,19 @@ export function PageContentHeader({
           <Box>
             {renderHeader()}
           </Box>
-                  {/* Actions Section */}
-        {actions.length > 0 && (
-          <>
+          {/* Actions Section */}
+          {actions.length > 0 && (
             <Box>
               {renderActions()}
             </Box>
-          </>
-        )}
-
+          )}
         </Stack>
-        {/* Content Section */}
-        <Box p={0} style={{ borderTop: '1px solid var(--mantine-color-gray-4)' }}>
+        
+        {/* Content Section - bleeds to edges like Card.Section 
+             Each content type handles its own padding:
+             - insights, description, nameValuePairs, drawer: wrapped with padding
+             - descriptionBlock: bleeds to edges with its own internal padding */}
+        <Box style={{ borderTop: '1px solid var(--mantine-color-gray-4)' }}>
           {renderContentSection()}
         </Box>
       </Stack>
