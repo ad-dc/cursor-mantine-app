@@ -71,8 +71,8 @@ export interface DSButtonProps extends Omit<MantineButtonProps, 'size' | 'color'
 export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
   (
     {
-      variant = 'primary',
-      size = 'md',
+      variant = 'default',
+      size = 'sm',
       color = 'primary',
       className,
       children,

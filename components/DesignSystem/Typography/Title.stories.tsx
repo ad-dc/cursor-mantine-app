@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Stack } from '@mantine/core';
 import { Title } from './Title';
 
 const meta: Meta<typeof Title> = {
@@ -52,49 +53,46 @@ export const Default: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <Title size="xs" order={6}>Extra Small Title (xs)</Title>
-      <Title size="sm" order={5}>Small Title (sm)</Title>
-      <Title size="md" order={4}>Medium Title (md)</Title>
-      <Title size="lg" order={3}>Large Title (lg)</Title>
-      <Title size="xl" order={2}>Extra Large Title (xl)</Title>
-    </div>
-  ),
-};
-
-export const HeadingLevels: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <Title order={1} size="xl">Heading 1 (h1)</Title>
-      <Title order={2} size="lg">Heading 2 (h2)</Title>
-      <Title order={3} size="md">Heading 3 (h3)</Title>
-      <Title order={4} size="md">Heading 4 (h4)</Title>
-      <Title order={5} size="sm">Heading 5 (h5)</Title>
-      <Title order={6} size="xs">Heading 6 (h6)</Title>
-    </div>
+    <Stack gap="md">
+      <Title order={1}>Heading 1 (order=1)</Title>
+      <Title order={2}>Heading 2 (order=2)</Title>
+      <Title order={3}>Heading 3 (order=3)</Title>
+      <Title order={4}>Heading 4 (order=4)</Title>
+      <Title order={5}>Heading 5 (order=5)</Title>
+      <Title order={6}>Heading 6 (order=6)</Title>
+    </Stack>
   ),
 };
 
 export const FontWeights: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <Title fw={400}>Normal weight (400)</Title>
-      <Title fw={500}>Medium weight (500)</Title>
-      <Title fw={600}>Semibold weight (600)</Title>
-      <Title fw={700}>Bold weight (700)</Title>
-    </div>
+    <Stack gap="md">
+      <Title order={2} fw={400}>Normal weight (400)</Title>
+      <Title order={2} fw={500}>Medium weight (500)</Title>
+      <Title order={2} fw={600}>Semibold weight (600)</Title>
+      <Title order={2} fw={700}>Bold weight (700)</Title>
+    </Stack>
   ),
 };
 
 export const Colors: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <Title>Default color</Title>
-      <Title c="blue">Blue title</Title>
-      <Title c="red">Red title</Title>
-      <Title c="green">Green title</Title>
-      <Title c="dimmed">Dimmed title</Title>
-    </div>
+    <Stack gap="md">
+      <Title order={2} c="blue">Blue title</Title>
+      <Title order={2} c="red">Red title</Title>
+      <Title order={2} c="green">Green title</Title>
+      <Title order={2} c="dimmed">Dimmed title</Title>
+    </Stack>
+  ),
+};
+
+export const Alignment: Story = {
+  render: () => (
+    <Stack gap="md">
+      <Title order={2} ta="left">Left aligned title</Title>
+      <Title order={2} ta="center">Center aligned title</Title>
+      <Title order={2} ta="right">Right aligned title</Title>
+    </Stack>
   ),
 };
 

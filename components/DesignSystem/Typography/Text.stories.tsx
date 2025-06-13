@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Stack } from '@mantine/core';
 import { Text } from './Text';
 
 const meta: Meta<typeof Text> = {
@@ -56,37 +57,48 @@ export const Default: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <Text size="xs">Extra Small Text (xs)</Text>
-      <Text size="sm">Small Text (sm)</Text>
-      <Text size="md">Medium Text (md)</Text>
-      <Text size="lg">Large Text (lg)</Text>
-      <Text size="xl">Extra Large Text (xl)</Text>
-    </div>
+    <Stack gap="xs">
+      <Text size="xs">Extra small text</Text>
+      <Text size="sm">Small text</Text>
+      <Text size="md">Medium text (default)</Text>
+      <Text size="lg">Large text</Text>
+      <Text size="xl">Extra large text</Text>
+    </Stack>
   ),
 };
 
 export const FontWeights: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <Stack gap="xs">
       <Text fw={400}>Normal weight (400)</Text>
       <Text fw={500}>Medium weight (500)</Text>
       <Text fw={600}>Semibold weight (600)</Text>
       <Text fw={700}>Bold weight (700)</Text>
-    </div>
+    </Stack>
+  ),
+};
+
+export const Colors: Story = {
+  render: () => (
+    <Stack gap="xs">
+      <Text c="blue">Blue text</Text>
+      <Text c="red">Red text</Text>
+      <Text c="green">Green text</Text>
+      <Text c="dimmed">Dimmed text</Text>
+    </Stack>
   ),
 };
 
 export const Styles: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <Stack gap="xs">
       <Text>Normal text</Text>
       <Text fs="italic">Italic text</Text>
       <Text td="underline">Underlined text</Text>
       <Text td="line-through">Strikethrough text</Text>
       <Text c="blue">Blue colored text</Text>
       <Text c="dimmed">Dimmed text</Text>
-    </div>
+    </Stack>
   ),
 };
 
