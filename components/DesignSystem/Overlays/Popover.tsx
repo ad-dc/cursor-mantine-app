@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { Popover as MantinePopover, PopoverProps as MantinePopoverProps, Stack, Group, Text } from '@mantine/core';
+import { Popover as MantinePopover, PopoverProps as MantinePopoverProps, Stack,Text } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Button } from '../Buttons';
 
 /**
@@ -201,9 +202,9 @@ export const Popover = forwardRef<HTMLDivElement, DSPopoverProps>(
             
             {/* Popover Actions Footer */}
             {hasActions && (
-              <Group justify="space-between" gap="sm">
+              <Inline justify="space-between" gap="sm">
                 {/* Left-aligned primary/secondary actions */}
-                <Group gap="sm">
+                <Inline gap="sm">
                   {actions.map((action) => (
                     <Button
                       key={action.id}
@@ -216,10 +217,10 @@ export const Popover = forwardRef<HTMLDivElement, DSPopoverProps>(
                       {action.label}
                     </Button>
                   ))}
-                </Group>
+                </Inline>
                 
                 {/* Right-aligned tertiary actions */}
-                <Group gap="sm">
+                <Inline gap="sm">
                   {tertiaryActions.map((action) => (
                     <Button
                       key={action.id}
@@ -232,8 +233,8 @@ export const Popover = forwardRef<HTMLDivElement, DSPopoverProps>(
                       {action.label}
                     </Button>
                   ))}
-                </Group>
-              </Group>
+                </Inline>
+              </Inline>
             )}
           </Stack>
         </MantinePopover.Dropdown>

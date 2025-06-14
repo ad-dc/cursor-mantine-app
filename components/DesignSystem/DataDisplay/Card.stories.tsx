@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Image, Box } from '@mantine/core';
+import { Stack, Image, Box } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Card } from './Card';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
@@ -51,7 +52,7 @@ export const Default: Story = {
 
 export const Interactive: Story = {
   render: () => (
-    <Group gap="md" align="center">
+    <Inline gap="md" align="center">
       <Card 
         interactive 
         onClick={() => alert('Card clicked!')}
@@ -67,7 +68,7 @@ export const Interactive: Story = {
           This card has no interactive effects for comparison.
         </Text>
       </Card>
-    </Group>
+    </Inline>
   ),
 };
 
@@ -303,7 +304,7 @@ export const HoverEffects: Story = {
         onClick={() => console.log('Product card clicked')}
         style={{ width: '400px' }}
       >
-        <Group gap="xs" mb="xs">
+        <Inline gap="xs" mb="xs">
           <ThemeIcon size="xxl">
             <RiSmartphoneFill size={40} />
           </ThemeIcon>
@@ -311,7 +312,7 @@ export const HoverEffects: Story = {
             <Title order={5}>iPhone 15 Pro</Title>
             <Text size="sm" c="dimmed">Latest model</Text>
           </Box>
-        </Group>
+        </Inline>
 
         <Box>
           <Text size="lg" fw={600} mb="xs">$999</Text>
@@ -352,10 +353,10 @@ export const WithSections: Story = {
       {/* Card with header section */}
       <Card style={{ width: '400px' }}>
         <Card.Section withBorder inheritPadding py="xs">
-          <Group justify="space-between" align="center">
+          <Inline justify="space-between" align="center">
             <Title order={4} size="sm">Header Section</Title>
             <Badge color="info" size="xs">New</Badge>
-          </Group>
+          </Inline>
         </Card.Section>
         
         <Text size="sm" mb="md">
@@ -391,13 +392,13 @@ export const WithSections: Story = {
         </Text>
         
         <Card.Section withBorder inheritPadding py="xs">
-          <Group justify="space-between" align="center">
+          <Inline justify="space-between" align="center">
             <Text size="xs" c="dimmed">March 15, 2024</Text>
-            <Group gap="xs">
+            <Inline gap="xs">
               <RiHeartLine size={14} />
               <RiShareLine size={14} />
-            </Group>
-          </Group>
+            </Inline>
+          </Inline>
         </Card.Section>
       </Card>
     </Stack>

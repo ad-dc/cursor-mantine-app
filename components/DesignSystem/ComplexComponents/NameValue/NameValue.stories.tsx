@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, SimpleGrid } from '@mantine/core';
+import { Stack } from '@/components/DesignSystem';
+import { Grid } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem';
 import { NameValue } from './NameValue';
 import { useState } from 'react';
 import { Title } from '../../Typography/Title';
@@ -280,7 +282,7 @@ export const ColorVariations: Story = {
 
 export const RealWorldExamples: Story = {
   render: () => (
-    <SimpleGrid cols={2} spacing="xl" w={800}>
+    <Grid cols={2} spacing="xl" w={800}>
              <Card>
          <Stack gap="md">
            <Title order={4} size="sm">User Profile</Title>
@@ -344,7 +346,7 @@ export const RealWorldExamples: Story = {
            />
          </Stack>
        </Card>
-    </SimpleGrid>
+    </Grid>
   ),
   parameters: {
     docs: {

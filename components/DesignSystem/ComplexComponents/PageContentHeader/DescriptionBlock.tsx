@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Title } from '../../Typography/Title';
 import { Text } from '../../Typography/Text';
 
@@ -45,7 +45,7 @@ export function DescriptionBlock({
   allowHtml = false,
 }: DescriptionBlockProps) {
   return (
-    <Group gap="xs" align="flex-start" p="sm">
+    <Inline gap="xs" align="flex-start" p="sm">
       {title && (
         <Title order={4}>
           {title}
@@ -60,6 +60,6 @@ export function DescriptionBlock({
           {description}
         </Text>
       )}
-    </Group>
+    </Inline>
   );
 } 

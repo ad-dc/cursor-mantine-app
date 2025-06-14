@@ -1,4 +1,5 @@
-import { NavLink, ThemeIcon, Divider, Group, Title } from '@mantine/core';
+import { NavLink, ThemeIcon, Divider,Title } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import React from 'react';
 import { SidebarNavLink } from './SidebarNavLink';
 
@@ -19,14 +20,14 @@ interface SidebarNavProps {
 export function SidebarNav({ navItems, title }: SidebarNavProps) {
   return (
     <nav aria-label="Sidebar Navigation">
-      <Group align="center" gap="sm" mb={0} h={66} pl="xs">
+      <Inline align="center" gap="sm" mb={0} h={66} pl="xs">
         <ThemeIcon variant="transparent" size="lg" color="dark">
           <i className="ri-group-line" style={{ fontSize: 28 }} />
         </ThemeIcon>
         <Title order={5} fw={700} m={0}>
           {title}
         </Title>
-      </Group>
+      </Inline>
       <Divider mb="md" />
       {navItems.map((item) => (
         <SidebarNavLink

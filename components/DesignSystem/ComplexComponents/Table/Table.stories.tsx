@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState, useMemo } from 'react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Table } from './Table';
 import { Title } from '../../Typography/Title';
 import { Text } from '../../Typography/Text';
@@ -263,7 +264,7 @@ export const WithSelection: Story = {
     return (
       <Stack gap="lg" w="100%">
         <Title order={3} size="md">Table with Row Selection</Title>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Text size="sm">Selected rows: {selectedCount}</Text>
           {selectedCount > 0 && (
             <Button 
@@ -274,7 +275,7 @@ export const WithSelection: Story = {
               Clear Selection
             </Button>
           )}
-        </Group>
+        </Inline>
         <Table
           data={data}
           columns={userColumns}
@@ -430,7 +431,7 @@ export const FullFeatured: Story = {
         </Text>
         
         {selectedCount > 0 && (
-          <Group gap="sm">
+          <Inline gap="sm">
             <Text size="sm" fw={500}>
               {selectedCount} row{selectedCount !== 1 ? 's' : ''} selected
             </Text>
@@ -440,7 +441,7 @@ export const FullFeatured: Story = {
             <Button size="xs" variant="primary">
               Bulk Action
             </Button>
-          </Group>
+          </Inline>
         )}
         
         <Table

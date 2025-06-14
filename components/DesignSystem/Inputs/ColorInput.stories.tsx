@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { ColorInput } from './ColorInput';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -298,7 +299,7 @@ export const ControlledExample: Story = {
           background: backgroundColor
         }}>
           <Text size="sm" fw={500} mb="xs">Color Preview:</Text>
-          <Group gap="xs" mb="xs">
+          <Inline gap="xs" mb="xs">
             <div style={{ 
               width: 24, 
               height: 24, 
@@ -307,8 +308,8 @@ export const ControlledExample: Story = {
               border: '1px solid var(--mantine-color-gray-3)'
             }} />
             <Text size="sm">Primary: {primaryColor}</Text>
-          </Group>
-          <Group gap="xs" mb="xs">
+          </Inline>
+          <Inline gap="xs" mb="xs">
             <div style={{ 
               width: 24, 
               height: 24, 
@@ -317,8 +318,8 @@ export const ControlledExample: Story = {
               border: '1px solid var(--mantine-color-gray-3)'
             }} />
             <Text size="sm">Secondary: {secondaryColor}</Text>
-          </Group>
-          <Group gap="xs" mb="xs">
+          </Inline>
+          <Inline gap="xs" mb="xs">
             <div style={{ 
               width: 24, 
               height: 24, 
@@ -327,7 +328,7 @@ export const ControlledExample: Story = {
               border: '1px solid var(--mantine-color-gray-3)'
             }} />
             <Text size="sm">Accent: {accentColor}</Text>
-          </Group>
+          </Inline>
         </div>
       </Stack>
     );

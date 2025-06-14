@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { CloseButton } from './CloseButton';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
@@ -45,28 +46,28 @@ export const Default: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <Group gap="sm" align="center">
+    <Inline gap="sm" align="center">
       <CloseButton size="xs" />
       <CloseButton size="sm" />
       <CloseButton size="md" />
       <CloseButton size="lg" />
       <CloseButton size="xl" />
-    </Group>
+    </Inline>
   ),
 };
 
 export const Colors: Story = {
   render: () => (
-    <Group gap="md" align="center">
+    <Inline gap="md" align="center">
       <CloseButton color="black" />
       <CloseButton color="blue" />
-    </Group>
+    </Inline>
   ),
 };
 
 export const States: Story = {
   render: () => (
-    <Group gap="md" align="center">
+    <Inline gap="md" align="center">
       <Paper variant="border" style={{ textAlign: 'center' }}>
         <CloseButton />
         <Text size="xs" mt={4}>Normal</Text>
@@ -75,7 +76,7 @@ export const States: Story = {
         <CloseButton disabled />
         <Text size="xs" mt={4}>Disabled</Text>
       </Paper>
-    </Group>
+    </Inline>
   ),
 };
 
@@ -84,10 +85,10 @@ export const UsageExamples: Story = {
     <Stack gap="md">
       {/* Modal Header Example */}
       <Paper variant="border-shadow">
-        <Group justify="space-between" align="center">
+        <Inline justify="space-between" align="center">
           <Title order={4}>Slat title</Title>
           <CloseButton size="md" />
-        </Group>
+        </Inline>
       </Paper>
 
       {/* Alert Example */}

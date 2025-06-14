@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
-import { Box, CloseButton, Group } from '@mantine/core';
+import { Box, CloseButton } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 
 export interface DSPillProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Pill content */
@@ -94,7 +95,7 @@ export const Pill = forwardRef<HTMLDivElement, DSPillProps>(
         }}
         {...others}
       >
-        <Group gap={4} wrap="nowrap">
+        <Inline gap={4} wrap="nowrap">
           <span>{children}</span>
           {withRemoveButton && (
             <CloseButton
@@ -110,7 +111,7 @@ export const Pill = forwardRef<HTMLDivElement, DSPillProps>(
               aria-label="Remove"
             />
           )}
-        </Group>
+        </Inline>
       </Box>
     );
   }

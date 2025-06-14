@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Badge } from './Badge';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
@@ -51,74 +52,74 @@ export const Default: Story = {
 
 export const Colors: Story = {
   render: () => (
-    <Group gap="xs" align="center">
+    <Inline gap="xs" align="center">
       <Badge color="default">Default</Badge>
       <Badge color="info">Info</Badge>
       <Badge color="success">Success</Badge>
       <Badge color="danger">Danger</Badge>
       <Badge color="pending">Pending</Badge>
-    </Group>
+    </Inline>
   ),
 };
 
 export const Variants: Story = {
   render: () => (
     <Stack gap="md">
-      <Group gap="xs" align="center">
+      <Inline gap="xs" align="center">
         <Text size="sm" fw={500} c="dimmed">Filled:</Text>
         <Badge variant="filled" color="default">Default</Badge>
         <Badge variant="filled" color="info">Info</Badge>
         <Badge variant="filled" color="success">Success</Badge>
         <Badge variant="filled" color="danger">Danger</Badge>
         <Badge variant="filled" color="pending">Pending</Badge>
-      </Group>
-      <Group gap="xs" align="center">
+      </Inline>
+      <Inline gap="xs" align="center">
         <Text size="sm" fw={500} c="dimmed">Outline:</Text>
         <Badge variant="outline" color="default">Default</Badge>
         <Badge variant="outline" color="info">Info</Badge>
         <Badge variant="outline" color="success">Success</Badge>
         <Badge variant="outline" color="danger">Danger</Badge>
         <Badge variant="outline" color="pending">Pending</Badge>
-      </Group>
+      </Inline>
     </Stack>
   ),
 };
 
 export const Sizes: Story = {
   render: () => (
-    <Group gap="sm" align="center">
+    <Inline gap="sm" align="center">
       <Badge size="xs" color="info">xs</Badge>
       <Badge size="sm" color="info">sm</Badge>
       <Badge size="md" color="info">md</Badge>
       <Badge size="lg" color="info">lg</Badge>
       <Badge size="xl" color="info">xl</Badge>
-    </Group>
+    </Inline>
   ),
 };
 
 export const StatusExamples: Story = {
   render: () => (
     <Stack gap="md">
-      <Group gap="xs" align="center">
+      <Inline gap="xs" align="center">
         <Text size="sm" fw={500} c="dimmed">User Status:</Text>
         <Badge color="success">Active</Badge>
         <Badge color="pending">Pending</Badge>
         <Badge color="danger">Suspended</Badge>
         <Badge color="default">Inactive</Badge>
-      </Group>
-      <Group gap="xs" align="center">
+      </Inline>
+      <Inline gap="xs" align="center">
         <Text size="sm" fw={500} c="dimmed">Order Status:</Text>
         <Badge color="info">Processing</Badge>
         <Badge color="pending">Shipped</Badge>
         <Badge color="success">Delivered</Badge>
         <Badge color="danger">Cancelled</Badge>
-      </Group>
-      <Group gap="xs" align="center">
+      </Inline>
+      <Inline gap="xs" align="center">
         <Text size="sm" fw={500} c="dimmed">Priority:</Text>
         <Badge color="danger">High</Badge>
         <Badge color="pending">Medium</Badge>
         <Badge color="info">Low</Badge>
-      </Group>
+      </Inline>
     </Stack>
   ),
 };
@@ -134,10 +135,10 @@ export const InContext: Story = {
       </Paper>
       {/* Card header with badge */}
       <Paper variant="border">
-        <Group justify="space-between" align="center" mb="sm">
+        <Inline justify="space-between" align="center" mb="sm">
           <Title order={4}>Project Alpha</Title>
           <Badge color="pending" variant="outline">In Progress</Badge>
-        </Group>
+        </Inline>
         <Text size="sm" c="dimmed">
           A comprehensive project management solution for enterprise clients.
         </Text>

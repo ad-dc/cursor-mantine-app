@@ -26,18 +26,18 @@ export interface DSKbdProps extends Omit<MantineKbdProps, 'children'> {
  * @example
  * ```tsx
  * // With different sizes
- * <Group gap="sm">
+ * <Inline gap="sm">
  *   <Kbd size="xs">Esc</Kbd>
  *   <Kbd size="sm">⌘K</Kbd>
  *   <Kbd size="md">Ctrl+C</Kbd>
  *   <Kbd size="lg">Enter</Kbd>
- * </Group>
+ * </Inline>
  * ```
  * 
  * @example
  * ```tsx
  * // Common keyboard shortcuts
- * <Group gap="sm">
+ * <Inline gap="sm">
  *   <Kbd>⌘</Kbd>
  *   <Kbd>⌘K</Kbd>
  *   <Kbd>⌘⇧P</Kbd>
@@ -47,7 +47,7 @@ export interface DSKbdProps extends Omit<MantineKbdProps, 'children'> {
  *   <Kbd>Esc</Kbd>
  *   <Kbd>Tab</Kbd>
  *   <Kbd>Space</Kbd>
- * </Group>
+ * </Inline>
  * ```
  * 
  * @example

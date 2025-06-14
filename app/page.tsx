@@ -1,7 +1,9 @@
 'use client';
 
 import '@mantine/core/styles.layer.css';
-import { ActionIcon, Title as MantineTitle, Text as MantineText, rem, Menu, Switch as MantineSwitch, Group, Divider, Stack, SimpleGrid, FileInput as MantineFileInput } from '@mantine/core';
+import { ActionIcon, Title as MantineTitle, Text as MantineText, rem, Menu, Switch as MantineSwitch,Divider, Stack,FileInput as MantineFileInput } from '@mantine/core';
+import { Grid } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem';
 import { useDisclosure } from '@mantine/hooks';
 import { HeaderBar } from '@/components/HeaderBar';
 import { SidebarNav, NavItem } from '@/components/SidebarNav';
@@ -9,7 +11,7 @@ import { MainLayout } from '@/components/MainLayout';
 import { Table } from '@/components/DesignSystem';
 import { PageContentHeader } from '@/components/DesignSystem';
 import { NameValue } from '@/components/DesignSystem';
-import { Alert, Avatar, Button as DSButton, ActionButton, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip, Kbd, Code, Text, Title, Divider as DSDivider, Paper as DSPaper, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs, DropZone, FileInput } from '@/components/DesignSystem';
+import { Alert, Avatar, Button as DSButton, ActionIcon, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip, Kbd, Code, Text, Title, Divider as DSDivider, Paper as DSPaper, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs, DropZone, FileInput } from '@/components/DesignSystem';
 import { useState, useMemo, useEffect } from 'react';
 import { RiMore2Fill, RiEyeLine, RiUserLine, RiServerLine, RiAddLine, RiCircleLine } from '@remixicon/react';
 import { MRT_PaginationState as PaginationState, MRT_ColumnDef as ColumnDef, MRT_TableInstance } from 'mantine-react-table';
@@ -188,7 +190,7 @@ const ColumnVisibilityMenu = ({ table }: { table: MRT_TableInstance<Person> }) =
       </Menu.Target>
       <Menu.Dropdown>
         <Stack gap="xs" p="sm">
-          <Group justify="space-between">
+          <Inline justify="space-between">
             <DSButton
               variant="default"
               size="xs"
@@ -207,14 +209,14 @@ const ColumnVisibilityMenu = ({ table }: { table: MRT_TableInstance<Person> }) =
             >
               Hide all
             </DSButton>
-          </Group>
+          </Inline>
           
           <Divider />
           
           {visibleColumns.map((column) => {
             const isVisible = column.getIsVisible();
             return (
-              <Group key={column.id}>
+              <Inline key={column.id}>
                 <MantineSwitch
                   size="sm"
                   checked={isVisible}
@@ -224,7 +226,7 @@ const ColumnVisibilityMenu = ({ table }: { table: MRT_TableInstance<Person> }) =
                 <span style={{ fontSize: '14px' }}>
                   {column.columnDef.header as string}
                 </span>
-              </Group>
+              </Inline>
             );
           })}
         </Stack>
@@ -318,7 +320,7 @@ export default function Home() {
         <Title order={1}>Typography Examples</Title>
         <DSDivider />
         
-        <Group align="flex-start">
+        <Inline align="flex-start">
           <DSPaper variant="border" style={{ width: '48%' }}>
             <Title order={2} size="lg" mb="md">Title Component</Title>
             <Title order={1} size="xl">Title XL (h1)</Title>
@@ -343,7 +345,7 @@ export default function Home() {
             <Text size="md" c="blue">Blue Text</Text>
             <Text size="md" c="dimmed">Dimmed Text</Text>
           </DSPaper>
-        </Group>
+        </Inline>
       </Stack>
       
       <PageContentHeader
@@ -390,11 +392,11 @@ export default function Home() {
           </Stack>
           
           <Title order={5} size="xs">TextInput States</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <TextInput label="Default" placeholder="Enter text" />
             <TextInput label="With Error" placeholder="Enter text" error="This field is required" />
             <TextInput label="Disabled" placeholder="Enter text" disabled />
-          </Group>
+          </Inline>
         </Stack>
 
         {/* TextArea Demo */}
@@ -455,9 +457,9 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">NumberInput Examples</Title>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">NumberInput Sizes</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <NumberInput size="xs" label="Extra Small" placeholder="Enter a number" style={{ width: 200 }} />
               <NumberInput size="sm" label="Small" placeholder="Enter a number" style={{ width: 200 }} />
@@ -466,10 +468,10 @@ export default function Home() {
               <NumberInput size="xl" label="Extra Large" placeholder="Enter a number" style={{ width: 200 }} />
             </Stack>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Label States</Title>
-            </Group>
-            <Group gap="md" align="flex-end">
+            </Inline>
+            <Inline gap="md" align="flex-end">
               <NumberInput 
                 label="Quantity" 
                 placeholder="Enter quantity"
@@ -487,12 +489,12 @@ export default function Home() {
                 placeholder="Enter discount"
                 style={{ width: 200 }}
               />
-            </Group>
+            </Inline>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">With Constraints & Formatting</Title>
-            </Group>
-            <Group gap="md" align="flex-end">
+            </Inline>
+            <Inline gap="md" align="flex-end">
               <NumberInput 
                 label="Rating" 
                 min={1}
@@ -517,12 +519,12 @@ export default function Home() {
                 defaultValue={50}
                 style={{ width: 200 }}
               />
-            </Group>
+            </Inline>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">States</Title>
-            </Group>
-            <Group gap="md" align="flex-end">
+            </Inline>
+            <Inline gap="md" align="flex-end">
               <NumberInput 
                 label="Disabled" 
                 disabled
@@ -541,7 +543,7 @@ export default function Home() {
                 placeholder="Enter a number"
                 style={{ width: 200 }}
               />
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -549,7 +551,7 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">ColorInput Examples</Title>
           <Stack gap="lg">
-            <Group gap="md" align="flex-end">
+            <Inline gap="md" align="flex-end">
               <ColorInput 
                 label="Brand Color" 
                 placeholder="#000000"
@@ -568,9 +570,9 @@ export default function Home() {
                 placeholder="#FFFFFF"
                 style={{ width: 200 }}
               />
-            </Group>
+            </Inline>
             
-            <Group gap="md" align="flex-end">
+            <Inline gap="md" align="flex-end">
               <ColorInput 
                 label="With Swatches" 
                 placeholder="Pick a color"
@@ -592,9 +594,9 @@ export default function Home() {
                 placeholder="rgb(0, 0, 0)"
                 style={{ width: 200 }}
               />
-            </Group>
+            </Inline>
             
-            <Group gap="md" align="flex-end">
+            <Inline gap="md" align="flex-end">
               <ColorInput 
                 label="Disabled" 
                 disabled
@@ -613,11 +615,11 @@ export default function Home() {
                 placeholder="#000000"
                 style={{ width: 200 }}
               />
-            </Group>
+            </Inline>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">ColorInput Sizes</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <ColorInput size="xs" label="Extra Small" placeholder="#000000" style={{ width: 200 }} />
               <ColorInput size="sm" label="Small" placeholder="#000000" style={{ width: 200 }} />
@@ -632,9 +634,9 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">Switch Examples</Title>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Switch Sizes</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <Switch size="xs" label="Extra Small Switch" />
               <Switch size="sm" label="Small Switch" />
@@ -643,17 +645,17 @@ export default function Home() {
               <Switch size="xl" label="Extra Large Switch" />
             </Stack>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Label States</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <Switch label="Default Switch" />
               <Switch label="Optional Setting" showOptional />
             </Stack>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Switch States</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <Switch label="Default (Off)" />
               <Switch label="Checked (On)" defaultChecked />
@@ -661,9 +663,9 @@ export default function Home() {
               <Switch label="Disabled On" disabled checked />
             </Stack>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">With On/Off Labels</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <Switch 
                 label="Power Mode" 
@@ -685,9 +687,9 @@ export default function Home() {
               />
             </Stack>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Common Use Cases</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <Switch label="Enable notifications" defaultChecked />
               <Switch label="Dark mode" />
@@ -702,17 +704,17 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">SegmentedControl Examples</Title>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Basic SegmentedControl</Title>
-            </Group>
+            </Inline>
             <SegmentedControl 
               data={['Segment 1', 'Segment 2', 'Segment 3', 'Segment 4', 'Segment 5']}
               defaultValue="Segment 2"
             />
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different Sizes</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <SegmentedControl 
                 size="xs"
@@ -741,9 +743,9 @@ export default function Home() {
               />
             </Stack>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Custom Data Structure</Title>
-            </Group>
+            </Inline>
             <SegmentedControl 
               data={[
                 { label: 'React', value: 'react' },
@@ -754,9 +756,9 @@ export default function Home() {
               defaultValue="react"
             />
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different Use Cases</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <SegmentedControl 
                 data={['Dashboard', 'Analytics', 'Reports', 'Settings']}
@@ -772,9 +774,9 @@ export default function Home() {
               />
             </Stack>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">States</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <SegmentedControl 
                 disabled
@@ -794,9 +796,9 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">Slider Examples</Title>
           <Stack gap="lg" style={{ width: '100%', maxWidth: 400 }}>
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Basic Slider</Title>
-            </Group>
+            </Inline>
             <Slider 
               label="Volume"
               defaultValue={50}
@@ -804,9 +806,9 @@ export default function Home() {
               max={100}
             />
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">With Optional Label</Title>
-            </Group>
+            </Inline>
             <Slider 
               label="Opacity"
               showOptional
@@ -815,9 +817,9 @@ export default function Home() {
               max={100}
             />
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">With Marks</Title>
-            </Group>
+            </Inline>
             <Slider 
               label="Rating"
               min={1}
@@ -833,9 +835,9 @@ export default function Home() {
               ]}
             />
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">With Custom Values</Title>
-            </Group>
+            </Inline>
             <Slider 
               label="Temperature"
               min={-20}
@@ -850,9 +852,9 @@ export default function Home() {
               ]}
             />
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">States</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <Slider 
                 label="Disabled"
@@ -937,38 +939,38 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">Badge - All Variants</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Filled Badges</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Badge variant="filled" color="default">Default</Badge>
               <Badge variant="filled" color="info">Info</Badge>
               <Badge variant="filled" color="success">Success</Badge>
               <Badge variant="filled" color="danger">Danger</Badge>
               <Badge variant="filled" color="pending">Pending</Badge>
-            </Group>
+            </Inline>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Outline Badges</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Badge variant="outline" color="default">Default</Badge>
               <Badge variant="outline" color="info">Info</Badge>
               <Badge variant="outline" color="success">Success</Badge>
               <Badge variant="outline" color="danger">Danger</Badge>
               <Badge variant="outline" color="pending">Pending</Badge>
-            </Group>
+            </Inline>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Badge Sizes</Title>
-            </Group>
-            <Group gap="md" align="center">
+            </Inline>
+            <Inline gap="md" align="center">
               <Badge size="xs" color="info">XS</Badge>
               <Badge size="sm" color="info">SM</Badge>
               <Badge size="md" color="info">MD</Badge>
               <Badge size="lg" color="info">LG</Badge>
               <Badge size="xl" color="info">XL</Badge>
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -976,43 +978,43 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">Chip Variants</Title>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Unselected Chips</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Chip variant="default">Default</Chip>
               <Chip variant="info">Info</Chip>
               <Chip variant="success">Success</Chip>
               <Chip variant="danger">Danger</Chip>
               <Chip variant="pending">Pending</Chip>
-            </Group>
+            </Inline>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Selected Chips</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Chip variant="default" checked>Default</Chip>
               <Chip variant="info" checked>Info</Chip>
               <Chip variant="success" checked>Success</Chip>
               <Chip variant="danger" checked>Danger</Chip>
               <Chip variant="pending" checked>Pending</Chip>
-            </Group>
+            </Inline>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Interactive Chips</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Chip variant="info" onChange={(checked) => console.log('Info chip:', checked)}>Toggle Info</Chip>
               <Chip variant="success" onChange={(checked) => console.log('Success chip:', checked)}>Toggle Success</Chip>
               <Chip variant="danger" onChange={(checked) => console.log('Danger chip:', checked)}>Toggle Danger</Chip>
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
         {/* Button Variants Demo */}
         <Stack gap="sm">
           <Title order={4} size="sm">All Button Variants</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <DSButton variant="primary" size="xs">Primary</DSButton>
             <DSButton variant="secondary" size="xs">Secondary</DSButton>
             <DSButton variant="default" size="xs">Default</DSButton>
@@ -1021,10 +1023,10 @@ export default function Home() {
             <DSButton variant="disabled" size="xs">Disabled</DSButton>
             <DSButton variant="link" size="xs">Link</DSButton>
             <DSButton variant="secret" size="xs">Secret</DSButton>
-          </Group>
+          </Inline>
           
           <Title order={4} size="sm">With Icons</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <DSButton 
               variant="primary" 
               size="xs" 
@@ -1053,81 +1055,81 @@ export default function Home() {
             >
               Outline
             </DSButton>
-          </Group>
+          </Inline>
         </Stack>
 
-        {/* ActionButton Demo */}
+        {/* ActionIcon Demo */}
         <Stack gap="sm">
-          <Title order={4} size="sm">ActionButton Examples</Title>
-          <Group gap="md">
-            <ActionButton><RiEyeLine size={16} /></ActionButton>
-            <ActionButton><RiAddLine size={16} /></ActionButton>
-            <ActionButton><RiMore2Fill size={16} /></ActionButton>
-            <ActionButton disabled><RiCircleLine size={16} /></ActionButton>
-          </Group>
+          <Title order={4} size="sm">ActionIcon Examples</Title>
+          <Inline gap="md">
+            <ActionIcon><RiEyeLine size={16} /></ActionIcon>
+            <ActionIcon><RiAddLine size={16} /></ActionIcon>
+            <ActionIcon><RiMore2Fill size={16} /></ActionIcon>
+            <ActionIcon disabled><RiCircleLine size={16} /></ActionIcon>
+          </Inline>
         </Stack>
 
         {/* CloseButton Demo */}
         <Stack gap="sm">
           <Title order={4} size="sm">CloseButton Examples</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <CloseButton />
             <CloseButton size="sm" />
             <CloseButton size="lg" />
             <CloseButton disabled />
-          </Group>
+          </Inline>
         </Stack>
 
         {/* Pill Demo */}
         <Stack gap="sm">
           <Title order={4} size="sm">Pill Examples</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <Pill>Default Pill</Pill>
             <Pill>Info Pill</Pill>
             <Pill>Success Pill</Pill>
             <Pill>Danger Pill</Pill>
             <Pill>Pending Pill</Pill>
-          </Group>
-          <Group gap="md">
+          </Inline>
+          <Inline gap="md">
             <Pill withRemoveButton onRemove={() => console.log('Remove clicked')}>Removable Pill</Pill>
             <Pill size="xs">XS Size</Pill>
             <Pill size="lg">LG Size</Pill>
             <Pill disabled>Disabled Pill</Pill>
-          </Group>
+          </Inline>
         </Stack>
 
         {/* Indicator Demo */}
         <Stack gap="sm">
           <Title order={4} size="sm">Indicator Examples</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Semantic Colors</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Indicator type="default"><DSButton size="xs">Default</DSButton></Indicator>
               <Indicator type="info"><DSButton size="xs">Info</DSButton></Indicator>
               <Indicator type="success"><DSButton size="xs">Success</DSButton></Indicator>
               <Indicator type="danger"><DSButton size="xs">Danger</DSButton></Indicator>
               <Indicator type="pending"><DSButton size="xs">Pending</DSButton></Indicator>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">With Numbers</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Indicator count={5} type="info"><DSButton size="xs">Messages</DSButton></Indicator>
               <Indicator count={23} type="danger"><DSButton size="xs">Errors</DSButton></Indicator>
               <Indicator count={100} type="success"><DSButton size="xs">Tasks</DSButton></Indicator>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">With Outline</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <Indicator type="info" withOutline><DSButton size="xs">Outlined Info</DSButton></Indicator>
               <Indicator count={8} type="danger" withOutline><DSButton size="xs">Notifications</DSButton></Indicator>
               <Indicator type="success" withOutline><DSButton size="xs">Complete</DSButton></Indicator>
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -1135,9 +1137,9 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">Progress Examples</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Progress Sizes</Title>
-            </Group>
+            </Inline>
             <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
               <div><span>Extra Small (30%)</span><Progress size="xs" value={30} /></div>
               <div><span>Small (50%)</span><Progress size="sm" value={50} /></div>
@@ -1146,9 +1148,9 @@ export default function Home() {
               <div><span>Extra Large (95%)</span><Progress size="xl" value={95} /></div>
             </Stack>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different Progress Levels</Title>
-            </Group>
+            </Inline>
             <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
               <div><span>25% Complete</span><Progress value={25} /></div>
               <div><span>50% Complete</span><Progress value={50} /></div>
@@ -1156,9 +1158,9 @@ export default function Home() {
               <div><span>Completed!</span><Progress value={100} /></div>
             </Stack>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Animated Progress</Title>
-            </Group>
+            </Inline>
             <Stack gap="md" style={{ width: '100%', maxWidth: 400 }}>
               <div><span>Uploading... 60%</span><Progress value={60} animated /></div>
               <div><span>Processing... 85%</span><Progress value={85} animated /></div>
@@ -1170,51 +1172,51 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">ThemeIcon Examples</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">All Sizes (xs to xxl)</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <ThemeIcon size="xs"><RiUserLine size={11} /></ThemeIcon>
               <ThemeIcon size="sm"><RiUserLine size={14} /></ThemeIcon>
               <ThemeIcon size="md"><RiUserLine size={18} /></ThemeIcon>
               <ThemeIcon size="lg"><RiUserLine size={22} /></ThemeIcon>
               <ThemeIcon size="xl"><RiUserLine size={28} /></ThemeIcon>
               <ThemeIcon size="xxl"><RiUserLine size={39} /></ThemeIcon>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Blue and Dark Colors</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <ThemeIcon color="blue">
                 <RiEyeLine size={18} />
               </ThemeIcon>
               <ThemeIcon color="default">
                 <RiEyeLine size={18} />
               </ThemeIcon>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Custom XXL Size from Figma</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <ThemeIcon size="xxl" color="blue">
                 <RiAddLine size={39} />
               </ThemeIcon>
               <ThemeIcon size="xxl" color="default">
                 <RiAddLine size={39} />
               </ThemeIcon>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different Icons</Title>
-            </Group>
-            <Group gap="md">
+            </Inline>
+            <Inline gap="md">
               <ThemeIcon color="blue"><RiServerLine size={18} /></ThemeIcon>
               <ThemeIcon color="default"><RiCircleLine size={18} /></ThemeIcon>
               <ThemeIcon color="blue"><RiMore2Fill size={18} /></ThemeIcon>
               <ThemeIcon color="default"><RiAddLine size={18} /></ThemeIcon>
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -1238,9 +1240,9 @@ export default function Home() {
               This is a general notice or announcement.
             </Alert>
             
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Dismissible Alerts</Title>
-            </Group>
+            </Inline>
             <Alert type="info" title="Dismissible Alert">
               You can close this alert by clicking the X button.
             </Alert>
@@ -1255,21 +1257,21 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">Kbd (Keyboard Key) Examples</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Single Keys</Title>
-            </Group>
-            <Group gap="sm">
+            </Inline>
+            <Inline gap="sm">
               <Kbd>Ctrl</Kbd>
               <Kbd>Alt</Kbd>
               <Kbd>Shift</Kbd>
               <Kbd>Enter</Kbd>
               <Kbd>Esc</Kbd>
               <Kbd>Tab</Kbd>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Key Combinations</Title>
-            </Group>
+            </Inline>
             <Stack gap="sm">
               <div>Save: <Kbd>Ctrl</Kbd> + <Kbd>S</Kbd></div>
               <div>Copy: <Kbd>Ctrl</Kbd> + <Kbd>C</Kbd></div>
@@ -1277,16 +1279,16 @@ export default function Home() {
               <div>Search: <Kbd>Ctrl</Kbd> + <Kbd>F</Kbd></div>
             </Stack>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different Sizes</Title>
-            </Group>
-            <Group gap="sm" align="center">
+            </Inline>
+            <Inline gap="sm" align="center">
               <Kbd size="xs">xs</Kbd>
               <Kbd size="sm">sm</Kbd>
               <Kbd size="md">md</Kbd>
               <Kbd size="lg">lg</Kbd>
               <Kbd size="xl">xl</Kbd>
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -1294,17 +1296,17 @@ export default function Home() {
         <Stack gap="sm">
           <Title order={4} size="sm">Code Examples</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Inline Code</Title>
-            </Group>
+            </Inline>
             <Text>
               Use <Code>React.createElement()</Code> to create elements programmatically.
               The <Code>useState</Code> hook manages component state.
             </Text>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Block Code</Title>
-            </Group>
+            </Inline>
             <Code block>
 {`import { useState } from 'react';
 import { Code } from '@mantine/core';
@@ -1314,20 +1316,20 @@ function Demo() {
   return <Code>Hello World</Code>;
 }`}
             </Code>
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different Sizes</Title>
-            </Group>
-            <Group gap="sm" align="center">
+            </Inline>
+            <Inline gap="sm" align="center">
               <Code size="xs">xs size</Code>
               <Code size="sm">sm size</Code>
               <Code size="md">md size</Code>
               <Code size="lg">lg size</Code>
               <Code size="xl">xl size</Code>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Code with Roboto Mono Font</Title>
-            </Group>
+            </Inline>
             <Text size="sm" c="dimmed">
               All code examples use Roboto Mono font as specified in Figma design.
             </Text>
@@ -1339,9 +1341,9 @@ function Demo() {
         <Stack gap="sm">
           <Title order={4} size="sm">Divider Examples</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different Thicknesses</Title>
-            </Group>
+            </Inline>
             <Text size="sm" c="dimmed">
               Dividers support sm, md, lg, xl thickness sizes.
             </Text>
@@ -1356,27 +1358,27 @@ function Demo() {
               <DSDivider size="xl" />
             </Stack>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Horizontal Divider</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <Text>Content above the divider</Text>
               <DSDivider orientation="horizontal" />
               <Text>Content below the divider</Text>
             </Stack>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Vertical Divider</Title>
-            </Group>
-            <Group gap="md" align="center">
+            </Inline>
+            <Inline gap="md" align="center">
               <Text>Left content</Text>
               <DSDivider orientation="vertical" />
               <Text>Right content</Text>
-            </Group>
+            </Inline>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Gray.4 Color</Title>
-            </Group>
+            </Inline>
             <Text size="sm" c="dimmed">
               All dividers use gray.4 color as specified in Figma design.
             </Text>
@@ -1388,13 +1390,13 @@ function Demo() {
         <Stack gap="sm">
           <Title order={4} size="sm">Paper Examples</Title>
           <Stack gap="md">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Four Variants</Title>
-            </Group>
+            </Inline>
             <Text size="sm" c="dimmed">
               Paper supports four variants: default (no border/shadow), shadow, border, and border-shadow. All use sm spacing.
             </Text>
-            <SimpleGrid cols={2} spacing="md">
+            <Grid cols={2} spacing="md">
               <DSPaper variant="default">
                 <Text fw={500} mb="xs">Default</Text>
                 <Text size="sm" c="dimmed">No border or shadow</Text>
@@ -1414,21 +1416,21 @@ function Demo() {
                 <Text fw={500} mb="xs">Border + Shadow</Text>
                 <Text size="sm" c="dimmed">With both border and shadow</Text>
               </DSPaper>
-            </SimpleGrid>
+            </Grid>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Content Examples</Title>
-            </Group>
+            </Inline>
             <DSPaper variant="border-shadow">
               <Text fw={500} mb="sm">Paper with Content</Text>
               <Text size="sm" c="dimmed" mb="md">
                 This is an example of Paper being used as a container for content. 
                 It has sm spacing applied automatically.
               </Text>
-              <Group gap="sm">
+              <Inline gap="sm">
                 <Badge color="info">Feature</Badge>
                 <Badge color="success">Ready</Badge>
-              </Group>
+              </Inline>
             </DSPaper>
           </Stack>
         </Stack>
@@ -1440,19 +1442,19 @@ function Demo() {
             File upload component with drag and drop functionality. Supports different file types, size limits, and states.
           </Text>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Basic Usage</Title>
-            </Group>
+            </Inline>
             <DropZone 
               title="Upload your files"
               description="Drag files here or click to select files"
               onDrop={(files) => console.log('Dropped files:', files)}
             />
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Different States</Title>
-            </Group>
-            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+            </Inline>
+            <Grid cols={{ base: 1, md: 2 }} spacing="md">
               <DropZone 
                 title="Loading State"
                 description="Processing your files..."
@@ -1463,12 +1465,12 @@ function Demo() {
                 description="File upload is currently disabled"
                 disabled
               />
-            </SimpleGrid>
+            </Grid>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Custom File Types</Title>
-            </Group>
-            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+            </Inline>
+            <Grid cols={{ base: 1, md: 2 }} spacing="md">
               <DropZone 
                 title="Images Only"
                 description="PNG, JPG, GIF files accepted (max 5MB)"
@@ -1481,7 +1483,7 @@ function Demo() {
                 accept={['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']}
                 onDrop={(files) => console.log('Document files:', files)}
               />
-            </SimpleGrid>
+            </Grid>
           </Stack>
         </Stack>
 
@@ -1492,9 +1494,9 @@ function Demo() {
             File input component with consistent design system styling. Supports all standard file input features.
           </Text>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">All Sizes</Title>
-            </Group>
+            </Inline>
             <Stack gap="md">
               <FileInput size="xs" label="Extra Small" placeholder="Choose file" />
               <FileInput size="sm" label="Small" placeholder="Choose file" />
@@ -1503,19 +1505,19 @@ function Demo() {
               <FileInput size="xl" label="Extra Large" placeholder="Choose file" />
             </Stack>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Label States</Title>
-            </Group>
+            </Inline>
             <Stack gap="sm">
               <FileInput label="Document Upload" placeholder="Select document" />
               <FileInput label="Resume" placeholder="Upload your resume" required />
               <FileInput label="Profile Picture" placeholder="Upload image" showOptional />
             </Stack>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">File Type Restrictions</Title>
-            </Group>
-            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+            </Inline>
+            <Grid cols={{ base: 1, md: 2 }} spacing="md">
               <FileInput 
                 label="Images Only"
                 placeholder="Upload image"
@@ -1526,12 +1528,12 @@ function Demo() {
                 placeholder="Upload document"
                 accept="application/pdf,.doc,.docx"
               />
-            </SimpleGrid>
+            </Grid>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Features</Title>
-            </Group>
-            <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+            </Inline>
+            <Grid cols={{ base: 1, md: 2 }} spacing="md">
               <MantineFileInput 
                 label="Multiple Files"
                 placeholder="Select multiple files"
@@ -1544,12 +1546,12 @@ function Demo() {
                 placeholder="Upload file (clearable)"
                 clearable
               />
-            </SimpleGrid>
+            </Grid>
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">States</Title>
-            </Group>
-            <Group gap="md" align="flex-end">
+            </Inline>
+            <Inline gap="md" align="flex-end">
               <FileInput 
                 label="Default" 
                 placeholder="Choose file"
@@ -1567,7 +1569,7 @@ function Demo() {
                 disabled
                 style={{ width: 200 }}
               />
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -1712,9 +1714,9 @@ function Demo() {
         <Stack gap="sm">
           <Title order={4} size="sm">Stepper Examples</Title>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Horizontal Stepper</Title>
-            </Group>
+            </Inline>
             <Stepper
               orientation="horizontal"
               steps={[
@@ -1727,9 +1729,9 @@ function Demo() {
               active={2}
             />
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Vertical Stepper</Title>
-            </Group>
+            </Inline>
             <Stepper
               orientation="vertical"
               steps={[
@@ -1748,9 +1750,9 @@ function Demo() {
         <Stack gap="sm">
           <Title order={4} size="sm">Tabs Examples</Title>
           <Stack gap="lg">
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Horizontal Tabs</Title>
-            </Group>
+            </Inline>
             <Tabs
               orientation="horizontal"
               tabs={[
@@ -1777,9 +1779,9 @@ function Demo() {
               value="overview"
             />
 
-            <Group gap="md">
+            <Inline gap="md">
               <Title order={5} size="xs">Vertical Tabs</Title>
-            </Group>
+            </Inline>
             <div style={{ maxWidth: 500 }}>
               <Tabs
                 orientation="vertical"
@@ -1833,10 +1835,10 @@ function Demo() {
         {/* Modal Demo */}
         <Stack gap="sm">
           <Title order={4} size="sm">Modal Examples</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <DSButton onClick={() => setModalOpened(true)}>Open Modal</DSButton>
             <DSButton variant="danger" onClick={() => setConfirmModalOpened(true)}>Confirmation Modal</DSButton>
-          </Group>
+          </Inline>
         </Stack>
 
         <Modal
@@ -1902,12 +1904,12 @@ function Demo() {
         {/* Drawer Demo */}
         <Stack gap="sm">
           <Title order={4} size="sm">Drawer Examples</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <DSButton onClick={() => setRightDrawerOpened(true)}>Right Drawer</DSButton>
             <DSButton onClick={() => setLeftDrawerOpened(true)}>Left Drawer</DSButton>
             <DSButton onClick={() => setTopDrawerOpened(true)}>Top Drawer</DSButton>
             <DSButton onClick={() => setBottomDrawerOpened(true)}>Bottom Drawer</DSButton>
-          </Group>
+          </Inline>
         </Stack>
 
         <Drawer
@@ -1921,10 +1923,10 @@ function Demo() {
             <TextInput label="Name" defaultValue="John Doe" />
             <TextInput label="Email" defaultValue="john@example.com" />
             <TextArea label="Notes" defaultValue="Customer since 2020" rows={4} />
-            <Group gap="sm" justify="flex-end" mt="md">
+            <Inline gap="sm" justify="flex-end" mt="md">
               <DSButton variant="outline" onClick={() => setRightDrawerOpened(false)}>Cancel</DSButton>
               <DSButton onClick={() => setRightDrawerOpened(false)}>Save</DSButton>
-            </Group>
+            </Inline>
           </Stack>
         </Drawer>
 
@@ -1963,17 +1965,17 @@ function Demo() {
           position="bottom"
           size="xs"
         >
-          <Group gap="md" justify="center">
+          <Inline gap="md" justify="center">
             <DSButton leftIcon={<RiAddLine size={16} />}>Add Item</DSButton>
             <DSButton leftIcon={<RiEyeLine size={16} />} variant="outline">View All</DSButton>
             <DSButton leftIcon={<RiServerLine size={16} />} variant="default">Export</DSButton>
-          </Group>
+          </Inline>
         </Drawer>
 
         {/* Menu Demo */}
         <Stack gap="sm">
           <Title order={4} size="sm">Menu Examples</Title>
-          <Group gap="md">
+          <Inline gap="md">
             <DSMenu
               trigger={<DSButton>Basic Menu</DSButton>}
               sections={[
@@ -1988,7 +1990,7 @@ function Demo() {
             />
             
             <DSMenu
-              trigger={<ActionButton><RiMore2Fill size={16} /></ActionButton>}
+              trigger={<ActionIcon><RiMore2Fill size={16} /></ActionIcon>}
               position="bottom-end"
               sections={[
                 {
@@ -2019,7 +2021,7 @@ function Demo() {
                 }
               ]}
             />
-          </Group>
+          </Inline>
         </Stack>
 
         {/* Popover Demo */}
@@ -2029,7 +2031,7 @@ function Demo() {
           {/* Basic Popovers */}
           <Stack gap="sm">
             <Title order={5} size="xs">Basic Popovers</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Popover
                 trigger={<DSButton size="xs">Info (Top)</DSButton>}
                 title="Information"
@@ -2071,13 +2073,13 @@ function Demo() {
                   <DSButton variant="danger" size="xs">Delete</DSButton>
                 </Stack>
               </Popover>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Popovers with Actions */}
           <Stack gap="sm">
             <Title order={5} size="xs">Popovers with Button Actions</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Popover
                 trigger={<DSButton size="xs">Confirm Action</DSButton>}
                 title="Confirm"
@@ -2135,13 +2137,13 @@ function Demo() {
                   <TextArea label="Notes" placeholder="Add notes..." rows={2} size="xs" />
                 </Stack>
               </Popover>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Confirmation Popover Variant */}
           <Stack gap="sm">
             <Title order={5} size="xs">Pre-configured Confirmation Popover</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <ConfirmationPopover
                 trigger={<DSButton variant="danger" size="xs">Delete Item</DSButton>}
                 title="Delete Confirmation"
@@ -2154,7 +2156,7 @@ function Demo() {
               >
                 This action cannot be undone.
               </ConfirmationPopover>
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -2165,7 +2167,7 @@ function Demo() {
           {/* Basic Tooltips */}
           <Stack gap="sm">
             <Title order={5} size="xs">Basic Tooltips - Different Positions</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Tooltip label="This is a tooltip! Rejoice!" position="top">
                 <DSButton size="xs">Top</DSButton>
               </Tooltip>
@@ -2181,13 +2183,13 @@ function Demo() {
               <Tooltip label="Right side tooltip" position="right">
                 <DSButton size="xs">Right</DSButton>
               </Tooltip>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Corner Positions */}
           <Stack gap="sm">
             <Title order={5} size="xs">Corner Positions</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Tooltip label="Top-start position" position="top-start">
                 <DSButton size="xs">Top Start</DSButton>
               </Tooltip>
@@ -2203,13 +2205,13 @@ function Demo() {
               <Tooltip label="Bottom-end position" position="bottom-end">
                 <DSButton size="xs">Bottom End</DSButton>
               </Tooltip>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Different Content Types */}
           <Stack gap="sm">
             <Title order={5} size="xs">Different Content & Styling</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Tooltip 
                 label="This is a longer tooltip that demonstrates multi-line content and how it wraps nicely."
                 width={200}
@@ -2233,13 +2235,13 @@ function Demo() {
               >
                 <DSButton size="xs">No Arrow</DSButton>
               </Tooltip>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* With Delays */}
           <Stack gap="sm">
             <Title order={5} size="xs">With Delays</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Tooltip 
                 label="Shows after 500ms delay"
                 openDelay={500}
@@ -2264,17 +2266,17 @@ function Demo() {
               >
                 <DSButton size="xs">Both Delays</DSButton>
               </Tooltip>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Interactive Elements */}
           <Stack gap="sm">
             <Title order={5} size="xs">On Different Elements</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Tooltip label="Tooltip on icon button">
-                <ActionButton size="xs">
+                <ActionIcon size="xs">
                   <RiEyeLine size={16} />
-                </ActionButton>
+                </ActionIcon>
               </Tooltip>
               
               <Tooltip label="Tooltip on badge">
@@ -2288,7 +2290,7 @@ function Demo() {
               <Tooltip label="Disabled tooltip" disabled>
                 <DSButton size="xs">Disabled Tooltip</DSButton>
               </Tooltip>
-            </Group>
+            </Inline>
           </Stack>
         </Stack>
 
@@ -2301,7 +2303,7 @@ function Demo() {
             <Title order={5} size="xs">All T-Shirt Sizes</Title>
             
             <Stack gap="md">
-              <Group gap="md" align="center">
+              <Inline gap="md" align="center">
                 <Text size="sm" style={{ minWidth: 60 }}>Icon:</Text>
                 <Avatar variant="icon" size="xs" />
                 <Avatar variant="icon" size="sm" />
@@ -2309,9 +2311,9 @@ function Demo() {
                 <Avatar variant="icon" size="lg" />
                 <Avatar variant="icon" size="xl" />
                 <Text size="xs" c="dimmed">xs (16px) → xl (84px)</Text>
-              </Group>
+              </Inline>
               
-              <Group gap="md" align="center">
+              <Inline gap="md" align="center">
                 <Text size="sm" style={{ minWidth: 60 }}>Initials:</Text>
                 <Avatar variant="initials" initials="AB" size="xs" />
                 <Avatar variant="initials" initials="CD" size="sm" />
@@ -2319,9 +2321,9 @@ function Demo() {
                 <Avatar variant="initials" initials="GH" size="lg" />
                 <Avatar variant="initials" initials="JK" size="xl" />
                 <Text size="xs" c="dimmed">Two character initials</Text>
-              </Group>
+              </Inline>
               
-              <Group gap="md" align="center">
+              <Inline gap="md" align="center">
                 <Text size="sm" style={{ minWidth: 60 }}>Image:</Text>
                 <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" alt="User 1" size="xs" />
                 <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png" alt="User 2" size="sm" />
@@ -2329,14 +2331,14 @@ function Demo() {
                 <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-4.png" alt="User 4" size="lg" />
                 <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png" alt="User 5" size="xl" />
                 <Text size="xs" c="dimmed">With profile images</Text>
-              </Group>
+              </Inline>
             </Stack>
           </Stack>
 
           {/* Three Variants */}
           <Stack gap="sm">
             <Title order={5} size="xs">Three Main Variants</Title>
-            <Group gap="lg" align="center">
+            <Inline gap="lg" align="center">
               <Stack gap="xs" align="center">
                 <Avatar variant="icon" size="lg" />
                 <Text size="xs" c="dimmed">Icon (Default)</Text>
@@ -2356,24 +2358,24 @@ function Demo() {
                 />
                 <Text size="xs" c="dimmed">Image</Text>
               </Stack>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Custom Icons */}
           <Stack gap="sm">
             <Title order={5} size="xs">Custom Icons</Title>
-            <Group gap="md">
+            <Inline gap="md">
               <Avatar variant="icon" size="md" />
               <Avatar variant="icon" icon={<RiUserLine />} size="md" />
               <Avatar variant="icon" icon={<RiServerLine />} size="md" />
               <Avatar variant="icon" icon={<RiEyeLine />} size="md" />
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Fallback Behavior */}
           <Stack gap="sm">
             <Title order={5} size="xs">Fallback Behavior</Title>
-            <Group gap="md" align="center">
+            <Inline gap="md" align="center">
               <Stack gap="xs" align="center">
                 <Avatar 
                   variant="image" 
@@ -2405,7 +2407,7 @@ function Demo() {
                 />
                 <Text size="xs" c="dimmed">No URL → Initials</Text>
               </Stack>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Real World Examples */}
@@ -2413,31 +2415,31 @@ function Demo() {
             <Title order={5} size="xs">Real World Usage</Title>
             <Stack gap="md">
               {/* User List Example */}
-              <Group gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
+              <Inline gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
                 <Avatar variant="image" src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" alt="John Doe" size="md" />
                 <Stack gap="0">
                   <Text size="sm" fw={500}>John Doe</Text>
                   <Text size="xs" c="dimmed">john.doe@example.com</Text>
                 </Stack>
-              </Group>
+              </Inline>
               
               {/* Chat Message Example */}
-              <Group gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
+              <Inline gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
                 <Avatar variant="initials" initials="AS" size="sm" />
                 <Stack gap="0">
                   <Text size="sm" fw={500}>Alice Smith</Text>
                   <Text size="sm">Hey! How's the project coming along?</Text>
                 </Stack>
-              </Group>
+              </Inline>
               
               {/* System User Example */}
-              <Group gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
+              <Inline gap="sm" p="sm" style={{ border: '1px solid var(--mantine-color-gray-3)', borderRadius: '8px' }}>
                 <Avatar variant="icon" icon={<RiServerLine />} size="sm" />
                 <Stack gap="0">
                   <Text size="sm" fw={500}>System Notification</Text>
                   <Text size="sm" c="dimmed">Your deployment was successful</Text>
                 </Stack>
-              </Group>
+              </Inline>
             </Stack>
           </Stack>
         </Stack>
@@ -2449,7 +2451,7 @@ function Demo() {
           {/* Basic Cards */}
           <Stack gap="sm">
             <Title order={5} size="xs">Basic Cards</Title>
-            <Group gap="md" align="flex-start">
+            <Inline gap="md" align="flex-start">
               <Card>
                 <Title order={6}>Simple Card</Title>
                 <Text size="sm" c="dimmed">
@@ -2463,13 +2465,13 @@ function Demo() {
                   This card has a medium shadow for elevation.
                 </Text>
               </Card>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Interactive Cards */}
           <Stack gap="sm">
             <Title order={5} size="xs">Interactive Cards</Title>
-            <Group gap="md" align="flex-start">
+            <Inline gap="md" align="flex-start">
               <Card 
                 withShadow 
                 onClick={() => console.log('Card clicked!')}
@@ -2481,12 +2483,12 @@ function Demo() {
                 </Text>
                 <DSButton size="xs" mt="sm">Learn More</DSButton>
               </Card>
-            </Group>
+            </Inline>
           </Stack>
           {/* Image Cards */}
           <Stack gap="sm">
             <Title order={5} size="xs">Cards with Images</Title>
-            <Group gap="md" align="flex-start">
+            <Inline gap="md" align="flex-start">
               {/* Card with full-width image on top */}
               <Card withShadow style={{ width: 300 }} padding="none">
                 {/* Image Section - uses padding="none" on card to allow full-width image */}
@@ -2506,10 +2508,10 @@ function Demo() {
                   <Text size="sm" c="dimmed" mb="sm">
                     Experience breathtaking views and challenging trails in the heart of nature.
                   </Text>
-                  <Group justify="space-between" align="center">
+                  <Inline justify="space-between" align="center">
                     <Badge color="success" variant="outline">Featured</Badge>
                     <Text size="sm" fw={600}>$299</Text>
-                  </Group>
+                  </Inline>
                   <DSButton variant="primary" size="sm" mt="md" fullWidth>
                     Book Now
                   </DSButton>
@@ -2532,24 +2534,24 @@ function Demo() {
                 <Text size="sm" c="dimmed" mb="sm">
                   Discover hidden gems and local culture in vibrant urban landscapes.
                 </Text>
-                <Group justify="space-between" align="center">
+                <Inline justify="space-between" align="center">
                   <Badge color="info" variant="outline">Popular</Badge>
                   <Text size="sm" fw={600}>$149</Text>
-                </Group>
+                </Inline>
                 <DSButton variant="outline" size="sm" mt="md" fullWidth>
                   Learn More
                 </DSButton>
               </Card>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Complex Content Examples */}
           <Stack gap="sm">
             <Title order={5} size="xs">Complex Content</Title>
-            <Group gap="md" align="flex-start">
+            <Inline gap="md" align="flex-start">
               {/* User Profile Card */}
               <Card withShadow style={{ width: 250 }}>
-                <Group gap="sm" mb="md">
+                <Inline gap="sm" mb="md">
                   <Avatar 
                     variant="image" 
                     src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png" 
@@ -2559,32 +2561,32 @@ function Demo() {
                     <Text fw={500}>John Doe</Text>
                     <Text size="sm" c="dimmed">Senior Developer</Text>
                   </Stack>
-                </Group>
+                </Inline>
                 <Text size="sm" mb="md">
                   Passionate about creating beautiful user interfaces and excellent user experiences.
                 </Text>
-                <Group gap="xs">
+                <Inline gap="xs">
                   <DSButton size="xs" variant="primary">Follow</DSButton>
                   <DSButton size="xs" variant="outline">Message</DSButton>
-                </Group>
+                </Inline>
               </Card>
 
               {/* Stats Card */}
               <Card withShadow style={{ width: 250 }}>
                 <Title order={6} mb="md">Project Stats</Title>
                 <Stack gap="sm">
-                  <Group justify="space-between">
+                  <Inline justify="space-between">
                     <Text size="sm">Tasks Completed</Text>
                                          <Badge variant="outline" color="success">24/30</Badge>
-                  </Group>
-                  <Group justify="space-between">
+                  </Inline>
+                  <Inline justify="space-between">
                     <Text size="sm">Team Members</Text>
                     <Text size="sm" fw={500}>8</Text>
-                  </Group>
-                  <Group justify="space-between">
+                  </Inline>
+                  <Inline justify="space-between">
                     <Text size="sm">Progress</Text>
                     <Text size="sm" fw={500}>80%</Text>
-                  </Group>
+                  </Inline>
                   <Progress value={80} size="sm" mt="xs" />
                 </Stack>
               </Card>
@@ -2594,7 +2596,7 @@ function Demo() {
                 variant="outline" 
                 style={{ width: 250, borderColor: 'var(--mantine-color-green-4)' }}
               >
-                <Group gap="sm" mb="md">
+                <Inline gap="sm" mb="md">
                   <div style={{ 
                     padding: '8px', 
                     borderRadius: '6px', 
@@ -2603,13 +2605,13 @@ function Demo() {
                     <RiAddLine size={20} style={{ color: 'var(--mantine-color-green-6)' }} />
                   </div>
                   <Title order={6}>New Feature</Title>
-                </Group>
+                </Inline>
                 <Text size="sm" c="dimmed" mb="md">
                   Enhanced dashboard with real-time analytics and improved performance.
                 </Text>
                                  <Badge color="success" variant="outline">Just Released</Badge>
               </Card>
-            </Group>
+            </Inline>
           </Stack>
 
           {/* Usage Examples */}
@@ -2617,66 +2619,66 @@ function Demo() {
             <Title order={5} size="xs">Real World Usage</Title>
             <Stack gap="md">
               {/* Dashboard Cards Grid */}
-              <Group gap="md" align="flex-start" style={{ flexWrap: 'wrap' }}>
+              <Inline gap="md" align="flex-start" style={{ flexWrap: 'wrap' }}>
                 <Card withShadow style={{ width: 200 }}>
-                  <Group justify="space-between" align="flex-start" mb="sm">
+                  <Inline justify="space-between" align="flex-start" mb="sm">
                     <Stack gap="0">
                       <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Total Users</Text>
                       <Text size="xl" fw={700}>12,543</Text>
                     </Stack>
                                          <Indicator type="success" size={8}><div /></Indicator>
-                  </Group>
+                  </Inline>
                   <Text size="xs" c="green">+12% from last month</Text>
                 </Card>
 
                                  <Card withShadow style={{ width: 200 }}>
-                   <Group justify="space-between" align="flex-start" mb="sm">
+                   <Inline justify="space-between" align="flex-start" mb="sm">
                      <Stack gap="0">
                        <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Revenue</Text>
                        <Text size="xl" fw={700}>$24,680</Text>
                      </Stack>
                      <Indicator type="info" size={8}><div /></Indicator>
-                   </Group>
+                   </Inline>
                    <Text size="xs" c="blue">+8% from last month</Text>
                  </Card>
 
                                   <Card withShadow style={{ width: 200 }}>
-                   <Group justify="space-between" align="flex-start" mb="sm">
+                   <Inline justify="space-between" align="flex-start" mb="sm">
                      <Stack gap="0">
                        <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Orders</Text>
                        <Text size="xl" fw={700}>1,423</Text>
                      </Stack>
                      <Indicator type="pending" size={8}><div /></Indicator>
-                   </Group>
+                   </Inline>
                    <Text size="xs" c="red">-3% from last month</Text>
                  </Card>
-              </Group>
+              </Inline>
 
               {/* List Card */}
               <Card withShadow style={{ maxWidth: 400 }}>
                 <Title order={6} mb="md">Recent Activity</Title>
                 <Stack gap="sm">
-                  <Group gap="sm">
+                  <Inline gap="sm">
                     <Avatar variant="initials" initials="JD" size="sm" />
                     <Stack gap="0" style={{ flex: 1 }}>
                       <Text size="sm" fw={500}>John created a new project</Text>
                       <Text size="xs" c="dimmed">2 minutes ago</Text>
                     </Stack>
-                  </Group>
-                  <Group gap="sm">
+                  </Inline>
+                  <Inline gap="sm">
                     <Avatar variant="initials" initials="AS" size="sm" />
                     <Stack gap="0" style={{ flex: 1 }}>
                       <Text size="sm" fw={500}>Alice updated the design system</Text>
                       <Text size="xs" c="dimmed">1 hour ago</Text>
                     </Stack>
-                  </Group>
-                  <Group gap="sm">
+                  </Inline>
+                  <Inline gap="sm">
                     <Avatar variant="icon" icon={<RiServerLine />} size="sm" />
                     <Stack gap="0" style={{ flex: 1 }}>
                       <Text size="sm" fw={500}>Deployment completed successfully</Text>
                       <Text size="xs" c="dimmed">3 hours ago</Text>
                     </Stack>
-                  </Group>
+                  </Inline>
                 </Stack>
               </Card>
             </Stack>

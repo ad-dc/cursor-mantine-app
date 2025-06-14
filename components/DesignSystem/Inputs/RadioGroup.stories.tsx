@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { RadioGroup } from './RadioGroup';
 import { Radio } from './Radio';
 import { useState } from 'react';
@@ -405,11 +406,11 @@ export const SurveyQuestions: Story = {
           value={answers.recommendation}
           onChange={(val) => setAnswers(prev => ({ ...prev, recommendation: val }))}
         >
-          <Group gap="sm">
+          <Inline gap="sm">
             {Array.from({ length: 11 }, (_, i) => (
               <Radio key={i} value={i.toString()} label={i.toString()} />
             ))}
-          </Group>
+          </Inline>
         </RadioGroup>
         
         <RadioGroup

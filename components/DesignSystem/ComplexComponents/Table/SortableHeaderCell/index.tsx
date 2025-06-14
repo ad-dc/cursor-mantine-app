@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
-import { UnstyledButton, Group, Text, Center, rem } from "@mantine/core";
+import { UnstyledButton,Text, Center, rem } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { IconArrowUp, IconArrowDown, IconArrowsSort } from '@tabler/icons-react';
 import { translate } from '../translations';
 
@@ -41,14 +42,14 @@ const SortableHeaderCell = ({
       disabled={!isSortable}
       aria-label={ariaLabel}
     >
-      <Group justify="space-between">
+      <Inline justify="space-between">
         <Text fw={500} fz="sm">
           {label}
         </Text>
         <Center>
           {renderSortIcon()}
         </Center>
-      </Group>
+      </Inline>
     </UnstyledButton>
   );
 };

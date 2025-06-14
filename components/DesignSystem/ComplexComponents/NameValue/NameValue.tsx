@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, SimpleGrid } from '@mantine/core';
+import { Stack, Grid } from '@/components/DesignSystem';
 import { NameValueItem, NameValueItemProps } from './NameValueItem';
 
 export interface NameValuePair {
@@ -157,9 +157,9 @@ export function NameValue({
   // Use grid layout if columns prop is provided
   if (columns) {
     return (
-      <SimpleGrid cols={columns} spacing={0}>
+      <Grid cols={columns} spacing={0}>
         {allPairs.map((pair, index) => renderPair(pair, index))}
-      </SimpleGrid>
+      </Grid>
     );
   }
   

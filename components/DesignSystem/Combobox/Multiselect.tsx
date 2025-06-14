@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Checkbox, Combobox, Group, Input, Pill as MantinePill, PillsInput, useCombobox, InputWrapper } from '@mantine/core';
+import { Checkbox, Combobox,Input, Pill as MantinePill, PillsInput, useCombobox, InputWrapper } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Pill } from '../DataDisplay/Pill';
 
 const technologies = ['React', 'Vue', 'Angular', 'Node.js', 'Docker', 'Kubernetes', 'AWS', 'MongoDB'];
@@ -81,7 +82,7 @@ export function Multiselect({
 
   const options = normalizedData.map((item) => (
     <Combobox.Option value={item.value} key={item.value} active={value.includes(item.value)}>
-      <Group gap="sm">
+      <Inline gap="sm">
         <Checkbox
           checked={value.includes(item.value)}
           onChange={() => {}} // Handled by onOptionSubmit
@@ -90,7 +91,7 @@ export function Multiselect({
           style={{ pointerEvents: 'none' }}
         />
         <span>{item.label}</span>
-      </Group>
+      </Inline>
     </Combobox.Option>
   ));
 

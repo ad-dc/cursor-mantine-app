@@ -1,19 +1,13 @@
 import React from 'react';
-import {
-  Stack,
-  Group,
-  SimpleGrid,
-  Collapse,
-  rem,
-  Box,
-} from '@mantine/core';
+import { Collapse, rem } from '@mantine/core';
+import { Grid, Inline, Stack, Box } from '@/components/DesignSystem';
 import { Button } from '../../Buttons/Button';
-import { ActionButton } from '../../Buttons/ActionButton';
+import { ActionIcon } from '../../Buttons/ActionIcon';
 import { Badge } from '../../DataDisplay/Badge';
 import { ThemeIcon } from '../../DataDisplay/ThemeIcon';
 import { Text } from '../../Typography/Text';
 import { Title } from '../../Typography/Title';
-import { Paper } from '../../Misc/Paper';
+import { Card } from '../../DataDisplay/Card';
 import { useDisclosure } from '@mantine/hooks';
 import { RiEditLine, RiArrowDownSLine, RiArrowUpSLine } from '@remixicon/react';
 import { KeyInsight, KeyInsightProps } from '../KeyInsights';
@@ -85,14 +79,16 @@ export interface PageContentHeaderProps {
   // Drawer Section
   /** Content to show in expanded drawer */
   drawerContent?: React.ReactNode;
-  /** Text for the "View More" button */
+  /** Text for the button when drawer is closed (e.g., "Show More") */
   drawerLabel?: string;
+  /** Text for the button when drawer is open (e.g., "Show Less") */
+  drawerLabelOpen?: string;
   /** Whether drawer starts open */
   defaultDrawerOpen?: boolean;
   
   // ==================== STYLING ====================
-  /** Additional styling for the paper container */
-  paperProps?: Record<string, any>;
+  /** Additional styling for the card container */
+  cardProps?: Record<string, any>;
   /** Custom spacing */
   spacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
@@ -135,11 +131,12 @@ export function PageContentHeader({
   nameValuePairs = [],
   nameValueColumns = 2,
   drawerContent,
-  drawerLabel = 'View More',
+  drawerLabel = 'Show More',
+  drawerLabelOpen = 'Show Less',
   defaultDrawerOpen = false,
   
   // Styling props
-  paperProps = {},
+  cardProps = {},
   spacing = 'sm',
 }: PageContentHeaderProps) {
   
@@ -148,8 +145,8 @@ export function PageContentHeader({
   // ==================== RENDER FUNCTIONS ==========================
   
   const renderHeader = () => (
-    <Group justify="space-between" align="flex-start">
-      <Group gap="xs" align="flex-start">
+    <Inline justify="space-between" align="flex-start">
+      <Inline gap="xs" align="flex-start">
         {/* Icon */}
         {icon && (
           <ThemeIcon 
@@ -180,7 +177,7 @@ export function PageContentHeader({
         {/* Subhead, Title and Badge */}
         <Stack gap="0" align="flex-start">
           {subhead && (
-            <Group justify="flex-start" align="center" gap="xs">
+            <Inline justify="flex-start" align="center" gap="xs">
               <Text size="md">
                 {subhead}
               </Text>
@@ -189,33 +186,33 @@ export function PageContentHeader({
                   {badge}
                 </Badge>
               )}
-            </Group>
+            </Inline>
           )}
-          <Group gap="xs" align="center">
+          <Inline gap="xs" align="center">
             <Title order={3}>
               {title}
             </Title>
             {editable && (
-              <ActionButton
+              <ActionIcon
                 size="sm"
                 onClick={onEdit}
                 aria-label="Edit title"
                 style={{ marginLeft: rem(4) }}
               >
                 <RiEditLine size={16} />
-              </ActionButton>
+              </ActionIcon>
             )}
-          </Group>
+          </Inline>
         </Stack>
-      </Group>
-    </Group>
+      </Inline>
+    </Inline>
   );
   
   const renderActions = () => {
     if (actions.length === 0) return null;
     
     return (
-      <Group gap="sm">
+      <Inline gap="sm">
         {actions.map((action, index) => (
           <Button
             key={index}
@@ -226,34 +223,33 @@ export function PageContentHeader({
             {action.label}
           </Button>
         ))}
-      </Group>
+      </Inline>
     );
   };
   
   const renderKeyInsights = () => (
-    <Box p={spacing}>
-      <SimpleGrid cols={insights.length} spacing="sm">
+    <Box p={0}>
+      <Grid cols={insights.length} spacing="sm">
         {insights.map((insight, index) => (
           <KeyInsight
             key={index}
             value={insight.value}
             title={insight.title}
             subtitle={insight.subtitle}
-            color={insight.color}
             showBorder={index < insights.length - 1}
           />
         ))}
-      </SimpleGrid>
+      </Grid>
     </Box>
   );
   
   const renderDescription = () => (
     <Box p={spacing}>
-      <Stack gap="sm">
+      <Stack gap="xs">
         {descriptionTitle && (
-          <Text size="lg" fw={500}>
+          <Title order={5}>
             {descriptionTitle}
-          </Text>
+          </Title>
         )}
         {allowLinks ? (
           <Text size="sm" c="dimmed" style={{ lineHeight: 1.6 }}>
@@ -294,25 +290,40 @@ export function PageContentHeader({
   );
   
   const renderDrawer = () => (
-    <Box p={spacing}>
-      <Stack gap="sm">
+    <Box p={0}>
+      <Stack gap={0}>
+        
+        <Collapse in={drawerOpened}>
+          <Box 
+            p={spacing}
+            style={{
+              backgroundColor: 'white', // Light blue background when open
+            }}
+          >
+            {drawerContent}
+          </Box>
+        </Collapse>
+        {/* Special drawer button - no border, no radius, fills space */}
         <Button
-          variant="default"
           onClick={toggleDrawer}
           rightIcon={
             drawerOpened ? <RiArrowUpSLine size={16} /> : <RiArrowDownSLine size={16} />
           }
           fullWidth
           size="sm"
+          style={{
+            border: drawerOpened ? '1px solid var(--mantine-color-gray-4)' : 'none',
+            borderRadius: 0,
+            backgroundColor: drawerOpened 
+              ? 'var(--mantine-color-blue-0)' // Light blue from Alert component
+              : 'var(--mantine-color-gray-0)', // Neutral light grey
+            color: 'var(--mantine-color-dark-9)',
+            transition: 'background-color 0.2s ease',
+          }}
         >
-          {drawerLabel}
+          {drawerOpened ? drawerLabelOpen : drawerLabel}
         </Button>
-        
-        <Collapse in={drawerOpened}>
-          <Box mt="sm">
-            {drawerContent}
-          </Box>
-        </Collapse>
+
       </Stack>
     </Box>
   );
@@ -337,33 +348,24 @@ export function PageContentHeader({
   // ==================== MAIN RENDER ==========================
   
   return (
-    <Paper 
-      variant="border-shadow"
-      {...paperProps}
-    >
-      {/* CORE STACK */}
-      <Stack gap="0">
-        {/* Header Section */}
-        <Stack p={spacing}>
-          <Box>
-            {renderHeader()}
-          </Box>
-          {/* Actions Section */}
-          {actions.length > 0 && (
-            <Box>
-              {renderActions()}
-            </Box>
-          )}
-        </Stack>
-        
-        {/* Content Section - bleeds to edges like Card.Section 
-             Each content type handles its own padding:
-             - insights, description, nameValuePairs, drawer: wrapped with padding
-             - descriptionBlock: bleeds to edges with its own internal padding */}
-        <Box style={{ borderTop: '1px solid var(--mantine-color-gray-4)' }}>
-          {renderContentSection()}
+    <Card {...cardProps}>
+      {/* Header Section */}
+      <Stack gap={spacing}>
+        <Box>
+          {renderHeader()}
         </Box>
+        {/* Actions Section */}
+        {actions.length > 0 && (
+          <Box>
+            {renderActions()}
+          </Box>
+        )}
       </Stack>
-    </Paper>
+      
+      {/* Content Section - uses Card.Section to bleed to edges */}
+      <Card.Section withBorder mt="md">
+        {renderContentSection()}
+      </Card.Section>
+    </Card>
   );
 } 

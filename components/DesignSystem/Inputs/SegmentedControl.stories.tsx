@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { SegmentedControl } from './SegmentedControl';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -81,7 +82,7 @@ export const States: Story = {
 
 export const Orientations: Story = {
   render: () => (
-    <Group gap="xl" align="start">
+    <Inline gap="xl" align="start">
       <div>
         <Text size="sm" fw={500} mb="sm">Horizontal (Default)</Text>
         <SegmentedControl 
@@ -98,7 +99,7 @@ export const Orientations: Story = {
           orientation="vertical"
         />
       </div>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -309,7 +310,7 @@ export const UseCases: Story = {
 
 export const VerticalLayout: Story = {
   render: () => (
-    <Group gap="xl" align="start">
+    <Inline gap="xl" align="start">
       <div>
         <Text size="sm" fw={500} mb="sm">Navigation Menu</Text>
         <SegmentedControl
@@ -339,7 +340,7 @@ export const VerticalLayout: Story = {
           defaultValue="Files"
         />
       </div>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {

@@ -16,9 +16,9 @@
 
 // Import components for category exports
 import { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
-import { Button, ActionButton, CloseButton } from './Buttons';
+import { Button, ActionIcon, CloseButton } from './Buttons';
 import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon } from './DataDisplay';
-import { SearchableSelect, AutocompleteClearable, Multiselect } from './Combobox';
+import { SearchableSelect, AutocompleteClearable, Multiselect, Select } from './Combobox';
 import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
 import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
 import { Kbd, Code, Text, Title } from './Typography';
@@ -29,18 +29,19 @@ import { NameValue, NameValueItem } from './ComplexComponents/NameValue';
 import { CopyButton } from './ComplexComponents/Utilities';
 import { PageContentHeader, DescriptionBlock } from './ComplexComponents/PageContentHeader';
 import { Table } from './ComplexComponents/Table';
+import { DashboardWidget } from './ComplexComponents/DashboardWidget';
 
 // ========================== INPUTS ==========================
 export { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
 export type { DSTextInputProps, DSTextAreaProps, DSNumberInputProps, DSColorInputProps, DSSliderProps, DSSwitchProps, DSSegmentedControlProps, DSCheckboxProps, DSRadioProps, DSRadioGroupProps, DropZoneProps, DSFileInputProps } from './Inputs';
 
 // ========================== BUTTONS ==========================
-export { Button, ActionButton, CloseButton } from './Buttons';
-export type { DSButtonProps, DSActionButtonProps, DSCloseButtonProps } from './Buttons';
+export { Button, ActionIcon, CloseButton } from './Buttons';
+export type { DSButtonProps, DSActionIconProps, DSCloseButtonProps } from './Buttons';
 
 // ========================== COMBOBOX ==========================
-export { SearchableSelect, AutocompleteClearable, Multiselect } from './Combobox';
-export type { DSSearchableSelectProps, DSAutocompleteClearableProps, DSMultiselectProps } from './Combobox';
+export { SearchableSelect, AutocompleteClearable, Multiselect, Select } from './Combobox';
+export type { DSSearchableSelectProps, DSAutocompleteClearableProps, DSMultiselectProps, DSSelectProps } from './Combobox';
 
 // ========================== NAVIGATION ==========================
 export { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
@@ -79,6 +80,8 @@ export { PageContentHeader, DescriptionBlock } from './ComplexComponents/PageCon
 export type { PageContentHeaderProps, ContentSection, DescriptionBlockProps } from './ComplexComponents/PageContentHeader';
 export { Table } from './ComplexComponents/Table';
 export type { TableProps, TableColumn, PageInfo } from './ComplexComponents/Table';
+export { DashboardWidget } from './ComplexComponents/DashboardWidget';
+export type { DashboardWidgetProps, DashboardWidgetLink } from './ComplexComponents/DashboardWidget';
 
 // ========================== CATEGORY EXPORTS ==========================
 // Export components grouped by category for convenient importing
@@ -99,7 +102,7 @@ export const Inputs = {
 
 export const Buttons = {
   Button,
-  ActionButton,
+  ActionIcon,
   CloseButton,
 };
 
@@ -107,6 +110,7 @@ export const Combobox = {
   SearchableSelect,
   AutocompleteClearable,
   Multiselect,
+  Select,
 };
 
 export const Navigation = {
@@ -168,6 +172,7 @@ export const ComplexComponents = {
   PageContentHeader,
   DescriptionBlock,
   Table,
+  DashboardWidget,
 };
 
 // Placeholder export to prevent empty module errors

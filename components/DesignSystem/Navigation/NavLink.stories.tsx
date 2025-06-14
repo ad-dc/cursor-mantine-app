@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Paper } from '@mantine/core';
+import { Stack, Paper } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { NavLink } from './NavLink';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';

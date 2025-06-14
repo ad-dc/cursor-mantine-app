@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Tabs } from './Tabs';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -518,7 +519,7 @@ export const ControlledTabs: Story = {
           <div style={{ padding: '16px' }}>
             <Title order={4} size="sm" fw={500} mb="sm">Step 1: Basic Information</Title>
             <Text mb="md">Enter your basic information to get started.</Text>
-            <Group gap="sm">
+            <Inline gap="sm">
               <button 
                 onClick={() => setActiveTab('step2')}
                 style={{
@@ -532,7 +533,7 @@ export const ControlledTabs: Story = {
               >
                 Next Step
               </button>
-            </Group>
+            </Inline>
           </div>
         ),
       },
@@ -545,7 +546,7 @@ export const ControlledTabs: Story = {
           <div style={{ padding: '16px' }}>
             <Title order={4} size="sm" fw={500} mb="sm">Step 2: Preferences</Title>
             <Text mb="md">Configure your preferences and settings.</Text>
-            <Group gap="sm">
+            <Inline gap="sm">
               <button 
                 onClick={() => setActiveTab('step1')}
                 style={{
@@ -572,7 +573,7 @@ export const ControlledTabs: Story = {
               >
                 Next Step
               </button>
-            </Group>
+            </Inline>
           </div>
         ),
       },
@@ -585,7 +586,7 @@ export const ControlledTabs: Story = {
           <div style={{ padding: '16px' }}>
             <Title order={4} size="sm" fw={500} mb="sm">Step 3: Review</Title>
             <Text mb="md">Review your information and complete the process.</Text>
-            <Group gap="sm">
+            <Inline gap="sm">
               <button 
                 onClick={() => setActiveTab('step2')}
                 style={{
@@ -612,7 +613,7 @@ export const ControlledTabs: Story = {
               >
                 Complete
               </button>
-            </Group>
+            </Inline>
           </div>
         ),
       },

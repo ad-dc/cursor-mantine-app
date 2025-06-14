@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { AutocompleteClearable } from './AutocompleteClearable';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';

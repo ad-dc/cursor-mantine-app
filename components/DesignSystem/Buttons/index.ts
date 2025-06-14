@@ -7,8 +7,8 @@
 export { Button } from './Button';
 export type { DSButtonProps } from './Button';
 
-export { ActionButton } from './ActionButton';
-export type { DSActionButtonProps } from './ActionButton';
+export { ActionIcon } from './ActionIcon';
+export type { DSActionIconProps } from './ActionIcon';
 
 export { CloseButton } from './CloseButton';
 export type { DSCloseButtonProps } from './CloseButton';

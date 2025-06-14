@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Box } from '@mantine/core';
+import { Stack, Box } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Badge } from '../DataDisplay/Badge';
 import { Indicator } from './Indicator';
 import { useState } from 'react';
@@ -85,7 +86,7 @@ export const Default: Story = {
 
 export const Types: Story = {
   render: () => (
-    <Group gap="xl">
+    <Inline gap="xl">
       <Indicator type="default" size={12}>
         <Avatar variant="initials" initials="D" />
       </Indicator>
@@ -101,7 +102,7 @@ export const Types: Story = {
       <Indicator type="pending" size={12}>
         <Avatar variant="initials" initials="P" />
       </Indicator>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -114,7 +115,7 @@ export const Types: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <Group gap="xl">
+    <Inline gap="xl">
       <Indicator type="info" size={8}>
         <Avatar variant="initials" initials="8px" />
       </Indicator>
@@ -130,7 +131,7 @@ export const Sizes: Story = {
       <Indicator type="info" size={24}>
         <Avatar variant="initials" initials="24px" />
       </Indicator>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -144,10 +145,10 @@ export const Sizes: Story = {
 export const Positions: Story = {
   render: () => (
     <Stack gap="lg">
-      <Group gap="xl">
+      <Inline gap="xl">
         <div>
           <Text size="sm" fw={500} mb="sm">Top Positions:</Text>
-          <Group gap="md">
+          <Inline gap="md">
             <Indicator type="danger" position="top-start" size={12}>
               <Avatar variant="initials" initials="TS" />
             </Indicator>
@@ -157,14 +158,14 @@ export const Positions: Story = {
             <Indicator type="danger" position="top-end" size={12}>
               <Avatar variant="initials" initials="TE" />
             </Indicator>
-          </Group>
+          </Inline>
         </div>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <div>
           <Text size="sm" fw={500} mb="sm">Middle Positions:</Text>
-          <Group gap="md">
+          <Inline gap="md">
             <Indicator type="success" position="middle-start" size={12}>
               <Avatar variant="initials" initials="MS" />
             </Indicator>
@@ -174,14 +175,14 @@ export const Positions: Story = {
             <Indicator type="success" position="middle-end" size={12}>
               <Avatar variant="initials" initials="ME" />
             </Indicator>
-          </Group>
+          </Inline>
         </div>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <div>
           <Text size="sm" fw={500} mb="sm">Bottom Positions:</Text>
-          <Group gap="md">
+          <Inline gap="md">
             <Indicator type="info" position="bottom-start" size={12}>
               <Avatar variant="initials" initials="BS" />
             </Indicator>
@@ -191,9 +192,9 @@ export const Positions: Story = {
             <Indicator type="info" position="bottom-end" size={12}>
               <Avatar variant="initials" initials="BE" />
             </Indicator>
-          </Group>
+          </Inline>
         </div>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -207,7 +208,7 @@ export const Positions: Story = {
 
 export const WithCounts: Story = {
   render: () => (
-    <Group gap="xl">
+    <Inline gap="xl">
       <Indicator type="danger" count={1} size={16}>
         <Button variant="outline">Messages</Button>
       </Indicator>
@@ -223,7 +224,7 @@ export const WithCounts: Story = {
       <Indicator type="danger" count={999} size={24}>
         <Button variant="outline">Items</Button>
       </Indicator>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -236,7 +237,7 @@ export const WithCounts: Story = {
 
 export const WithLabels: Story = {
   render: () => (
-    <Group gap="xl">
+    <Inline gap="xl">
       <Indicator type="success" label="✓" size={16}>
         <Avatar variant="initials" initials="OK" />
       </Indicator>
@@ -252,7 +253,7 @@ export const WithLabels: Story = {
       <Indicator type="info" label="NEW" size={20}>
         <Button variant="outline">Feature</Button>
       </Indicator>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -266,7 +267,7 @@ export const WithLabels: Story = {
 export const WithBorders: Story = {
   render: () => (
     <Stack gap="md">
-      <Group gap="xl">
+      <Inline gap="xl">
         <Text size="sm" fw={500}>Without Border:</Text>
         <Indicator type="success" size={16}>
           <Avatar variant="initials" initials="NB" />
@@ -274,9 +275,9 @@ export const WithBorders: Story = {
         <Indicator type="danger" count={5} size={16}>
           <Button variant="danger">No Border</Button>
         </Indicator>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <Text size="sm" fw={500}>With Border:</Text>
         <Indicator type="success" withBorder size={16}>
           <Avatar variant="initials" initials="WB" />
@@ -284,9 +285,9 @@ export const WithBorders: Story = {
         <Indicator type="danger" count={5} withBorder size={16}>
           <Button variant="primary">With Border</Button>
         </Indicator>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <Text size="sm" fw={500}>With Outline:</Text>
         <Indicator type="success" withOutline size={16}>
           <Avatar variant="initials" initials="WO" />
@@ -294,7 +295,7 @@ export const WithBorders: Story = {
         <Indicator type="danger" count={5} withOutline size={16}>
           <Button variant="primary">With Border</Button>
         </Indicator>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -308,7 +309,7 @@ export const WithBorders: Story = {
 
 export const ProcessingStates: Story = {
   render: () => (
-    <Group gap="xl">
+    <Inline gap="xl">
       <Indicator type="pending" processing size={12}>
         <Avatar variant="initials" initials="PR" />
       </Indicator>
@@ -323,7 +324,7 @@ export const ProcessingStates: Story = {
           <RiAccessibilityLine size={40} color="var(--mantine-color-blue-5)" />
         </ThemeIcon>
       </Indicator>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -337,7 +338,7 @@ export const ProcessingStates: Story = {
 export const States: Story = {
   render: () => (
     <Stack gap="md">
-      <Group gap="xl">
+      <Inline gap="xl">
         <Text size="sm" fw={500}>Normal:</Text>
         <Indicator type="info" count={5} size={16}>
           <Button variant="outline">Normal</Button>
@@ -345,9 +346,9 @@ export const States: Story = {
         <Indicator type="success" size={12}>
           <Avatar variant="initials" initials="N" />
         </Indicator>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <Text size="sm" fw={500}>Disabled:</Text>
         <Indicator type="info" count={5} disabled size={16}>
           <Button variant="outline">Disabled</Button>
@@ -355,7 +356,7 @@ export const States: Story = {
         <Indicator type="success" disabled size={12}>
           <Avatar variant="initials" initials="D" />
         </Indicator>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -377,7 +378,7 @@ export const NotificationExamples: Story = {
       <Stack gap="lg" w={400}>
         <Title order={3} size="md" fw={500}>Notification Examples</Title>
         
-        <Group gap="md">
+        <Inline gap="md">
           <Indicator type="danger" count={messageCount} disabled={messageCount === 0} size={16}>
             <Button 
               variant="outline" 
@@ -404,9 +405,9 @@ export const NotificationExamples: Story = {
               Status
             </Button>
           </Indicator>
-        </Group>
+        </Inline>
         
-        <Group gap="sm">
+        <Inline gap="sm">
           <Button 
             size="xs" 
             variant="secondary" 
@@ -432,7 +433,7 @@ export const NotificationExamples: Story = {
           >
             Clear All
           </Button>
-        </Group>
+        </Inline>
       </Stack>
     );
   },
@@ -451,7 +452,7 @@ export const UseCases: Story = {
       <Title order={3} size="md" fw={500} mb="xs">Common Use Cases</Title>
       <Box>
         <Text size="sm" fw={500} mb="sm">1. User Status Indicators:</Text>
-        <Group gap="lg">
+        <Inline gap="lg">
           <Indicator type="success" label="online" size={20}>
             <Avatar variant="initials" initials="JD" />
           </Indicator>
@@ -461,12 +462,12 @@ export const UseCases: Story = {
           <Indicator type="default" label="disabled" size={20}>
             <Avatar variant="initials" initials="MJ" />
           </Indicator>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="sm">2. Notification Badges:</Text>
-        <Group gap="md">
+        <Inline gap="md">
           <Indicator type="danger" count={12} size={18}>
             <Button variant="outline">Inbox</Button>
           </Indicator>
@@ -476,12 +477,12 @@ export const UseCases: Story = {
           <Indicator type="success" label="NEW" size={18}>
             <Button variant="outline">Features</Button>
           </Indicator>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="sm">3. Status Indicators:</Text>
-        <Group gap="md">
+        <Inline gap="md">
           <Indicator type="success" label="✓" size={16}>
             <Badge variant="outline" color="success" size="md">
               Completed Task
@@ -497,7 +498,7 @@ export const UseCases: Story = {
               Processing
             </Badge>
           </Indicator>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
@@ -529,7 +530,7 @@ export const UseCases: Story = {
 export const MinimumSizeDemo: Story = {
   render: () => (
     <Stack gap="lg">
-      <Group gap="xl">
+      <Inline gap="xl">
         <Text size="sm" fw={500}>Dots (no content) - Always circular:</Text>
         <Indicator type="danger" size={4}>
           <Avatar variant="initials" initials="T1" />
@@ -543,7 +544,7 @@ export const MinimumSizeDemo: Story = {
         <Indicator type="pending" size={12}>
           <Avatar variant="initials" initials="T4" />
         </Indicator>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {

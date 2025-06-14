@@ -1,5 +1,6 @@
 import React from 'react';
-import { SimpleGrid, Box, Alert } from '@mantine/core';
+import { Box, Alert } from '@mantine/core';
+import { Grid } from '@/components/DesignSystem';
 import { IconAlertCircle } from '@tabler/icons-react';
 import FilterRenderer from './FilterRenderer';
 import { translate } from '../../translations';
@@ -116,7 +117,7 @@ const FilterSystem: React.FC<FilterSystemConfig> = ({
   
   return (
     <Box>
-      <SimpleGrid 
+      <Grid 
         cols={Math.min(columns, limitedFilters.length)} 
         spacing="xs"
         role="region"
@@ -136,7 +137,7 @@ const FilterSystem: React.FC<FilterSystemConfig> = ({
             />
           );
         })}
-      </SimpleGrid>
+      </Grid>
       
       {filters.length > maxFilters && (
         <Alert 

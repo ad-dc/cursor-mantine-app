@@ -1,5 +1,6 @@
 import React from 'react';
-import { Group, Stack } from '@mantine/core';
+import { Stack } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem';
 import { Text } from '../../Typography/Text';
 import { CopyButton } from '../Utilities/CopyButton';
 
@@ -77,7 +78,7 @@ export function NameValueItem({
       <Text size={labelSize} c={nameColor}>
         {name}
       </Text>
-      <Group gap="xs" align="center">
+      <Inline gap="xs" align="center">
         <Text 
           size={valueSize} 
           fw={valueWeight}
@@ -93,7 +94,7 @@ export function NameValueItem({
             iconSize={copyIconSize}
           />
         )}
-      </Group>
+      </Inline>
     </Stack>
   );
 } 

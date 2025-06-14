@@ -11,4 +11,7 @@ export { AutocompleteClearable } from './AutocompleteClearable';
 export type { DSAutocompleteClearableProps } from './AutocompleteClearable';
 
 export { Multiselect } from './Multiselect';
-export type { DSMultiselectProps } from './Multiselect'; 
+export type { DSMultiselectProps } from './Multiselect';
+
+export { Select } from './Select';
+export type { DSSelectProps } from './Select'; 

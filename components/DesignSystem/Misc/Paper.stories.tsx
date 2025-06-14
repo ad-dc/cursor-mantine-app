@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Paper } from './Paper';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
@@ -9,7 +10,7 @@ import { Divider } from './Divider';
 
 const meta: Meta<typeof Paper> = {
   title: 'Design System/Misc/Paper',
-  component: Paper,
+  component: Paper, 
   parameters: {
     layout: 'centered',
     docs: {
@@ -195,7 +196,7 @@ export const WithRadius: Story = {
 
 export const AsCards: Story = {
   render: () => (
-    <Group gap="lg" align="flex-start">
+    <Inline gap="lg" align="flex-start">
       <Paper variant="shadow" style={{ width: 250 }}>
         <Title order={4} size="sm" fw={500} mb="sm">Product Card</Title>
         <div style={{
@@ -212,18 +213,18 @@ export const AsCards: Story = {
         </div>
         <Text size="sm" mb="xs">Premium Wireless Headphones</Text>
         <Text size="xs" c="dimmed" mb="sm">High-quality audio with noise cancellation</Text>
-        <Group gap="xs" justify="space-between" align="center">
+        <Inline gap="xs" justify="space-between" align="center">
           <Text size="lg" fw={600}>$199.99</Text>
           <Button variant="primary" size="xs">Add to Cart</Button>
-        </Group>
+        </Inline>
       </Paper>
       
       <Paper variant="border" style={{ width: 250 }}>
-        <Group gap="xs" justify="space-between" align="flex-start" mb="sm">
+        <Inline gap="xs" justify="space-between" align="flex-start" mb="sm">
           <Title order={4} size="sm" fw={500}>User Profile</Title>
           <Badge variant="filled" color="green">Online</Badge>
-        </Group>
-        <Group gap="sm" mb="sm">
+        </Inline>
+        <Inline gap="sm" mb="sm">
           <div style={{
             width: 40,
             height: 40,
@@ -242,31 +243,31 @@ export const AsCards: Story = {
             <Text size="sm" fw={500}>John Doe</Text>
             <Text size="xs" c="dimmed">Software Engineer</Text>
           </div>
-        </Group>
+        </Inline>
         <Text size="xs" c="dimmed" mb="sm">
           Passionate about creating great user experiences and building scalable applications.
         </Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Button variant="outline" size="xs">View Profile</Button>
           <Button variant="outline" size="xs">Message</Button>
-        </Group>
+        </Inline>
       </Paper>
       
       <Paper variant="border-shadow" style={{ width: 250 }}>
-        <Group gap="xs" justify="space-between" align="center" mb="sm">
+        <Inline gap="xs" justify="space-between" align="center" mb="sm">
           <Title order={4} size="sm" fw={500}>Notification</Title>
           <Text size="xs" c="dimmed">2 min ago</Text>
-        </Group>
+        </Inline>
         <Text size="sm" mb="sm">
           Your order #12345 has been shipped and is on its way to your address.
         </Text>
         <Divider mb="sm" />
-        <Group gap="xs" justify="flex-end">
+        <Inline gap="xs" justify="flex-end">
           <Button variant="outline" size="xs">Dismiss</Button>
           <Button variant="primary" size="xs">Track Order</Button>
-        </Group>
+        </Inline>
       </Paper>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -285,7 +286,7 @@ export const NestedPapers: Story = {
       <Stack gap="md">
         <Paper variant="shadow" p="md">
           <Title order={4} size="sm" fw={500} mb="sm">Statistics</Title>
-          <Group gap="lg">
+          <Inline gap="lg">
             <div>
               <Text size="xl" fw={700} c="blue">1,234</Text>
               <Text size="xs" c="dimmed">Total Users</Text>
@@ -298,10 +299,10 @@ export const NestedPapers: Story = {
               <Text size="xl" fw={700} c="orange">$12,345</Text>
               <Text size="xs" c="dimmed">Revenue</Text>
             </div>
-          </Group>
+          </Inline>
         </Paper>
         
-        <Group gap="md" align="flex-start">
+        <Inline gap="md" align="flex-start">
           <Paper variant="border" p="md" style={{ flex: 1 }}>
             <Title order={4} size="sm" fw={500} mb="sm">Recent Activity</Title>
             <Stack gap="xs">
@@ -319,7 +320,7 @@ export const NestedPapers: Story = {
               <Button variant="outline" size="sm" fullWidth>View Analytics</Button>
             </Stack>
           </Paper>
-        </Group>
+        </Inline>
       </Stack>
     </Paper>
   ),
@@ -360,41 +361,41 @@ export const ContentContainers: Story = {
         
         <Divider mb="md" />
         
-        <Group gap="sm">
+        <Inline gap="sm">
           <Badge variant="outline">React</Badge>
           <Badge variant="outline">TypeScript</Badge>
           <Badge variant="outline">Design Systems</Badge>
-        </Group>
+        </Inline>
       </Paper>
       
       <Paper variant="shadow" p="md">
-        <Group gap="sm" justify="space-between" align="center" mb="sm">
+        <Inline gap="sm" justify="space-between" align="center" mb="sm">
           <Title order={4} size="sm" fw={500}>Comments (3)</Title>
           <Button variant="outline" size="xs">Add Comment</Button>
-        </Group>
+        </Inline>
         
         <Stack gap="sm">
           <Paper variant="border" p="sm">
-            <Group gap="xs" mb="xs">
+            <Inline gap="xs" mb="xs">
               <Text size="sm" fw={500}>Alice Johnson</Text>
               <Text size="xs" c="dimmed">2 hours ago</Text>
-            </Group>
+            </Inline>
             <Text size="sm">Great article! This really helped me understand the concepts better.</Text>
           </Paper>
           
           <Paper variant="border" p="sm">
-            <Group gap="xs" mb="xs">
+            <Inline gap="xs" mb="xs">
               <Text size="sm" fw={500}>Bob Smith</Text>
               <Text size="xs" c="dimmed">1 day ago</Text>
-            </Group>
+            </Inline>
             <Text size="sm">Thanks for sharing this. Do you have any examples of implementation?</Text>
           </Paper>
           
           <Paper variant="border" p="sm">
-            <Group gap="xs" mb="xs">
+            <Inline gap="xs" mb="xs">
               <Text size="sm" fw={500}>Carol Wilson</Text>
               <Text size="xs" c="dimmed">2 days ago</Text>
-            </Group>
+            </Inline>
             <Text size="sm">Excellent explanation! Looking forward to more content like this.</Text>
           </Paper>
         </Stack>
@@ -467,22 +468,22 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">2. Information Panels:</Text>
-        <Group gap="md" align="flex-start">
+        <Inline gap="md" align="flex-start">
           <Paper variant="shadow" p="md" style={{ width: 200 }}>
             <Title order={4} size="sm" fw={500} mb="sm">System Status</Title>
             <Stack gap="xs">
-              <Group gap="xs" justify="space-between">
+              <Inline gap="xs" justify="space-between">
                 <Text size="sm">API</Text>
                 <Badge variant="filled" color="green">Online</Badge>
-              </Group>
-              <Group gap="xs" justify="space-between">
+              </Inline>
+              <Inline gap="xs" justify="space-between">
                 <Text size="sm">Database</Text>
                 <Badge variant="filled" color="green">Online</Badge>
-              </Group>
-              <Group gap="xs" justify="space-between">
+              </Inline>
+              <Inline gap="xs" justify="space-between">
                 <Text size="sm">Cache</Text>
                 <Badge variant="filled" color="yellow">Warning</Badge>
-              </Group>
+              </Inline>
             </Stack>
           </Paper>
           
@@ -503,7 +504,7 @@ export const UseCases: Story = {
               </div>
             </Stack>
           </Paper>
-        </Group>
+        </Inline>
       </div>
       
       <div>

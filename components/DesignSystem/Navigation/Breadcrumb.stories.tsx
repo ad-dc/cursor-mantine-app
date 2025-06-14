@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Breadcrumb, BackBreadcrumb } from './Breadcrumb';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -451,7 +452,7 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">4. Back Navigation:</Text>
-        <Group gap="lg">
+        <Inline gap="lg">
           <BackBreadcrumb 
             label="Back to Search Results" 
             onClick={() => console.log('Back to search')} 
@@ -460,7 +461,7 @@ export const UseCases: Story = {
             label="Back" 
             onClick={() => console.log('Go back')} 
           />
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),

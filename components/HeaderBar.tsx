@@ -1,9 +1,10 @@
-import { Group, ThemeIcon, Title } from '@mantine/core';
+import { ThemeIcon, Title } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import Image from 'next/image';
 
 export function HeaderBar() {
   return (
-    <Group h="100%" px="xl" gap="lg">
+    <Inline h="100%" px="xl" gap="lg">
       <ThemeIcon variant="transparent" size="lg" color="white">
         <i className="ri-grid-fill" style={{ fontSize: 28 }} />
       </ThemeIcon>
@@ -13,6 +14,6 @@ export function HeaderBar() {
       <Title order={1} c="white" fw={300} fz={22} ml={12}>
         Prototype Name
       </Title>
-    </Group>
+    </Inline>
   );
 } 

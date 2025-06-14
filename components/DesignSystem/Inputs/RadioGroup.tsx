@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { Radio as MantineRadio, RadioGroupProps as MantineRadioGroupProps } from '@mantine/core';
+import { Radio as MantineRadio, Radio,Props as MantineRadioGroupProps } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { ComponentSize } from '../config';
 
 /**

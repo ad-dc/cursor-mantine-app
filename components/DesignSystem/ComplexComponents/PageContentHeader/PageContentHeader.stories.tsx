@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack, Inline} from '@/components/DesignSystem';
 import { PageContentHeader } from './PageContentHeader';
 import { useState } from 'react';
 import { Title } from '../../Typography/Title';
 import { Text } from '../../Typography/Text';
-import { Button } from '../../Buttons/Button';
 import { Card } from '../../DataDisplay/Card';
+import { NameValue } from '../NameValue';
 import { 
   RiUserLine, 
   RiSettingsLine, 
@@ -58,6 +58,14 @@ const meta: Meta<typeof PageContentHeader> = {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
       description: 'Custom spacing',
     },
+    drawerLabel: {
+      control: 'text',
+      description: 'Text for the button when drawer is closed',
+    },
+    drawerLabelOpen: {
+      control: 'text',
+      description: 'Text for the button when drawer is open',
+    },
   },
 };
 
@@ -77,7 +85,7 @@ export const Default: Story = {
 
 export const WithKeyInsights: Story = {
   render: () => (
-    <Stack gap="lg" w={800}>
+    <Stack gap="lg">
       <PageContentHeader
         title="Analytics Dashboard"
         subhead="Performance Metrics"
@@ -88,26 +96,22 @@ export const WithKeyInsights: Story = {
           {
             value: "1,247",
             title: "Total Users",
-            subtitle: "+12% from last month",
-            color: "blue"
+            subtitle: "+12% from last month"
           },
           {
             value: "89.2%",
             title: "Success Rate",
-            subtitle: "+2.1% improvement",
-            color: "green"
+            subtitle: "+2.1% improvement"
           },
           {
             value: "245ms",
             title: "Avg Response",
-            subtitle: "-15ms faster",
-            color: "orange"
+            subtitle: "-15ms faster"
           },
           {
             value: "$12,450",
             title: "Revenue",
-            subtitle: "+8.5% growth",
-            color: "teal"
+            subtitle: "+8.5% growth"
           }
         ]}
         actions={[
@@ -128,7 +132,7 @@ export const WithKeyInsights: Story = {
 
 export const UserProfile: Story = {
   render: () => (
-    <Stack gap="lg" w={700}>
+    <Stack gap="lg">
       <PageContentHeader
         title="John Doe"
         subhead="Senior Developer"
@@ -167,7 +171,7 @@ export const UserProfile: Story = {
 
 export const ProjectOverview: Story = {
   render: () => (
-    <Stack gap="lg" w={800}>
+    <Stack gap="lg">
       <PageContentHeader
         title="E-commerce Platform"
         subhead="Project Overview"
@@ -198,45 +202,33 @@ export const SystemStatus: Story = {
     const [drawerOpen, setDrawerOpen] = useState(false);
     
     return (
-      <Stack gap="lg" w={800}>
+      <Stack gap="lg">
         <PageContentHeader
           title="System Health"
           subhead="Infrastructure Status"
           badge="Operational"
           icon={<RiShieldLine />}
           contentSection="drawer"
-          drawerLabel="View Detailed Metrics"
+          drawerLabel="Show Detailed Metrics"
+          drawerLabelOpen="Hide Detailed Metrics"
           defaultDrawerOpen={drawerOpen}
           drawerContent={
-            <Stack gap="md">
-              <Title order={4} size="sm">Detailed System Metrics</Title>
-              <Group gap="lg">
-                <Card>
-                  <Stack gap="xs">
-                    <Text size="xs" c="dimmed">CPU Usage</Text>
-                    <Text size="lg" fw={600} c="blue">45.2%</Text>
-                    <Text size="xs" c="green">Normal</Text>
-                  </Stack>
-                </Card>
-                <Card>
-                  <Stack gap="xs">
-                    <Text size="xs" c="dimmed">Memory</Text>
-                    <Text size="lg" fw={600} c="orange">78.5%</Text>
-                    <Text size="xs" c="orange">High</Text>
-                  </Stack>
-                </Card>
-                <Card>
-                  <Stack gap="xs">
-                    <Text size="xs" c="dimmed">Disk I/O</Text>
-                    <Text size="lg" fw={600} c="green">23.1%</Text>
-                    <Text size="xs" c="green">Low</Text>
-                  </Stack>
-                </Card>
-              </Group>
-              <Text size="sm" c="dimmed">
-                Last updated: 2 minutes ago
-              </Text>
-            </Stack>
+            <NameValue 
+              pairs={[
+                { name: "CPU Usage", value: "45.2%" },
+                { name: "Memory Usage", value: "78.5%" },
+                { name: "Disk I/O", value: "23.1%" },
+                { name: "Network Traffic", value: "156 MB/s" },
+                { name: "Active Connections", value: "1,247" },
+                { name: "Uptime", value: "15 days, 4 hours" },
+                { name: "Last Restart", value: "March 15, 2024" },
+                { name: "Status", value: "Operational" }
+              ]}
+              columns={2}
+              spacing="sm"
+              labelSize="xs"
+              valueSize="sm"
+            />
           }
           actions={[
             { label: 'View Logs', onClick: () => console.log('Logs'), variant: 'outline' },
@@ -257,7 +249,7 @@ export const SystemStatus: Story = {
 
 export const TeamDashboard: Story = {
   render: () => (
-    <Stack gap="lg" w={800}>
+    <Stack gap="lg">
       <PageContentHeader
         title="Engineering Team"
         subhead="Team Dashboard"
@@ -269,19 +261,16 @@ export const TeamDashboard: Story = {
             value: "23",
             title: "Active Tasks",
             subtitle: "Across 5 projects",
-            color: "blue"
           },
           {
             value: "87%",
             title: "Sprint Progress",
             subtitle: "3 days remaining",
-            color: "green"
           },
           {
             value: "4.2",
             title: "Avg Story Points",
             subtitle: "Per developer",
-            color: "purple"
           }
         ]}
         actions={[
@@ -303,7 +292,7 @@ export const TeamDashboard: Story = {
 
 export const DatabaseManagement: Story = {
   render: () => (
-    <Stack gap="lg" w={700}>
+    <Stack gap="lg">
       <PageContentHeader
         title="Production Database"
         subhead="PostgreSQL Cluster"
@@ -340,7 +329,7 @@ export const DatabaseManagement: Story = {
 
 export const ApplicationSettings: Story = {
   render: () => (
-    <Stack gap="lg" w={800}>
+    <Stack gap="lg">
       <PageContentHeader
         title="Application Settings"
         subhead="Configuration"
@@ -368,7 +357,7 @@ export const ApplicationSettings: Story = {
 
 export const APIDocumentation: Story = {
   render: () => (
-    <Stack gap="lg" w={800}>
+    <Stack gap="lg">
       <PageContentHeader
         title="REST API v2.1"
         subhead="API Documentation"
@@ -397,7 +386,7 @@ export const APIDocumentation: Story = {
 
 export const CloudInfrastructure: Story = {
   render: () => (
-    <Stack gap="lg" w={800}>
+    <Stack gap="lg">
       <PageContentHeader
         title="AWS Infrastructure"
         subhead="Cloud Resources"
@@ -409,25 +398,21 @@ export const CloudInfrastructure: Story = {
             value: "12",
             title: "EC2 Instances",
             subtitle: "Running",
-            color: "blue"
           },
           {
             value: "$1,247",
             title: "Monthly Cost",
             subtitle: "Current billing",
-            color: "orange"
           },
           {
             value: "99.9%",
             title: "Uptime",
             subtitle: "Last 30 days",
-            color: "green"
           },
           {
             value: "3",
             title: "Regions",
             subtitle: "Active deployments",
-            color: "purple"
           }
         ]}
         actions={[
@@ -449,7 +434,7 @@ export const CloudInfrastructure: Story = {
 
 export const DocumentationPage: Story = {
   render: () => (
-    <Stack gap="lg" w={800}>
+    <Stack gap="lg">
       <PageContentHeader
         title="Component Library"
         subhead="Design System Documentation"

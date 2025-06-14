@@ -1,5 +1,6 @@
 import React, { ReactElement, useMemo } from "react";
-import { Group, Select, Text, rem, ActionIcon } from "@mantine/core";
+import { Select, rem, ActionIcon, Text } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import {
   MRT_TableInstance as MRTTableInstance,
   MRT_RowData,
@@ -105,12 +106,12 @@ const CustomBottomToolbar = <T extends MRT_RowData>({
   const canGoNext = pageIndex < totalPages - 1;
 
   return (
-    <Group 
+    <Inline 
       justify="space-between" 
       style={TOOLBAR_STYLES.container}
     >
       {/* Left section - Rows per page selector */}
-      <Group gap="xs">
+      <Inline gap="xs">
         <Text size="sm">
           {translate("table.rows.per.page")}
         </Text>
@@ -125,20 +126,20 @@ const CustomBottomToolbar = <T extends MRT_RowData>({
           }}
           aria-label={translate("table.rows.per.page")}
         />
-      </Group>
+      </Inline>
       
       {/* Middle section - Selected rows indicator */}
       
-      <Group gap="xs">
+      <Inline gap="xs">
         {selectedRowsText && (
           <Text size="sm">
             {selectedRowsText}
           </Text>
         )}
-      </Group>
+      </Inline>
 
       {/* Right section - Page navigation */}
-      <Group gap="xs">
+      <Inline gap="xs">
         <ActionIcon
           variant="subtle"
           color="gray"
@@ -167,9 +168,9 @@ const CustomBottomToolbar = <T extends MRT_RowData>({
         >
           <RiArrowRightSLine size={16} />
         </ActionIcon>
-      </Group>
+      </Inline>
 
-    </Group>
+    </Inline>
   );
 };
 

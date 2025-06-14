@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Button as MantineButton } from '@mantine/core';
+import { Stack, Button as MantineButton } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Drawer } from './Drawer';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -93,7 +94,7 @@ export const Positions: Story = {
     
     return (
       <>
-        <Group gap="sm">
+        <Inline gap="sm">
           {positions.map(({ key, label }) => (
             <MantineButton 
               key={key}
@@ -103,7 +104,7 @@ export const Positions: Story = {
               {label}
             </MantineButton>
           ))}
-        </Group>
+        </Inline>
         
         {positions.map(({ key, label }) => (
           <Drawer
@@ -136,7 +137,7 @@ export const Sizes: Story = {
     
     return (
       <>
-        <Group gap="sm">
+        <Inline gap="sm">
           {sizes.map(size => (
             <MantineButton 
               key={size}
@@ -146,7 +147,7 @@ export const Sizes: Story = {
               {size.toUpperCase()}
             </MantineButton>
           ))}
-        </Group>
+        </Inline>
         
         {sizes.map(size => (
           <Drawer
@@ -314,14 +315,14 @@ export const SettingsDrawer: Story = {
             
             <Divider />
             
-            <Group gap="sm" justify="flex-end">
+            <Inline gap="sm" justify="flex-end">
               <Button variant="outline" onClick={() => setOpened(false)}>
                 Cancel
               </Button>
               <Button variant="primary" onClick={() => setOpened(false)}>
                 Save Changes
               </Button>
-            </Group>
+            </Inline>
           </Stack>
         </Drawer>
       </>
@@ -542,7 +543,7 @@ export const DrawerStates: Story = {
     
     return (
       <>
-        <Group gap="sm">
+        <Inline gap="sm">
           <MantineButton onClick={() => setBasicOpened(true)} variant="outline">
             Basic Drawer
           </MantineButton>
@@ -552,7 +553,7 @@ export const DrawerStates: Story = {
           <MantineButton onClick={() => setNoOverlayOpened(true)} variant="outline">
             No Overlay Close
           </MantineButton>
-        </Group>
+        </Inline>
         
         <Drawer
           opened={basicOpened}
@@ -644,27 +645,27 @@ export const UseCases: Story = {
         >
           <Stack gap="md">
             <div style={{ padding: '12px', border: '1px solid var(--mantine-color-gray-3)', borderRadius: '6px' }}>
-              <Group gap="sm" justify="space-between">
+              <Inline gap="sm" justify="space-between">
                 <Text size="sm" fw={500}>Wireless Headphones</Text>
                 <Text size="sm">$199.99</Text>
-              </Group>
+              </Inline>
               <Text size="xs" c="dimmed">Qty: 1</Text>
             </div>
             
             <div style={{ padding: '12px', border: '1px solid var(--mantine-color-gray-3)', borderRadius: '6px' }}>
-              <Group gap="sm" justify="space-between">
+              <Inline gap="sm" justify="space-between">
                 <Text size="sm" fw={500}>USB Cable</Text>
                 <Text size="sm">$19.99</Text>
-              </Group>
+              </Inline>
               <Text size="xs" c="dimmed">Qty: 2</Text>
             </div>
             
             <Divider />
             
-            <Group gap="sm" justify="space-between">
+            <Inline gap="sm" justify="space-between">
               <Text size="sm" fw={600}>Total:</Text>
               <Text size="sm" fw={600}>$239.97</Text>
-            </Group>
+            </Inline>
             
             <Button variant="primary" fullWidth>
               Proceed to Checkout
@@ -754,14 +755,14 @@ export const UseCases: Story = {
             
             <Divider />
             
-            <Group gap="sm" justify="flex-end">
+            <Inline gap="sm" justify="flex-end">
               <Button variant="outline" onClick={() => setProfileOpened(false)}>
                 Cancel
               </Button>
               <Button variant="primary" onClick={() => setProfileOpened(false)}>
                 Save Changes
               </Button>
-            </Group>
+            </Inline>
           </Stack>
         </Drawer>
       </>

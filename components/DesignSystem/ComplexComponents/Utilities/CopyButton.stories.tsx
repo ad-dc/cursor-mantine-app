@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, SimpleGrid } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Grid } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem';
 import { CopyButton } from './CopyButton';
 import { useState } from 'react';
 import { Title } from '../../Typography/Title';
@@ -69,7 +71,7 @@ export const BasicUsage: Story = {
       <Stack gap="lg" w={400}>
         <Title order={3} size="md">Basic Copy Examples</Title>
         
-        <Group gap="md" align="center">
+        <Inline gap="md" align="center">
           <Text size="sm">Simple text:</Text>
           <Text fw={500}>Hello World</Text>
           <CopyButton
@@ -77,9 +79,9 @@ export const BasicUsage: Story = {
             label="text"
             onCopy={(v) => handleCopy(v, "text")}
           />
-        </Group>
+        </Inline>
 
-        <Group gap="md" align="center">
+        <Inline gap="md" align="center">
           <Text size="sm">Email:</Text>
           <Text fw={500}>user@example.com</Text>
           <CopyButton
@@ -87,9 +89,9 @@ export const BasicUsage: Story = {
             label="email"
             onCopy={(v) => handleCopy(v, "email")}
           />
-        </Group>
+        </Inline>
 
-        <Group gap="md" align="center">
+        <Inline gap="md" align="center">
           <Text size="sm">Phone:</Text>
           <Text fw={500}>+1 (555) 123-4567</Text>
           <CopyButton
@@ -97,7 +99,7 @@ export const BasicUsage: Story = {
             label="phone number"
             onCopy={(v) => handleCopy(v, "phone")}
           />
-        </Group>
+        </Inline>
 
         {copyStatus && (
           <Text size="sm" c="green" fw={500}>
@@ -121,7 +123,7 @@ export const DifferentSizes: Story = {
     <Stack gap="lg" w={400}>
       <Title order={3} size="md">Different Icon Sizes</Title>
       
-      <Group gap="xl" align="center">
+      <Inline gap="xl" align="center">
         <Stack gap="xs" align="center">
           <Text size="xs">Small (16px)</Text>
           <CopyButton
@@ -150,7 +152,7 @@ export const DifferentSizes: Story = {
             onCopy={(v) => navigator.clipboard.writeText(v)}
           />
         </Stack>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -197,7 +199,7 @@ export const WithCodeSnippets: Story = {
         
                  {codeExamples.map((example, index) => (
            <Paper key={index}>
-             <Group gap="sm" align="flex-start" mb="xs">
+             <Inline gap="sm" align="flex-start" mb="xs">
                <Text size="sm" fw={500}>{example.label}:</Text>
                <CopyButton
                  value={example.code}
@@ -205,7 +207,7 @@ export const WithCodeSnippets: Story = {
                  iconSize={16}
                  onCopy={(v) => handleCopy(v, example.label)}
                />
-             </Group>
+             </Inline>
              <Code block>{example.code}</Code>
            </Paper>
          ))}
@@ -251,7 +253,7 @@ export const CredentialsExample: Story = {
         <Card>
           <Stack gap="md">
             {credentials.map((cred, index) => (
-              <Group key={index} gap="sm" align="center">
+              <Inline key={index} gap="sm" align="center">
                 <Text size="sm" c="dimmed" w={100}>
                   {cred.label}:
                 </Text>
@@ -273,7 +275,7 @@ export const CredentialsExample: Story = {
                   iconSize={16}
                   onCopy={(v) => handleCopy(v, cred.label)}
                 />
-              </Group>
+              </Inline>
             ))}
           </Stack>
         </Card>
@@ -316,7 +318,7 @@ export const WithInputFields: Story = {
         <Title order={3} size="md">Form Fields with Copy</Title>
         
         <Stack gap="md">
-          <Group gap="xs" align="flex-end">
+          <Inline gap="xs" align="flex-end">
             <TextInput
               label="Username"
               value={formData.username}
@@ -328,9 +330,9 @@ export const WithInputFields: Story = {
               label="username"
               onCopy={(v) => handleCopy(v, "username")}
             />
-          </Group>
+          </Inline>
 
-          <Group gap="xs" align="flex-end">
+          <Inline gap="xs" align="flex-end">
             <TextInput
               label="Email"
               value={formData.email}
@@ -342,9 +344,9 @@ export const WithInputFields: Story = {
               label="email"
               onCopy={(v) => handleCopy(v, "email")}
             />
-          </Group>
+          </Inline>
 
-          <Group gap="xs" align="flex-end">
+          <Inline gap="xs" align="flex-end">
             <TextInput
               label="User ID"
               value={formData.userId}
@@ -356,9 +358,9 @@ export const WithInputFields: Story = {
               label="user ID"
               onCopy={(v) => handleCopy(v, "user ID")}
             />
-          </Group>
+          </Inline>
 
-          <Group gap="xs" align="flex-end">
+          <Inline gap="xs" align="flex-end">
             <TextInput
               label="API Token"
               value={formData.apiToken}
@@ -371,7 +373,7 @@ export const WithInputFields: Story = {
               label="API token"
               onCopy={(v) => handleCopy(v, "API token")}
             />
-          </Group>
+          </Inline>
         </Stack>
 
         {copyStatus && (
@@ -420,7 +422,7 @@ export const SystemInformation: Story = {
       <Stack gap="lg" w={600}>
         <Title order={3} size="md">System Information</Title>
         
-        <SimpleGrid cols={2} spacing="md">
+        <Grid cols={2} spacing="md">
           {Object.entries(groupedInfo).map(([category, items]) => (
             <Card key={category}>
               <Stack gap="sm">
@@ -428,7 +430,7 @@ export const SystemInformation: Story = {
                   {category}
                 </Title>
                 {items.map((item, index) => (
-                  <Group key={index} gap="xs" align="center">
+                  <Inline key={index} gap="xs" align="center">
                     <Text size="xs" c="dimmed" w={80}>
                       {item.label}:
                     </Text>
@@ -441,12 +443,12 @@ export const SystemInformation: Story = {
                       iconSize={14}
                       onCopy={(v) => handleCopy(v, item.label)}
                     />
-                  </Group>
+                  </Inline>
                 ))}
               </Stack>
             </Card>
           ))}
-        </SimpleGrid>
+        </Grid>
 
         {copyStatus && (
           <Text size="sm" c="green" fw={500}>

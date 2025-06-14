@@ -1,7 +1,8 @@
 'use client';
 
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
-import { Group, Text, rem } from '@mantine/core';
+import { Text, rem } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { IconUpload, IconX, IconPhoto } from '@tabler/icons-react';
 import { forwardRef } from 'react';
 
@@ -37,7 +38,7 @@ export const DropZone = forwardRef<HTMLDivElement, DropZoneProps>(
         accept={accept}
         {...props}
       >
-        <Group justify="flex-start" gap="md" mih={80} style={{ pointerEvents: 'none' }}>
+        <Inline justify="flex-start" gap="md" mih={80} style={{ pointerEvents: 'none' }}>
           <Dropzone.Accept>
             <IconUpload 
               size={32} 
@@ -68,7 +69,7 @@ export const DropZone = forwardRef<HTMLDivElement, DropZoneProps>(
               {description}
             </Text>
           </div>
-        </Group>
+        </Inline>
       </Dropzone>
     );
   }

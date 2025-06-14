@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Stepper } from './Stepper';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -287,7 +288,7 @@ export const InteractiveStepper: Story = {
           size="md"
         />
         
-        <Group justify="center" gap="md">
+        <Inline justify="center" gap="md">
           <Button 
             variant="outline" 
             onClick={prevStep}
@@ -301,7 +302,7 @@ export const InteractiveStepper: Story = {
           >
             Next
           </Button>
-        </Group>
+        </Inline>
         
         <Text size="sm" ta="center" c="dimmed">
           Current step: {activeStep + 1} of {interactiveSteps.length}
@@ -485,7 +486,7 @@ export const FormWizard: Story = {
             size="md"
           />
           
-          <Group justify="space-between" mt="lg">
+          <Inline justify="space-between" mt="lg">
             <Button 
               variant="outline"
               onClick={() => setWizardStep(s => Math.max(0, s - 1))}
@@ -504,7 +505,7 @@ export const FormWizard: Story = {
             >
               {wizardStep === wizardSteps.length - 1 ? 'Submit' : 'Continue'}
             </Button>
-          </Group>
+          </Inline>
         </Stack>
       </Paper>
     );
@@ -549,7 +550,7 @@ export const ProjectSetup: Story = {
 
     return (
       <Stack gap="lg" w={600}>
-        <Group gap="lg">
+        <Inline gap="lg">
           <div style={{ flex: 1 }}>
             <Title order={3} size="md" fw={500} mb="sm">
               Horizontal Layout
@@ -560,9 +561,9 @@ export const ProjectSetup: Story = {
               size="sm"
             />
           </div>
-        </Group>
+        </Inline>
         
-        <Group gap="lg" align="flex-start">
+        <Inline gap="lg" align="flex-start">
           <div>
             <Title order={3} size="md" fw={500} mb="sm">
               Vertical Layout
@@ -576,7 +577,7 @@ export const ProjectSetup: Story = {
               />
             </Paper>
           </div>
-        </Group>
+        </Inline>
       </Stack>
     );
   },

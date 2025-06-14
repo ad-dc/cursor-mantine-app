@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Group, SimpleGrid } from '@mantine/core';
+import { Grid } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem';
 import { KeyInsight } from './KeyInsights';
 import { Title } from '../../Typography/Title';
 import { Text } from '../../Typography/Text';
@@ -29,10 +30,7 @@ const meta: Meta<typeof KeyInsight> = {
       control: 'text',
       description: 'Optional subtitle or description',
     },
-    color: {
-      control: 'text',
-      description: 'Optional color for the value',
-    },
+
     showBorder: {
       control: 'boolean',
       description: 'Whether to show border on the right',
@@ -55,7 +53,6 @@ export const WithSubtitle: Story = {
     value: '95%',
     title: 'Success Rate',
     subtitle: 'Last 30 days',
-    color: 'green',
   },
 };
 
@@ -63,7 +60,6 @@ export const WithColor: Story = {
   args: {
     value: 42,
     title: 'Active Projects',
-    color: 'blue',
   },
 };
 
@@ -77,7 +73,7 @@ export const WithBorder: Story = {
 
 export const DashboardExample: Story = {
   render: () => (
-    <SimpleGrid cols={4} spacing="md" w={800}>
+    <Grid cols={4} spacing="md" w={800}>
       <KeyInsight
         value={1250}
         title="Total Users"
@@ -104,7 +100,7 @@ export const DashboardExample: Story = {
         color="teal"
         showBorder={false}
       />
-    </SimpleGrid>
+    </Grid>
   ),
   parameters: {
     docs: {
@@ -119,7 +115,7 @@ export const MetricsGrid: Story = {
   render: () => (
     <div style={{ width: 600 }}>
       <Title order={2} mb="lg">Analytics Overview</Title>
-      <SimpleGrid cols={3} spacing="lg">
+      <Grid cols={3} spacing="lg">
         <KeyInsight
           value="$24,500"
           title="Revenue"
@@ -155,7 +151,7 @@ export const MetricsGrid: Story = {
           subtitle="Open"
           color="red"
         />
-      </SimpleGrid>
+      </Grid>
     </div>
   ),
   parameters: {
@@ -171,7 +167,7 @@ export const HorizontalLayout: Story = {
   render: () => (
     <div style={{ width: 800 }}>
       <Title order={3} mb="md">Key Performance Indicators</Title>
-      <Group justify="space-between">
+      <Inline justify="space-between">
         <KeyInsight
           value={1250}
           title="Total Users"
@@ -196,7 +192,7 @@ export const HorizontalLayout: Story = {
           color="teal"
           showBorder={false}
         />
-      </Group>
+      </Inline>
     </div>
   ),
   parameters: {
@@ -213,7 +209,6 @@ export const Interactive: Story = {
     value: 1250,
     title: 'Total Users',
     subtitle: 'Last 30 days',
-    color: 'blue',
     showBorder: false,
   },
   parameters: {

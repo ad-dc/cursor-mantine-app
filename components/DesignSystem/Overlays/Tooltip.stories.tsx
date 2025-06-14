@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Button as MantineButton, Box } from '@mantine/core';
+import { Stack, Button as MantineButton, Box } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Tooltip } from './Tooltip';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -69,7 +70,7 @@ export const Default: Story = {
 export const Positions: Story = {
   render: () => (
     <Stack gap="xl" align="center">
-      <Group gap="xl">
+      <Inline gap="xl">
         <Tooltip label="Top Start" position="top-start">
           <Button variant="outline" size="sm">Top Start</Button>
         </Tooltip>
@@ -79,9 +80,9 @@ export const Positions: Story = {
         <Tooltip label="Top End" position="top-end">
           <Button variant="outline" size="sm">Top End</Button>
         </Tooltip>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <Tooltip label="Left Start" position="left-start">
           <Button variant="outline" size="sm">Left Start</Button>
         </Tooltip>
@@ -91,9 +92,9 @@ export const Positions: Story = {
         <Tooltip label="Left End" position="left-end">
           <Button variant="outline" size="sm">Left End</Button>
         </Tooltip>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <Tooltip label="Right Start" position="right-start">
           <Button variant="outline" size="sm">Right Start</Button>
         </Tooltip>
@@ -103,9 +104,9 @@ export const Positions: Story = {
         <Tooltip label="Right End" position="right-end">
           <Button variant="outline" size="sm">Right End</Button>
         </Tooltip>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <Tooltip label="Bottom Start" position="bottom-start">
           <Button variant="outline" size="sm">Bottom Start</Button>
         </Tooltip>
@@ -115,7 +116,7 @@ export const Positions: Story = {
         <Tooltip label="Bottom End" position="bottom-end">
           <Button variant="outline" size="sm">Bottom End</Button>
         </Tooltip>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -129,14 +130,14 @@ export const Positions: Story = {
 
 export const WithArrow: Story = {
   render: () => (
-    <Group gap="lg">
+    <Inline gap="lg">
       <Tooltip label="Tooltip with arrow" withArrow>
         <Button variant="outline">With Arrow</Button>
       </Tooltip>
       <Tooltip label="Tooltip without arrow" withArrow={false}>
         <Button variant="outline">Without Arrow</Button>
       </Tooltip>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -149,7 +150,7 @@ export const WithArrow: Story = {
 
 export const MultilineContent: Story = {
   render: () => (
-    <Group gap="lg">
+    <Inline gap="lg">
       <Tooltip 
         label="This is a short tooltip"
         position="top"
@@ -171,7 +172,7 @@ export const MultilineContent: Story = {
       >
         <Button variant="outline">Long (Auto Width)</Button>
       </Tooltip>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -184,7 +185,7 @@ export const MultilineContent: Story = {
 
 export const WithDelays: Story = {
   render: () => (
-    <Group gap="lg">
+    <Inline gap="lg">
       <Tooltip label="Instant tooltip" openDelay={0} closeDelay={0}>
         <Button variant="outline">Instant</Button>
       </Tooltip>
@@ -200,7 +201,7 @@ export const WithDelays: Story = {
       <Tooltip label="Both delays (300ms open, 500ms close)" openDelay={300} closeDelay={500}>
         <Button variant="outline">Both Delays</Button>
       </Tooltip>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -217,7 +218,7 @@ export const DisabledState: Story = {
     
     return (
       <Stack gap="md" align="center">
-        <Group gap="lg">
+        <Inline gap="lg">
           <Tooltip label="This tooltip is enabled" disabled={false}>
             <Button variant="outline">Enabled Tooltip</Button>
           </Tooltip>
@@ -229,7 +230,7 @@ export const DisabledState: Story = {
           <Tooltip label="This tooltip can be toggled" disabled={disabled}>
             <Button variant="outline">Toggle Tooltip</Button>
           </Tooltip>
-        </Group>
+        </Inline>
         
         <MantineButton 
           onClick={() => setDisabled(!disabled)}
@@ -255,7 +256,7 @@ export const DifferentTriggers: Story = {
     <Stack gap="lg" w={400}>
       <div>
         <Text size="sm" fw={500} mb="sm">Buttons:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Tooltip label="Primary button tooltip">
             <Button variant="primary" size="sm">Primary</Button>
           </Tooltip>
@@ -265,12 +266,12 @@ export const DifferentTriggers: Story = {
           <Tooltip label="Default button tooltip">
             <Button variant="default" size="sm">Default</Button>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Icons:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Tooltip label="Info icon">
             <ThemeIcon variant="info" size="sm">
               <span>ℹ</span>
@@ -291,12 +292,12 @@ export const DifferentTriggers: Story = {
               <span>✕</span>
             </ThemeIcon>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Text Elements:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Tooltip label="This text has additional context">
             <Text 
               size="sm" 
@@ -323,12 +324,12 @@ export const DifferentTriggers: Story = {
               API
             </Text>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Custom Elements:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Tooltip label="Custom box element">
             <Box
               style={{
@@ -364,7 +365,7 @@ export const DifferentTriggers: Story = {
               <Text size="xs">Hover</Text>
             </div>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -382,7 +383,7 @@ export const ContextualTooltips: Story = {
     <Stack gap="lg" w={500}>
       <div>
         <Text size="sm" fw={500} mb="sm">Form Field Help:</Text>
-        <Group gap="sm" align="end">
+        <Inline gap="sm" align="end">
           <div style={{ flex: 1 }}>
             <Text size="sm" fw={500} mb="xs">Password</Text>
             <input 
@@ -405,12 +406,12 @@ export const ContextualTooltips: Story = {
               <span>?</span>
             </ThemeIcon>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Feature Explanations:</Text>
-        <Group gap="md">
+        <Inline gap="md">
           <Tooltip label="Enable two-factor authentication for enhanced security">
             <Text 
               size="sm"
@@ -446,12 +447,12 @@ export const ContextualTooltips: Story = {
               Collaboration
             </Text>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Status Indicators:</Text>
-        <Group gap="md">
+        <Inline gap="md">
           <Tooltip label="System is operating normally">
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div style={{ 
@@ -487,7 +488,7 @@ export const ContextualTooltips: Story = {
               <Text size="sm">Offline</Text>
             </div>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -507,7 +508,7 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">1. Button Descriptions:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Tooltip label="Save your current work">
             <Button variant="primary" size="sm">Save</Button>
           </Tooltip>
@@ -517,12 +518,12 @@ export const UseCases: Story = {
           <Tooltip label="Delete this item permanently">
             <Button variant="danger" size="sm">Delete</Button>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">2. Icon Explanations:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Tooltip label="Download file">
             <ThemeIcon variant="info" size="sm">
               <span>⬇</span>
@@ -543,7 +544,7 @@ export const UseCases: Story = {
               <span>⋯</span>
             </ThemeIcon>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
       
       <div>
@@ -564,14 +565,14 @@ export const UseCases: Story = {
       <div>
         <Text size="sm" fw={500} mb="sm">4. Form Field Help:</Text>
         <div style={{ maxWidth: 300 }}>
-          <Group gap="xs" align="center" mb="xs">
+          <Inline gap="xs" align="center" mb="xs">
             <Text size="sm" fw={500}>Email Address</Text>
             <Tooltip label="We'll use this email for account notifications and password recovery">
               <ThemeIcon variant="info" size="xs">
                 <span style={{ fontSize: '10px' }}>?</span>
               </ThemeIcon>
             </Tooltip>
-          </Group>
+          </Inline>
           <input 
             type="email" 
             placeholder="Enter your email..."
@@ -587,7 +588,7 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">5. Disabled Elements:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Tooltip label="This feature is not available in your current plan">
             <div>
               <Button variant="outline" size="sm" disabled>
@@ -602,7 +603,7 @@ export const UseCases: Story = {
               </Button>
             </div>
           </Tooltip>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),

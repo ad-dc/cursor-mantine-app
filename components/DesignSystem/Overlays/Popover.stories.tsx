@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Popover, ConfirmationPopover } from './Popover';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -67,7 +68,7 @@ export const Default: Story = {
 export const Positions: Story = {
   render: () => (
     <Stack gap="xl" align="center">
-      <Group gap="xl">
+      <Inline gap="xl">
         <Popover
           trigger={<Button variant="outline" size="sm">Top</Button>}
           title="Top Popover"
@@ -83,9 +84,9 @@ export const Positions: Story = {
         >
           <Text size="sm">This popover appears below the trigger.</Text>
         </Popover>
-      </Group>
+      </Inline>
       
-      <Group gap="xl">
+      <Inline gap="xl">
         <Popover
           trigger={<Button variant="outline" size="sm">Left</Button>}
           title="Left Popover"
@@ -101,7 +102,7 @@ export const Positions: Story = {
         >
           <Text size="sm">This popover appears to the right of the trigger.</Text>
         </Popover>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -276,7 +277,7 @@ export const FormPopover: Story = {
 
 export const ConfirmationPopovers: Story = {
   render: () => (
-    <Group gap="lg">
+    <Inline gap="lg">
       <ConfirmationPopover
         trigger={<Button variant="outline">Basic Confirmation</Button>}
         title="Confirm Action"
@@ -318,7 +319,7 @@ export const ConfirmationPopovers: Story = {
           This is a custom confirmation popover with different button labels and tertiary actions.
         </Text>
       </ConfirmationPopover>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -334,7 +335,7 @@ export const DifferentTriggers: Story = {
     <Stack gap="lg" w={500}>
       <div>
         <Text size="sm" fw={500} mb="sm">Button Triggers:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Popover
             trigger={<Button variant="primary" size="sm">Primary</Button>}
             title="Primary Button"
@@ -348,12 +349,12 @@ export const DifferentTriggers: Story = {
           >
             <Text size="sm">Popover triggered by an outline button.</Text>
           </Popover>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Icon Triggers:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Popover
             trigger={
               <ThemeIcon variant="info" size="sm" style={{ cursor: 'pointer' }}>
@@ -389,12 +390,12 @@ export const DifferentTriggers: Story = {
           >
             <Text size="sm">Important warning information to consider.</Text>
           </Popover>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Text Triggers:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Popover
             trigger={
               <Text 
@@ -430,7 +431,7 @@ export const DifferentTriggers: Story = {
           >
             <Text size="sm">Application Programming Interface - details about our API.</Text>
           </Popover>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -449,7 +450,7 @@ export const ControlledPopover: Story = {
     
     return (
       <Stack gap="md" align="center">
-        <Group gap="sm">
+        <Inline gap="sm">
           <Button 
             variant="outline" 
             size="sm"
@@ -464,7 +465,7 @@ export const ControlledPopover: Story = {
           >
             Close Popover
           </Button>
-        </Group>
+        </Inline>
         
         <Popover
           trigger={<Button>Controlled Popover</Button>}
@@ -515,7 +516,7 @@ export const ContextualPopovers: Story = {
     <Stack gap="lg" w={600}>
       <div>
         <Text size="sm" fw={500} mb="sm">Help & Information:</Text>
-        <Group gap="md" align="center">
+        <Inline gap="md" align="center">
           <Text size="sm">Password</Text>
           <Popover
             trigger={
@@ -534,12 +535,12 @@ export const ContextualPopovers: Story = {
               <Text size="xs">• Contains at least one special character</Text>
             </Stack>
           </Popover>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Quick Actions:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Popover
             trigger={
               <div style={{
@@ -583,12 +584,12 @@ export const ContextualPopovers: Story = {
           >
             <Text size="sm">Choose an action for this file.</Text>
           </Popover>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Status Information:</Text>
-        <Group gap="md">
+        <Inline gap="md">
           <Popover
             trigger={
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
@@ -605,25 +606,25 @@ export const ContextualPopovers: Story = {
             position="top"
           >
             <Stack gap="xs">
-              <Group gap="xs" justify="space-between">
+              <Inline gap="xs" justify="space-between">
                 <Text size="xs">API Server</Text>
                 <Text size="xs" c="green">Online</Text>
-              </Group>
-              <Group gap="xs" justify="space-between">
+              </Inline>
+              <Inline gap="xs" justify="space-between">
                 <Text size="xs">Database</Text>
                 <Text size="xs" c="green">Online</Text>
-              </Group>
-              <Group gap="xs" justify="space-between">
+              </Inline>
+              <Inline gap="xs" justify="space-between">
                 <Text size="xs">Cache</Text>
                 <Text size="xs" c="green">Online</Text>
-              </Group>
-              <Group gap="xs" justify="space-between">
+              </Inline>
+              <Inline gap="xs" justify="space-between">
                 <Text size="xs">Last Check</Text>
                 <Text size="xs" c="dimmed">2 min ago</Text>
-              </Group>
+              </Inline>
             </Stack>
           </Popover>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -643,7 +644,7 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">1. Form Field Help:</Text>
-        <Group gap="xs" align="center">
+        <Inline gap="xs" align="center">
           <TextInput
             label="API Key"
             placeholder="Enter your API key..."
@@ -663,12 +664,12 @@ export const UseCases: Story = {
               You can find your API key in your account settings under the "Developers" section.
             </Text>
           </Popover>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">2. Quick Confirmations:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <ConfirmationPopover
             trigger={<Button variant="outline" size="sm">Archive Item</Button>}
             title="Archive Item"
@@ -687,12 +688,12 @@ export const UseCases: Story = {
           >
             <Text size="sm">This action cannot be undone.</Text>
           </ConfirmationPopover>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">3. Feature Previews:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Popover
             trigger={<Button variant="outline" size="sm">Preview Feature</Button>}
             title="New Dashboard"
@@ -723,12 +724,12 @@ export const UseCases: Story = {
               </div>
             </Stack>
           </Popover>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">4. Settings Shortcuts:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Popover
             trigger={
               <ThemeIcon variant="default" size="md" style={{ cursor: 'pointer' }}>
@@ -752,7 +753,7 @@ export const UseCases: Story = {
               <Switch label="Auto-save" defaultChecked />
             </Stack>
           </Popover>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),

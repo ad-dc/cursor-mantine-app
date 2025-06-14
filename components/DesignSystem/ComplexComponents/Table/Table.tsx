@@ -305,14 +305,14 @@ const FEATURE_FLAGS = {
  *     enableSorting: false,
  *     enableColumnFilter: false,
  *     Cell: ({ row }) => (
- *       <Group>
+ *       <Inline>
  *         <Button size="xs" onClick={() => handleEdit(row.original)}>
  *           Edit
  *         </Button>
  *         <Button size="xs" color="red" onClick={() => handleDelete(row.original)}>
  *           Delete
  *         </Button>
- *       </Group>
+ *       </Inline>
  *     )
  *   }
  * ], []);

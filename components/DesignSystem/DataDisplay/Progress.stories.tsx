@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Progress } from './Progress';
 import { useState, useEffect } from 'react';
 import { Title } from '../Typography/Title';
@@ -243,10 +244,10 @@ export const MultipleProgress: Story = {
         
         {downloads.map((download, index) => (
           <div key={index}>
-            <Group justify="space-between" mb="xs">
+            <Inline justify="space-between" mb="xs">
               <Text size="sm" fw={500}>{download.name}</Text>
               <Text size="sm" c="dimmed">{Math.round(download.progress)}%</Text>
-            </Group>
+            </Inline>
             <Progress 
               value={download.progress} 
               size="sm" 
@@ -283,17 +284,17 @@ export const ProgressWithSteps: Story = {
     return (
       <Stack gap="lg" w={400}>
         <div>
-          <Group justify="space-between" mb="xs">
+          <Inline justify="space-between" mb="xs">
             <Text size="sm" fw={500}>Setup Progress</Text>
             <Text size="sm" c="dimmed">Step {currentStep} of {totalSteps}</Text>
-          </Group>
+          </Inline>
           <Progress value={progressValue} size="lg" />
           <Text size="xs" c="dimmed" mt="xs">
             Current: {steps[currentStep - 1]}
           </Text>
         </div>
         
-        <Group gap="xs">
+        <Inline gap="xs">
           <button 
             onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
             disabled={currentStep === 1}
@@ -320,7 +321,7 @@ export const ProgressWithSteps: Story = {
           >
             Next
           </button>
-        </Group>
+        </Inline>
       </Stack>
     );
   },

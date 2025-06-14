@@ -1,5 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { ActionIcon, Group, Indicator, Stack, Text, SimpleGrid, rem } from "@mantine/core";
+import { ActionIcon, Indicator, Stack, Text, rem } from '@mantine/core';
+import { Grid } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem';
 import { Button } from '@/components/DesignSystem';
 import { IconFilter, IconMaximize, IconMinimize, IconBaselineDensityMedium, IconBaselineDensitySmall, IconBaselineDensityLarge } from '@tabler/icons-react';
 import { DatesRangeValue } from "@mantine/dates";
@@ -446,7 +448,7 @@ const ToolbarActions = <T extends MRT_RowData>({ table }: ToolbarActionsProps<T>
   };
 
   return (
-    <Group justify="end" gap="xs">
+    <Inline justify="end" gap="xs">
       {/* Fullscreen toggle button */}
       <ActionIconButton
         onClick={handleFullscreenToggle}
@@ -464,7 +466,7 @@ const ToolbarActions = <T extends MRT_RowData>({ table }: ToolbarActionsProps<T>
         icon={getDensityIcon(currentDensity)}
         testId="toggle-dense-padding"
       />
-    </Group>
+    </Inline>
   );
 };
 
@@ -492,7 +494,7 @@ const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
   if (!visible) return null;
 
   return (
-    <SimpleGrid data-testid="additional-filters" cols={3} spacing="xs" role="menu">
+    <Grid data-testid="additional-filters" cols={3} spacing="xs" role="menu">
       {/* Date range selector */}
       <DateRangeSelector
         key={dateRangeSelectorKey}
@@ -510,7 +512,7 @@ const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
         placeholderWithSelection={translate("table.filters.placeholder.select.more")}
         data={CITY_OPTIONS}
       />
-    </SimpleGrid>
+    </Grid>
   );
 };
 
@@ -691,9 +693,9 @@ const CustomTopToolbar = <T extends MRT_RowData>({
         }}
       >
         {/* Top row: Search and action buttons */}
-        <SimpleGrid cols={2}>
+        <Grid cols={2}>
           {/* Left side: Filter toggle and search */}
-          <Group gap="xs" align="center">
+          <Inline gap="xs" align="center">
             {/* Filter toggle button with optional indicator */}
             {filtersAreActive ? (
               <Indicator size="8">
@@ -716,15 +718,15 @@ const CustomTopToolbar = <T extends MRT_RowData>({
               searchTerm={searchTerm as string}
               onChange={handleSearchChange}
             />
-          </Group>
+          </Inline>
 
           {/* Right side: Action buttons */}
           <ToolbarActions table={table} />
-        </SimpleGrid>
+        </Grid>
 
         {/* Second row: Active filters and result count */}
-        <Group justify="space-between">
-          <Group gap="xs">
+        <Inline justify="space-between">
+          <Inline gap="xs">
             {/* Show active filters if any exist */}
             {filtersAreActive && (
               <ActiveFilters
@@ -742,8 +744,8 @@ const CustomTopToolbar = <T extends MRT_RowData>({
               isLoading={isLoading ?? false} 
               hasActiveFilters={filtersAreActive}
             />
-          </Group>
-        </Group>
+          </Inline>
+        </Inline>
 
         {/* Expandable filters section */}
         <ExpandableFilters

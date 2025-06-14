@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { Modal as MantineModal, ModalProps as MantineModalProps, Stack, Group } from '@mantine/core';
+import { Modal as MantineModal, ModalProps as MantineModalProps, Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Button } from '../Buttons';
 import { CloseButton } from '../Buttons';
 
@@ -217,9 +218,9 @@ export const Modal = forwardRef<HTMLDivElement, DSModalProps>(
           
           {/* Modal Actions Footer */}
           {(actions.length > 0 || tertiaryActions.length > 0) && (
-            <Group justify="space-between" gap="sm" pt="sm">
+            <Inline justify="space-between" gap="sm" pt="sm">
               {/* Left-aligned primary/secondary actions */}
-              <Group gap="sm">
+              <Inline gap="sm">
                 {actions.map((action) => (
                   <Button
                     key={action.id}
@@ -232,10 +233,10 @@ export const Modal = forwardRef<HTMLDivElement, DSModalProps>(
                     {action.label}
                   </Button>
                 ))}
-              </Group>
+              </Inline>
               
               {/* Right-aligned tertiary actions */}
-              <Group gap="sm">
+              <Inline gap="sm">
                 {tertiaryActions.map((action) => (
                   <Button
                     key={action.id}
@@ -248,8 +249,8 @@ export const Modal = forwardRef<HTMLDivElement, DSModalProps>(
                     {action.label}
                   </Button>
                 ))}
-              </Group>
-            </Group>
+              </Inline>
+            </Inline>
           )}
         </Stack>
       </MantineModal>

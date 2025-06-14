@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
-import { Group, Stack } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { RiAddLine, RiDownloadLine, RiDeleteBinLine, RiEyeLine } from '@remixicon/react';
 
 const meta: Meta<typeof Button> = {

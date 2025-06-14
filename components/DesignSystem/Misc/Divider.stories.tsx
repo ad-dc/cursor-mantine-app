@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Box } from '@mantine/core';
+import { Stack, Box } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Divider } from './Divider';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
@@ -136,7 +137,7 @@ export const VerticalDividers: Story = {
     <Stack gap="lg">
       <div>
         <Text size="sm" fw={500} mb="sm">Vertical dividers in horizontal layout:</Text>
-        <Group gap="md" align="center" style={{ height: 60 }}>
+        <Inline gap="md" align="center" style={{ height: 60 }}>
           <Text>Item 1</Text>
           <Divider orientation="vertical" />
           <Text>Item 2</Text>
@@ -144,12 +145,12 @@ export const VerticalDividers: Story = {
           <Text>Item 3</Text>
           <Divider orientation="vertical" />
           <Text>Item 4</Text>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Different vertical sizes:</Text>
-        <Group gap="lg" align="center" style={{ height: 80 }}>
+        <Inline gap="lg" align="center" style={{ height: 80 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Text size="sm">Small</Text>
             <Divider orientation="vertical" size="sm" />
@@ -173,7 +174,7 @@ export const VerticalDividers: Story = {
             <Divider orientation="vertical" size="xl" />
             <Text size="sm">Text</Text>
           </div>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -206,10 +207,10 @@ export const InCards: Story = {
         
         <Divider label="Actions" />
         
-        <Group gap="sm" mt="md">
+        <Inline gap="sm" mt="md">
           <Button variant="primary" size="sm">Primary</Button>
           <Button variant="outline" size="sm">Secondary</Button>
-        </Group>
+        </Inline>
       </Box>
       
       <Box
@@ -220,7 +221,7 @@ export const InCards: Story = {
           backgroundColor: 'white'
         }}
       >
-        <Group gap="md" align="flex-start">
+        <Inline gap="md" align="flex-start">
           <div style={{ flex: 1 }}>
             <Title order={4} size="sm" fw={500} mb="xs">Left Section</Title>
             <Text size="sm">Content in the left section of the card.</Text>
@@ -232,7 +233,7 @@ export const InCards: Story = {
             <Title order={4} size="sm" fw={500} mb="xs">Right Section</Title>
             <Text size="sm">Content in the right section of the card.</Text>
           </div>
-        </Group>
+        </Inline>
       </Box>
     </Stack>
   ),
@@ -406,10 +407,10 @@ export const InForms: Story = {
         
         <Divider my="lg" />
         
-        <Group gap="sm" justify="flex-end">
+        <Inline gap="sm" justify="flex-end">
           <Button variant="outline">Cancel</Button>
           <Button variant="primary">Create Account</Button>
-        </Group>
+        </Inline>
       </Box>
     </Stack>
   ),
@@ -447,7 +448,7 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">2. Navigation Breadcrumbs:</Text>
-        <Group gap="xs" align="center">
+        <Inline gap="xs" align="center">
           <Text size="sm" style={{ cursor: 'pointer', color: 'var(--mantine-color-blue-6)' }}>Home</Text>
           <Divider orientation="vertical" size="sm" />
           <Text size="sm" style={{ cursor: 'pointer', color: 'var(--mantine-color-blue-6)' }}>Products</Text>
@@ -455,12 +456,12 @@ export const UseCases: Story = {
           <Text size="sm" style={{ cursor: 'pointer', color: 'var(--mantine-color-blue-6)' }}>Electronics</Text>
           <Divider orientation="vertical" size="sm" />
           <Text size="sm" c="dimmed">Laptop</Text>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">3. Toolbar Separators:</Text>
-        <Group gap="sm" align="center" style={{
+        <Inline gap="sm" align="center" style={{
           padding: '8px 12px',
           border: '1px solid var(--mantine-color-gray-3)',
           borderRadius: '6px',
@@ -480,7 +481,7 @@ export const UseCases: Story = {
           
           <Button variant="outline" size="xs">Link</Button>
           <Button variant="outline" size="xs">Image</Button>
-        </Group>
+        </Inline>
       </div>
       
       <div>
@@ -514,7 +515,7 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">5. Statistics Dashboard:</Text>
-        <Group gap="lg" align="center">
+        <Inline gap="lg" align="center">
           <div style={{ textAlign: 'center' }}>
             <Text size="xl" fw={700} c="blue">1,234</Text>
             <Text size="xs" c="dimmed">Users</Text>
@@ -540,7 +541,7 @@ export const UseCases: Story = {
             <Text size="xl" fw={700} c="red">23</Text>
             <Text size="xs" c="dimmed">Issues</Text>
           </div>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),

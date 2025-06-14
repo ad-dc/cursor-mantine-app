@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Menu } from './Menu';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -225,7 +226,7 @@ export const WithShortcuts: Story = {
 export const Positions: Story = {
   render: () => (
     <Stack gap="xl" align="center">
-      <Group gap="lg">
+      <Inline gap="lg">
         <Menu
           trigger={<Button variant="outline" size="sm">Bottom Start</Button>}
           position="bottom-start"
@@ -262,9 +263,9 @@ export const Positions: Story = {
             },
           ]}
         />
-      </Group>
+      </Inline>
       
-      <Group gap="lg">
+      <Inline gap="lg">
         <Menu
           trigger={<Button variant="outline" size="sm">Top Start</Button>}
           position="top-start"
@@ -301,9 +302,9 @@ export const Positions: Story = {
             },
           ]}
         />
-      </Group>
+      </Inline>
       
-      <Group gap="lg">
+      <Inline gap="lg">
         <Menu
           trigger={<Button variant="outline" size="sm">Left</Button>}
           position="left"
@@ -328,7 +329,7 @@ export const Positions: Story = {
             },
           ]}
         />
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -403,7 +404,7 @@ export const WithDisabledItems: Story = {
 
 export const DifferentTriggers: Story = {
   render: () => (
-    <Group gap="lg">
+    <Inline gap="lg">
       <Menu
         trigger={<Button variant="primary">Primary Button</Button>}
         sections={[
@@ -465,7 +466,7 @@ export const DifferentTriggers: Story = {
           },
         ]}
       />
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -482,7 +483,7 @@ export const ControlledMenu: Story = {
     
     return (
       <Stack gap="md" align="center">
-        <Group gap="sm">
+        <Inline gap="sm">
           <Button 
             variant="outline" 
             size="sm"
@@ -497,7 +498,7 @@ export const ControlledMenu: Story = {
           >
             Close Menu
           </Button>
-        </Group>
+        </Inline>
         
         <Menu
           trigger={<Button>Controlled Menu</Button>}
@@ -553,7 +554,7 @@ export const ContextMenus: Story = {
     <Stack gap="lg" w={500}>
       <div>
         <Text size="sm" fw={500} mb="sm">User Actions:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Menu
             trigger={<Button variant="outline" size="sm">John Doe</Button>}
             sections={[
@@ -605,12 +606,12 @@ export const ContextMenus: Story = {
               },
             ]}
           />
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">File Actions:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Menu
             trigger={
               <div style={{
@@ -682,12 +683,12 @@ export const ContextMenus: Story = {
               },
             ]}
           />
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">Settings Menu:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Menu
             trigger={
               <ThemeIcon variant="default" size="lg" style={{ cursor: 'pointer' }}>
@@ -754,7 +755,7 @@ export const ContextMenus: Story = {
               },
             ]}
           />
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -774,7 +775,7 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">1. Action Menus:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Menu
             trigger={<Button variant="primary" size="sm">Actions</Button>}
             sections={[
@@ -787,12 +788,12 @@ export const UseCases: Story = {
               },
             ]}
           />
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">2. Dropdown Navigation:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Menu
             trigger={<Button variant="outline" size="sm">Products ▼</Button>}
             sections={[
@@ -814,12 +815,12 @@ export const UseCases: Story = {
               },
             ]}
           />
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">3. User Account Menu:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Menu
             trigger={
               <div style={{
@@ -872,12 +873,12 @@ export const UseCases: Story = {
               },
             ]}
           />
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">4. More Options Menu:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Menu
             trigger={
               <ThemeIcon variant="default" size="sm" style={{ cursor: 'pointer' }}>
@@ -894,7 +895,7 @@ export const UseCases: Story = {
               },
             ]}
           />
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),

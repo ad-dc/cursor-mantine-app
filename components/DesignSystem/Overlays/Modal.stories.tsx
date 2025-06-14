@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Button as MantineButton } from '@mantine/core';
+import { Stack, Button as MantineButton } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Modal, ConfirmationModal } from './Modal';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -91,7 +92,7 @@ export const Sizes: Story = {
     
     return (
       <>
-        <Group gap="sm">
+        <Inline gap="sm">
           {sizes.map(size => (
             <MantineButton 
               key={size} 
@@ -101,7 +102,7 @@ export const Sizes: Story = {
               {size.toUpperCase()}
             </MantineButton>
           ))}
-        </Group>
+        </Inline>
         
         {sizes.map(size => (
           <Modal
@@ -334,7 +335,7 @@ export const ConfirmationModals: Story = {
     
     return (
       <>
-        <Group gap="sm">
+        <Inline gap="sm">
           <MantineButton onClick={() => setConfirmOpened(true)} variant="outline">
             Basic Confirmation
           </MantineButton>
@@ -344,7 +345,7 @@ export const ConfirmationModals: Story = {
           <MantineButton onClick={() => setCustomOpened(true)} variant="outline">
             Custom Confirmation
           </MantineButton>
-        </Group>
+        </Inline>
         
         <ConfirmationModal
           opened={confirmOpened}
@@ -420,7 +421,7 @@ export const ModalStates: Story = {
     
     return (
       <>
-        <Group gap="sm">
+        <Inline gap="sm">
           <MantineButton onClick={() => setBasicOpened(true)} variant="outline">
             Basic Modal
           </MantineButton>
@@ -433,7 +434,7 @@ export const ModalStates: Story = {
           <MantineButton onClick={() => setNotCenteredOpened(true)} variant="outline">
             Not Centered
           </MantineButton>
-        </Group>
+        </Inline>
         
         <Modal
           opened={basicOpened}
@@ -540,10 +541,10 @@ export const ComplexContent: Story = {
             <div>
               <Title order={4} size="sm" fw={500} mb="sm">Personal Information</Title>
               <Stack gap="md">
-                <Group gap="md" grow>
+                <Inline gap="md" grow>
                   <TextInput label="First Name" placeholder="John" />
                   <TextInput label="Last Name" placeholder="Doe" />
-                </Group>
+                </Inline>
                 <TextInput label="Email" placeholder="john.doe@example.com" />
                 <TextInput label="Phone" placeholder="+1 (555) 123-4567" />
               </Stack>

@@ -1,10 +1,10 @@
 import { forwardRef } from 'react';
-import { ActionIcon, ActionIconProps } from '@mantine/core';
+import { ActionIcon as MantineActionIcon, ActionIconProps } from '@mantine/core';
 
-export interface DSActionButtonProps extends Omit<ActionIconProps, 'size' | 'variant'> {
-  /** ActionButton content (typically an icon) */
+export interface DSActionIconProps extends Omit<ActionIconProps, 'size' | 'variant'> {
+  /** ActionIcon content (typically an icon) */
   children: React.ReactNode;
-  /** Size of the action button */
+  /** Size of the action icon */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Whether the button is disabled */
   disabled?: boolean;
@@ -44,7 +44,7 @@ const sizeConfig = {
   },
 };
 
-export const ActionButton = forwardRef<HTMLButtonElement, DSActionButtonProps>(
+export const ActionIcon = forwardRef<HTMLButtonElement, DSActionIconProps>(
   ({ 
     children, 
     size = 'md', 
@@ -78,7 +78,7 @@ export const ActionButton = forwardRef<HTMLButtonElement, DSActionButtonProps>(
     const colors = getColors();
 
     return (
-      <ActionIcon
+      <MantineActionIcon
         ref={ref}
         variant="subtle"
         disabled={disabled}
@@ -101,9 +101,9 @@ export const ActionButton = forwardRef<HTMLButtonElement, DSActionButtonProps>(
         {...others}
       >
         {children}
-      </ActionIcon>
+      </MantineActionIcon>
     );
   }
 );
 
-ActionButton.displayName = 'ActionButton'; 
+ActionIcon.displayName = 'ActionIcon'; 

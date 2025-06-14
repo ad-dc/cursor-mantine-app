@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group } from '@mantine/core';
+import { Stack } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Kbd } from './Kbd';
 import { Title } from './Title';
 import { Text } from './Text';
@@ -81,46 +82,46 @@ export const CommonKeys: Story = {
     <Stack gap="md" align="flex-start">
       <div>
         <Text size="sm" fw={500} mb="xs">Single Keys:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>Esc</Kbd>
           <Kbd>Tab</Kbd>
           <Kbd>Enter</Kbd>
           <Kbd>Space</Kbd>
           <Kbd>Delete</Kbd>
           <Kbd>Backspace</Kbd>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="xs">Arrow Keys:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>↑</Kbd>
           <Kbd>↓</Kbd>
           <Kbd>←</Kbd>
           <Kbd>→</Kbd>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="xs">Function Keys:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>F1</Kbd>
           <Kbd>F2</Kbd>
           <Kbd>F5</Kbd>
           <Kbd>F12</Kbd>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="xs">Modifier Keys:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>⌘</Kbd>
           <Kbd>Ctrl</Kbd>
           <Kbd>Alt</Kbd>
           <Kbd>Shift</Kbd>
           <Kbd>⌥</Kbd>
           <Kbd>⇧</Kbd>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -138,50 +139,50 @@ export const KeyCombinations: Story = {
     <Stack gap="md" align="flex-start">
       <div>
         <Text size="sm" fw={500} mb="xs">Mac Shortcuts:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>⌘C</Kbd>
           <Kbd>⌘V</Kbd>
           <Kbd>⌘Z</Kbd>
           <Kbd>⌘⇧Z</Kbd>
           <Kbd>⌘K</Kbd>
           <Kbd>⌘⇧P</Kbd>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="xs">Windows/Linux Shortcuts:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>Ctrl+C</Kbd>
           <Kbd>Ctrl+V</Kbd>
           <Kbd>Ctrl+Z</Kbd>
           <Kbd>Ctrl+Shift+Z</Kbd>
           <Kbd>Ctrl+K</Kbd>
           <Kbd>Ctrl+Shift+P</Kbd>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="xs">Editor Shortcuts:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>Ctrl+/</Kbd>
           <Kbd>Ctrl+D</Kbd>
           <Kbd>Ctrl+F</Kbd>
           <Kbd>Ctrl+H</Kbd>
           <Kbd>Alt+↑</Kbd>
           <Kbd>Alt+↓</Kbd>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="xs">Browser Shortcuts:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           <Kbd>Ctrl+T</Kbd>
           <Kbd>Ctrl+W</Kbd>
           <Kbd>Ctrl+R</Kbd>
           <Kbd>Ctrl+Shift+T</Kbd>
           <Kbd>F5</Kbd>
           <Kbd>F12</Kbd>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),
@@ -210,10 +211,10 @@ export const InMenuItems: Story = {
           borderBottom: '1px solid var(--mantine-color-gray-2)',
           cursor: 'pointer'
         }}>
-          <Group gap="sm">
+          <Inline gap="sm">
             <span>🔍</span>
             <Text size="sm">Search</Text>
-          </Group>
+          </Inline>
           <Kbd size="xs">⌘K</Kbd>
         </div>
         
@@ -225,10 +226,10 @@ export const InMenuItems: Story = {
           borderBottom: '1px solid var(--mantine-color-gray-2)',
           cursor: 'pointer'
         }}>
-          <Group gap="sm">
+          <Inline gap="sm">
             <span>📋</span>
             <Text size="sm">Command Palette</Text>
-          </Group>
+          </Inline>
           <Kbd size="xs">⌘⇧P</Kbd>
         </div>
         
@@ -240,10 +241,10 @@ export const InMenuItems: Story = {
           borderBottom: '1px solid var(--mantine-color-gray-2)',
           cursor: 'pointer'
         }}>
-          <Group gap="sm">
+          <Inline gap="sm">
             <span>📁</span>
             <Text size="sm">Open File</Text>
-          </Group>
+          </Inline>
           <Kbd size="xs">⌘O</Kbd>
         </div>
         
@@ -254,10 +255,10 @@ export const InMenuItems: Story = {
           alignItems: 'center',
           cursor: 'pointer'
         }}>
-          <Group gap="sm">
+          <Inline gap="sm">
             <span>💾</span>
             <Text size="sm">Save</Text>
-          </Group>
+          </Inline>
           <Kbd size="xs">⌘S</Kbd>
         </div>
       </div>
@@ -311,54 +312,54 @@ export const HelpDocumentation: Story = {
       <div>
         <Title order={4} size="sm" fw={500} mb="sm">Navigation</Title>
         <Stack gap="xs">
-          <Group gap="md" justify="space-between">
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Go to dashboard</Text>
             <Kbd size="xs">G D</Kbd>
-          </Group>
-          <Group gap="md" justify="space-between">
+          </Inline>
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Go to settings</Text>
             <Kbd size="xs">G S</Kbd>
-          </Group>
-          <Group gap="md" justify="space-between">
+          </Inline>
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Go to profile</Text>
             <Kbd size="xs">G P</Kbd>
-          </Group>
+          </Inline>
         </Stack>
       </div>
       
       <div>
         <Title order={4} size="sm" fw={500} mb="sm">Actions</Title>
         <Stack gap="xs">
-          <Group gap="md" justify="space-between">
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Create new item</Text>
             <Kbd size="xs">C</Kbd>
-          </Group>
-          <Group gap="md" justify="space-between">
+          </Inline>
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Edit selected item</Text>
             <Kbd size="xs">E</Kbd>
-          </Group>
-          <Group gap="md" justify="space-between">
+          </Inline>
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Delete selected item</Text>
             <Kbd size="xs">Del</Kbd>
-          </Group>
+          </Inline>
         </Stack>
       </div>
       
       <div>
         <Title order={4} size="sm" fw={500} mb="sm">Search & Filter</Title>
         <Stack gap="xs">
-          <Group gap="md" justify="space-between">
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Global search</Text>
             <Kbd size="xs">⌘K</Kbd>
-          </Group>
-          <Group gap="md" justify="space-between">
+          </Inline>
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Filter current view</Text>
             <Kbd size="xs">F</Kbd>
-          </Group>
-          <Group gap="md" justify="space-between">
+          </Inline>
+          <Inline gap="md" justify="space-between">
             <Text size="sm">Clear filters</Text>
             <Kbd size="xs">⌘⌫</Kbd>
-          </Group>
+          </Inline>
         </Stack>
       </div>
     </Stack>
@@ -377,7 +378,7 @@ export const GameControls: Story = {
     <Stack gap="lg" w={500}>
       <div>
         <Title order={4} size="sm" fw={500} mb="sm">Movement</Title>
-        <Group gap="sm" justify="center">
+        <Inline gap="sm" justify="center">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '4px', width: 'fit-content' }}>
             <div></div>
             <Kbd>W</Kbd>
@@ -386,7 +387,7 @@ export const GameControls: Story = {
             <Kbd>S</Kbd>
             <Kbd>D</Kbd>
           </div>
-        </Group>
+        </Inline>
         <Text size="sm" ta="center" c="dimmed" mt="xs">
           Use WASD keys to move your character
         </Text>
@@ -394,38 +395,38 @@ export const GameControls: Story = {
       
       <div>
         <Title order={4} size="sm" fw={500} mb="sm">Actions</Title>
-        <Group gap="md" justify="space-between">
+        <Inline gap="md" justify="space-between">
           <Text size="sm">Jump</Text>
           <Kbd>Space</Kbd>
-        </Group>
-        <Group gap="md" justify="space-between">
+        </Inline>
+        <Inline gap="md" justify="space-between">
           <Text size="sm">Run</Text>
           <Kbd>Shift</Kbd>
-        </Group>
-        <Group gap="md" justify="space-between">
+        </Inline>
+        <Inline gap="md" justify="space-between">
           <Text size="sm">Interact</Text>
           <Kbd>E</Kbd>
-        </Group>
-        <Group gap="md" justify="space-between">
+        </Inline>
+        <Inline gap="md" justify="space-between">
           <Text size="sm">Inventory</Text>
           <Kbd>I</Kbd>
-        </Group>
+        </Inline>
       </div>
       
       <div>
         <Title order={4} size="sm" fw={500} mb="sm">Combat</Title>
-        <Group gap="md" justify="space-between">
+        <Inline gap="md" justify="space-between">
           <Text size="sm">Attack</Text>
           <Kbd>Left Click</Kbd>
-        </Group>
-        <Group gap="md" justify="space-between">
+        </Inline>
+        <Inline gap="md" justify="space-between">
           <Text size="sm">Block</Text>
           <Kbd>Right Click</Kbd>
-        </Group>
-        <Group gap="md" justify="space-between">
+        </Inline>
+        <Inline gap="md" justify="space-between">
           <Text size="sm">Special ability</Text>
           <Kbd>Q</Kbd>
-        </Group>
+        </Inline>
       </div>
     </Stack>
   ),

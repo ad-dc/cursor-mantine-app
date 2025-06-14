@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
-import { Group, Text, ActionIcon } from "@mantine/core";
+import { Text, ActionIcon } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Button } from '@/components/DesignSystem';
 import { IconX } from '@tabler/icons-react';
 import { RiFlashlightFill } from '@remixicon/react';
@@ -25,7 +26,7 @@ const CustomToolbarAlertBannerContent = ({
   
 
   return (
-    <Group
+    <Inline
       gap="sm"
       align="center"
       style={{
@@ -66,7 +67,7 @@ const CustomToolbarAlertBannerContent = ({
       <Text size="sm" c="white" fw={500}>
         {selectedRowsText}
       </Text>
-    </Group>
+    </Inline>
   );
 };
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack, Group, Box } from '@mantine/core';
+import { Stack, Box } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem';
 import { Chip } from './Chip';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';
@@ -54,13 +55,13 @@ export const Default: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <Group gap="sm">
+    <Inline gap="sm">
       <Chip variant="default">Default</Chip>
       <Chip variant="info">Info</Chip>
       <Chip variant="success">Success</Chip>
       <Chip variant="danger">Danger</Chip>
       <Chip variant="pending">Pending</Chip>
-    </Group>
+    </Inline>
   ),
   parameters: {
     docs: {
@@ -74,13 +75,13 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <Stack gap="md">
-      <Group gap="sm">
+      <Inline gap="sm">
         <Chip size="xs" variant="info">Extra Small</Chip>
         <Chip size="sm" variant="info">Small</Chip>
         <Chip size="md" variant="info">Medium</Chip>
         <Chip size="lg" variant="info">Large</Chip>
         <Chip size="xl" variant="info">Extra Large</Chip>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -95,33 +96,33 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <Stack gap="md">
-      <Group gap="sm">
+      <Inline gap="sm">
         <Text size="sm" fw={500}>Default State:</Text>
         <Chip variant="info">Normal</Chip>
         <Chip variant="success">Normal</Chip>
         <Chip variant="danger">Normal</Chip>
-      </Group>
+      </Inline>
       
-      <Group gap="sm">
+      <Inline gap="sm">
         <Text size="sm" fw={500}>Selected State:</Text>
         <Chip variant="info" checked>Selected</Chip>
         <Chip variant="success" checked>Selected</Chip>
         <Chip variant="danger" checked>Selected</Chip>
-      </Group>
+      </Inline>
       
-      <Group gap="sm">
+      <Inline gap="sm">
         <Text size="sm" fw={500}>Disabled State:</Text>
         <Chip variant="info" disabled>Disabled</Chip>
         <Chip variant="success" disabled>Disabled</Chip>
         <Chip variant="danger" disabled>Disabled</Chip>
-      </Group>
+      </Inline>
       
-      <Group gap="sm">
+      <Inline gap="sm">
         <Text size="sm" fw={500}>Disabled + Selected:</Text>
         <Chip variant="info" disabled checked>Disabled Selected</Chip>
         <Chip variant="success" disabled checked>Disabled Selected</Chip>
         <Chip variant="danger" disabled checked>Disabled Selected</Chip>
-      </Group>
+      </Inline>
     </Stack>
   ),
   parameters: {
@@ -157,7 +158,7 @@ export const SelectableChips: Story = {
     return (
       <Stack gap="md" w={400}>
         <Text size="sm" fw={500}>Select Technologies:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           {technologies.map(tech => (
             <Chip
               key={tech.value}
@@ -168,7 +169,7 @@ export const SelectableChips: Story = {
               {tech.label}
             </Chip>
           ))}
-        </Group>
+        </Inline>
         <Text size="sm" c="dimmed">
           Selected: {selectedChips.length > 0 ? selectedChips.join(', ') : 'None'}
         </Text>
@@ -207,7 +208,7 @@ export const FilterChips: Story = {
     return (
       <Stack gap="md" w={400}>
         <Text size="sm" fw={500}>Filter by Status:</Text>
-        <Group gap="sm">
+        <Inline gap="sm">
           {filters.map(filter => (
             <Chip
               key={filter.value}
@@ -218,7 +219,7 @@ export const FilterChips: Story = {
               {filter.label}
             </Chip>
           ))}
-        </Group>
+        </Inline>
         <Text size="sm" c="dimmed">
           Active filters: {activeFilters.length > 0 ? activeFilters.join(', ') : 'None'}
         </Text>
@@ -239,35 +240,35 @@ export const TagChips: Story = {
     <Stack gap="lg" w={500}>
       <Box>
         <Text size="sm" fw={500} mb="xs">Article Tags:</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="info" size="sm">JavaScript</Chip>
           <Chip variant="info" size="sm">React</Chip>
           <Chip variant="success" size="sm">Tutorial</Chip>
           <Chip variant="pending" size="sm">Beginner</Chip>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="xs">Project Categories:</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="danger" size="sm">Urgent</Chip>
           <Chip variant="info" size="sm">Frontend</Chip>
           <Chip variant="success" size="sm">Backend</Chip>
           <Chip variant="default" size="sm">Design</Chip>
           <Chip variant="pending" size="sm">Review</Chip>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="xs">Skills:</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="info">TypeScript</Chip>
           <Chip variant="success">Node.js</Chip>
           <Chip variant="info">Python</Chip>
           <Chip variant="pending">GraphQL</Chip>
           <Chip variant="success">Docker</Chip>
           <Chip variant="danger">Redis</Chip>
-        </Group>
+        </Inline>
       </Box>
     </Stack>
   ),
@@ -297,7 +298,7 @@ export const ControlledExample: Story = {
       <Stack gap="lg" w={500}>
         <Box>
           <Text size="sm" fw={500} mb="sm">Priority Levels:</Text>
-          <Group gap="sm">
+          <Inline gap="sm">
             <Chip
               variant="danger"
               checked={priorities.includes('critical')}
@@ -326,12 +327,12 @@ export const ControlledExample: Story = {
             >
               Low
             </Chip>
-          </Group>
+          </Inline>
         </Box>
         
         <Box>
           <Text size="sm" fw={500} mb="sm">Issue Categories:</Text>
-          <Group gap="sm">
+          <Inline gap="sm">
             <Chip
               variant="danger"
               checked={categories.includes('bug')}
@@ -360,12 +361,12 @@ export const ControlledExample: Story = {
             >
               Documentation
             </Chip>
-          </Group>
+          </Inline>
         </Box>
         
         <Box>
           <Text size="sm" fw={500} mb="sm">Assignees:</Text>
-          <Group gap="sm">
+          <Inline gap="sm">
             <Chip
               variant="info"
               checked={assignees.includes('john')}
@@ -387,7 +388,7 @@ export const ControlledExample: Story = {
             >
               Bob Johnson
             </Chip>
-          </Group>
+          </Inline>
         </Box>
         
         <Box style={{ 
@@ -420,53 +421,53 @@ export const UseCases: Story = {
       
       <Box>
         <Text size="sm" fw={500} mb="sm">1. Content Tags (Non-interactive):</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="info" size="sm">React</Chip>
           <Chip variant="success" size="sm">TypeScript</Chip>
           <Chip variant="pending" size="sm">Tutorial</Chip>
           <Chip variant="default" size="sm">Beginner</Chip>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="sm">2. Status Indicators:</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="success">Active</Chip>
           <Chip variant="pending">Pending</Chip>
           <Chip variant="danger">Inactive</Chip>
           <Chip variant="info">Processing</Chip>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="sm">3. Multi-select Filters:</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="info" checked>Frontend</Chip>
           <Chip variant="success">Backend</Chip>
           <Chip variant="pending" checked>Mobile</Chip>
           <Chip variant="default">DevOps</Chip>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="sm">4. Skill Tags:</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="info" size="sm">JavaScript</Chip>
           <Chip variant="info" size="sm">Python</Chip>
           <Chip variant="success" size="sm">Docker</Chip>
           <Chip variant="success" size="sm">AWS</Chip>
           <Chip variant="pending" size="sm">GraphQL</Chip>
-        </Group>
+        </Inline>
       </Box>
       
       <Box>
         <Text size="sm" fw={500} mb="sm">5. Priority Labels:</Text>
-        <Group gap="xs">
+        <Inline gap="xs">
           <Chip variant="danger">Critical</Chip>
           <Chip variant="pending">High</Chip>
           <Chip variant="info">Medium</Chip>
           <Chip variant="default">Low</Chip>
-        </Group>
+        </Inline>
       </Box>
     </Stack>
   ),
