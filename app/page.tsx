@@ -1,7 +1,7 @@
 'use client';
 
 import '@mantine/core/styles.layer.css';
-import { ActionIcon, Title as MantineTitle, Text as MantineText, rem, Menu, Switch as MantineSwitch,Divider, Stack,FileInput as MantineFileInput } from '@mantine/core';
+import { Title as MantineTitle, Text as MantineText, rem, Menu, Switch as MantineSwitch,Divider, Stack,FileInput as MantineFileInput } from '@mantine/core';
 import { Grid } from '@/components/DesignSystem';
 import { Inline } from '@/components/DesignSystem';
 import { useDisclosure } from '@mantine/hooks';

@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { DashboardWidget } from './DashboardWidget';
 import { Text } from '../../Typography/Text';
-import { Stack } from '../../Layout';
+import { Title } from '../../Typography/Title';
+import { Stack, Grid } from '../../Layout';
+import { List, Table } from '../../DataDisplay';
+import { Pill } from '../../DataDisplay/Pill';
+import { KeyInsight } from '../KeyInsights';
 import { useState } from 'react';
 
 const meta: Meta<typeof DashboardWidget> = {
@@ -13,9 +17,9 @@ const meta: Meta<typeof DashboardWidget> = {
       description: {
         component: `
 A flexible dashboard widget container that supports:
-- **Header**: Title, subtitle, optional switch, and actions menu
+- **Header**: Title, optional switch, and actions menu
 - **Content Area**: Any React content (charts, tables, text, etc.)
-- **Optional Controls**: Combobox for filtering/selection
+- **Optional Controls**: Header select for filtering/selection
 - **Footer**: Optional action links with arrows
 
 Built on top of our Card component with consistent Design System styling.
@@ -27,10 +31,6 @@ Built on top of our Card component with consistent Design System styling.
     title: {
       control: 'text',
       description: 'Widget title',
-    },
-    subtitle: {
-      control: 'text',
-      description: 'Optional subtitle or description',
     },
     spacing: {
       control: 'select',
@@ -48,32 +48,29 @@ type Story = StoryObj<typeof DashboardWidget>;
 export const Basic: Story = {
   args: {
     title: 'A widget title',
+    footerLinks: [
+      {
+        label: 'Link 1',
+        onClick: () => alert('Link 1 clicked'),
+      },
+      {
+        label: 'Link 2',
+        onClick: () => alert('Link 2 clicked'),
+      },
+    ],
+
     children: (
       <Stack gap="sm">
-        <Text>This is a slot. To use it:</Text>
-        <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
-          <li>Create a local component with autolayout on</li>
-          <li>Switch out this slot with that component using the component instance switcher</li>
-        </ul>
+        <Title order={5}>This is the content:</Title>
+        <List spacing="xs">
+          <List.Item>Dashboard widgets are a great way to display data in a structured way.</List.Item>
+          <List.Item>Content supports any React component, including charts, tables, metrics, or any other components.</List.Item>
+        </List>
       </Stack>
     ),
   },
 };
 
-export const WithSubtitle: Story = {
-  args: {
-    title: 'Analytics Dashboard',
-    subtitle: 'Real-time performance metrics',
-    children: (
-      <Stack gap="md">
-        <Text>Your dashboard content goes here.</Text>
-        <Text size="sm" c="dimmed">
-          This could be charts, tables, metrics, or any other React components.
-        </Text>
-      </Stack>
-    ),
-  },
-};
 
 // ========================== WITH CONTROLS ==========================
 
@@ -83,18 +80,18 @@ export const WithSwitch: Story = {
     
     return (
       <DashboardWidget
-        title="Live Monitoring"
-        subtitle="System health dashboard"
+        title="Data"
+        
         switch={{
-          label: "Live updates",
+          label: "Sync all data",
           checked: enabled,
           onChange: setEnabled,
         }}
       >
         <Stack gap="sm">
-          <Text>Live updates: {enabled ? 'ON' : 'OFF'}</Text>
+          <Text>Sync all data: {enabled ? 'ON' : 'OFF'}</Text>
           <Text size="sm" c="dimmed">
-            Toggle the switch to enable/disable real-time data updates.
+            Toggle the switch to enable/disable sync all data.
           </Text>
         </Stack>
       </DashboardWidget>
@@ -105,7 +102,6 @@ export const WithSwitch: Story = {
 export const WithActionsMenu: Story = {
   args: {
     title: 'User Analytics',
-    subtitle: 'Weekly performance report',
     actionsMenu: {
       sections: [
         {
@@ -144,12 +140,11 @@ export const WithActionsMenu: Story = {
   },
 };
 
-export const WithCombobox: Story = {
+export const WithHeaderSelect: Story = {
   args: {
     title: 'Sales Report',
-    subtitle: 'Filter by time period',
-    combobox: {
-      label: 'Time Period',
+    
+    headerSelect: {
       placeholder: 'Select time period',
       data: [
         { value: 'today', label: 'Today' },
@@ -163,7 +158,7 @@ export const WithCombobox: Story = {
       <Stack gap="sm">
         <Text>Sales data will be filtered based on your selection above.</Text>
         <Text size="sm" c="dimmed">
-          The combobox is searchable - try typing to filter options.
+          The header select is searchable - try typing to filter options.
         </Text>
       </Stack>
     ),
@@ -177,10 +172,7 @@ export const WithBorderlessSelect: Story = {
     return (
       <DashboardWidget
         title="Revenue Analytics"
-        subtitle="Performance metrics"
-        combobox={{
-          borderless: true,
-          inHeader: true,
+        headerSelect={{
           placeholder: 'This Month',
           data: [
             { value: 'today', label: 'Today' },
@@ -198,7 +190,7 @@ export const WithBorderlessSelect: Story = {
         <Stack gap="sm">
           <Text>Selected period: <strong>{selectedPeriod || 'None'}</strong></Text>
           <Text size="sm" c="dimmed">
-            The select with borderless option is positioned in the top-right header, replacing the actions menu.
+            The header select is positioned in the top-right header, replacing the actions menu.
           </Text>
         </Stack>
       </DashboardWidget>
@@ -244,15 +236,12 @@ export const FullFeatured: Story = {
     return (
       <DashboardWidget
         title="Advanced Analytics"
-        subtitle="Comprehensive system monitoring"
         switch={{
           label: "Live updates",
           checked: liveUpdates,
           onChange: setLiveUpdates,
         }}
-        combobox={{
-          borderless: true,
-          inHeader: true,
+        headerSelect={{
           placeholder: 'Production Database',
           data: [
             { value: 'production', label: 'Production Database' },
@@ -290,7 +279,7 @@ export const FullFeatured: Story = {
             <Text size="sm">• Network I/O: 1.2 GB/s</Text>
           </Stack>
           <Text size="sm" c="dimmed">
-            The select with borderless option in the header replaces the actions menu for a cleaner look.
+            The header select replaces the actions menu for a cleaner look.
           </Text>
         </Stack>
       </DashboardWidget>
@@ -303,7 +292,6 @@ export const FullFeatured: Story = {
 export const WithTableContent: Story = {
   args: {
     title: 'Recent Transactions',
-    subtitle: 'Last 10 transactions',
     footerLinks: [
       {
         label: 'View All Transactions',
@@ -311,42 +299,39 @@ export const WithTableContent: Story = {
       },
     ],
     children: (
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ borderBottom: '1px solid var(--mantine-color-gray-3)' }}>
-              <th style={{ textAlign: 'left', padding: '8px 0', fontSize: '14px', fontWeight: 500 }}>ID</th>
-              <th style={{ textAlign: 'left', padding: '8px 0', fontSize: '14px', fontWeight: 500 }}>Amount</th>
-              <th style={{ textAlign: 'left', padding: '8px 0', fontSize: '14px', fontWeight: 500 }}>Status</th>
-              <th style={{ textAlign: 'left', padding: '8px 0', fontSize: '14px', fontWeight: 500 }}>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              { id: '#1234', amount: '$125.00', status: 'Completed', date: '2024-01-15' },
-              { id: '#1235', amount: '$89.50', status: 'Pending', date: '2024-01-15' },
-              { id: '#1236', amount: '$234.75', status: 'Completed', date: '2024-01-14' },
-            ].map((row, index) => (
-              <tr key={index} style={{ borderBottom: '1px solid var(--mantine-color-gray-1)' }}>
-                <td style={{ padding: '8px 0', fontSize: '14px' }}>{row.id}</td>
-                <td style={{ padding: '8px 0', fontSize: '14px' }}>{row.amount}</td>
-                <td style={{ padding: '8px 0', fontSize: '14px' }}>
-                  <span style={{
-                    padding: '2px 8px',
-                    borderRadius: '4px',
-                    fontSize: '12px',
-                    backgroundColor: row.status === 'Completed' ? 'var(--mantine-color-green-1)' : 'var(--mantine-color-yellow-1)',
-                    color: row.status === 'Completed' ? 'var(--mantine-color-green-7)' : 'var(--mantine-color-yellow-7)',
-                  }}>
-                    {row.status}
-                  </span>
-                </td>
-                <td style={{ padding: '8px 0', fontSize: '14px', color: 'var(--mantine-color-gray-6)' }}>{row.date}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>ID</Table.Th>
+            <Table.Th>Amount</Table.Th>
+            <Table.Th>Status</Table.Th>
+            <Table.Th>Date</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          {[
+            { id: '#1234', amount: '$125.00', status: 'Completed', date: '2024-01-15' },
+            { id: '#1235', amount: '$89.50', status: 'Pending', date: '2024-01-15' },
+            { id: '#1236', amount: '$234.75', status: 'Completed', date: '2024-01-14' },
+          ].map((row, index) => (
+            <Table.Tr key={index}>
+              <Table.Td>{row.id}</Table.Td>
+              <Table.Td>{row.amount}</Table.Td>
+              <Table.Td>
+                <Pill
+                  color={row.status === 'Completed' ? 'green' : 'yellow'}
+                  size="sm"
+                >
+                  {row.status}
+                </Pill>
+              </Table.Td>
+              <Table.Td style={{ color: 'var(--mantine-color-gray-6)' }}>
+                {row.date}
+              </Table.Td>
+            </Table.Tr>
+          ))}
+        </Table.Tbody>
+      </Table>
     ),
   },
 };
@@ -354,8 +339,7 @@ export const WithTableContent: Story = {
 export const WithMetricsContent: Story = {
   args: {
     title: 'Key Performance Indicators',
-    subtitle: 'Current month performance',
-    combobox: {
+    headerSelect: {
       placeholder: 'Select metric type',
       data: ['Revenue', 'Users', 'Conversion', 'Retention'],
     },
@@ -400,7 +384,6 @@ export const WithMetricsContent: Story = {
 export const CompactSpacing: Story = {
   args: {
     title: 'Compact Widget',
-    subtitle: 'Minimal spacing',
     spacing: 'xs',
     children: (
       <Text>This widget uses compact spacing for dense layouts.</Text>
@@ -411,7 +394,6 @@ export const CompactSpacing: Story = {
 export const GenerousSpacing: Story = {
   args: {
     title: 'Spacious Widget',
-    subtitle: 'Generous spacing',
     spacing: 'xl',
     children: (
       <Text>This widget uses generous spacing for a more relaxed layout.</Text>
@@ -419,14 +401,105 @@ export const GenerousSpacing: Story = {
   },
 };
 
-export const WithBothSelectAndActions: Story = {
-  render: () => {
-    const [selectedPeriod, setSelectedPeriod] = useState<string | null>('month');
-    
-    return (
+export const WithActionsMenuOnly: Story = {
+  args: {
+    title: "Analytics Dashboard",
+    actionsMenu: {
+      sections: [
+        {
+          items: [
+            {
+              id: 'export',
+              label: 'Export Data',
+              onClick: () => alert('Export clicked'),
+            },
+            {
+              id: 'settings',
+              label: 'Settings',
+              onClick: () => alert('Settings clicked'),
+            },
+          ],
+        },
+      ],
+    },
+    children: (
+      <Stack gap="sm">
+        <Text>This widget shows the actions menu in the top-right corner.</Text>
+        <Text size="sm" c="dimmed">
+          The actions menu appears when no header select is configured.
+        </Text>
+      </Stack>
+    ),
+  },
+};
+
+export const ConsistentFooterSpacing: Story = {
+  render: () => (
+    <Grid cols={2} spacing="md">
       <DashboardWidget
-        title="Analytics Dashboard"
-        subtitle="With both select and actions menu"
+        title="Widget Without Links"
+      >
+        <Stack gap="sm">
+          <Text>This widget has no footer links.</Text>
+          <Text size="sm" c="dimmed">
+            The footer area still takes up space to maintain consistent heights across widgets.
+          </Text>
+        </Stack>
+      </DashboardWidget>
+      
+      <DashboardWidget
+        title="Widget With Links"
+        footerLinks={[
+          {
+            label: 'View Details',
+            onClick: () => alert('View Details clicked'),
+          },
+          {
+            label: 'Export Report',
+            onClick: () => alert('Export Report clicked'),
+          },
+        ]}
+      >
+        <Stack gap="sm">
+          <Text>This widget has footer links.</Text>
+          <Text size="sm" c="dimmed">
+            Both widgets maintain the same overall height due to consistent footer spacing.
+          </Text>
+        </Stack>
+      </DashboardWidget>
+    </Grid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates how the footer area always takes up space, ensuring consistent widget heights whether links are present or not.',
+      },
+    },
+  },
+};
+
+export const ScrollableContent: Story = {
+  render: () => (
+    <Grid cols={2} spacing="md" style={{ height: '400px' }}>
+      <DashboardWidget
+        title="Short Content"
+        footerLinks={[
+          {
+            label: 'View Details',
+            onClick: () => alert('View Details clicked'),
+          },
+        ]}
+      >
+        <Stack gap="sm">
+          <Text>This widget has minimal content.</Text>
+          <Text size="sm" c="dimmed">
+            Footer is fixed at the bottom.
+          </Text>
+        </Stack>
+      </DashboardWidget>
+      
+      <DashboardWidget
+        title="Long Scrollable Content"
         actionsMenu={{
           sections: [
             {
@@ -436,38 +509,319 @@ export const WithBothSelectAndActions: Story = {
                   label: 'Export Data',
                   onClick: () => alert('Export clicked'),
                 },
-                {
-                  id: 'settings',
-                  label: 'Settings',
-                  onClick: () => alert('Settings clicked'),
-                },
               ],
             },
           ],
         }}
-        combobox={{
-          borderless: true,
-          // inHeader: false (default) - select appears below header
-          placeholder: 'Select time period',
-          data: [
-            { value: 'today', label: 'Today' },
-            { value: 'week', label: 'This Week' },
-            { value: 'month', label: 'This Month' },
-            { value: 'quarter', label: 'This Quarter' },
-          ],
-          value: selectedPeriod,
-          onChange: setSelectedPeriod,
-          searchable: true,
-          clearable: true,
-        }}
+        footerLinks={[
+          {
+            label: 'View Full Report',
+            onClick: () => alert('View Full Report clicked'),
+          },
+          {
+            label: 'Export Data',
+            onClick: () => alert('Export Data clicked'),
+          },
+        ]}
       >
         <Stack gap="sm">
-          <Text>Selected period: <strong>{selectedPeriod || 'None'}</strong></Text>
-          <Text size="sm" c="dimmed">
-            When the select is not in the header, both actions menu and select can coexist.
+          <Text fw={500}>This widget has a lot of content that will scroll:</Text>
+          <List spacing="xs">
+            {Array.from({ length: 20 }, (_, i) => (
+              <List.Item key={i}>
+                <Text size="sm">List item #{i + 1} - This is a sample item with some descriptive text that shows how content flows in a scrollable widget.</Text>
+              </List.Item>
+            ))}
+          </List>
+          <Text size="sm" c="dimmed" mt="md">
+            Notice how the footer links stay fixed at the bottom while this content area scrolls.
           </Text>
+          <KeyInsight
+            title="Bottom Metric"
+            value="99%"
+            subtitle="This metric is at the bottom of the scrollable content"
+          />
         </Stack>
       </DashboardWidget>
+    </Grid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+Demonstrates how DashboardWidget handles content overflow:
+
+**Fixed Footer**: Footer links are always positioned at the bottom of the widget
+**Scrollable Content**: When content exceeds the available space, the main content area becomes scrollable
+**Consistent Layout**: Both widgets maintain the same overall structure regardless of content length
+
+Try scrolling in the right widget to see the footer behavior in action.
+        `,
+      },
+    },
+  },
+};
+
+// ========================== SALES DASHBOARD ==========================
+
+export const SalesDashboard: Story = {
+  render: () => {
+    const [liveUpdates, setLiveUpdates] = useState(true);
+    const [selectedPeriod, setSelectedPeriod] = useState<string | null>('month');
+    const [selectedRegion, setSelectedRegion] = useState<string | null>('all');
+    
+    return (
+      <div style={{ 
+        padding: '20px',
+        backgroundColor: 'var(--mantine-color-gray-0)',
+        minHeight: '100vh'
+      }}>
+        <Grid 
+          cols={2} 
+          spacing="lg"
+          style={{
+            gridTemplateRows: 'repeat(3, 275px)', // Fixed height rows for lg KeyInsights
+          }}
+        >
+        {/* Row 1 */}
+        <DashboardWidget
+          title="Revenue Overview"
+          switch={{
+            label: "Live updates",
+            checked: liveUpdates,
+            onChange: setLiveUpdates,
+          }}
+          actionsMenu={{
+            sections: [
+              {
+                items: [
+                  {
+                    id: 'export',
+                    label: 'Export Revenue Data',
+                    onClick: () => alert('Exporting revenue data...'),
+                  },
+                  {
+                    id: 'settings',
+                    label: 'Configure Metrics',
+                    onClick: () => alert('Opening configuration...'),
+                  },
+                ],
+              },
+            ],
+          }}
+          footerLinks={[
+            {
+              label: 'View Detailed Report',
+              onClick: () => alert('Opening detailed revenue report...'),
+            },
+          ]}
+        >
+          <KeyInsight
+            size="lg"
+            title="Total Revenue"
+            value="$847,392"
+            subtitle="+18.2% from last month"
+          />
+        </DashboardWidget>
+
+        <DashboardWidget
+          title="Sales Performance"
+          headerSelect={{
+            placeholder: 'This Month',
+            data: [
+              { value: 'today', label: 'Today' },
+              { value: 'week', label: 'This Week' },
+              { value: 'month', label: 'This Month' },
+              { value: 'quarter', label: 'This Quarter' },
+              { value: 'year', label: 'This Year' },
+            ],
+            value: selectedPeriod,
+            onChange: setSelectedPeriod,
+            searchable: true,
+            clearable: true,
+          }}
+          footerLinks={[
+            {
+              label: 'Sales Analytics',
+              onClick: () => alert('Opening sales analytics...'),
+            },
+            {
+              label: 'Team Performance',
+              onClick: () => alert('Opening team performance...'),
+            },
+          ]}
+        >
+          <KeyInsight
+            size="lg"
+            title="New Deals"
+            value="47"
+            subtitle="+12 this week"
+          />
+        </DashboardWidget>
+
+        <DashboardWidget
+          title="Customer Metrics"
+          actionsMenu={{
+            sections: [
+              {
+                items: [
+                  {
+                    id: 'export',
+                    label: 'Export Customer Data',
+                    onClick: () => alert('Exporting customer data...'),
+                  },
+                  {
+                    id: 'segment',
+                    label: 'Customer Segmentation',
+                    onClick: () => alert('Opening segmentation...'),
+                  },
+                ],
+              },
+            ],
+          }}
+          footerLinks={[
+            {
+              label: 'Customer Database',
+              onClick: () => alert('Opening customer database...'),
+            },
+          ]}
+        >
+          <KeyInsight
+            size="lg"
+            title="Active Customers"
+            value="1,847"
+            subtitle="+156 new this month"
+          />
+        </DashboardWidget>
+
+        {/* Row 2 */}
+        <DashboardWidget
+          title="Regional Sales"
+          footerLinks={[
+            {
+              label: 'Regional Analysis',
+              onClick: () => alert('Opening regional analysis...'),
+            },
+          ]}
+        >
+          <KeyInsight
+            size="lg"
+            title="Top Region"
+            value="North America"
+            subtitle="$312,847 (+15.2%)"
+          />
+        </DashboardWidget>
+
+        <DashboardWidget
+          title="Top Products"
+          actionsMenu={{
+            sections: [
+              {
+                items: [
+                  {
+                    id: 'export',
+                    label: 'Export Product Data',
+                    onClick: () => alert('Exporting product data...'),
+                  },
+                  {
+                    id: 'inventory',
+                    label: 'Check Inventory',
+                    onClick: () => alert('Opening inventory...'),
+                  },
+                ],
+              },
+            ],
+          }}
+          footerLinks={[
+            {
+              label: 'Product Catalog',
+              onClick: () => alert('Opening product catalog...'),
+            },
+            {
+              label: 'Inventory Report',
+              onClick: () => alert('Opening inventory report...'),
+            },
+          ]}
+        >
+          <KeyInsight
+            size="lg"
+            title="Best Seller"
+            value="Enterprise License"
+            subtitle="247 units sold ($284,392)"
+          />
+        </DashboardWidget>
+
+        {/* Row 3 */}
+        <DashboardWidget
+          title="Sales Pipeline"
+          switch={{
+            label: "Auto-refresh",
+            checked: liveUpdates,
+            onChange: setLiveUpdates,
+          }}
+          actionsMenu={{
+            sections: [
+              {
+                items: [
+                  {
+                    id: 'forecast',
+                    label: 'Sales Forecast',
+                    onClick: () => alert('Opening sales forecast...'),
+                  },
+                  {
+                    id: 'pipeline',
+                    label: 'Manage Pipeline',
+                    onClick: () => alert('Opening pipeline management...'),
+                  },
+                ],
+              },
+            ],
+          }}
+          footerLinks={[
+            {
+              label: 'CRM System',
+              onClick: () => alert('Opening CRM system...'),
+            },
+            {
+              label: 'Pipeline Report',
+              onClick: () => alert('Opening pipeline report...'),
+            },
+          ]}
+        >
+          <KeyInsight
+            size="lg"
+            title="Qualified Leads"
+            value="342"
+            subtitle="64 new this week"
+          />
+        </DashboardWidget>
+        </Grid>
+      </div>
     );
+  },
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: `
+A comprehensive sales dashboard demonstrating DashboardWidget components in a realistic grid layout. 
+
+**Features demonstrated:**
+- **Grid Layout**: 2x3 grid showing 6 different widgets
+- **KeyInsight Components**: Used for displaying KPIs and metrics
+- **Full Featured Widgets**: Each widget uses different combinations of features
+- **Interactive Controls**: Switches, header selects, and action menus
+- **Sales Data Theme**: Realistic sales metrics, regional data, and pipeline information
+- **Consistent Styling**: Cohesive design with proper spacing and colors
+
+**Widget Features Used:**
+- Live update switches for real-time data
+- Header selects for filtering
+- Action menus for additional functionality
+- Footer links for navigation
+- Mixed content types (KeyInsights, lists, custom layouts)
+        `,
+      },
+    },
   },
 }; 

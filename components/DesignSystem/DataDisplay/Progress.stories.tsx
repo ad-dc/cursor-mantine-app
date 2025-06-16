@@ -7,7 +7,7 @@ import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
 
 const meta: Meta<typeof Progress> = {
-  title: 'Design System/DataDisplay/Progress',
+  title: 'Design System/Data Display/Progress',
   component: Progress,
   parameters: {
     layout: 'centered',

@@ -7,7 +7,7 @@ import { Text } from '../Typography/Text';
 import { RiStarLine, RiShieldCheckLine, RiLightbulbLine, RiHeartLine } from '@remixicon/react';
 
 const meta: Meta<typeof Alert> = {
-  title: 'Design System/DataDisplay/Alert',
+  title: 'Design System/Data Display/Alert',
   component: Alert,
   parameters: {
     layout: 'centered',

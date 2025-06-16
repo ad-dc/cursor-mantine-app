@@ -4,7 +4,6 @@ import { Stack, Inline, Box } from '../../Layout';
 import { Title } from '../../Typography/Title';
 import { Text } from '../../Typography/Text';
 import { Switch } from '../../Inputs/Switch';
-import { SearchableSelect } from '../../Combobox/SearchableSelect';
 import { Select } from '../../Combobox/Select';
 import { Menu } from '../../Overlays/Menu';
 import { ActionIcon } from '../../Buttons/ActionIcon';
@@ -24,8 +23,6 @@ export interface DashboardWidgetLink {
 export interface DashboardWidgetProps {
   /** Widget title */
   title: string;
-  /** Optional subtitle or description */
-  subtitle?: string;
   
   // ==================== HEADER CONTROLS ====================
   /** Optional switch with label and handler */
@@ -53,14 +50,11 @@ export interface DashboardWidgetProps {
   children: React.ReactNode;
   
   // ==================== OPTIONAL CONTROLS ====================
-  /** Optional combobox for filtering/selection */
-  combobox?: {
-    label?: string;
+  /** Optional select dropdown in the header (top-right) */
+  headerSelect?: {
     placeholder?: string;
     data: string[] | { value: string; label: string }[];
     disabled?: boolean;
-    /** Whether to use borderless style (default: false) */
-    borderless?: boolean;
     /** Current selected value (for controlled component) */
     value?: string | null;
     /** Change handler (for controlled component) */
@@ -69,8 +63,6 @@ export interface DashboardWidgetProps {
     searchable?: boolean;
     /** Whether the select is clearable */
     clearable?: boolean;
-    /** Position the select in the header (top-right) instead of below header */
-    inHeader?: boolean;
   };
   
   /** Optional footer links */
@@ -105,7 +97,6 @@ export interface DashboardWidgetProps {
  * // Widget with all features
  * <DashboardWidget
  *   title="Analytics Widget"
- *   subtitle="Real-time data"
  *   switch={{
  *     label: "Live updates",
  *     checked: true,
@@ -119,7 +110,7 @@ export interface DashboardWidgetProps {
  *       ]
  *     }]
  *   }}
- *   combobox={{
+ *   headerSelect={{
  *     placeholder: "Select filter",
  *     data: ["Option 1", "Option 2", "Option 3"],
  *     onChange: (value) => console.log(value)
@@ -135,32 +126,25 @@ export interface DashboardWidgetProps {
  */
 export function DashboardWidget({
   title,
-  subtitle,
   switch: switchConfig,
   actionsMenu,
   children,
-  combobox,
+  headerSelect,
   footerLinks,
   cardProps = {},
-  spacing = 'md',
+  spacing = 'xs',
 }: DashboardWidgetProps) {
   
   // ==================== RENDER FUNCTIONS ==========================
   
   const renderHeader = () => (
     <Inline justify="space-between" align="flex-start">
-      {/* Title and subtitle */}
+      {/* Title */}
       <Stack gap="xs">
-        <Title order={4} size="md">
+        <Title order={4}>
           {title}
         </Title>
-        {subtitle && (
-          <Text size="sm" c="dimmed">
-            {subtitle}
-          </Text>
-        )}
       </Stack>
-      
       {/* Header controls */}
       <Inline gap="sm" align="center">
         {/* Switch */}
@@ -176,23 +160,23 @@ export function DashboardWidget({
           </Inline>
         )}
         
-        {/* Header combobox (borderless select in top-right) */}
-        {combobox?.inHeader && combobox.borderless && (
+        {/* Header select (borderless select in top-right) */}
+        {headerSelect && (
           <Select
-            data={combobox.data}
-            value={combobox.value}
-            onChange={combobox.onChange}
-            placeholder={combobox.placeholder}
-            disabled={combobox.disabled}
-            searchable={combobox.searchable}
-            clearable={combobox.clearable}
+            data={headerSelect.data}
+            value={headerSelect.value}
+            onChange={headerSelect.onChange}
+            placeholder={headerSelect.placeholder}
+            disabled={headerSelect.disabled}
+            searchable={headerSelect.searchable}
+            clearable={headerSelect.clearable}
             borderless
             size="sm"
           />
         )}
         
-        {/* Actions menu - only show if no header combobox */}
-        {actionsMenu && !(combobox?.inHeader && combobox.borderless) && (
+        {/* Actions menu - only show if no header select */}
+        {actionsMenu && !headerSelect && (
           <Menu
             trigger={
               <ActionIcon size="sm" aria-label="Widget actions">
@@ -207,96 +191,88 @@ export function DashboardWidget({
     </Inline>
   );
   
-  const renderCombobox = () => {
-    if (!combobox) return null;
-    
-    // Don't render here if it's positioned in the header
-    if (combobox.inHeader && combobox.borderless) return null;
-    
-    // Use borderless select if specified
-    if (combobox.borderless) {
-      return (
-        <Box mb={spacing}>
-          <Select
-            data={combobox.data}
-            value={combobox.value}
-            onChange={combobox.onChange}
-            placeholder={combobox.placeholder}
-            disabled={combobox.disabled}
-            searchable={combobox.searchable}
-            clearable={combobox.clearable}
-            borderless
-            size="sm"
-          />
-        </Box>
-      );
-    }
-    
-    // Default to SearchableSelect with borders
-    return (
-      <Box mb={spacing}>
-        <SearchableSelect
-          label={combobox.label}
-          placeholder={combobox.placeholder}
-          data={combobox.data}
-          disabled={combobox.disabled}
-          size="sm"
-        />
-      </Box>
-    );
-  };
-  
   const renderFooterLinks = () => {
-    if (!footerLinks || footerLinks.length === 0) return null;
-    
     return (
-      <Card.Section inheritPadding pt="md" mt="md" pb="md">
-        <Inline gap="lg">
-          {footerLinks.map((link, index) => (
-            <Inline
-              key={index}
-              gap="xs"
-              align="center"
-              onClick={link.disabled ? undefined : link.onClick}
-              style={{
-                cursor: link.disabled ? 'not-allowed' : 'pointer',
-                opacity: link.disabled ? 0.5 : 1,
-                color: link.disabled ? 'var(--mantine-color-gray-5)' : 'var(--mantine-color-blue-6)',
-                fontSize: 'var(--mantine-font-size-sm)',
-                fontWeight: 500,
-                transition: 'color 0.2s ease',
-              }}
-            >
-              <Text size="sm" c={link.disabled ? 'dimmed' : 'blue'}>
-                {link.label}
-              </Text>
-              <RiArrowRightSLine size={14} />
-            </Inline>
-          ))}
-        </Inline>
-      </Card.Section>
+      <Box p="sm" pl="lg" pr="lg">
+        {footerLinks && footerLinks.length > 0 ? (
+          <Inline gap="xs" >
+            {footerLinks.map((link, index) => (
+              <Inline
+                key={index}
+                gap="xs"
+                align="center"
+                onClick={link.disabled ? undefined : link.onClick}
+                style={{
+                  cursor: link.disabled ? 'not-allowed' : 'pointer',
+                  opacity: link.disabled ? 0.5 : 1,
+                  color: link.disabled ? 'var(--mantine-color-gray-5)' : 'var(--mantine-color-blue-6)',
+                  
+                  
+                  transition: 'color 0.2s ease',
+                }}
+              >
+                <Text size="sm" c={link.disabled ? 'dimmed' : 'blue'}>
+                  {link.label}
+                </Text>
+                <RiArrowRightSLine size={14} />
+              </Inline>
+            ))}
+          </Inline>
+        ) : (
+          // Empty footer that maintains the same height
+          <Box style={{ height: '21px' }} />
+        )}
+      </Box>
     );
   };
   
   // ==================== MAIN RENDER ==========================
   
   return (
-    <Card {...cardProps}>
-      {/* Header */}
-      <Stack gap={spacing}>
+    <Card 
+      {...cardProps} 
+      pl="lg" 
+      pr="lg" 
+      pt="sm" 
+      pb={0} // Remove bottom padding as footer will handle it
+      style={{
+        position: 'relative',
+        height: '100%',
+        overflow: 'hidden',
+        ...cardProps.style,
+      }}
+    >
+      {/* Header and scrollable content area */}
+      <Stack 
+        gap={spacing} 
+        style={{ 
+          height: '100%',
+          paddingBottom: '60px', // Space for fixed footer
+        }}
+      >
         {renderHeader()}
         
-        {/* Optional combobox */}
-        {renderCombobox()}
-        
-        {/* Main content area */}
-        <Box>
+        {/* Main content area - scrollable */}
+        <Box style={{ 
+          flex: 1,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          paddingRight: '4px', // Space for scrollbar
+        }}>
           {children}
         </Box>
       </Stack>
       
-      {/* Optional footer links */}
-      {renderFooterLinks()}
+      {/* Footer area - fixed at bottom */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'var(--mantine-color-white)',
+      }}>
+        {renderFooterLinks()}
+      </div>
     </Card>
   );
 } 

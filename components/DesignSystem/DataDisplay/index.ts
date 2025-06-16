@@ -13,8 +13,8 @@ export type { DSAvatarProps, AvatarVariant, AvatarSize } from './Avatar';
 export { Badge } from './Badge';
 export type { DSBadgeProps } from './Badge';
 
-export { Card } from './Card';
-export type { DSCardProps, CardSize, CardVariant, CardPadding } from './Card';
+export { Card, CardSection } from './Card';
+export type { DSCardProps, DSCardSectionProps } from './Card';
 
 export { Chip } from './Chip';
 export type { DSChipProps } from './Chip';
@@ -30,6 +30,12 @@ export type { DSProgressProps } from './Progress';
 
 export { ThemeIcon } from './ThemeIcon';
 export type { DSThemeIconProps, ThemeIconSize, ThemeIconColor } from './ThemeIcon';
+
+export { List } from './List';
+export type { DSListProps } from './List';
+
+export { Table } from './Table';
+export type { DSTableProps } from './Table';
 
 // Future data display component exports will go here:
 // export { ADDSKbd } from './Kbd'; 

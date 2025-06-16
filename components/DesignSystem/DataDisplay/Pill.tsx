@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { Box, CloseButton } from '@mantine/core';
-import { Inline } from '@/components/DesignSystem';
+import { Inline } from '../Layout';
 
 export interface DSPillProps extends React.ComponentPropsWithoutRef<'div'> {
   /** Pill content */

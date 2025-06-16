@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Grid } from '@/components/DesignSystem';
+import { Grid, Stack } from '@/components/DesignSystem';
 import { Inline } from '@/components/DesignSystem';
 import { KeyInsight } from './KeyInsights';
 import { Title } from '../../Typography/Title';
@@ -12,7 +12,7 @@ const meta: Meta<typeof KeyInsight> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'KeyInsight component for displaying key metrics or insights with a title, value, and optional subtitle. Commonly used in dashboards, analytics pages, or summary sections.',
+        component: 'KeyInsight component for displaying key metrics or insights with a title, value, and optional subtitle. Supports multiple sizes from xs to xxl. Commonly used in dashboards, analytics pages, or summary sections.',
       },
     },
   },
@@ -30,10 +30,14 @@ const meta: Meta<typeof KeyInsight> = {
       control: 'text',
       description: 'Optional subtitle or description',
     },
-
     showBorder: {
       control: 'boolean',
       description: 'Whether to show border on the right',
+    },
+    size: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'jumbo', 'super-jumbo'],
+      description: 'Size of the KeyInsight component',
     },
   },
 };
@@ -45,6 +49,7 @@ export const Default: Story = {
   args: {
     value: 1250,
     title: 'Total Users',
+    size: 'md',
   },
 };
 
@@ -53,13 +58,7 @@ export const WithSubtitle: Story = {
     value: '95%',
     title: 'Success Rate',
     subtitle: 'Last 30 days',
-  },
-};
-
-export const WithColor: Story = {
-  args: {
-    value: 42,
-    title: 'Active Projects',
+    size: 'lg',
   },
 };
 
@@ -68,8 +67,116 @@ export const WithBorder: Story = {
     value: 987,
     title: 'Active Users',
     showBorder: true,
+    size: 'md',
   },
 };
+
+// ========================== SIZE SHOWCASE ==========================
+
+export const AllSizes: Story = {
+  render: () => (
+    <Stack gap="xl" align="center">
+      <Title order={2}>KeyInsight Size Variations</Title>
+      <Stack gap="lg" align="center">
+        <div>
+          <Text size="sm" c="dimmed" mb="xs" ta="center">Extra Small (xs)</Text>
+          <KeyInsight
+            value={1250}
+            title="Total Users"
+            subtitle="Last 30 days"
+            size="xs"
+          />
+        </div>
+        <div>
+          <Text size="sm" c="dimmed" mb="xs" ta="center">Small (sm)</Text>
+          <KeyInsight
+            value={1250}
+            title="Total Users"
+            subtitle="Last 30 days"
+            size="sm"
+          />
+        </div>
+        <div>
+          <Text size="sm" c="dimmed" mb="xs" ta="center">Medium (md) - Default</Text>
+          <KeyInsight
+            value={1250}
+            title="Total Users"
+            subtitle="Last 30 days"
+            size="md"
+          />
+        </div>
+        <div>
+          <Text size="sm" c="dimmed" mb="xs" ta="center">Large (lg)</Text>
+          <KeyInsight
+            value={1250}
+            title="Total Users"
+            subtitle="Last 30 days"
+            size="lg"
+          />
+        </div>
+        <div>
+          <Text size="sm" c="dimmed" mb="xs" ta="center">Extra Large (jumbo)</Text>
+          <KeyInsight
+            value={1250}
+            title="Total Users"
+            subtitle="Last 30 days"
+            size="jumbo"
+          />
+        </div>
+        <div>
+          <Text size="sm" c="dimmed" mb="xs" ta="center">Super Jumbo (super-jumbo)</Text>
+          <KeyInsight
+            value={1250}
+            title="Total Users"
+            subtitle="Last 30 days"
+            size="super-jumbo"
+          />
+        </div>
+      </Stack>
+    </Stack>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Showcase of all available KeyInsight sizes from xs to super-jumbo. Each size adjusts the value text, title text, subtitle text, and padding proportionally.',
+      },
+    },
+  },
+};
+
+export const SizeComparison: Story = {
+  render: () => (
+    <Grid cols={3} spacing="lg" w={800}>
+      <KeyInsight
+        value="$24.5K"
+        title="Revenue"
+        subtitle="This month"
+        size="sm"
+      />
+      <KeyInsight
+        value={1847}
+        title="Orders"
+        subtitle="Last 30 days"
+        size="md"
+      />
+      <KeyInsight
+        value="12.5%"
+        title="Growth"
+        subtitle="vs last month"
+        size="lg"
+      />
+    </Grid>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Side-by-side comparison of different KeyInsight sizes in a grid layout.',
+      },
+    },
+  },
+};
+
+// ========================== DASHBOARD EXAMPLES ==========================
 
 export const DashboardExample: Story = {
   render: () => (
@@ -77,27 +184,27 @@ export const DashboardExample: Story = {
       <KeyInsight
         value={1250}
         title="Total Users"
-        color="blue"
+        size="md"
         showBorder={true}
       />
       <KeyInsight
         value={987}
         title="Active Users"
         subtitle="Last 7 days"
-        color="green"
+        size="md"
         showBorder={true}
       />
       <KeyInsight
         value={263}
         title="New Users"
         subtitle="This month"
-        color="purple"
+        size="md"
         showBorder={true}
       />
       <KeyInsight
         value="95%"
         title="Success Rate"
-        color="teal"
+        size="md"
         showBorder={false}
       />
     </Grid>
@@ -120,36 +227,36 @@ export const MetricsGrid: Story = {
           value="$24,500"
           title="Revenue"
           subtitle="This month"
-          color="green"
+          size="lg"
         />
         <KeyInsight
           value={1847}
           title="Orders"
           subtitle="Last 30 days"
-          color="blue"
+          size="lg"
         />
         <KeyInsight
           value="12.5%"
           title="Growth"
           subtitle="vs last month"
-          color="orange"
+          size="lg"
         />
         <KeyInsight
           value={456}
           title="New Customers"
-          color="purple"
+          size="lg"
         />
         <KeyInsight
           value="4.2"
           title="Avg Rating"
           subtitle="Customer satisfaction"
-          color="yellow"
+          size="lg"
         />
         <KeyInsight
           value={89}
           title="Support Tickets"
           subtitle="Open"
-          color="red"
+          size="lg"
         />
       </Grid>
     </div>
@@ -157,7 +264,7 @@ export const MetricsGrid: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Example of KeyInsight components in a comprehensive metrics grid layout.',
+        story: 'Example of KeyInsight components in a comprehensive metrics grid layout using large size.',
       },
     },
   },
@@ -171,25 +278,25 @@ export const HorizontalLayout: Story = {
         <KeyInsight
           value={1250}
           title="Total Users"
-          color="blue"
+          size="md"
           showBorder={true}
         />
         <KeyInsight
           value={987}
           title="Active Users"
-          color="green"
+          size="md"
           showBorder={true}
         />
         <KeyInsight
           value={263}
           title="New Users"
-          color="purple"
+          size="md"
           showBorder={true}
         />
         <KeyInsight
           value="95%"
           title="Success Rate"
-          color="teal"
+          size="md"
           showBorder={false}
         />
       </Inline>
@@ -204,17 +311,47 @@ export const HorizontalLayout: Story = {
   },
 };
 
+export const HeroMetrics: Story = {
+  render: () => (
+    <Stack gap="xl" align="center">
+      <Title order={1} ta="center">Company Performance</Title>
+      <Grid cols={2} spacing="xl" w={800}>
+        <KeyInsight
+          value="$2.4M"
+          title="Annual Revenue"
+          subtitle="2024 Performance"
+          size="super-jumbo"
+        />
+        <KeyInsight
+          value="150K"
+          title="Active Users"
+          subtitle="Monthly Active"
+          size="super-jumbo"
+        />
+      </Grid>
+    </Stack>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Example of KeyInsight components used as hero metrics with super-jumbo size for maximum impact.',
+      },
+    },
+  },
+};
+
 export const Interactive: Story = {
   args: {
     value: 1250,
     title: 'Total Users',
     subtitle: 'Last 30 days',
     showBorder: false,
+    size: 'md',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Use the controls below to interact with the KeyInsight component and see different combinations.',
+        story: 'Use the controls below to interact with the KeyInsight component and see different combinations of props including the new size options.',
       },
     },
   },

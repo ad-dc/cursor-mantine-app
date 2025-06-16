@@ -17,7 +17,7 @@
 // Import components for category exports
 import { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
 import { Button, ActionIcon, CloseButton } from './Buttons';
-import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon } from './DataDisplay';
+import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List } from './DataDisplay';
 import { SearchableSelect, AutocompleteClearable, Multiselect, Select } from './Combobox';
 import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
 import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
@@ -54,8 +54,8 @@ export { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, T
 export type { DSDrawerProps, DSMenuProps, MenuItem, MenuSection, DSModalProps, ModalAction, ConfirmationModalProps, DSPopoverProps, PopoverAction, ConfirmationPopoverProps, DSTooltipProps } from './Overlays';
 
 // ========================== DATA DISPLAY ==========================
-export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon } from './DataDisplay';
-export type { DSAlertProps, DSAvatarProps, AvatarVariant, AvatarSize, DSBadgeProps, DSCardProps, CardSize, CardVariant, CardPadding, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps, DSThemeIconProps, ThemeIconSize, ThemeIconColor } from './DataDisplay';
+export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List } from './DataDisplay';
+export type { DSAlertProps, DSAvatarProps, AvatarVariant, AvatarSize, DSBadgeProps, DSCardProps, DSCardSectionProps, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps, DSThemeIconProps, ThemeIconSize, ThemeIconColor, DSListProps } from './DataDisplay';
 
 // ========================== TYPOGRAPHY ==========================
 export { Kbd, Code, Text, Title } from './Typography';
@@ -143,6 +143,7 @@ export const DataDisplay = {
   Indicator,
   Progress,
   ThemeIcon,
+  List,
 };
 
 export const Typography = {
