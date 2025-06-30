@@ -36,7 +36,7 @@ type SortDirection = 'asc' | 'desc' | null;
  * Enhanced TableColumn interface with better typing and additional options
  * Extends the basic column definition with custom properties
  */
-export interface TableColumn<T extends MRT_RowData> {
+export interface DataTableColumn<T extends MRT_RowData> {
   /** The key from the data object to access the column value */
   accessorKey: keyof T;
   /** Column header - can be static text or a React component function */
@@ -68,7 +68,7 @@ export interface PageInfo {
  * Comprehensive props interface for the Table component
  * Organized by functionality for better maintainability
  */
-export interface TableProps<T extends MRT_RowData> {
+export interface DataTableProps<T extends MRT_RowData> {
   // ==================== DATA PROPS ====================
   /** Array of data objects to display in the table */
   data: T[];
@@ -174,7 +174,7 @@ const FEATURE_FLAGS = {
 // ========================== CUSTOM HOOKS ==========================
 
 /**
- * Table Component
+ * DataTable Component
  * 
  * A powerful, feature-rich data table component built on top of Mantine React Table.
  * Supports pagination, sorting, filtering, row selection, density controls, and more.
@@ -193,7 +193,7 @@ const FEATURE_FLAGS = {
  *   { accessorKey: 'status', header: 'Status' },
  * ];
  * 
- * <Table
+ * <DataTable
  *   data={userData}
  *   columns={columns}
  * />
@@ -210,7 +210,7 @@ const FEATURE_FLAGS = {
  *   fetchData(pagination, filters);
  * }, [pagination, filters]);
  * 
- * <Table
+ * <DataTable
  *   data={tableData}
  *   columns={columns}
  *   isLoading={isLoading}
@@ -241,7 +241,7 @@ const FEATURE_FLAGS = {
  *   // Perform bulk action on selected rows
  * };
  * 
- * <Table
+ * <DataTable
  *   data={tableData}
  *   columns={columns}
  *   onRowSelectionChange={handleRowSelection}
@@ -260,7 +260,7 @@ const FEATURE_FLAGS = {
  *   fetchData();
  * };
  * 
- * <Table
+ * <DataTable
  *   data={tableData}
  *   columns={columns}
  *   isError={isError}
@@ -270,7 +270,7 @@ const FEATURE_FLAGS = {
  * 
  * @example
  * // Customized table features and styling
- * <Table
+ * <DataTable
  *   data={tableData}
  *   columns={columns}
  *   defaultDensity="md"
@@ -317,7 +317,7 @@ const FEATURE_FLAGS = {
  *   }
  * ], []);
  * 
- * <Table
+ * <DataTable
  *   data={tableData}
  *   columns={columns}
  *   onSortChange={(field, direction) => {
@@ -325,7 +325,7 @@ const FEATURE_FLAGS = {
  *   }}
  * />
  */
-export function Table<T extends MRT_RowData>({
+export function DataTable<T extends MRT_RowData>({
   // ==================== DATA PROPS ====================
   data,
   columns,
@@ -369,7 +369,7 @@ export function Table<T extends MRT_RowData>({
   
   // ==================== DEPRECATED/UNUSED PROPS ====================
   resultCount = DEFAULT_VALUES.RESULT_COUNT,
-}: TableProps<T>) {
+}: DataTableProps<T>) {
   // ==================== HOOK INITIALIZATION ====================
   /** Initialize table state management */
   const tableState = useTableState(defaultPageSize, defaultDensity);

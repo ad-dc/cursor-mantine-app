@@ -8,7 +8,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { HeaderBar } from '@/components/HeaderBar';
 import { SidebarNav, NavItem } from '@/components/SidebarNav';
 import { MainLayout } from '@/components/MainLayout';
-import { Table } from '@/components/DesignSystem';
+import { DataTable } from '@/components/DesignSystem';
 import { PageContentHeader } from '@/components/DesignSystem';
 import { NameValue } from '@/components/DesignSystem';
 import { Alert, Avatar, Button as DSButton, ActionIcon, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip, Kbd, Code, Text, Title, Divider as DSDivider, Paper as DSPaper, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs, DropZone, FileInput } from '@/components/DesignSystem';
@@ -2749,7 +2749,7 @@ function Demo() {
       />      
       <Stack gap="sm">
         <Title order={2}>Users</Title>
-        <Table<Person>
+        <DataTable<Person>
           data={currentPageData}
           columns={columns}
           totalCount={filteredData.length}

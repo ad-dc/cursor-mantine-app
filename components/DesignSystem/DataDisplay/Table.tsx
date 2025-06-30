@@ -16,7 +16,7 @@ export interface DSTableProps extends MantineTableProps {
  * Built on top of Mantine's Table component with Design System patterns.
  * 
  * For complex data tables with features like sorting, filtering, and pagination,
- * use the ComplexComponents/Table component instead.
+ * use the ComplexComponents/DataTable component instead.
  * 
  * @example
  * Basic table usage with compound components

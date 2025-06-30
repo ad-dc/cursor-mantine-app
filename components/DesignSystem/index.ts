@@ -17,7 +17,7 @@
 // Import components for category exports
 import { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
 import { Button, ActionIcon, CloseButton } from './Buttons';
-import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List } from './DataDisplay';
+import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List, Table } from './DataDisplay';
 import { SearchableSelect, AutocompleteClearable, Multiselect, Select } from './Combobox';
 import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
 import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
@@ -28,7 +28,7 @@ import { KeyInsight } from './ComplexComponents/KeyInsights';
 import { NameValue, NameValueItem } from './ComplexComponents/NameValue';
 import { CopyButton } from './ComplexComponents/Utilities';
 import { PageContentHeader, DescriptionBlock } from './ComplexComponents/PageContentHeader';
-import { Table } from './ComplexComponents/Table';
+import { DataTable } from './ComplexComponents/DataTable';
 import { DashboardWidget } from './ComplexComponents/DashboardWidget';
 
 // ========================== INPUTS ==========================
@@ -54,8 +54,8 @@ export { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, T
 export type { DSDrawerProps, DSMenuProps, MenuItem, MenuSection, DSModalProps, ModalAction, ConfirmationModalProps, DSPopoverProps, PopoverAction, ConfirmationPopoverProps, DSTooltipProps } from './Overlays';
 
 // ========================== DATA DISPLAY ==========================
-export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List } from './DataDisplay';
-export type { DSAlertProps, DSAvatarProps, AvatarVariant, AvatarSize, DSBadgeProps, DSCardProps, DSCardSectionProps, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps, DSThemeIconProps, ThemeIconSize, ThemeIconColor, DSListProps } from './DataDisplay';
+export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List, Table } from './DataDisplay';
+export type { DSAlertProps, DSAvatarProps, AvatarVariant, AvatarSize, DSBadgeProps, DSCardProps, DSCardSectionProps, DSChipProps, DSPillProps, DSIndicatorProps, DSProgressProps, DSThemeIconProps, ThemeIconSize, ThemeIconColor, DSListProps, DSTableProps } from './DataDisplay';
 
 // ========================== TYPOGRAPHY ==========================
 export { Kbd, Code, Text, Title } from './Typography';
@@ -78,8 +78,8 @@ export { CopyButton } from './ComplexComponents/Utilities';
 export type { CopyButtonProps } from './ComplexComponents/Utilities';
 export { PageContentHeader, DescriptionBlock } from './ComplexComponents/PageContentHeader';
 export type { PageContentHeaderProps, ContentSection, DescriptionBlockProps } from './ComplexComponents/PageContentHeader';
-export { Table } from './ComplexComponents/Table';
-export type { TableProps, TableColumn, PageInfo } from './ComplexComponents/Table';
+export { DataTable } from './ComplexComponents/DataTable';
+export type { DataTableProps, DataTableColumn, PageInfo } from './ComplexComponents/DataTable';
 export { DashboardWidget } from './ComplexComponents/DashboardWidget';
 export type { DashboardWidgetProps, DashboardWidgetLink } from './ComplexComponents/DashboardWidget';
 
@@ -144,6 +144,7 @@ export const DataDisplay = {
   Progress,
   ThemeIcon,
   List,
+  Table,
 };
 
 export const Typography = {
@@ -172,7 +173,7 @@ export const ComplexComponents = {
   CopyButton,
   PageContentHeader,
   DescriptionBlock,
-  Table,
+  DataTable,
   DashboardWidget,
 };
 

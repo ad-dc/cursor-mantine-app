@@ -1,0 +1,16 @@
+{
+  "codeConnect": {
+    "include": [
+      "components/DesignSystem/DataDisplay/Badge.figma.tsx",
+      "components/DesignSystem/DataDisplay/Badge.tsx"
+    ],
+    "exclude": [
+      "node_modules/**",
+      ".next/**",
+      "storybook-static/**",
+      "**/*.test.*",
+      "**/*.spec.*"
+    ],
+    "parser": "react"
+  }
+} 

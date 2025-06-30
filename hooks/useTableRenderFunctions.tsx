@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { MRT_RowData } from 'mantine-react-table';
-import CustomTopToolbar, { type Filters } from '@/components/DesignSystem/ComplexComponents/Table/CustomTopToolbar';
-import CustomBottomToolbar from '@/components/DesignSystem/ComplexComponents/Table/CustomBottomToolbar';
-import CustomToolbarAlertBannerContent from '@/components/DesignSystem/ComplexComponents/Table/CustomToolbarAlertBannerContent';
-import ErrorOverlay from '@/components/DesignSystem/ComplexComponents/Table/ErrorOverlay';
-import SortableHeaderCell from '@/components/DesignSystem/ComplexComponents/Table/SortableHeaderCell';
+import CustomTopToolbar, { type Filters } from '@/components/DesignSystem/ComplexComponents/DataTable/CustomTopToolbar';
+import CustomBottomToolbar from '@/components/DesignSystem/ComplexComponents/DataTable/CustomBottomToolbar';
+import CustomToolbarAlertBannerContent from '@/components/DesignSystem/ComplexComponents/DataTable/CustomToolbarAlertBannerContent';
+import ErrorOverlay from '@/components/DesignSystem/ComplexComponents/DataTable/ErrorOverlay';
+import SortableHeaderCell from '@/components/DesignSystem/ComplexComponents/DataTable/SortableHeaderCell';
 
 /**
  * Page information interface for cursor-based pagination

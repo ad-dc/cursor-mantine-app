@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState, useMemo } from 'react';
 import { Stack } from '@mantine/core';
 import { Inline } from '@/components/DesignSystem';
-import { Table } from './Table';
+import { DataTable } from './DataTable';
 import { Title } from '../../Typography/Title';
 import { Text } from '../../Typography/Text';
 import { Button } from '../../Buttons/Button';
@@ -69,9 +69,9 @@ const generateProducts = (count: number): Product[] => {
   }));
 };
 
-const meta: Meta<typeof Table> = {
-  title: 'Design System/Complex Components/Table',
-  component: Table,
+const meta: Meta<typeof DataTable> = {
+  title: 'Design System/Complex Components/DataTable',
+  component: DataTable,
   parameters: {
     layout: 'padded',
     docs: {
@@ -198,7 +198,7 @@ export const Default: Story = {
     return (
       <Stack gap="lg" w="100%">
         <Title order={3} size="md">Basic Table</Title>
-        <Table
+        <DataTable
           data={data}
           columns={userColumns}
           totalCount={data.length}
@@ -235,7 +235,7 @@ export const WithPagination: Story = {
         <Text size="sm" c="dimmed">
           Showing {data.length} of {allData.length} users
         </Text>
-        <Table
+        <DataTable
           data={data}
           columns={userColumns}
           totalCount={allData.length}
@@ -276,7 +276,7 @@ export const WithSelection: Story = {
             </Button>
           )}
         </Inline>
-        <Table
+        <DataTable
           data={data}
           columns={userColumns}
           totalCount={data.length}
@@ -301,7 +301,7 @@ export const LoadingState: Story = {
     return (
       <Stack gap="lg" w="100%">
         <Title order={3} size="md">Loading State</Title>
-        <Table
+        <DataTable
           data={data}
           columns={userColumns}
           totalCount={data.length}
@@ -324,7 +324,7 @@ export const ErrorState: Story = {
     return (
       <Stack gap="lg" w="100%">
         <Title order={3} size="md">Error State</Title>
-        <Table
+        <DataTable
           data={[]}
           columns={userColumns}
           totalCount={0}
@@ -349,7 +349,7 @@ export const EmptyState: Story = {
     return (
       <Stack gap="lg" w="100%">
         <Title order={3} size="md">Empty State</Title>
-        <Table
+        <DataTable
           data={[]}
           columns={userColumns}
           totalCount={0}
@@ -386,7 +386,7 @@ export const ProductTable: Story = {
         <Text size="sm" c="dimmed">
           Product catalog with pricing, stock levels, and supplier information
         </Text>
-        <Table
+        <DataTable
           data={paginatedData}
           columns={productColumns}
           totalCount={data.length}
@@ -444,7 +444,7 @@ export const FullFeatured: Story = {
           </Inline>
         )}
         
-        <Table
+        <DataTable
           data={data}
           columns={userColumns}
           totalCount={allData.length}
@@ -488,7 +488,7 @@ export const Interactive: Story = {
         <Text size="sm" c="dimmed">
           Use the controls below to customize the table behavior and appearance
         </Text>
-        <Table
+        <DataTable
           {...args}
           data={data}
           columns={userColumns}

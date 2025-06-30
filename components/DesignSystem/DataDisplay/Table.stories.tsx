@@ -28,7 +28,7 @@ A simple table component for displaying tabular data with consistent styling.
 - Basic table layouts
 
 **When not to use:**
-- Complex data tables with sorting/filtering (use ComplexComponents/Table instead)
+- Complex data tables with sorting/filtering (use ComplexComponents/DataTable instead)
 - Large datasets requiring pagination
 - Interactive data manipulation
         `,
