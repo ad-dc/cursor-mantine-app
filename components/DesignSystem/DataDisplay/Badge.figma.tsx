@@ -19,14 +19,16 @@ figma.connect(
         'Outline': 'outline',
       }),
       
-      // Map Figma size property to React size prop (direct prop, not nested)
-      size: figma.enum('Size', {
-        'Extra Small': 'xs',
-        'Small': 'sm',
-        'Medium': 'md',
-        'Large': 'lg',
-        'Extra Large': 'xl',
-      }),
+      // Map Figma size property to React size prop
+      size: figma.nestedProps('.Core/Badge/', {
+        size: figma.enum('Size', {
+          'Extra Small': 'xs',
+          'Small': 'sm',
+          'Medium': 'md',
+          'Large': 'lg',
+          'Extra Large': 'xl',
+        }),
+      })
         
       // Map Figma semantic color property to React color prop
       color: figma.enum('Type', {
