@@ -11,6 +11,7 @@
       "**/*.test.*",
       "**/*.spec.*"
     ],
-    "parser": "react"
+    "parser": "react",
+    "fallback": false
   }
 } 

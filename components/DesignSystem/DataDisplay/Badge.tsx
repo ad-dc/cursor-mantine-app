@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Badge as MantineBadge, BadgeProps as MantineBadgeProps } from '@mantine/core';
+import { RiCircleFill } from '@remixicon/react';
 import { ComponentSize } from '../config';
 
 /**
@@ -12,6 +13,8 @@ export interface DSBadgeProps extends Omit<MantineBadgeProps, 'size' | 'color' |
   variant?: 'filled' | 'outline';
   /** Badge semantic color variant */
   color?: 'info' | 'success' | 'danger' | 'pending' | 'default';
+  /** Whether to show an icon (defaults to circle-fill from Remix icons) */
+  hasIcon?: boolean;
 }
 
 /**
@@ -56,6 +59,8 @@ export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
       variant = 'filled',
       size = 'md',
       color = 'default',
+      hasIcon = false,
+      children,
       ...props
     },
     ref
@@ -85,8 +90,11 @@ export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
         size={size}
         color={getMantineColor(color)}
         radius="sm"
+        leftSection={hasIcon ? <RiCircleFill size={12} /> : undefined}
         {...props}
-      />
+      >
+        {children}
+      </MantineBadge>
     );
   }
 );
