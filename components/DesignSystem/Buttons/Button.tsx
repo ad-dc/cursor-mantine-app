@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { Button as MantineButton, ButtonProps as MantineButtonProps } from '@mantine/core';
 import { ComponentSize, ComponentColor, addsClassName } from '../config';
 import styles from './Button.module.css';
@@ -26,6 +26,8 @@ export interface DSButtonProps extends Omit<MantineButtonProps, 'size' | 'color'
   /** Click handler */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
+
+export const BUTTON_BUILD = 'button-2025-09-26';
 
 /**
  * AppDirect Design System Button Component
@@ -84,6 +86,12 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
     },
     ref
   ) => {
+    useEffect(() => {
+      // Mount fingerprint log for Figma verification
+      // eslint-disable-next-line no-console
+      console.log('@@BUTTON_MOUNT@@', BUTTON_BUILD, variant);
+    }, []);
+
     // Map design system variants to Mantine variants
     const getMantineVariant = (addsVariant: DSButtonProps['variant']) => {
       switch (addsVariant) {
@@ -153,6 +161,8 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
         disabled={isDisabled}
         radius="sm"
         className={componentClassName}
+        data-ui="Button"
+        data-build={BUTTON_BUILD}
         leftSection={leftIcon || leftSection}
         rightSection={rightIcon || rightSection}
         {...props}

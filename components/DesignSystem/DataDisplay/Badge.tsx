@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { Badge as MantineBadge, BadgeProps as MantineBadgeProps } from '@mantine/core';
 import { RiCircleFill } from '@remixicon/react';
 import { ComponentSize } from '../config';
@@ -16,6 +16,8 @@ export interface DSBadgeProps extends Omit<MantineBadgeProps, 'size' | 'color' |
   /** Whether to show an icon (defaults to circle-fill from Remix icons) */
   hasIcon?: boolean;
 }
+
+export const BADGE_BUILD = 'badge-2025-09-26';
 
 /**
  * AppDirect Design System Badge Component
@@ -65,6 +67,12 @@ export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
     },
     ref
   ) => {
+    useEffect(() => {
+      // Mount fingerprint log for Figma verification
+      // eslint-disable-next-line no-console
+      console.log('@@BADGE_MOUNT@@', BADGE_BUILD, variant);
+    }, []);
+
     // Map design system colors to Mantine colors
     const getMantineColor = (dsColor: DSBadgeProps['color']) => {
       switch (dsColor) {
@@ -90,6 +98,8 @@ export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
         size={size}
         color={getMantineColor(color)}
         radius="sm"
+        data-ui="Badge"
+        data-build={BADGE_BUILD}
         leftSection={hasIcon ? <RiCircleFill size={12} /> : undefined}
         {...props}
       >
