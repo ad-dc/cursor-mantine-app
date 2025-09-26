@@ -202,6 +202,20 @@ npx figma connect publish
 - Include comprehensive examples in your Code Connect files
 - Document any special mapping logic
 
+### Nested Component Mapping (Critical!)
+- **ALWAYS map nested components explicitly** to prevent Tailwind fallback
+- When Figma components contain nested structures (e.g., `.Core/Badge/` inside a Badge component set), you MUST create separate `figma.connect` mappings for EACH nested component
+- Without explicit mappings, Figma auto-generates mixed React/Tailwind output which is unacceptable for design system usage
+- Example: Badge component requires both main component set mapping AND `.Core/Badge/` mapping
+
+```tsx
+// Main component mapping
+figma.connect(Badge, 'main-component-url', { /* main props */ });
+
+// Nested component mapping (prevents Tailwind fallback)
+figma.connect(Badge, 'nested-component-url', { /* nested props */ });
+```
+
 ### File Organization
 - Keep Code Connect files alongside their components
 - Use the `.figma.tsx` extension for consistency

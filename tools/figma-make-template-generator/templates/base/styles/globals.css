@@ -1,0 +1,24 @@
+/* Minimal global styles for Make; primary styling comes from Mantine core */
+
+:root {
+  /* Place global CSS variables or theme overrides here if needed */
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Example utility class namespace for template */
+.app-container {
+  padding: 16px;
+}
+
+
+
+

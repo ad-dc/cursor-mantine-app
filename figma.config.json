@@ -2,7 +2,9 @@
   "codeConnect": {
     "include": [
       "components/DesignSystem/DataDisplay/Badge.figma.tsx",
-      "components/DesignSystem/DataDisplay/Badge.tsx"
+      "components/DesignSystem/DataDisplay/Badge.tsx",
+      "components/DesignSystem/Buttons/Button.figma.tsx",
+      "components/DesignSystem/Buttons/Button.tsx"
     ],
     "exclude": [
       "node_modules/**",

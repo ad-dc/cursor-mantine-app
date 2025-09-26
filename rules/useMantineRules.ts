@@ -26,6 +26,18 @@ export function useMantineRules() {
   };
 }
 
+/**
+ * Figma Code Connect Rules
+ */
+
+// Rule: Nested Component Mapping for Code Connect
+// When creating figma.connect mappings for components with nested structures,
+// you MUST create explicit figma.connect mappings for EACH nested component
+// to prevent Tailwind fallback code generation. Without explicit mappings,
+// Figma will auto-generate mixed React/Tailwind output which is unacceptable
+// for design system usage. Always map every component level that Figma might
+// auto-detect to ensure clean React-only output.
+
 // Example usage:
 /*
 import { Button, TextInput } from '@mantine/core';

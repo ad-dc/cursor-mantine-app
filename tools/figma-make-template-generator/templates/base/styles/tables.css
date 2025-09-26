@@ -1,0 +1,4 @@
+/* styles/tables.css */
+.mantine-Table-root {
+  --row-hover: color-mix(in srgb, var(--mantine-color-gray-2), transparent 30%);
+}

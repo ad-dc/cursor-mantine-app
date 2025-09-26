@@ -1,76 +1,53 @@
 import { figma } from '@figma/code-connect';
 import { Badge } from './Badge';
+import { RiCircleLine } from '@remixicon/react';
 
 /**
  * Code Connect configuration for Badge component
  * 
- * This file connects the Badge React component to its Figma design counterpart.
- * It maps Figma properties to React props for all 10 semantic badge variants
- * with support for nested size and icon properties.
+ * Maps the Figma Badge component to the React Badge component with exact prop matching.
+ * 
+ * Expected Figma Properties:
+ * - variant: "filled" | "outline"
+ * - size: "xs" | "sm" | "md" | "lg" | "xl"
+ * - color: "info" | "success" | "danger" | "pending" | "default"
+ * - hasIcon: boolean
+ * - children: text content
  */
 
-// Main Badge component set - handles all 10 combinations (2 variants × 5 types)
 figma.connect(
   Badge,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=686-2334&t=IRjjbQpCPaZTntoz-4',
+  'https://www.figma.com/design/ZdGe37wL0o1BqZyKzo2Z0j/ADDS-V2-Admin-Mantine-Core?node-id=686-2334',
   {
     props: {
-      // Map Figma variant properties to React props
-      variant: figma.enum('Variant', {
+      variant: figma.enum('variant', {
         'filled': 'filled',
-        'default': 'outline',  // Figma "default" = our "outline"
+        'outline': 'outline',
       }),
-      
-      // Map Figma semantic color property to React color prop
-      color: figma.enum('Type', {
-        'default': 'default',
+      size: figma.enum('size', {
+        'xs': 'xs',
+        'sm': 'sm',
+        'md': 'md',
+        'lg': 'lg',
+        'xl': 'xl',
+      }),
+      color: figma.enum('color', {
         'info': 'info',
         'success': 'success',
         'danger': 'danger',
         'pending': 'pending',
+        'default': 'default',
       }),
-      
-      // Map Figma text content to React children
-      children: figma.textContent('BADGE'),
+      hasIcon: figma.boolean('hasIcon'),
+      children: figma.string('children'),
     },
     
     // Example code snippet that will be shown in Figma
     example: (props) => (
       <Badge
         variant={props.variant}
-        color={props.color}
-      >
-        {props.children}
-      </Badge>
-    ),
-  }
-);
-
-// Block .Core/Badge/ from generating Tailwind by connecting it to our Badge component too
-figma.connect(
-  Badge,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=656-2583&t=0I6siX1Ay34XuZpv-4', // Core/Badge node-id
-  {
-    props: {
-      // Map size property 
-      size: figma.enum('Size', {
-        'Extra Small': 'xs',
-        'Small': 'sm', 
-        'Medium': 'md',
-        'Large': 'lg',
-        'Extra Large': 'xl',
-      }),
-      
-      // Map icon presence
-      hasIcon: figma.boolean('Has Icon'),
-      
-      // Map text content
-      children: figma.textContent('BADGE'),
-    },
-    
-    example: (props) => (
-      <Badge
         size={props.size}
+        color={props.color}
         hasIcon={props.hasIcon}
       >
         {props.children}
