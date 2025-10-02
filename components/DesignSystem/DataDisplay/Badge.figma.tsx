@@ -1,6 +1,14 @@
 import { figma } from '@figma/code-connect';
-import { Badge } from './Badge';
-import { RiCircleLine } from '@remixicon/react';
+import { Badge } from '@mantine/core';
+import { RiInformationLine } from '@remixicon/react';
+
+const colorMap: Record<string, string> = {
+  info: 'blue',
+  success: 'green',
+  danger: 'red',
+  pending: 'yellow',
+  default: 'gray',
+};
 
 /**
  * Code Connect configuration for Badge component
@@ -39,16 +47,16 @@ figma.connect(
         'default': 'default',
       }),
       hasIcon: figma.boolean('hasIcon'),
+      leftSection: figma.instance('leftSection'),
       children: figma.string('children'),
     },
-    
     // Example code snippet that will be shown in Figma
     example: (props) => (
       <Badge
-        variant={props.variant}
-        size={props.size}
-        color={props.color}
-        hasIcon={props.hasIcon}
+        variant={props.variant ?? 'filled'}
+        size={props.size ?? 'md'}
+        color={colorMap[props.color ?? 'default']}
+        leftSection={props.leftSection ?? (props.hasIcon ? <RiInformationLine size={12} /> : undefined)}
       >
         {props.children}
       </Badge>

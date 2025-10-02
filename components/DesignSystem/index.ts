@@ -18,7 +18,7 @@
 import { TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput } from './Inputs';
 import { Button, ActionIcon, CloseButton } from './Buttons';
 import { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List, Table } from './DataDisplay';
-import { SearchableSelect, AutocompleteClearable, Multiselect, Select } from './Combobox';
+import { SearchableSelect, AutocompleteClearable, Multiselect, Select, Combobox } from './Combobox';
 import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
 import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
 import { Kbd, Code, Text, Title } from './Typography';
@@ -40,8 +40,8 @@ export { Button, ActionIcon, CloseButton } from './Buttons';
 export type { DSButtonProps, DSActionIconProps, DSCloseButtonProps } from './Buttons';
 
 // ========================== COMBOBOX ==========================
-export { SearchableSelect, AutocompleteClearable, Multiselect, Select } from './Combobox';
-export type { DSSearchableSelectProps, DSAutocompleteClearableProps, DSMultiselectProps, DSSelectProps } from './Combobox';
+export { SearchableSelect, AutocompleteClearable, Multiselect, Select, Combobox } from './Combobox';
+export type { DSSearchableSelectProps, DSAutocompleteClearableProps, DSMultiselectProps, DSSelectProps, DSComboboxProps } from './Combobox';
 
 // ========================== NAVIGATION ==========================
 export { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
