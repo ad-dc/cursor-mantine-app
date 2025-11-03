@@ -44,34 +44,3 @@ figma.connect(
     ),
   }
 );
-/*
-NOT WORKING
-figma.connect(
-  Select,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1610-6659&t=F9hLR9eQ6A8lxsBi-4',
-  {
-    variant: {
-      'Select Style': 'Dialog',
-    },
-    props: {
-      // TODO: Restore bindings once the dialog select exposes matching props/layers
-      // data: figma.children('options'),
-      // placeholder: figma.string('placeholder'),
-      // label: figma.string('label'),
-      // description: figma.string('description'),
-      // searchValue: figma.string('search'),
-      // comboboxProps: figma.children('combobox target'),
-    },
-    example: () => (
-      <Select
-        data={[
-          { value: 'dialog-1', label: 'Dialog option 1' },
-          { value: 'dialog-2', label: 'Dialog option 2' },
-        ]}
-        placeholder="Select..."
-        comboboxProps={{ withinPortal: true }}
-      />
-    ),
-  }
-);
-*/

@@ -1,6 +1,9 @@
 import { figma } from '@figma/code-connect';
 import { Combobox, InputBase } from '@mantine/core';
 
+// Disabled: SearchableSelect shares node-id=1610-2362 with DropZone and Multiselect
+// TODO: Get unique Figma node URL, then uncomment
+/*
 figma.connect(
   InputBase,
   'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1610-2362&t=y0IJ175mkJJcYKZp-4',
@@ -48,4 +51,5 @@ figma.connect(
     ),
   }
 );
+*/
 
