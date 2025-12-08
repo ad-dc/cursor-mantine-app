@@ -1,9 +1,12 @@
 import { figma } from '@figma/code-connect';
 import { Menu, Button } from '@mantine/core';
 
+// Disabled: node-id=2938-803 is not a component or component set
+// TODO: Get valid Figma component URL, then uncomment
+/*
 figma.connect(
   Menu,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1141-2603&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=2938-803&t=y0IJ175mkJJcYKZp-4',
   {
     props: {
       // TODO: Restore bindings once the Figma component exposes these props
@@ -35,4 +38,5 @@ figma.connect(
     ),
   }
 );
+*/
 

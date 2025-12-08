@@ -4,7 +4,7 @@ import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
 
 figma.connect(
   Dropzone,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1610-2362&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1868-11698&t=y0IJ175mkJJcYKZp-4',
   {
     props: {
       // TODO: Restore bindings once the Figma dropzone exposes matching props/layers

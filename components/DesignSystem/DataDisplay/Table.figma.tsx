@@ -10,6 +10,9 @@ const defaultData = {
   ],
 };
 
+// Disabled: Table shares node-id=4129-10931 with Select and List
+// TODO: Get unique Figma node URL, then uncomment
+/*
 figma.connect(
   Table,
   'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=4129-10931&t=y0IJ175mkJJcYKZp-4',
@@ -50,4 +53,5 @@ figma.connect(
     ),
   }
 );
+*/
 
