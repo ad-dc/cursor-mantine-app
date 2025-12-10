@@ -17,7 +17,7 @@ export { Card, CardSection } from './Card';
 export type { DSCardProps, DSCardSectionProps } from './Card';
 
 export { Chip } from './Chip';
-export type { DSChipProps } from './Chip';
+export type { DSChipProps, ChipColor } from './Chip';
 
 export { Pill } from './Pill';
 export type { DSPillProps } from './Pill';
