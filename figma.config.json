@@ -1,8 +1,7 @@
 {
   "codeConnect": {
     "include": [
-      "components/DesignSystem/**/*.{figma.ts,figma.tsx}",
-      "components/DesignSystem/**/*.tsx"
+      "components/DesignSystem/**/*.{figma.ts,figma.tsx}"
     ],
     "exclude": [
       "node_modules/**",
