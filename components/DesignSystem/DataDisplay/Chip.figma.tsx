@@ -1,9 +1,9 @@
 import { figma } from '@figma/code-connect';
-import { Chip } from '@mantine/core';
+import { Chip } from './Chip';
 
 figma.connect(
   Chip,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=4315-173&t=ESTuKt2GI8tuVBUK-0',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=688-4120',
   {
     props: {
       size: figma.enum('size', {
@@ -13,7 +13,7 @@ figma.connect(
         lg: 'lg',
         xl: 'xl',
       }),
-      variant: figma.enum('variant', {
+      color: figma.enum('color', {
         default: 'default',
         info: 'info',
         success: 'success',
@@ -21,17 +21,17 @@ figma.connect(
         pending: 'pending',
       }),
       checked: figma.boolean('checked'),
+      children: figma.string('children'),
     },
     example: (props) => (
       <Chip
         value="chip-value"
         size={props.size}
-        variant={props.variant}
+        color={props.color}
         checked={props.checked}
       >
-        Chip label
+        {props.children}
       </Chip>
     ),
   }
 );
-
