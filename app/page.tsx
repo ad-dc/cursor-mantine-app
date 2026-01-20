@@ -1094,7 +1094,6 @@ export default function Home() {
             <Pill withRemoveButton onRemove={() => console.log('Remove clicked')}>Removable Pill</Pill>
             <Pill size="xs">XS Size</Pill>
             <Pill size="lg">LG Size</Pill>
-            <Pill disabled>Disabled Pill</Pill>
           </Inline>
         </Stack>
 
