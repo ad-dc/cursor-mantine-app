@@ -1,35 +1,33 @@
 import { figma } from '@figma/code-connect';
-import { Checkbox } from '@mantine/core';
+import { Checkbox } from './Checkbox';
 
 figma.connect(
   Checkbox,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1188-1605&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1188-1605',
   {
     props: {
-      // TODO: Restore bindings once the Figma checkbox exposes matching props
-      // size: figma.enum('size', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // label: figma.string('label'),
-      // description: figma.string('description'),
-      // error: figma.string('error'),
-      // required: figma.boolean('required'),
-      // disabled: figma.boolean('disabled'),
-      // indeterminate: figma.boolean('indeterminate'),
-      // checked: figma.boolean('checked'),
+      size: figma.enum('size', {
+        xs: 'xs',
+        sm: 'sm',
+        md: 'md',
+        lg: 'lg',
+        xl: 'xl',
+      }),
+      label: figma.string('label'),
+      checked: figma.boolean('checked'),
+      indeterminate: figma.boolean('indeterminate'),
+      disabled: figma.boolean('disabled'),
+      required: figma.boolean('required'),
     },
-    example: () => (
+    example: (props) => (
       <Checkbox
-        size="md"
-        label="Remember me"
-        description="Stay signed in"
-        defaultChecked
+        size={props.size}
+        label={props.label}
+        checked={props.checked}
+        indeterminate={props.indeterminate}
+        disabled={props.disabled}
+        required={props.required}
       />
     ),
   }
 );
-
