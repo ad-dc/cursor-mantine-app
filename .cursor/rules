@@ -22,6 +22,22 @@ Use this prompt to instruct Cursor IDE to generate components, layouts, or utili
 - Leverage **Mantine theming** for colors, spacing, and typography.
 - Do **not** use Tailwind CSS, CSS modules, or other styling libraries unless explicitly requested.
 - Prioritize **composability** and **readable functional components**.
+- Avoid inline `style` props. Prefer Mantine system props (`bg`, `c`, `w`, `h`, `p`, `px`, `py`, `m`, `mx`, `my`, `radius`, `shadow`, etc.) or component props.
+
+---
+
+## 🧱 Figma Layout Primitive Mapping
+
+When generating code from Figma selections, infer layout primitives from layer names and
+auto-layout properties, then use Design System primitives as the structural wrapper.
+
+- If a layer/frame name contains or equals `Stack`, use `Stack` from `@/components/DesignSystem`.
+- If a layer/frame name contains or equals `Grid`, use `Grid` from `@/components/DesignSystem`.
+- Map auto-layout spacing tokens to Mantine props:
+  - `Stack`: `gap`, `align`, `justify`, `p`/`px`/`py`
+  - `Grid`: `spacing`, `verticalSpacing`, `p`/`px`/`py`
+- Preserve padding values by translating Figma spacing variables to the closest DS spacing token.
+- Keep layout primitives as the outer structure; place DS components as children.
 
 ---
 
