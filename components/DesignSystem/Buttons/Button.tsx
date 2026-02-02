@@ -19,10 +19,10 @@ export interface DSButtonProps extends Omit<MantineButtonProps, 'size' | 'color'
   loading?: boolean;
   /** Disabled state */
   disabled?: boolean;
-  /** Icon to display on the left */
-  leftIcon?: React.ReactNode;
-  /** Icon to display on the right */
-  rightIcon?: React.ReactNode;
+  /** Content to display on the left side (e.g., icon, badge) */
+  leftSection?: React.ReactNode;
+  /** Content to display on the right side (e.g., icon, badge) */
+  rightSection?: React.ReactNode;
   /** Click handler */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -38,10 +38,10 @@ export const BUTTON_BUILD = 'button-2025-09-26';
  * @example
  * ```tsx
  * // Basic usage
- * <Button>Click me</ADDSButton>
+ * <Button>Click me</Button>
  * 
  * // Primary button with icon
- * <Button variant="primary" leftIcon={<Icon />}>
+ * <Button variant="primary" leftSection={<Icon />}>
  *   Save Changes
  * </Button>
  * 
@@ -78,8 +78,6 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
       color = 'primary',
       className,
       children,
-      leftIcon,
-      rightIcon,
       leftSection,
       rightSection,
       ...props
@@ -146,7 +144,7 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
       styles.addsButton,
       styles[`addsButton--${variant}`],
       styles[`addsButton--${size}`],
-      leftIcon && styles.hasLeftIcon,
+      leftSection && styles.hasLeftSection,
       className,
     ]
       .filter(Boolean)
@@ -163,8 +161,8 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
         className={componentClassName}
         data-ui="Button"
         data-build={BUTTON_BUILD}
-        leftSection={leftIcon || leftSection}
-        rightSection={rightIcon || rightSection}
+        leftSection={leftSection}
+        rightSection={rightSection}
         {...props}
       >
         {children}
