@@ -1,14 +1,15 @@
 {
   "codeConnect": {
     "include": [
-      "components/DesignSystem/**/*.{figma.ts,figma.tsx}"
+      "components/DesignSystem/**/*.{ts,tsx}"
     ],
     "exclude": [
       "node_modules/**",
       ".next/**",
       "storybook-static/**",
       "**/*.test.*",
-      "**/*.spec.*"
+      "**/*.spec.*",
+      "**/*.stories.*"
     ],
     "parser": "react",
     "fallback": false

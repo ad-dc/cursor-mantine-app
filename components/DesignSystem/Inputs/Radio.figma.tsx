@@ -1,30 +1,35 @@
 import { figma } from '@figma/code-connect';
-import { Radio } from '@mantine/core';
+import { Radio } from './Radio';
 
 figma.connect(
   Radio,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1205-372&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=5422-950&t=1LrRB2fT0aSOV74o-11',
+
+  
   {
     props: {
-      // TODO: Restore bindings once the Figma radio exposes matching props
-      // size: figma.enum('size', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // label: figma.string('label'),
-      // description: figma.string('description'),
-      // error: figma.string('error'),
-      // required: figma.boolean('required'),
-      // disabled: figma.boolean('disabled'),
-      // checked: figma.boolean('checked'),
-      // value: figma.string('value'),
-      // name: figma.string('name'),
+      size: figma.enum('size', {
+        xs: 'xs',
+        sm: 'sm',
+        md: 'md',
+        lg: 'lg',
+        xl: 'xl',
+      }),
+      label: figma.string('label'),
+      required: figma.boolean('required'),
+      disabled: figma.boolean('disabled'),
+      checked: figma.boolean('checked'),
     },
-    example: () => (
-      <Radio size="md" label="Option" value="option" name="radio" />
+    example: (props) => (
+      <Radio
+        size={props.size}
+        label={props.label}
+        required={props.required}
+        disabled={props.disabled}
+        checked={props.checked}
+        value="option"
+        name="radio"
+      />
     ),
   }
 );
