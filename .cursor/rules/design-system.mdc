@@ -1,0 +1,71 @@
+---
+description: Design system component and coding standards for cursor-mantine-app
+alwaysApply: true
+---
+
+# 🧩 Next.js + Mantine Design System Rules
+
+## Tech Stack
+
+- **Next.js v14+** App Router
+- **Mantine v7** for UI and styling
+- **TypeScript**
+
+---
+
+## Styling
+
+- Style only with Mantine system props (`bg`, `c`, `w`, `h`, `p`, `px`, `py`, `m`, `mx`, `my`, `radius`, `shadow`, etc.)
+- Do **not** use Tailwind CSS, CSS modules, or inline `style` props
+
+---
+
+## Figma Layout Primitive Mapping
+
+When generating code from Figma selections, map auto-layout frames to DS primitives:
+
+- Layer named `Stack` → `Stack` from `@/components/DesignSystem`
+- Layer named `Grid` → `Grid` from `@/components/DesignSystem`
+- Translate Figma spacing variables to the closest DS spacing token
+
+---
+
+## Design System Components
+
+**ALWAYS use DS components** from `@/components/DesignSystem` instead of raw Mantine.
+
+```tsx
+// ✅ CORRECT
+import { Button, TextInput, Alert } from '@/components/DesignSystem';
+
+// ❌ INCORRECT
+import { Button, TextInput, Alert } from '@mantine/core';
+```
+
+**Available categories:** Buttons, Inputs, Combobox, Navigation, DataDisplay, Overlays, Typography, Feedback, Misc
+
+If a Mantine component has no DS wrapper yet, create one:
+
+```tsx
+import React, { forwardRef } from 'react';
+import { [MantineComponent] as Mantine[Component], [MantineComponent]Props as Mantine[Component]Props } from '@mantine/core';
+
+export interface DS[Component]Props extends Mantine[Component]Props {}
+
+export const [Component] = forwardRef<HTML[Element]Element, DS[Component]Props>(
+  ({ ...props }, ref) => <Mantine[Component] ref={ref} {...props} />
+);
+[Component].displayName = '[Component]';
+```
+
+Export through the category index and `components/DesignSystem/index.ts`.
+
+---
+
+## Data Tables
+
+Always use the custom `Table` from `@/components/DesignSystem` — never raw Mantine `Table` or third-party libraries.
+
+## Page Headers
+
+Always use `PageContentHeader` from `@/components/DesignSystem` for page/section headers.

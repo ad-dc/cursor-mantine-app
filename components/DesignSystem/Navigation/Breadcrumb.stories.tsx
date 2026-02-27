@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Stack } from '@mantine/core';
-import { Inline } from '@/components/DesignSystem';
+import { Stack, Inline } from '@/components/DesignSystem';
 import { Breadcrumb, BackBreadcrumb } from './Breadcrumb';
 import { useState } from 'react';
 import { Title } from '../Typography/Title';

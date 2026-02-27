@@ -5,18 +5,36 @@ import { Breadcrumb, BackBreadcrumb } from './Breadcrumb';
 // Variants live inside the set — use variant: {} to differentiate them.
 
 // ── Default breadcrumb (type=Default) ──────────────────────────────────────
+//
+// Variable level support:
+//   In Figma, add boolean properties named "Level 3" and "Level 4" to the
+//   component. Toggle those properties to show/hide levels on the canvas.
+//   Code Connect reads those booleans so the generated snippet in Dev Mode
+//   always matches the exact number of levels the designer has configured.
 figma.connect(
   Breadcrumb,
   'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=959-1668',
   {
     variant: { type: 'Default' },
-    example: () => (
+    props: {
+      level1:      figma.nestedProps('level 1', { label: figma.string('label') }),
+      level2:      figma.nestedProps('level 2', { label: figma.string('label') }),
+      showLevel3:  figma.boolean('Level 3'),
+      level3:      figma.nestedProps('level 3', { label: figma.string('label') }),
+      showLevel4:  figma.boolean('Level 4'),
+      level4:      figma.nestedProps('level 4', { label: figma.string('label') }),
+    },
+    // Level 4 is always the current-page item (no href) when visible.
+    // Level 3 gets href only when level 4 is also visible; otherwise it becomes
+    // the current-page item itself. Level 1 and 2 are always present links.
+    example: (props) => (
       <Breadcrumb
         separator="/"
         items={[
-          { label: 'Home', href: '#' },
-          { label: 'Library', href: '#' },
-          { label: 'Current Page' },
+          { label: props.level1.label, href: '#' },
+          { label: props.level2.label, href: '#' },
+          ...(props.showLevel3 ? [{ label: props.level3.label, href: props.showLevel4 ? '#' : undefined }] : []),
+          ...(props.showLevel4 ? [{ label: props.level4.label }] : []),
         ]}
       />
     ),
@@ -29,8 +47,11 @@ figma.connect(
   'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=959-1668',
   {
     variant: { type: 'back' },
-    example: () => (
-      <BackBreadcrumb label="Back" onClick={() => {}} />
+    props: {
+      level: figma.nestedProps('.Breadcrumbs/Core/level', { label: figma.string('label') }),
+    },
+    example: (props) => (
+      <BackBreadcrumb label={props.level.label} onClick={() => {}} />
     ),
   }
 );
