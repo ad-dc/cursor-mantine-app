@@ -1,26 +1,64 @@
 import { figma } from '@figma/code-connect';
-import { Breadcrumbs, Anchor, Text } from '@mantine/core';
+import { Breadcrumb, BackBreadcrumb } from './Breadcrumb';
 
-// Disabled: Breadcrumb shares node-id=959-1668 with NavLink
-// TODO: Get unique Figma node URL, then uncomment
-/*
+// Component set node: 959-1668 ("Ⓜ️ Breadcrumbs")
+// Variants live inside the set — use variant: {} to differentiate them.
+
+// ── Default breadcrumb (type=Default) ──────────────────────────────────────
 figma.connect(
-  Breadcrumbs,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=959-1668&t=y0IJ175mkJJcYKZp-4',
+  Breadcrumb,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=959-1668',
   {
-    props: {
-      // TODO: Restore bindings once the Figma breadcrumbs expose matching props/layers
-      // separator: figma.string('separator'),
-      // items: figma.children('items'),
-    },
+    variant: { type: 'Default' },
     example: () => (
-      <Breadcrumbs separator="/">
-        <Anchor href="#">Home</Anchor>
-        <Anchor href="#">Library</Anchor>
-        <Text fw={500}>Data</Text>
-      </Breadcrumbs>
+      <Breadcrumb
+        separator="/"
+        items={[
+          { label: 'Home', href: '#' },
+          { label: 'Library', href: '#' },
+          { label: 'Current Page' },
+        ]}
+      />
     ),
   }
 );
-*/
 
+// ── Back breadcrumb (type=back) ────────────────────────────────────────────
+figma.connect(
+  BackBreadcrumb,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=959-1668',
+  {
+    variant: { type: 'back' },
+    example: () => (
+      <BackBreadcrumb label="Back" onClick={() => {}} />
+    ),
+  }
+);
+
+// ── Subcomponent: .Breadcrumbs/Core/level (node 1150:3287) ─────────────────
+// Prevents Figma from falling back to Tailwind auto-generation for this node.
+figma.connect(
+  Breadcrumb,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1150-3287',
+  {
+    example: () => <Breadcrumb items={[{ label: 'Level', href: '#' }]} />,
+  }
+);
+
+// ── Subcomponent: .Breadcrumbs/Core/separator (node 1151:552) ─────────────
+figma.connect(
+  Breadcrumb,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1151-552',
+  {
+    example: () => <Breadcrumb items={[{ label: 'Level 1', href: '#' }, { label: 'Level 2' }]} />,
+  }
+);
+
+// ── Subcomponent: .Breadcrumbs/Core/back-icon (node 1151:598) ─────────────
+figma.connect(
+  BackBreadcrumb,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1151-598',
+  {
+    example: () => <BackBreadcrumb label="Back" onClick={() => {}} />,
+  }
+);

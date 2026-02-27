@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text, BreadcrumbsProps as MantineBreadcrumbsProps } from '@mantine/core';
+import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text, Group, BreadcrumbsProps as MantineBreadcrumbsProps } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
 
 // ========================== TYPES ==========================
@@ -27,18 +27,6 @@ export interface DSBackBreadcrumbProps {
   /** Additional class names */
   className?: string;
 }
-
-// ========================== STYLES ==========================
-
-const breadcrumbStyles = {
-  backButton: {
-    display: 'flex',
-    alignItems: 'center',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-};
 
 // ========================== COMPONENTS ==========================
 
@@ -116,38 +104,29 @@ export const Breadcrumb = forwardRef<HTMLDivElement, DSBreadcrumbProps>(
  *   onClick={() => router.back()} 
  * />
  */
-export function BackBreadcrumb({ 
-  label = 'Back', 
-  onClick, 
-  href, 
-  className 
+export function BackBreadcrumb({
+  label = 'Back',
+  onClick,
+  href,
+  className
 }: DSBackBreadcrumbProps) {
   const content = (
-    <>
+    <Group gap={4} wrap="nowrap">
       <IconChevronLeft size={16} />
       <span>{label}</span>
-    </>
+    </Group>
   );
 
   if (href) {
     return (
-      <Anchor
-        href={href}
-        className={className}
-        style={breadcrumbStyles.backButton}
-      >
+      <Anchor href={href} className={className}>
         {content}
       </Anchor>
     );
   }
 
   return (
-    <Anchor
-      component="button"
-      className={className}
-      style={breadcrumbStyles.backButton}
-      onClick={onClick}
-    >
+    <Anchor component="button" className={className} onClick={onClick}>
       {content}
     </Anchor>
   );
