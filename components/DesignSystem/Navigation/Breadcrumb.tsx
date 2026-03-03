@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text, BreadcrumbsProps as MantineBreadcrumbsProps } from '@mantine/core';
+import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text, Group, BreadcrumbsProps as MantineBreadcrumbsProps } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
 
 // ========================== TYPES ==========================
@@ -26,31 +26,22 @@ export interface DSBackBreadcrumbProps {
   href?: string;
   /** Additional class names */
   className?: string;
+  /** Accessible label for screen readers (overrides visible label when set) */
+  'aria-label'?: string;
 }
-
-// ========================== STYLES ==========================
-
-const breadcrumbStyles = {
-  backButton: {
-    display: 'flex',
-    alignItems: 'center',
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-};
 
 // ========================== COMPONENTS ==========================
 
 /**
  * Standard Breadcrumb Component
- * 
+ *
  * Built on top of Mantine's Breadcrumbs component with design system styling.
  * Displays a navigation breadcrumb with clickable links and separators.
- * The last item is rendered as plain text representing the current page.
- * 
+ * The last item is rendered as plain text with `aria-current="page"` to
+ * represent the current page both visually and semantically.
+ *
  * @example
- * <Breadcrumb 
+ * <Breadcrumb
  *   items={[
  *     { label: 'Home', href: '/' },
  *     { label: 'Products', href: '/products' },
@@ -64,30 +55,27 @@ export const Breadcrumb = forwardRef<HTMLDivElement, DSBreadcrumbProps>(
       return null;
     }
 
-    // Create breadcrumb items, making last item non-clickable (current page)
     const breadcrumbItems = items.map((item, index) => {
       const isLast = index === items.length - 1;
-      
+
       if (isLast) {
-        // Current page - render as plain text (Mantine will style this)
         return (
-          <Text key={index} component="span">
+          <Text key={item.label} component="span" aria-current="page">
             {item.label}
           </Text>
         );
       }
-      
-      // Navigation items - render as links or buttons (Mantine will style these)
+
       if (item.href) {
         return (
-          <Anchor key={index} href={item.href}>
+          <Anchor key={item.label} href={item.href}>
             {item.label}
           </Anchor>
         );
       }
-      
+
       return (
-        <Anchor key={index} component="button" onClick={item.onClick}>
+        <Anchor key={item.label} component="button" onClick={item.onClick}>
           {item.label}
         </Anchor>
       );
@@ -97,6 +85,7 @@ export const Breadcrumb = forwardRef<HTMLDivElement, DSBreadcrumbProps>(
       <MantineBreadcrumbs
         ref={ref}
         separator={separator}
+        aria-label="breadcrumb"
         {...props}
       >
         {breadcrumbItems}
@@ -107,53 +96,41 @@ export const Breadcrumb = forwardRef<HTMLDivElement, DSBreadcrumbProps>(
 
 /**
  * Back Breadcrumb Component
- * 
- * Displays a simple back navigation with an arrow icon and label.
- * 
+ *
+ * Displays a simple back navigation with a chevron icon and label.
+ *
  * @example
- * <BackBreadcrumb 
- *   label="Back to Products" 
- *   onClick={() => router.back()} 
+ * <BackBreadcrumb
+ *   label="Back to Products"
+ *   onClick={() => router.back()}
  * />
  */
-export function BackBreadcrumb({ 
-  label = 'Back', 
-  onClick, 
-  href, 
-  className 
-}: DSBackBreadcrumbProps) {
-  const content = (
-    <>
-      <IconChevronLeft size={16} />
-      <span>{label}</span>
-    </>
-  );
+export const BackBreadcrumb = forwardRef<HTMLAnchorElement & HTMLButtonElement, DSBackBreadcrumbProps>(
+  ({ label = 'Back', onClick, href, className, 'aria-label': ariaLabel }, ref) => {
+    const content = (
+      <Group gap={4} wrap="nowrap">
+        <IconChevronLeft size={16} />
+        <span>{label}</span>
+      </Group>
+    );
 
-  if (href) {
+    if (href) {
+      return (
+        <Anchor ref={ref} href={href} className={className} aria-label={ariaLabel}>
+          {content}
+        </Anchor>
+      );
+    }
+
     return (
-      <Anchor
-        href={href}
-        className={className}
-        style={breadcrumbStyles.backButton}
-      >
+      <Anchor ref={ref} component="button" className={className} onClick={onClick} aria-label={ariaLabel}>
         {content}
       </Anchor>
     );
   }
-
-  return (
-    <Anchor
-      component="button"
-      className={className}
-      style={breadcrumbStyles.backButton}
-      onClick={onClick}
-    >
-      {content}
-    </Anchor>
-  );
-}
+);
 
 Breadcrumb.displayName = 'Breadcrumb';
+BackBreadcrumb.displayName = 'BackBreadcrumb';
 
-// Default export for convenience
 export default Breadcrumb; 

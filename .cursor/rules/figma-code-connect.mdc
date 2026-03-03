@@ -1,0 +1,59 @@
+---
+description: Figma Code Connect authoring rules and known serializer gotchas
+globs: "**/*.figma.tsx"
+alwaysApply: false
+---
+
+# Figma Code Connect Rules
+
+## ⚠️ Serializer bug: never use a function body in `example`
+
+Figma's Code Connect serializer **cannot handle `{ }` function bodies** with intermediate variables. It mangles object literals — e.g. `{ label: "foo" }` becomes `{label}: "foo"` — and drops opening braces entirely.
+
+**Always use a parenthesized arrow expression.**
+
+```tsx
+// ❌ BAD — serializer mangles object literals inside function bodies
+example: (props) => {
+  const items = [{ label: props.level1.label, href: '#' }];
+  return <Component items={items} />;
+}
+
+// ✅ GOOD — pure expression, serializes cleanly
+example: (props) => (
+  <Component items={[{ label: props.level1.label, href: '#' }]} />
+)
+```
+
+Move ALL conditional logic inline into the JSX expression — no `const`, no `.map()`, no intermediate variables.
+
+---
+
+## Boolean visibility props for optional layers
+
+To let designers show/hide layers and have it reflect in the Dev Mode snippet:
+
+1. In Figma: add a **boolean property** (e.g. `Level 3`) bound to the layer's visibility toggle
+2. In Code Connect: map it with `figma.boolean('Level 3')`
+3. In the example: use a **conditional spread** to include/exclude the layer
+
+```tsx
+props: {
+  showLevel3: figma.boolean('Level 3'),
+  level3: figma.nestedProps('level 3', { label: figma.string('label') }),
+},
+example: (props) => (
+  <Breadcrumb
+    items={[
+      { label: props.level1.label, href: '#' },
+      ...(props.showLevel3 ? [{ label: props.level3.label }] : []),
+    ]}
+  />
+)
+```
+
+---
+
+## Subcomponent stubs
+
+Always add stub `figma.connect` calls for internal subcomponent nodes to prevent Figma from falling back to Tailwind auto-generation in Dev Mode.
