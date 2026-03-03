@@ -12,6 +12,11 @@
       "**/*.stories.*"
     ],
     "parser": "react",
-    "fallback": false
+    "fallback": false,
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   }
 } 

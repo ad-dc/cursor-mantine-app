@@ -6,19 +6,19 @@ import { RiCircleLine } from '@remixicon/react';
  * Code Connect configuration for Button component (V2)
  * 
  * Maps the Figma Button V2 component to the React Button component using boolean
- * icon props for cleaner code generation and more flexible icon combinations.
+ * section props for cleaner code generation and more flexible content combinations.
  * 
  * Expected Figma Properties:
  * - size: "xs" | "sm" | "md" | "lg" | "xl" 
  * - variant: "primary" | "secondary" | "default" | "disabled" | "link" | "secret" | "outline" | "danger"
- * - hasIconLeft: boolean
- * - hasIconRight: boolean
+ * - hasLeftSection: boolean
+ * - hasRightSection: boolean
  * - children: string
  */
 
 figma.connect(
   Button,
-  'https://www.figma.com/design/ZdGe37wL0o1BqZyKzo2Z0j/ADDS-V2-Admin-Mantine-Core?node-id=3609-18499',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=5331-12700&t=RcqEK5uoQUTmRFvI-11',
   {
     props: {
       // Map Figma size property to React size prop
@@ -42,9 +42,9 @@ figma.connect(
         'danger': 'danger',
       }),
       
-      // Map boolean icon properties
-      hasIconLeft: figma.boolean('hasIconLeft'),
-      hasIconRight: figma.boolean('hasIconRight'),
+      // Map boolean section properties
+      hasLeftSection: figma.boolean('hasLeftSection'),
+      hasRightSection: figma.boolean('hasRightSection'),
       
       // Map Figma text content to React children
       children: figma.string('children'),
@@ -52,8 +52,8 @@ figma.connect(
     
     // Example code snippet that will be shown in Figma
     example: (props) => {
-      const leftSection = props.hasIconLeft ? <RiCircleLine size={14} /> : undefined;
-      const rightSection = props.hasIconRight ? <RiCircleLine size={14} /> : undefined;
+      const leftSection = props.hasLeftSection ? <RiCircleLine size={14} /> : undefined;
+      const rightSection = props.hasRightSection ? <RiCircleLine size={14} /> : undefined;
       
       return (
         <Button

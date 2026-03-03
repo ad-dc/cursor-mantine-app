@@ -15,7 +15,7 @@ const meta: Meta<typeof Pill> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Pill component for displaying tags, labels, or removable items with consistent gray styling.',
+        component: 'Pill component for displaying tags, labels, or removable items with consistent gray styling. Disabled state is not supported.',
       },
     },
   },
@@ -29,10 +29,6 @@ const meta: Meta<typeof Pill> = {
     withRemoveButton: {
       control: 'boolean',
       description: 'Whether the pill can be removed',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Whether the pill is disabled',
     },
     children: {
       control: 'text',
@@ -115,14 +111,6 @@ export const States: Story = {
         <Pill>Normal Pill</Pill>
         <Pill withRemoveButton onRemove={() => console.log('Remove')}>
           With Remove
-        </Pill>
-      </Inline>
-      
-      <Inline gap="sm">
-        <Text size="sm" fw={500}>Disabled:</Text>
-        <Pill disabled>Disabled Pill</Pill>
-        <Pill disabled withRemoveButton onRemove={() => console.log('Remove')}>
-          Disabled with Remove
         </Pill>
       </Inline>
     </Stack>
@@ -496,19 +484,6 @@ export const UseCases: Story = {
           </Pill>
         </Inline>
       </Box>
-      
-      <Box>
-        <Text size="sm" fw={500} mb="sm">6. Disabled Pills:</Text>
-        <Inline gap="xs">
-          <Pill disabled>Unavailable</Pill>
-          <Pill disabled withRemoveButton>
-            Cannot Remove
-          </Pill>
-          <Pill disabled size="sm">
-            Disabled Small
-          </Pill>
-        </Inline>
-      </Box>
     </Stack>
   ),
   parameters: {
@@ -525,7 +500,6 @@ export const Interactive: Story = {
     children: 'Interactive Pill',
     size: 'md',
     withRemoveButton: false,
-    disabled: false,
   },
   parameters: {
     docs: {

@@ -170,7 +170,7 @@ export const PasswordExample: Story = {
           placeholder="Enter password"
           type={showPassword ? 'text' : 'password'}
           required
-          rightIcon={
+          rightSection={
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
