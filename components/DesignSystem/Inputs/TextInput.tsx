@@ -1,6 +1,9 @@
 import React, { forwardRef } from 'react';
-import { TextInput as MantineTextInput, TextInputProps as MantineTextInputProps } from '@mantine/core';
+import { TextInput as MantineTextInput, TextInputProps as MantineTextInputProps, ActionIcon, Group } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { ComponentSize } from '../config';
+import { Text } from '../Typography/Text';
+import { Tooltip } from '../Overlays/Tooltip';
 
 /**
  * Enhanced TextInput props extending Mantine's TextInputProps
@@ -12,10 +15,17 @@ export interface DSTextInputProps extends Omit<MantineTextInputProps, 'size' | '
   required?: boolean;
   /** Whether to show "(Optional)" text after label */
   showOptional?: boolean;
-  /** Icon to display on the left */
-  leftIcon?: React.ReactNode;
-  /** Icon to display on the right */
-  rightIcon?: React.ReactNode;
+  /** Whether to show a help icon with a tooltip in the right section */
+  hasHelpIcon?: boolean;
+  /** Tooltip label shown when hovering the help icon. Also used as aria-label for a11y */
+  helpIconLabel?: string;
+  /** Optional click handler for the help icon */
+  onHelpIconClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Optional error message text shown below the input when in error state.
+   * Used with error={true} (from state) for red border + message; omit for red border only.
+   */
+  errorCaption?: string;
 }
 
 /**
@@ -61,8 +71,23 @@ export interface DSTextInputProps extends Omit<MantineTextInputProps, 'size' | '
  * 
  * // With icons
  * <TextInput
- *   leftIcon={<IconUser />}
+ *   leftSection={<IconUser />}
  *   placeholder="Username"
+ * />
+ * 
+ * // With help icon tooltip (hover)
+ * <TextInput
+ *   label="API Key"
+ *   hasHelpIcon
+ *   helpIconLabel="Your API key can be found in account settings"
+ * />
+ * 
+ * // With help icon click handler
+ * <TextInput
+ *   label="API Key"
+ *   hasHelpIcon
+ *   helpIconLabel="Learn more about API keys"
+ *   onHelpIconClick={() => openHelpDrawer()}
  * />
  * ```
  */
@@ -70,39 +95,67 @@ export const TextInput = forwardRef<HTMLInputElement, DSTextInputProps>(
   (
     {
       size = 'md',
-      className,
-      leftIcon,
-      rightIcon,
       leftSection,
       rightSection,
       showOptional = false,
+      required,
       label,
+      hasHelpIcon = false,
+      helpIconLabel,
+      onHelpIconClick,
+      error,
+      errorCaption,
       ...props
     },
     ref
   ) => {
-    // Construct label with optional text if needed
+    const effectiveError = error === true ? (errorCaption ?? true) : error;
+
     const enhancedLabel = React.useMemo(() => {
       if (!label) return label;
-      if (showOptional && !props.required) {
+      if (showOptional && !required) {
         return (
           <>
-            {label} <span style={{ fontWeight: 'normal', color: 'var(--mantine-color-gray-6)' }}>(Optional)</span>
+            {label} <Text span c="dimmed" fw="normal">(Optional)</Text>
           </>
         );
       }
       return label;
-    }, [label, showOptional, props.required]);
+    }, [label, showOptional, required]);
+
+    const helpIconElement = hasHelpIcon ? (
+      <Tooltip
+        label={helpIconLabel ?? 'Help'}
+        position="top"
+        withArrow
+      >
+        <ActionIcon
+          variant="transparent"
+          size="xs"
+          aria-label={helpIconLabel ?? 'Help'}
+          onClick={onHelpIconClick}
+          color="gray"
+          style={{ cursor: onHelpIconClick ? 'pointer' : 'default' }}
+        >
+          <IconInfoCircle size={14} aria-hidden />
+        </ActionIcon>
+      </Tooltip>
+    ) : null;
+
+    const composedRightSection = (helpIconElement && rightSection)
+      ? <Group gap={4} wrap="nowrap">{rightSection}{helpIconElement}</Group>
+      : helpIconElement || rightSection;
 
     return (
       <MantineTextInput
         ref={ref}
         size={size}
         radius="sm"
-        className={className}
-        leftSection={leftIcon || leftSection}
-        rightSection={rightIcon || rightSection}
+        required={required}
+        leftSection={leftSection}
+        rightSection={composedRightSection}
         label={enhancedLabel}
+        error={effectiveError}
         {...props}
       />
     );
