@@ -14,6 +14,7 @@ import { NameValue } from '@/components/DesignSystem';
 import { Alert, Avatar, Button as DSButton, ActionIcon, CloseButton, TextInput, TextArea, NumberInput, ColorInput, Slider, Switch, SegmentedControl, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, Drawer, Menu as DSMenu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip, Kbd, Code, Text, Title, Divider as DSDivider, Paper as DSPaper, Checkbox, Radio, RadioGroup, SearchableSelect, AutocompleteClearable, Multiselect, Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs, DropZone, FileInput } from '@/components/DesignSystem';
 import { useState, useMemo, useEffect } from 'react';
 import { RiMore2Fill, RiEyeLine, RiUserLine, RiServerLine, RiAddLine, RiCircleLine } from '@remixicon/react';
+import { IconChevronRight } from '@tabler/icons-react';
 import { MRT_PaginationState as PaginationState, MRT_ColumnDef as ColumnDef, MRT_TableInstance } from 'mantine-react-table';
 
 // Import Filters type from the correct location
@@ -1689,22 +1690,22 @@ function Demo() {
         <Stack gap="sm">
           <Title order={4} size="sm">NavLink Examples</Title>
           <Stack gap="md" style={{ maxWidth: 300 }}>
-            <NavLink label="Dashboard" icon={<RiEyeLine size={18} />} active />
-            <NavLink label="Users" icon={<RiUserLine size={18} />} />
+            <NavLink label="Dashboard" leftSection={<RiEyeLine size={18} />} active />
+            <NavLink label="Users" leftSection={<RiUserLine size={18} />} />
             <NavLink 
               label="Settings" 
-              icon={<RiServerLine size={18} />} 
+              leftSection={<RiServerLine size={18} />} 
               rightSection={<Badge size="xs" color="info">3</Badge>}
             />
             <NavLink 
               label="Messages" 
-              icon={<RiAddLine size={18} />}
+              leftSection={<RiAddLine size={18} />}
               rightSection={<Badge size="xs" color="danger">184</Badge>}
             />
             <NavLink 
               label="Reports" 
-              icon={<RiCircleLine size={18} />}
-              hasChildren
+              leftSection={<RiCircleLine size={18} />}
+              rightSection={<IconChevronRight size={16} />}
             />
           </Stack>
         </Stack>
@@ -1937,10 +1938,10 @@ function Demo() {
           size="sm"
         >
           <Stack gap="sm">
-            <NavLink label="Dashboard" icon={<RiEyeLine size={18} />} active />
-            <NavLink label="Users" icon={<RiUserLine size={18} />} />
-            <NavLink label="Settings" icon={<RiServerLine size={18} />} />
-            <NavLink label="Reports" icon={<RiCircleLine size={18} />} />
+            <NavLink label="Dashboard" leftSection={<RiEyeLine size={18} />} active />
+            <NavLink label="Users" leftSection={<RiUserLine size={18} />} />
+            <NavLink label="Settings" leftSection={<RiServerLine size={18} />} />
+            <NavLink label="Reports" leftSection={<RiCircleLine size={18} />} />
           </Stack>
         </Drawer>
 

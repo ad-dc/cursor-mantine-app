@@ -7,6 +7,7 @@ import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
 import { Badge } from '../DataDisplay/Badge';
 import { ThemeIcon } from '../DataDisplay/ThemeIcon';
+import { IconChevronRight } from '@tabler/icons-react';
 
 const meta: Meta<typeof NavLink> = {
   title: 'Design System/Navigation/NavLink',
@@ -15,7 +16,7 @@ const meta: Meta<typeof NavLink> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'NavLink component for navigation items in menus and sidebars with icons, descriptions, and children indicators.',
+        component: 'NavLink component for navigation items in menus and sidebars. Thin wrapper around Mantine NavLink.',
       },
     },
   },
@@ -36,10 +37,6 @@ const meta: Meta<typeof NavLink> = {
     disabled: {
       control: 'boolean',
       description: 'Whether the nav item is disabled',
-    },
-    hasChildren: {
-      control: 'boolean',
-      description: 'Whether this nav item has children (shows chevron)',
     },
     href: {
       control: 'text',
@@ -62,22 +59,22 @@ export const WithIcon: Story = {
   render: () => (
     <Stack gap="xs" w={250}>
       <NavLink
-        icon={<span>🏠</span>}
+        leftSection={<span>🏠</span>}
         label="Home"
         onClick={() => console.log('Home clicked')}
       />
       <NavLink
-        icon={<span>📊</span>}
+        leftSection={<span>📊</span>}
         label="Analytics"
         onClick={() => console.log('Analytics clicked')}
       />
       <NavLink
-        icon={<span>👥</span>}
+        leftSection={<span>👥</span>}
         label="Users"
         onClick={() => console.log('Users clicked')}
       />
       <NavLink
-        icon={<span>⚙️</span>}
+        leftSection={<span>⚙️</span>}
         label="Settings"
         onClick={() => console.log('Settings clicked')}
       />
@@ -96,25 +93,25 @@ export const WithDescription: Story = {
   render: () => (
     <Stack gap="xs" w={300}>
       <NavLink
-        icon={<span>📊</span>}
+        leftSection={<span>📊</span>}
         label="Dashboard"
         description="Overview and key metrics"
         onClick={() => console.log('Dashboard clicked')}
       />
       <NavLink
-        icon={<span>👥</span>}
+        leftSection={<span>👥</span>}
         label="User Management"
         description="Manage users and permissions"
         onClick={() => console.log('User Management clicked')}
       />
       <NavLink
-        icon={<span>📈</span>}
+        leftSection={<span>📈</span>}
         label="Reports"
         description="Generate and view reports"
         onClick={() => console.log('Reports clicked')}
       />
       <NavLink
-        icon={<span>⚙️</span>}
+        leftSection={<span>⚙️</span>}
         label="System Settings"
         description="Configure system preferences"
         onClick={() => console.log('System Settings clicked')}
@@ -134,29 +131,29 @@ export const WithChildren: Story = {
   render: () => (
     <Stack gap="xs" w={250}>
       <NavLink
-        icon={<span>📊</span>}
+        leftSection={<span>📊</span>}
         label="Analytics"
-        hasChildren
+        rightSection={<IconChevronRight size={16} />}
         onClick={() => console.log('Analytics menu toggled')}
       />
       <NavLink
-        icon={<span>👥</span>}
+        leftSection={<span>👥</span>}
         label="Users"
         description="User management"
-        hasChildren
+        rightSection={<IconChevronRight size={16} />}
         onClick={() => console.log('Users menu toggled')}
       />
       <NavLink
-        icon={<span>🛒</span>}
+        leftSection={<span>🛒</span>}
         label="E-commerce"
-        hasChildren
+        rightSection={<IconChevronRight size={16} />}
         onClick={() => console.log('E-commerce menu toggled')}
       />
       <NavLink
-        icon={<span>⚙️</span>}
+        leftSection={<span>⚙️</span>}
         label="Settings"
         description="System configuration"
-        hasChildren
+        rightSection={<IconChevronRight size={16} />}
         onClick={() => console.log('Settings menu toggled')}
       />
     </Stack>
@@ -164,7 +161,7 @@ export const WithChildren: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'NavLink components that indicate they have children with chevron arrows.',
+        story: 'NavLink components with chevron indicators showing nested navigation.',
       },
     },
   },
@@ -187,7 +184,7 @@ export const ActiveStates: Story = {
         {navItems.map((item) => (
           <NavLink
             key={item.id}
-            icon={<span>{item.icon}</span>}
+            leftSection={<span>{item.icon}</span>}
             label={item.label}
             active={activeItem === item.id}
             onClick={() => setActiveItem(item.id)}
@@ -209,32 +206,32 @@ export const DisabledStates: Story = {
   render: () => (
     <Stack gap="xs" w={250}>
       <NavLink
-        icon={<span>📊</span>}
+        leftSection={<span>📊</span>}
         label="Dashboard"
         onClick={() => console.log('Dashboard clicked')}
       />
       <NavLink
-        icon={<span>👥</span>}
+        leftSection={<span>👥</span>}
         label="Users"
         disabled
         onClick={() => console.log('Users clicked')}
       />
       <NavLink
-        icon={<span>📦</span>}
+        leftSection={<span>📦</span>}
         label="Products"
         description="Manage your products"
         disabled
         onClick={() => console.log('Products clicked')}
       />
       <NavLink
-        icon={<span>🛒</span>}
+        leftSection={<span>🛒</span>}
         label="Orders"
-        hasChildren
+        rightSection={<IconChevronRight size={16} />}
         disabled
         onClick={() => console.log('Orders clicked')}
       />
       <NavLink
-        icon={<span>⚙️</span>}
+        leftSection={<span>⚙️</span>}
         label="Settings"
         onClick={() => console.log('Settings clicked')}
       />
@@ -253,26 +250,26 @@ export const WithCustomRightSection: Story = {
   render: () => (
     <Stack gap="xs" w={300}>
       <NavLink
-        icon={<span>📧</span>}
+        leftSection={<span>📧</span>}
         label="Messages"
         rightSection={<Badge variant="danger" size="xs">3</Badge>}
         onClick={() => console.log('Messages clicked')}
       />
       <NavLink
-        icon={<span>🔔</span>}
+        leftSection={<span>🔔</span>}
         label="Notifications"
         rightSection={<Badge variant="info" size="xs">12</Badge>}
         onClick={() => console.log('Notifications clicked')}
       />
       <NavLink
-        icon={<span>📋</span>}
+        leftSection={<span>📋</span>}
         label="Tasks"
         description="Pending assignments"
         rightSection={<Badge variant="warning" size="xs">5</Badge>}
         onClick={() => console.log('Tasks clicked')}
       />
       <NavLink
-        icon={<span>🎯</span>}
+        leftSection={<span>🎯</span>}
         label="Goals"
         rightSection={
           <ThemeIcon size="xs" variant="success">
@@ -309,16 +306,16 @@ export const NavigationMenu: Story = {
       <Paper p="md" w={280} shadow="sm">
         <Stack gap="xs">
           <NavLink
-            icon={<span>🏠</span>}
+            leftSection={<span>🏠</span>}
             label="Dashboard"
             active={activeSection === 'dashboard'}
             onClick={() => setActiveSection('dashboard')}
           />
           
           <NavLink
-            icon={<span>📊</span>}
+            leftSection={<span>📊</span>}
             label="Analytics"
-            hasChildren
+            rightSection={<IconChevronRight size={16} />}
             active={expandedSections.includes('analytics')}
             onClick={() => toggleSection('analytics')}
           />
@@ -344,9 +341,9 @@ export const NavigationMenu: Story = {
           )}
           
           <NavLink
-            icon={<span>👥</span>}
+            leftSection={<span>👥</span>}
             label="Users"
-            hasChildren
+            rightSection={<IconChevronRight size={16} />}
             active={expandedSections.includes('users')}
             onClick={() => toggleSection('users')}
           />
@@ -372,14 +369,14 @@ export const NavigationMenu: Story = {
           )}
           
           <NavLink
-            icon={<span>📦</span>}
+            leftSection={<span>📦</span>}
             label="Products"
             active={activeSection === 'products'}
             onClick={() => setActiveSection('products')}
           />
           
           <NavLink
-            icon={<span>🛒</span>}
+            leftSection={<span>🛒</span>}
             label="Orders"
             rightSection={<Badge variant="info" size="xs">24</Badge>}
             active={activeSection === 'orders'}
@@ -387,7 +384,7 @@ export const NavigationMenu: Story = {
           />
           
           <NavLink
-            icon={<span>⚙️</span>}
+            leftSection={<span>⚙️</span>}
             label="Settings"
             active={activeSection === 'settings'}
             onClick={() => setActiveSection('settings')}
@@ -433,7 +430,7 @@ export const SidebarNavigation: Story = {
               {mainNavItems.map((item) => (
                 <NavLink
                   key={item.id}
-                  icon={<span>{item.icon}</span>}
+                  leftSection={<span>{item.icon}</span>}
                   label={item.label}
                   active={activeItem === item.id}
                   rightSection={item.badge ? <Badge variant="info" size="xs">{item.badge}</Badge> : undefined}
@@ -451,7 +448,7 @@ export const SidebarNavigation: Story = {
               {accountItems.map((item) => (
                 <NavLink
                   key={item.id}
-                  icon={<span>{item.icon}</span>}
+                  leftSection={<span>{item.icon}</span>}
                   label={item.label}
                   active={activeItem === item.id}
                   onClick={() => setActiveItem(item.id)}
@@ -462,7 +459,7 @@ export const SidebarNavigation: Story = {
           
           <div style={{ marginTop: 'auto' }}>
             <NavLink
-              icon={<span>🚪</span>}
+              leftSection={<span>🚪</span>}
               label="Sign Out"
               onClick={() => console.log('Sign out clicked')}
             />
@@ -490,23 +487,23 @@ export const UseCases: Story = {
         <Paper p="sm" w={250} shadow="xs">
           <Stack gap="xs">
             <NavLink
-              icon={<span>📊</span>}
+              leftSection={<span>📊</span>}
               label="Dashboard"
               description="Overview & metrics"
               active
             />
             <NavLink
-              icon={<span>👥</span>}
+              leftSection={<span>👥</span>}
               label="User Management"
               rightSection={<Badge variant="info" size="xs">142</Badge>}
             />
             <NavLink
-              icon={<span>📈</span>}
+              leftSection={<span>📈</span>}
               label="Analytics"
-              hasChildren
+              rightSection={<IconChevronRight size={16} />}
             />
             <NavLink
-              icon={<span>⚙️</span>}
+              leftSection={<span>⚙️</span>}
               label="Settings"
               description="System configuration"
             />
@@ -519,29 +516,29 @@ export const UseCases: Story = {
         <Paper p="sm" w={250} shadow="xs">
           <Stack gap="xs">
             <NavLink
-              icon={<span>🏪</span>}
+              leftSection={<span>🏪</span>}
               label="Store"
               active
             />
             <NavLink
-              icon={<span>📦</span>}
+              leftSection={<span>📦</span>}
               label="Products"
               rightSection={<Badge variant="success" size="xs">234</Badge>}
             />
             <NavLink
-              icon={<span>🛒</span>}
+              leftSection={<span>🛒</span>}
               label="Orders"
               rightSection={<Badge variant="warning" size="xs">12</Badge>}
             />
             <NavLink
-              icon={<span>👥</span>}
+              leftSection={<span>👥</span>}
               label="Customers"
-              hasChildren
+              rightSection={<IconChevronRight size={16} />}
             />
             <NavLink
-              icon={<span>📊</span>}
+              leftSection={<span>📊</span>}
               label="Reports"
-              hasChildren
+              rightSection={<IconChevronRight size={16} />}
             />
           </Stack>
         </Paper>
@@ -552,27 +549,27 @@ export const UseCases: Story = {
         <Paper p="sm" w={250} shadow="xs">
           <Stack gap="xs">
             <NavLink
-              icon={<span>📝</span>}
+              leftSection={<span>📝</span>}
               label="Posts"
               rightSection={<Badge variant="info" size="xs">45</Badge>}
             />
             <NavLink
-              icon={<span>📄</span>}
+              leftSection={<span>📄</span>}
               label="Pages"
               active
             />
             <NavLink
-              icon={<span>🏷️</span>}
+              leftSection={<span>🏷️</span>}
               label="Categories"
-              hasChildren
+              rightSection={<IconChevronRight size={16} />}
             />
             <NavLink
-              icon={<span>💬</span>}
+              leftSection={<span>💬</span>}
               label="Comments"
               rightSection={<Badge variant="danger" size="xs">3</Badge>}
             />
             <NavLink
-              icon={<span>📁</span>}
+              leftSection={<span>📁</span>}
               label="Media Library"
               description="Images & files"
             />
@@ -596,8 +593,7 @@ export const Interactive: Story = {
     description: 'Use the controls to modify this NavLink',
     active: false,
     disabled: false,
-    hasChildren: false,
-    icon: <span>🔗</span>,
+    leftSection: <span>🔗</span>,
   },
   render: (args) => (
     <div style={{ width: 300 }}>

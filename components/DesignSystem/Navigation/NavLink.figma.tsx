@@ -1,33 +1,58 @@
 import { figma } from '@figma/code-connect';
-import { NavLink, ThemeIcon } from '@mantine/core';
+import { NavLink } from './NavLink';
+import { RiCircleLine } from '@remixicon/react';
 import { IconChevronRight } from '@tabler/icons-react';
 
 figma.connect(
   NavLink,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=959-1668&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=2002-1980',
   {
     props: {
-      // TODO: Restore bindings once the Figma nav link exposes matching props/layers
-      // label: figma.string('label'),
-      // description: figma.string('description'),
-      // active: figma.boolean('active'),
-      // disabled: figma.boolean('disabled'),
-      // rightSection: figma.instance('right section'),
-      // leftSection: figma.instance('left section'),
-      // hasChildren: figma.boolean('has children'),
+      leftSection: figma.boolean('leftSection'),
+      rightSection: figma.boolean('rightSection'),
+      description: figma.boolean('description'),
     },
-    example: () => (
-      <NavLink
-        label="Nav label"
-        description="Optional description"
-        leftSection={(
-          <ThemeIcon variant="light" color="blue" size="sm">
-            <IconChevronRight size={14} />
-          </ThemeIcon>
-        )}
-        rightSection={<IconChevronRight size={16} />}
-      />
-    ),
+    example: (props) => {
+      const leftSection = props.leftSection ? <RiCircleLine size={14} /> : undefined;
+      const rightSection = props.rightSection ? <IconChevronRight size={16} /> : undefined;
+      const description = props.description ? 'Description' : undefined;
+
+      return (
+        <NavLink
+          label="Nav label"
+          description={description}
+          leftSection={leftSection}
+          rightSection={rightSection}
+        />
+      );
+    },
   }
 );
 
+figma.connect(
+  NavLink,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=2002-1980',
+  {
+    variant: { state: 'active' },
+    props: {
+      leftSection: figma.boolean('leftSection'),
+      rightSection: figma.boolean('rightSection'),
+      description: figma.boolean('description'),
+    },
+    example: (props) => {
+      const leftSection = props.leftSection ? <RiCircleLine size={14} /> : undefined;
+      const rightSection = props.rightSection ? <IconChevronRight size={16} /> : undefined;
+      const description = props.description ? 'Description' : undefined;
+
+      return (
+        <NavLink
+          label="Nav label"
+          description={description}
+          leftSection={leftSection}
+          rightSection={rightSection}
+          active
+        />
+      );
+    },
+  }
+);
