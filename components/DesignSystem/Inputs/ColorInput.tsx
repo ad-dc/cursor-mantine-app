@@ -1,58 +1,122 @@
-import React from 'react';
-import { ColorInput as MantineColorInput, ColorInputProps as MantineColorInputProps } from '@mantine/core';
+import React, { forwardRef } from 'react';
+import { ColorInput as MantineColorInput, ColorInputProps as MantineColorInputProps, ActionIcon, Group } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
+import { ComponentSize } from '../config';
+import { Text } from '../Typography/Text';
+import { Tooltip } from '../Overlays/Tooltip';
 
-// Define the DS ColorInput props interface
-export interface DSColorInputProps extends Omit<MantineColorInputProps, 'radius'> {
-  /** Show "(Optional)" text after label */
+// ========================== TYPES ==========================
+
+export interface DSColorInputProps extends Omit<MantineColorInputProps, 'size' | 'radius'> {
+  /** Input size from design system scale */
+  size?: ComponentSize;
+  /** Whether to show "(Optional)" text after label */
   showOptional?: boolean;
+  /** Whether to show a help icon with a tooltip in the right section */
+  hasHelpIcon?: boolean;
+  /** Tooltip label shown when hovering the help icon. Also used as aria-label for a11y */
+  helpIconLabel?: string;
+  /** Optional click handler for the help icon */
+  onHelpIconClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Optional error message text shown below the input when in error state.
+   * Used with error={true} (from state) for red border + message; omit for red border only.
+   */
+  errorCaption?: string;
 }
 
+// ========================== COMPONENT ==========================
+
 /**
- * ColorInput component with consistent design system styling.
- * Built on top of Mantine's ColorInput component with enforced radius.
- * 
+ * AppDirect Design System ColorInput Component
+ *
+ * A color picker input built on top of Mantine's ColorInput with
+ * consistent design system styling and enforced radius.
+ *
  * @example
  * ```tsx
- * // Basic color input
- * <ColorInput label="Brand Color" placeholder="#000000" />
- * 
- * // Different sizes
- * <ColorInput label="Small" size="sm" />
- * <ColorInput label="Large" size="lg" />
- * 
- * // Required field (shows red asterisk)
- * <ColorInput label="Primary Color" required />
- * 
- * // Optional field (shows gray optional text)
- * <ColorInput label="Accent Color" showOptional />
- * 
- * // With all formats
- * <ColorInput 
- *   label="Theme Color" 
+ * <ColorInput label="Brand Color" placeholder="#000000" format="hex" />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <ColorInput
+ *   label="Theme Color"
  *   format="hex"
  *   swatches={['#FF0000', '#00FF00', '#0000FF']}
+ *   showOptional
+ *   hasHelpIcon
+ *   helpIconLabel="Choose the primary brand color"
  * />
  * ```
  */
-export const ColorInput: React.FC<DSColorInputProps> = ({
-  label,
-  showOptional = false,
-  required = false,
-  ...props
-}) => {
-  // Create the label with optional indicator if needed
-  const labelWithOptional = showOptional && !required && label
-    ? `${label} (Optional)`
-    : label;
+export const ColorInput = forwardRef<HTMLInputElement, DSColorInputProps>(
+  (
+    {
+      size = 'md',
+      showOptional = false,
+      required,
+      label,
+      hasHelpIcon = false,
+      helpIconLabel,
+      onHelpIconClick,
+      rightSection,
+      error,
+      errorCaption,
+      ...props
+    },
+    ref
+  ) => {
+    const effectiveError = error === true ? (errorCaption ?? true) : error;
 
-  return (
-    <MantineColorInput
-      label={labelWithOptional}
-      required={required}
-      radius="sm"
-      {...props}
-    />
-  );
-};
+    const enhancedLabel = React.useMemo(() => {
+      if (!label) return label;
+      if (showOptional && !required) {
+        return (
+          <>
+            {label} <Text span c="dimmed" fw="normal">(Optional)</Text>
+          </>
+        );
+      }
+      return label;
+    }, [label, showOptional, required]);
 
-export default ColorInput; 
+    const helpIconElement = hasHelpIcon ? (
+      <Tooltip
+        label={helpIconLabel ?? 'Help'}
+        position="top"
+        withArrow
+      >
+        <ActionIcon
+          variant="transparent"
+          size="xs"
+          aria-label={helpIconLabel ?? 'Help'}
+          onClick={onHelpIconClick}
+          color="gray"
+          style={{ cursor: onHelpIconClick ? 'pointer' : 'default' }}
+        >
+          <IconInfoCircle size={14} aria-hidden />
+        </ActionIcon>
+      </Tooltip>
+    ) : null;
+
+    const composedRightSection = (helpIconElement && rightSection)
+      ? <Group gap={4} wrap="nowrap">{rightSection}{helpIconElement}</Group>
+      : helpIconElement || rightSection;
+
+    return (
+      <MantineColorInput
+        ref={ref}
+        size={size}
+        radius="sm"
+        required={required}
+        label={enhancedLabel}
+        rightSection={composedRightSection}
+        error={effectiveError}
+        {...props}
+      />
+    );
+  }
+);
+
+ColorInput.displayName = 'ColorInput';
