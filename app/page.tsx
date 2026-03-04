@@ -1753,81 +1753,55 @@ function Demo() {
             <Inline gap="md">
               <Title order={5} size="xs">Horizontal Tabs</Title>
             </Inline>
-            <Tabs
-              orientation="horizontal"
-              tabs={[
-                { 
-                  id: 'overview', 
-                  label: 'Overview', 
-                  leftSection: <RiEyeLine size={16} />,
-                  rightSection: <Badge size="xs" color="info">12</Badge>,
-                  children: <div>Overview content goes here...</div>
-                },
-                { 
-                  id: 'analytics', 
-                  label: 'Analytics',
-                  leftSection: <RiServerLine size={16} />,
-                  children: <div>Analytics content goes here...</div>
-                },
-                { 
-                  id: 'settings', 
-                  label: 'Settings',
-                  rightSection: <Badge size="xs" color="danger">3</Badge>,
-                  children: <div>Settings content goes here...</div>
-                }
-              ]}
-              value="overview"
-            />
+            <Tabs defaultValue="overview" orientation="horizontal">
+              <Tabs.List>
+                <Tabs.Tab value="overview" leftSection={<RiEyeLine size={16} />} rightSection={<Badge size="xs" color="info">12</Badge>}>
+                  Overview
+                </Tabs.Tab>
+                <Tabs.Tab value="analytics" leftSection={<RiServerLine size={16} />}>Analytics</Tabs.Tab>
+                <Tabs.Tab value="settings" rightSection={<Badge size="xs" color="danger">3</Badge>}>Settings</Tabs.Tab>
+              </Tabs.List>
+              <Tabs.Panel value="overview" pt="md">Overview content goes here...</Tabs.Panel>
+              <Tabs.Panel value="analytics" pt="md">Analytics content goes here...</Tabs.Panel>
+              <Tabs.Panel value="settings" pt="md">Settings content goes here...</Tabs.Panel>
+            </Tabs>
 
             <Inline gap="md">
               <Title order={5} size="xs">Vertical Tabs</Title>
             </Inline>
             <div style={{ maxWidth: 500 }}>
-              <Tabs
-                orientation="vertical"
-                tabs={[
-                  { 
-                    id: 'profile', 
-                    label: 'Profile', 
-                    leftSection: <RiUserLine size={16} />,
-                    children: (
-                      <Stack gap="md" p="md">
-                        <TextInput label="Display Name" placeholder="Enter your display name..." size="sm" />
-                        <TextInput label="Email" placeholder="your.email@example.com" size="sm" />
-                        <TextArea label="Bio" placeholder="Tell us about yourself..." rows={3} size="sm" />
-                        <DSButton size="sm">Save Profile</DSButton>
-                      </Stack>
-                    )
-                  },
-                  { 
-                    id: 'security', 
-                    label: 'Security',
-                    children: (
-                      <Stack gap="md" p="md">
-                        <TextInput label="Current Password" type="password" size="sm" />
-                        <TextInput label="New Password" type="password" size="sm" />
-                        <TextInput label="Confirm Password" type="password" size="sm" />
-                        <DSButton size="sm" variant="outline">Change Password</DSButton>
-                      </Stack>
-                    )
-                  },
-                  { 
-                    id: 'notifications', 
-                    label: 'Notifications', 
-                    rightSection: <Badge size="xs" color="success">On</Badge>,
-                    children: (
-                      <Stack gap="md" p="md">
-                        <Switch label="Email notifications" defaultChecked />
-                        <Switch label="Push notifications" />
-                        <Switch label="SMS notifications" defaultChecked />
-                        <Switch label="Marketing emails" />
-                        <DSButton size="sm" variant="default">Save Preferences</DSButton>
-                      </Stack>
-                    )
-                  }
-                ]}
-                value="profile"
-              />
+              <Tabs defaultValue="profile" orientation="vertical">
+                <Tabs.List>
+                  <Tabs.Tab value="profile" leftSection={<RiUserLine size={16} />}>Profile</Tabs.Tab>
+                  <Tabs.Tab value="security">Security</Tabs.Tab>
+                  <Tabs.Tab value="notifications" rightSection={<Badge size="xs" color="success">On</Badge>}>Notifications</Tabs.Tab>
+                </Tabs.List>
+                <Tabs.Panel value="profile" pl="md">
+                  <Stack gap="md" p="md">
+                    <TextInput label="Display Name" placeholder="Enter your display name..." size="sm" />
+                    <TextInput label="Email" placeholder="your.email@example.com" size="sm" />
+                    <TextArea label="Bio" placeholder="Tell us about yourself..." rows={3} size="sm" />
+                    <DSButton size="sm">Save Profile</DSButton>
+                  </Stack>
+                </Tabs.Panel>
+                <Tabs.Panel value="security" pl="md">
+                  <Stack gap="md" p="md">
+                    <TextInput label="Current Password" type="password" size="sm" />
+                    <TextInput label="New Password" type="password" size="sm" />
+                    <TextInput label="Confirm Password" type="password" size="sm" />
+                    <DSButton size="sm" variant="outline">Change Password</DSButton>
+                  </Stack>
+                </Tabs.Panel>
+                <Tabs.Panel value="notifications" pl="md">
+                  <Stack gap="md" p="md">
+                    <Switch label="Email notifications" defaultChecked />
+                    <Switch label="Push notifications" />
+                    <Switch label="SMS notifications" defaultChecked />
+                    <Switch label="Marketing emails" />
+                    <DSButton size="sm" variant="default">Save Preferences</DSButton>
+                  </Stack>
+                </Tabs.Panel>
+              </Tabs>
             </div>
           </Stack>
         </Stack>

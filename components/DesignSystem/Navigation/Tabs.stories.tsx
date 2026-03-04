@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
 import { Badge } from '../DataDisplay/Badge';
-import { ThemeIcon } from '../DataDisplay/ThemeIcon';
 
 const meta: Meta<typeof Tabs> = {
   title: 'Design System/Navigation/Tabs',
@@ -15,7 +14,7 @@ const meta: Meta<typeof Tabs> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Tabs component for organizing content into multiple sections with consistent styling and flexible layouts.',
+        component: 'Tabs compound component for organizing content into sections. Thin wrapper around Mantine Tabs.',
       },
     },
   },
@@ -43,108 +42,78 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('tab1');
-    
-    const tabs = [
-      {
-        id: 'tab1',
-        label: 'Overview',
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>This is the overview content. It provides a general summary of the information.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'tab2',
-        label: 'Details',
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>This is the details content. It contains more specific information.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'tab3',
-        label: 'Settings',
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>This is the settings content. Configure your preferences here.</Text>
-          </div>
-        ),
-      },
-    ];
-    
+    const [activeTab, setActiveTab] = useState<string | null>('tab1');
+
     return (
       <div style={{ width: 500 }}>
-        <Tabs
-          tabs={tabs}
-          value={activeTab}
-          onTabChange={setActiveTab}
-        />
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="tab1">Overview</Tabs.Tab>
+            <Tabs.Tab value="tab2">Details</Tabs.Tab>
+            <Tabs.Tab value="tab3">Settings</Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="tab1" pt="md">
+            <Text>This is the overview content. It provides a general summary of the information.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="tab2" pt="md">
+            <Text>This is the details content. It contains more specific information.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="tab3" pt="md">
+            <Text>This is the settings content. Configure your preferences here.</Text>
+          </Tabs.Panel>
+        </Tabs>
       </div>
     );
   },
 };
 
 export const Variants: Story = {
-  render: () => {
-    const [defaultTab, setDefaultTab] = useState('tab1');
-    const [outlineTab, setOutlineTab] = useState('tab1');
-    const [pillsTab, setPillsTab] = useState('tab1');
-    
-    const tabs = [
-      {
-        id: 'tab1',
-        label: 'First',
-        children: <div style={{ padding: '16px' }}><Text>First tab content</Text></div>,
-      },
-      {
-        id: 'tab2',
-        label: 'Second',
-        children: <div style={{ padding: '16px' }}><Text>Second tab content</Text></div>,
-      },
-      {
-        id: 'tab3',
-        label: 'Third',
-        children: <div style={{ padding: '16px' }}><Text>Third tab content</Text></div>,
-      },
-    ];
-    
-    return (
-      <Stack gap="xl" w={500}>
-        <div>
-          <Text size="sm" fw={500} mb="sm">Default Variant:</Text>
-          <Tabs
-            tabs={tabs}
-            value={defaultTab}
-            onTabChange={setDefaultTab}
-            variant="default"
-          />
-        </div>
-        
-        <div>
-          <Text size="sm" fw={500} mb="sm">Outline Variant:</Text>
-          <Tabs
-            tabs={tabs}
-            value={outlineTab}
-            onTabChange={setOutlineTab}
-            variant="outline"
-          />
-        </div>
-        
-        <div>
-          <Text size="sm" fw={500} mb="sm">Pills Variant:</Text>
-          <Tabs
-            tabs={tabs}
-            value={pillsTab}
-            onTabChange={setPillsTab}
-            variant="pills"
-          />
-        </div>
-      </Stack>
-    );
-  },
+  render: () => (
+    <Stack gap="xl" w={500}>
+      <div>
+        <Text size="sm" fw={500} mb="sm">Default Variant:</Text>
+        <Tabs defaultValue="tab1" variant="default">
+          <Tabs.List>
+            <Tabs.Tab value="tab1">First</Tabs.Tab>
+            <Tabs.Tab value="tab2">Second</Tabs.Tab>
+            <Tabs.Tab value="tab3">Third</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="tab1" pt="md"><Text>First tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab2" pt="md"><Text>Second tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab3" pt="md"><Text>Third tab content</Text></Tabs.Panel>
+        </Tabs>
+      </div>
+
+      <div>
+        <Text size="sm" fw={500} mb="sm">Outline Variant:</Text>
+        <Tabs defaultValue="tab1" variant="outline">
+          <Tabs.List>
+            <Tabs.Tab value="tab1">First</Tabs.Tab>
+            <Tabs.Tab value="tab2">Second</Tabs.Tab>
+            <Tabs.Tab value="tab3">Third</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="tab1" pt="md"><Text>First tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab2" pt="md"><Text>Second tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab3" pt="md"><Text>Third tab content</Text></Tabs.Panel>
+        </Tabs>
+      </div>
+
+      <div>
+        <Text size="sm" fw={500} mb="sm">Pills Variant:</Text>
+        <Tabs defaultValue="tab1" variant="pills">
+          <Tabs.List>
+            <Tabs.Tab value="tab1">First</Tabs.Tab>
+            <Tabs.Tab value="tab2">Second</Tabs.Tab>
+            <Tabs.Tab value="tab3">Third</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="tab1" pt="md"><Text>First tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab2" pt="md"><Text>Second tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab3" pt="md"><Text>Third tab content</Text></Tabs.Panel>
+        </Tabs>
+      </div>
+    </Stack>
+  ),
   parameters: {
     docs: {
       description: {
@@ -156,58 +125,31 @@ export const Variants: Story = {
 
 export const WithIcons: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('dashboard');
-    
-    const tabs = [
-      {
-        id: 'dashboard',
-        label: 'Dashboard',
-        leftSection: <span>📊</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>Dashboard overview with charts and metrics.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'users',
-        label: 'Users',
-        leftSection: <span>👥</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>User management and profiles.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'settings',
-        label: 'Settings',
-        leftSection: <span>⚙️</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>Application settings and configuration.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'help',
-        label: 'Help',
-        leftSection: <span>❓</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>Help documentation and support.</Text>
-          </div>
-        ),
-      },
-    ];
-    
+    const [activeTab, setActiveTab] = useState<string | null>('dashboard');
+
     return (
       <div style={{ width: 600 }}>
-        <Tabs
-          tabs={tabs}
-          value={activeTab}
-          onTabChange={setActiveTab}
-        />
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="dashboard" leftSection={<span>📊</span>}>Dashboard</Tabs.Tab>
+            <Tabs.Tab value="users" leftSection={<span>👥</span>}>Users</Tabs.Tab>
+            <Tabs.Tab value="settings" leftSection={<span>⚙️</span>}>Settings</Tabs.Tab>
+            <Tabs.Tab value="help" leftSection={<span>❓</span>}>Help</Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="dashboard" pt="md">
+            <Text>Dashboard overview with charts and metrics.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="users" pt="md">
+            <Text>User management and profiles.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="settings" pt="md">
+            <Text>Application settings and configuration.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="help" pt="md">
+            <Text>Help documentation and support.</Text>
+          </Tabs.Panel>
+        </Tabs>
       </div>
     );
   },
@@ -222,61 +164,29 @@ export const WithIcons: Story = {
 
 export const WithBadges: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('inbox');
-    
-    const tabs = [
-      {
-        id: 'inbox',
-        label: 'Inbox',
-        leftSection: <span>📧</span>,
-        rightSection: <Badge variant="filled" color="blue">12</Badge>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>You have 12 unread messages in your inbox.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'sent',
-        label: 'Sent',
-        leftSection: <span>📤</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>Your sent messages.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'drafts',
-        label: 'Drafts',
-        leftSection: <span>📝</span>,
-        rightSection: <Badge variant="filled" color="gray">3</Badge>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>You have 3 draft messages.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'spam',
-        label: 'Spam',
-        leftSection: <span>🚫</span>,
-        rightSection: <Badge variant="filled" color="red">5</Badge>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>5 messages marked as spam.</Text>
-          </div>
-        ),
-      },
-    ];
-    
+    const [activeTab, setActiveTab] = useState<string | null>('inbox');
+
     return (
       <div style={{ width: 600 }}>
-        <Tabs
-          tabs={tabs}
-          value={activeTab}
-          onTabChange={setActiveTab}
-        />
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="inbox" leftSection={<span>📧</span>} rightSection={<Badge variant="filled" color="blue">12</Badge>}>
+              Inbox
+            </Tabs.Tab>
+            <Tabs.Tab value="sent" leftSection={<span>📤</span>}>Sent</Tabs.Tab>
+            <Tabs.Tab value="drafts" leftSection={<span>📝</span>} rightSection={<Badge variant="filled" color="gray">3</Badge>}>
+              Drafts
+            </Tabs.Tab>
+            <Tabs.Tab value="spam" leftSection={<span>🚫</span>} rightSection={<Badge variant="filled" color="red">5</Badge>}>
+              Spam
+            </Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="inbox" pt="md"><Text>You have 12 unread messages in your inbox.</Text></Tabs.Panel>
+          <Tabs.Panel value="sent" pt="md"><Text>Your sent messages.</Text></Tabs.Panel>
+          <Tabs.Panel value="drafts" pt="md"><Text>You have 3 draft messages.</Text></Tabs.Panel>
+          <Tabs.Panel value="spam" pt="md"><Text>5 messages marked as spam.</Text></Tabs.Panel>
+        </Tabs>
       </div>
     );
   },
@@ -291,63 +201,27 @@ export const WithBadges: Story = {
 
 export const WithDisabledTabs: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('available');
-    
-    const tabs = [
-      {
-        id: 'available',
-        label: 'Available',
-        leftSection: <span>✅</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>This tab is available and can be accessed.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'premium',
-        label: 'Premium Only',
-        leftSection: <span>⭐</span>,
-        rightSection: <Badge variant="outline" color="yellow">Pro</Badge>,
-        disabled: true,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>This content requires a premium subscription.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'maintenance',
-        label: 'Under Maintenance',
-        leftSection: <span>🔧</span>,
-        disabled: true,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>This section is currently under maintenance.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'coming-soon',
-        label: 'Coming Soon',
-        leftSection: <span>🚀</span>,
-        rightSection: <Badge variant="outline" color="blue">Soon</Badge>,
-        disabled: true,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Text>This feature is coming soon!</Text>
-          </div>
-        ),
-      },
-    ];
-    
+    const [activeTab, setActiveTab] = useState<string | null>('available');
+
     return (
       <div style={{ width: 700 }}>
-        <Tabs
-          tabs={tabs}
-          value={activeTab}
-          onTabChange={setActiveTab}
-        />
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="available" leftSection={<span>✅</span>}>Available</Tabs.Tab>
+            <Tabs.Tab value="premium" leftSection={<span>⭐</span>} rightSection={<Badge variant="outline" color="yellow">Pro</Badge>} disabled>
+              Premium Only
+            </Tabs.Tab>
+            <Tabs.Tab value="maintenance" leftSection={<span>🔧</span>} disabled>Under Maintenance</Tabs.Tab>
+            <Tabs.Tab value="coming-soon" leftSection={<span>🚀</span>} rightSection={<Badge variant="outline" color="blue">Soon</Badge>} disabled>
+              Coming Soon
+            </Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="available" pt="md"><Text>This tab is available and can be accessed.</Text></Tabs.Panel>
+          <Tabs.Panel value="premium" pt="md"><Text>This content requires a premium subscription.</Text></Tabs.Panel>
+          <Tabs.Panel value="maintenance" pt="md"><Text>This section is currently under maintenance.</Text></Tabs.Panel>
+          <Tabs.Panel value="coming-soon" pt="md"><Text>This feature is coming soon!</Text></Tabs.Panel>
+        </Tabs>
       </div>
     );
   },
@@ -362,75 +236,42 @@ export const WithDisabledTabs: Story = {
 
 export const VerticalTabs: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('profile');
-    
-    const tabs = [
-      {
-        id: 'profile',
-        label: 'Profile',
-        leftSection: <span>👤</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Title order={4} size="sm" fw={500} mb="sm">Profile Settings</Title>
-            <Text>Manage your personal information and profile details.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'account',
-        label: 'Account',
-        leftSection: <span>⚙️</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Title order={4} size="sm" fw={500} mb="sm">Account Settings</Title>
-            <Text>Configure your account preferences and security settings.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'notifications',
-        label: 'Notifications',
-        leftSection: <span>🔔</span>,
-        rightSection: <Badge variant="filled" color="red">3</Badge>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Title order={4} size="sm" fw={500} mb="sm">Notification Settings</Title>
-            <Text>Control how and when you receive notifications.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'privacy',
-        label: 'Privacy',
-        leftSection: <span>🔒</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Title order={4} size="sm" fw={500} mb="sm">Privacy Settings</Title>
-            <Text>Manage your privacy preferences and data sharing options.</Text>
-          </div>
-        ),
-      },
-      {
-        id: 'billing',
-        label: 'Billing',
-        leftSection: <span>💳</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
-            <Title order={4} size="sm" fw={500} mb="sm">Billing Information</Title>
-            <Text>View and manage your subscription and payment methods.</Text>
-          </div>
-        ),
-      },
-    ];
-    
+    const [activeTab, setActiveTab] = useState<string | null>('profile');
+
     return (
       <div style={{ width: 600, height: 400 }}>
-        <Tabs
-          tabs={tabs}
-          value={activeTab}
-          onTabChange={setActiveTab}
-          orientation="vertical"
-        />
+        <Tabs value={activeTab} onChange={setActiveTab} orientation="vertical">
+          <Tabs.List>
+            <Tabs.Tab value="profile" leftSection={<span>👤</span>}>Profile</Tabs.Tab>
+            <Tabs.Tab value="account" leftSection={<span>⚙️</span>}>Account</Tabs.Tab>
+            <Tabs.Tab value="notifications" leftSection={<span>🔔</span>} rightSection={<Badge variant="filled" color="red">3</Badge>}>
+              Notifications
+            </Tabs.Tab>
+            <Tabs.Tab value="privacy" leftSection={<span>🔒</span>}>Privacy</Tabs.Tab>
+            <Tabs.Tab value="billing" leftSection={<span>💳</span>}>Billing</Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="profile" pl="md">
+            <Title order={4} size="sm" fw={500} mb="sm">Profile Settings</Title>
+            <Text>Manage your personal information and profile details.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="account" pl="md">
+            <Title order={4} size="sm" fw={500} mb="sm">Account Settings</Title>
+            <Text>Configure your account preferences and security settings.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="notifications" pl="md">
+            <Title order={4} size="sm" fw={500} mb="sm">Notification Settings</Title>
+            <Text>Control how and when you receive notifications.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="privacy" pl="md">
+            <Title order={4} size="sm" fw={500} mb="sm">Privacy Settings</Title>
+            <Text>Manage your privacy preferences and data sharing options.</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value="billing" pl="md">
+            <Title order={4} size="sm" fw={500} mb="sm">Billing Information</Title>
+            <Text>View and manage your subscription and payment methods.</Text>
+          </Tabs.Panel>
+        </Tabs>
       </div>
     );
   },
@@ -445,44 +286,24 @@ export const VerticalTabs: Story = {
 
 export const TabsWithoutContent: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('tab1');
-    
-    const tabs = [
-      {
-        id: 'tab1',
-        label: 'Tab 1',
-        leftSection: <span>1️⃣</span>,
-      },
-      {
-        id: 'tab2',
-        label: 'Tab 2',
-        leftSection: <span>2️⃣</span>,
-      },
-      {
-        id: 'tab3',
-        label: 'Tab 3',
-        leftSection: <span>3️⃣</span>,
-        rightSection: <Badge variant="filled" color="green">New</Badge>,
-      },
-      {
-        id: 'tab4',
-        label: 'Tab 4',
-        leftSection: <span>4️⃣</span>,
-        disabled: true,
-      },
-    ];
-    
+    const [activeTab, setActiveTab] = useState<string | null>('tab1');
+
     return (
       <Stack gap="md" w={500}>
-        <Tabs
-          tabs={tabs}
-          value={activeTab}
-          onTabChange={setActiveTab}
-        />
-        
-        <div style={{ 
-          padding: '16px', 
-          border: '1px solid var(--mantine-color-gray-3)', 
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="tab1" leftSection={<span>1️⃣</span>}>Tab 1</Tabs.Tab>
+            <Tabs.Tab value="tab2" leftSection={<span>2️⃣</span>}>Tab 2</Tabs.Tab>
+            <Tabs.Tab value="tab3" leftSection={<span>3️⃣</span>} rightSection={<Badge variant="filled" color="green">New</Badge>}>
+              Tab 3
+            </Tabs.Tab>
+            <Tabs.Tab value="tab4" leftSection={<span>4️⃣</span>} disabled>Tab 4</Tabs.Tab>
+          </Tabs.List>
+        </Tabs>
+
+        <div style={{
+          padding: '16px',
+          border: '1px solid var(--mantine-color-gray-3)',
           borderRadius: '8px',
           backgroundColor: 'var(--mantine-color-gray-0)'
         }}>
@@ -508,19 +329,24 @@ export const TabsWithoutContent: Story = {
 
 export const ControlledTabs: Story = {
   render: () => {
-    const [activeTab, setActiveTab] = useState('step1');
-    
-    const tabs = [
-      {
-        id: 'step1',
-        label: 'Step 1',
-        leftSection: <span>1️⃣</span>,
-        children: (
-          <div style={{ padding: '16px' }}>
+    const [activeTab, setActiveTab] = useState<string | null>('step1');
+
+    return (
+      <div style={{ width: 600 }}>
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="step1" leftSection={<span>1️⃣</span>}>Step 1</Tabs.Tab>
+            <Tabs.Tab value="step2" leftSection={<span>2️⃣</span>} disabled={activeTab === 'step1'}>Step 2</Tabs.Tab>
+            <Tabs.Tab value="step3" leftSection={<span>3️⃣</span>} disabled={activeTab === 'step1' || activeTab === 'step2'}>
+              Step 3
+            </Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="step1" pt="md">
             <Title order={4} size="sm" fw={500} mb="sm">Step 1: Basic Information</Title>
             <Text mb="md">Enter your basic information to get started.</Text>
             <Inline gap="sm">
-              <button 
+              <button
                 onClick={() => setActiveTab('step2')}
                 style={{
                   padding: '8px 16px',
@@ -534,20 +360,12 @@ export const ControlledTabs: Story = {
                 Next Step
               </button>
             </Inline>
-          </div>
-        ),
-      },
-      {
-        id: 'step2',
-        label: 'Step 2',
-        leftSection: <span>2️⃣</span>,
-        disabled: activeTab === 'step1',
-        children: (
-          <div style={{ padding: '16px' }}>
+          </Tabs.Panel>
+          <Tabs.Panel value="step2" pt="md">
             <Title order={4} size="sm" fw={500} mb="sm">Step 2: Preferences</Title>
             <Text mb="md">Configure your preferences and settings.</Text>
             <Inline gap="sm">
-              <button 
+              <button
                 onClick={() => setActiveTab('step1')}
                 style={{
                   padding: '8px 16px',
@@ -560,7 +378,7 @@ export const ControlledTabs: Story = {
               >
                 Previous
               </button>
-              <button 
+              <button
                 onClick={() => setActiveTab('step3')}
                 style={{
                   padding: '8px 16px',
@@ -574,20 +392,12 @@ export const ControlledTabs: Story = {
                 Next Step
               </button>
             </Inline>
-          </div>
-        ),
-      },
-      {
-        id: 'step3',
-        label: 'Step 3',
-        leftSection: <span>3️⃣</span>,
-        disabled: activeTab === 'step1' || activeTab === 'step2',
-        children: (
-          <div style={{ padding: '16px' }}>
+          </Tabs.Panel>
+          <Tabs.Panel value="step3" pt="md">
             <Title order={4} size="sm" fw={500} mb="sm">Step 3: Review</Title>
             <Text mb="md">Review your information and complete the process.</Text>
             <Inline gap="sm">
-              <button 
+              <button
                 onClick={() => setActiveTab('step2')}
                 style={{
                   padding: '8px 16px',
@@ -600,7 +410,7 @@ export const ControlledTabs: Story = {
               >
                 Previous
               </button>
-              <button 
+              <button
                 onClick={() => alert('Process completed!')}
                 style={{
                   padding: '8px 16px',
@@ -614,18 +424,8 @@ export const ControlledTabs: Story = {
                 Complete
               </button>
             </Inline>
-          </div>
-        ),
-      },
-    ];
-    
-    return (
-      <div style={{ width: 600 }}>
-        <Tabs
-          tabs={tabs}
-          value={activeTab}
-          onTabChange={setActiveTab}
-        />
+          </Tabs.Panel>
+        </Tabs>
       </div>
     );
   },
@@ -642,96 +442,53 @@ export const UseCases: Story = {
   render: () => (
     <Stack gap="xl" w={700}>
       <Title order={3} size="md" fw={500} mb="xs">Common Use Cases</Title>
-      
+
       <div>
         <Text size="sm" fw={500} mb="sm">1. Dashboard Navigation:</Text>
-        <Tabs
-          tabs={[
-            {
-              id: 'overview',
-              label: 'Overview',
-              leftSection: <span>📊</span>,
-              children: <div style={{ padding: '16px' }}><Text>Dashboard overview with key metrics</Text></div>,
-            },
-            {
-              id: 'analytics',
-              label: 'Analytics',
-              leftSection: <span>📈</span>,
-              rightSection: <Badge variant="filled" color="blue">Live</Badge>,
-              children: <div style={{ padding: '16px' }}><Text>Real-time analytics and reports</Text></div>,
-            },
-            {
-              id: 'reports',
-              label: 'Reports',
-              leftSection: <span>📋</span>,
-              children: <div style={{ padding: '16px' }}><Text>Generated reports and exports</Text></div>,
-            },
-          ]}
-          defaultValue="overview"
-        />
+        <Tabs defaultValue="overview">
+          <Tabs.List>
+            <Tabs.Tab value="overview" leftSection={<span>📊</span>}>Overview</Tabs.Tab>
+            <Tabs.Tab value="analytics" leftSection={<span>📈</span>} rightSection={<Badge variant="filled" color="blue">Live</Badge>}>
+              Analytics
+            </Tabs.Tab>
+            <Tabs.Tab value="reports" leftSection={<span>📋</span>}>Reports</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="overview" pt="md"><Text>Dashboard overview with key metrics</Text></Tabs.Panel>
+          <Tabs.Panel value="analytics" pt="md"><Text>Real-time analytics and reports</Text></Tabs.Panel>
+          <Tabs.Panel value="reports" pt="md"><Text>Generated reports and exports</Text></Tabs.Panel>
+        </Tabs>
       </div>
-      
+
       <div>
         <Text size="sm" fw={500} mb="sm">2. Settings Panel:</Text>
-        <Tabs
-          tabs={[
-            {
-              id: 'general',
-              label: 'General',
-              leftSection: <span>⚙️</span>,
-              children: <div style={{ padding: '16px' }}><Text>General application settings</Text></div>,
-            },
-            {
-              id: 'security',
-              label: 'Security',
-              leftSection: <span>🔒</span>,
-              children: <div style={{ padding: '16px' }}><Text>Security and privacy settings</Text></div>,
-            },
-            {
-              id: 'integrations',
-              label: 'Integrations',
-              leftSection: <span>🔗</span>,
-              rightSection: <Badge variant="outline" color="green">3 Active</Badge>,
-              children: <div style={{ padding: '16px' }}><Text>Third-party integrations</Text></div>,
-            },
-          ]}
-          defaultValue="general"
-          variant="pills"
-        />
+        <Tabs defaultValue="general" variant="pills">
+          <Tabs.List>
+            <Tabs.Tab value="general" leftSection={<span>⚙️</span>}>General</Tabs.Tab>
+            <Tabs.Tab value="security" leftSection={<span>🔒</span>}>Security</Tabs.Tab>
+            <Tabs.Tab value="integrations" leftSection={<span>🔗</span>} rightSection={<Badge variant="outline" color="green">3 Active</Badge>}>
+              Integrations
+            </Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="general" pt="md"><Text>General application settings</Text></Tabs.Panel>
+          <Tabs.Panel value="security" pt="md"><Text>Security and privacy settings</Text></Tabs.Panel>
+          <Tabs.Panel value="integrations" pt="md"><Text>Third-party integrations</Text></Tabs.Panel>
+        </Tabs>
       </div>
-      
+
       <div>
         <Text size="sm" fw={500} mb="sm">3. Content Categories:</Text>
-        <Tabs
-          tabs={[
-            {
-              id: 'all',
-              label: 'All Items',
-              rightSection: <Badge variant="filled" color="gray">24</Badge>,
-              children: <div style={{ padding: '16px' }}><Text>All content items</Text></div>,
-            },
-            {
-              id: 'published',
-              label: 'Published',
-              rightSection: <Badge variant="filled" color="green">18</Badge>,
-              children: <div style={{ padding: '16px' }}><Text>Published content</Text></div>,
-            },
-            {
-              id: 'drafts',
-              label: 'Drafts',
-              rightSection: <Badge variant="filled" color="yellow">4</Badge>,
-              children: <div style={{ padding: '16px' }}><Text>Draft content</Text></div>,
-            },
-            {
-              id: 'archived',
-              label: 'Archived',
-              rightSection: <Badge variant="filled" color="gray">2</Badge>,
-              children: <div style={{ padding: '16px' }}><Text>Archived content</Text></div>,
-            },
-          ]}
-          defaultValue="all"
-          variant="outline"
-        />
+        <Tabs defaultValue="all" variant="outline">
+          <Tabs.List>
+            <Tabs.Tab value="all" rightSection={<Badge variant="filled" color="gray">24</Badge>}>All Items</Tabs.Tab>
+            <Tabs.Tab value="published" rightSection={<Badge variant="filled" color="green">18</Badge>}>Published</Tabs.Tab>
+            <Tabs.Tab value="drafts" rightSection={<Badge variant="filled" color="yellow">4</Badge>}>Drafts</Tabs.Tab>
+            <Tabs.Tab value="archived" rightSection={<Badge variant="filled" color="gray">2</Badge>}>Archived</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="all" pt="md"><Text>All content items</Text></Tabs.Panel>
+          <Tabs.Panel value="published" pt="md"><Text>Published content</Text></Tabs.Panel>
+          <Tabs.Panel value="drafts" pt="md"><Text>Draft content</Text></Tabs.Panel>
+          <Tabs.Panel value="archived" pt="md"><Text>Archived content</Text></Tabs.Panel>
+        </Tabs>
       </div>
     </Stack>
   ),
@@ -745,51 +502,31 @@ export const UseCases: Story = {
 };
 
 export const Interactive: Story = {
-  args: {
-    orientation: 'horizontal',
-    variant: 'default',
-    tabs: [
-      {
-        id: 'tab1',
-        label: 'First Tab',
-        leftSection: <span>1️⃣</span>,
-        children: <div style={{ padding: '16px' }}><Text>First tab content</Text></div>,
-      },
-      {
-        id: 'tab2',
-        label: 'Second Tab',
-        leftSection: <span>2️⃣</span>,
-        rightSection: <Badge variant="filled" color="blue">New</Badge>,
-        children: <div style={{ padding: '16px' }}><Text>Second tab content</Text></div>,
-      },
-      {
-        id: 'tab3',
-        label: 'Third Tab',
-        leftSection: <span>3️⃣</span>,
-        disabled: true,
-        children: <div style={{ padding: '16px' }}><Text>Third tab content</Text></div>,
-      },
-    ],
-    value: 'tab1',
-  },
-  render: (args) => {
-    const [activeTab, setActiveTab] = useState(args.value || 'tab1');
-    
+  render: () => {
+    const [activeTab, setActiveTab] = useState<string | null>('tab1');
+
     return (
       <div style={{ width: 600 }}>
-        <Tabs
-          {...args}
-          value={activeTab}
-          onTabChange={setActiveTab}
-        />
+        <Tabs value={activeTab} onChange={setActiveTab}>
+          <Tabs.List>
+            <Tabs.Tab value="tab1" leftSection={<span>1️⃣</span>}>First Tab</Tabs.Tab>
+            <Tabs.Tab value="tab2" leftSection={<span>2️⃣</span>} rightSection={<Badge variant="filled" color="blue">New</Badge>}>
+              Second Tab
+            </Tabs.Tab>
+            <Tabs.Tab value="tab3" leftSection={<span>3️⃣</span>} disabled>Third Tab</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="tab1" pt="md"><Text>First tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab2" pt="md"><Text>Second tab content</Text></Tabs.Panel>
+          <Tabs.Panel value="tab3" pt="md"><Text>Third tab content</Text></Tabs.Panel>
+        </Tabs>
       </div>
     );
   },
   parameters: {
     docs: {
       description: {
-        story: 'Use the controls below to interact with the Tabs and see different combinations.',
+        story: 'Interactive tabs demonstration.',
       },
     },
   },
-}; 
+};
