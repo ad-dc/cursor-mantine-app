@@ -14,4 +14,4 @@ export { Stepper } from './Stepper';
 export type { DSStepperProps } from './Stepper';
 
 export { Tabs } from './Tabs';
-export type { DSTabsProps, TabData } from './Tabs'; 
+export type { DSTabsProps } from './Tabs'; 
