@@ -11,7 +11,7 @@ export { NavLink } from './NavLink';
 export type { DSNavLinkProps } from './NavLink';
 
 export { Stepper } from './Stepper';
-export type { DSStepperProps, StepData } from './Stepper';
+export type { DSStepperProps } from './Stepper';
 
 export { Tabs } from './Tabs';
 export type { DSTabsProps, TabData } from './Tabs'; 

@@ -1717,32 +1717,23 @@ function Demo() {
             <Inline gap="md">
               <Title order={5} size="xs">Horizontal Stepper</Title>
             </Inline>
-            <Stepper
-              orientation="horizontal"
-              steps={[
-                { id: 'account', label: 'Account Setup', description: 'Create your account' },
-                { id: 'profile', label: 'Profile Information', description: 'Fill in your details' },
-                { id: 'preferences', label: 'Preferences', description: 'Customize your experience' },
-                { id: 'review', label: 'Review', description: 'Review and confirm' },
-                { id: 'complete', label: 'Complete', description: 'All done!' }
-              ]}
-              active={2}
-            />
+            <Stepper orientation="horizontal" active={2}>
+              <Stepper.Step label="Account Setup" description="Create your account" />
+              <Stepper.Step label="Profile Information" description="Fill in your details" />
+              <Stepper.Step label="Preferences" description="Customize your experience" />
+              <Stepper.Step label="Review" description="Review and confirm" />
+              <Stepper.Step label="Complete" description="All done!" />
+            </Stepper>
 
             <Inline gap="md">
               <Title order={5} size="xs">Vertical Stepper</Title>
             </Inline>
-            <Stepper
-              orientation="vertical"
-              steps={[
-                { id: 'planning', label: 'Planning', description: 'Define project requirements' },
-                { id: 'development', label: 'Development', description: 'Build the application' },
-                { id: 'testing', label: 'Testing', description: 'Quality assurance testing' },
-                { id: 'deployment', label: 'Deployment', description: 'Deploy to production' }
-              ]}
-              active={1}
-              style={{ maxWidth: 400 }}
-            />
+            <Stepper orientation="vertical" active={1} style={{ maxWidth: 400 }}>
+              <Stepper.Step label="Planning" description="Define project requirements" />
+              <Stepper.Step label="Development" description="Build the application" />
+              <Stepper.Step label="Testing" description="Quality assurance testing" />
+              <Stepper.Step label="Deployment" description="Deploy to production" />
+            </Stepper>
           </Stack>
         </Stack>
 
