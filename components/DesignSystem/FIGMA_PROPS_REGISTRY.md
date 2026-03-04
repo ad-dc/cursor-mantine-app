@@ -655,17 +655,38 @@ Style-based variants used across components:
 
 **Component Name:** `Stepper`  
 **Mantine Base:** `Stepper`  
-**Purpose:** Multi-step progress indicator and navigation.
+**Purpose:** Multi-step progress indicator and navigation. Thin wrapper matching core Mantine children-based API.
 
-#### Figma-Exposed Props
+#### Figma-Exposed Props (Stepper container — core `StepperProps`)
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | `StepData[]` | Yes | - | Step definitions |
 | `active` | `number` | Yes | - | Active step index (0-based) |
 | `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` | Stepper layout |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Stepper size |
-| `iconSize` | `number` | No | `18` | Step icon size |
+| `hasContent` | `boolean` | No | `true` | Toggles current step content area |
+| `content` | `string` | No | - | Current step content text (shown when `hasContent` is true) |
+
+#### Figma-Exposed Props (Stepper.Step — core `StepperStepProps`)
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `label` | `ReactNode` | No | - | Step label |
+| `description` | `ReactNode` | No | - | Step description |
+
+#### Figma Step Visibility (Code Connect only)
+
+| Figma Property | Type | Description |
+|---------------|------|-------------|
+| `step3` | `boolean` | Toggles step 3 visibility |
+| `step4` | `boolean` | Toggles step 4 visibility |
+| `step5` | `boolean` | Toggles step 5 visibility |
+| `step6` | `boolean` | Toggles step 6 visibility |
+| `step7` | `boolean` | Toggles step 7 visibility |
+| `step8` | `boolean` | Toggles step 8 visibility |
+| `step9` | `boolean` | Toggles step 9 visibility |
+| `step10` | `boolean` | Toggles step 10 visibility |
+
+Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties. Each step layer (`Step 1` through `Step 10`) exposes `label` and `description` text properties via `figma.nestedProps`.
 
 ---
 
@@ -926,7 +947,7 @@ Style-based variants used across components:
 | Popover | Overlays | title, position, actions | - | - |
 | Menu | Overlays | sections, trigger | - | - |
 | Tabs | Navigation | tabs, variant, orientation | - | default |
-| Stepper | Navigation | steps, active | md | - |
+| Stepper | Navigation | orientation, hasContent, content, step3-10 | md | horizontal |
 | Breadcrumb | Navigation | items | - | - |
 | NavLink | Navigation | label, icon, active | - | - |
 | Text | Typography | size, children | sm | - |

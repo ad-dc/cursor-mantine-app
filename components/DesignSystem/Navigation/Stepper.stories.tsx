@@ -53,79 +53,42 @@ const meta: Meta<typeof Stepper> = {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
       description: 'Stepper size',
     },
-    iconSize: {
-      control: { type: 'number', min: 12, max: 32 },
-      description: 'Icon size',
-    },
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const basicSteps = [
-  { id: 'step1', label: 'Personal Info', description: 'Enter your details' },
-  { id: 'step2', label: 'Payment', description: 'Add payment method' },
-  { id: 'step3', label: 'Review', description: 'Confirm your order' },
-  { id: 'step4', label: 'Complete', description: 'Order confirmation' },
-];
-
 export const Default: Story = {
   args: {
-    steps: basicSteps,
     active: 1,
     orientation: 'horizontal',
     size: 'md',
   },
+  render: (args) => (
+    <Stepper {...args}>
+      <Stepper.Step label="Personal Info" description="Enter your details" />
+      <Stepper.Step label="Payment" description="Add payment method" />
+      <Stepper.Step label="Review" description="Confirm your order" />
+      <Stepper.Step label="Complete" description="Order confirmation" />
+    </Stepper>
+  ),
 };
 
 export const Sizes: Story = {
   render: () => (
     <Stack gap="xl" w={600}>
-      <div>
-        <Text size="sm" fw={500} mb="sm">Extra Small (xs):</Text>
-        <Stepper
-          steps={basicSteps}
-          active={1}
-          size="xs"
-        />
-      </div>
-      
-      <div>
-        <Text size="sm" fw={500} mb="sm">Small (sm):</Text>
-        <Stepper
-          steps={basicSteps}
-          active={1}
-          size="sm"
-        />
-      </div>
-      
-      <div>
-        <Text size="sm" fw={500} mb="sm">Medium (md):</Text>
-        <Stepper
-          steps={basicSteps}
-          active={1}
-          size="md"
-        />
-      </div>
-      
-      <div>
-        <Text size="sm" fw={500} mb="sm">Large (lg):</Text>
-        <Stepper
-          steps={basicSteps}
-          active={1}
-          size="lg"
-        />
-      </div>
-      
-      <div>
-        <Text size="sm" fw={500} mb="sm">Extra Large (xl):</Text>
-        <Stepper
-          steps={basicSteps}
-          active={1}
-          size="xl"
-        />
-      </div>
+      {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map((size) => (
+        <div key={size}>
+          <Text size="sm" fw={500} mb="sm">{size.toUpperCase()}:</Text>
+          <Stepper active={1} size={size}>
+            <Stepper.Step label="Personal Info" description="Enter your details" />
+            <Stepper.Step label="Payment" description="Add payment method" />
+            <Stepper.Step label="Review" description="Confirm your order" />
+            <Stepper.Step label="Complete" description="Order confirmation" />
+          </Stepper>
+        </div>
+      ))}
     </Stack>
   ),
   parameters: {
@@ -138,46 +101,14 @@ export const Sizes: Story = {
 };
 
 export const WithCustomIcons: Story = {
-  render: () => {
-    const iconSteps = [
-      { 
-        id: 'user', 
-        label: 'User Info', 
-        description: 'Personal details',
-        icon: <IconUser />,
-        completedIcon: <IconCheck />
-      },
-      { 
-        id: 'payment', 
-        label: 'Payment', 
-        description: 'Billing information',
-        icon: <IconCreditCard />,
-        completedIcon: <IconCheck />
-      },
-      { 
-        id: 'shipping', 
-        label: 'Shipping', 
-        description: 'Delivery address',
-        icon: <IconTruck />,
-        completedIcon: <IconCheck />
-      },
-      { 
-        id: 'review', 
-        label: 'Review', 
-        description: 'Order summary',
-        icon: <IconShoppingCart />,
-        completedIcon: <IconCheck />
-      },
-    ];
-
-    return (
-      <Stepper
-        steps={iconSteps}
-        active={2}
-        size="lg"
-      />
-    );
-  },
+  render: () => (
+    <Stepper active={2} size="lg">
+      <Stepper.Step label="User Info" description="Personal details" icon={<IconUser />} completedIcon={<IconCheck />} />
+      <Stepper.Step label="Payment" description="Billing information" icon={<IconCreditCard />} completedIcon={<IconCheck />} />
+      <Stepper.Step label="Shipping" description="Delivery address" icon={<IconTruck />} completedIcon={<IconCheck />} />
+      <Stepper.Step label="Review" description="Order summary" icon={<IconShoppingCart />} completedIcon={<IconCheck />} />
+    </Stepper>
+  ),
   parameters: {
     docs: {
       description: {
@@ -188,45 +119,16 @@ export const WithCustomIcons: Story = {
 };
 
 export const VerticalOrientation: Story = {
-  render: () => {
-    const verticalSteps = [
-      { 
-        id: 'setup', 
-        label: 'Initial Setup', 
-        description: 'Configure your account settings',
-        icon: <IconSettings />
-      },
-      { 
-        id: 'data', 
-        label: 'Import Data', 
-        description: 'Upload your existing data',
-        icon: <IconDatabase />
-      },
-      { 
-        id: 'upload', 
-        label: 'Upload Files', 
-        description: 'Add your documents and media',
-        icon: <IconCloudUpload />
-      },
-      { 
-        id: 'complete', 
-        label: 'Complete', 
-        description: 'Finish setup process',
-        icon: <IconCheck />
-      },
-    ];
-
-    return (
-      <Paper variant="border">
-        <Stepper
-          steps={verticalSteps}
-          active={1}
-          orientation="vertical"
-          size="md"
-        />
-      </Paper>
-    );
-  },
+  render: () => (
+    <Paper variant="border">
+      <Stepper active={1} orientation="vertical" size="md">
+        <Stepper.Step label="Initial Setup" description="Configure your account settings" icon={<IconSettings />} />
+        <Stepper.Step label="Import Data" description="Upload your existing data" icon={<IconDatabase />} />
+        <Stepper.Step label="Upload Files" description="Add your documents and media" icon={<IconCloudUpload />} />
+        <Stepper.Step label="Complete" description="Finish setup process" icon={<IconCheck />} />
+      </Stepper>
+    </Paper>
+  ),
   parameters: {
     docs: {
       description: {
@@ -239,73 +141,35 @@ export const VerticalOrientation: Story = {
 export const InteractiveStepper: Story = {
   render: () => {
     const [activeStep, setActiveStep] = useState(0);
-    
-    const interactiveSteps = [
-      { 
-        id: 'contact', 
-        label: 'Contact Info', 
-        description: 'Email and phone',
-        icon: <IconMail />,
-        allowStepSelect: true
-      },
-      { 
-        id: 'address', 
-        label: 'Address', 
-        description: 'Shipping details',
-        icon: <IconMapPin />,
-        allowStepSelect: true
-      },
-      { 
-        id: 'security', 
-        label: 'Security', 
-        description: 'Password setup',
-        icon: <IconLock />,
-        allowStepSelect: true
-      },
-      { 
-        id: 'verification', 
-        label: 'Verification', 
-        description: 'Confirm account',
-        icon: <IconCheck />,
-        allowStepSelect: false
-      },
-    ];
-
-    const nextStep = () => setActiveStep((current) => 
-      current < interactiveSteps.length - 1 ? current + 1 : current
-    );
-    
-    const prevStep = () => setActiveStep((current) => 
-      current > 0 ? current - 1 : current
-    );
+    const totalSteps = 4;
 
     return (
       <Stack gap="lg" w={600}>
-        <Stepper
-          steps={interactiveSteps}
-          active={activeStep}
-          onStepClick={setActiveStep}
-          size="md"
-        />
+        <Stepper active={activeStep} onStepClick={setActiveStep} size="md">
+          <Stepper.Step label="Contact Info" description="Email and phone" icon={<IconMail />} allowStepSelect />
+          <Stepper.Step label="Address" description="Shipping details" icon={<IconMapPin />} allowStepSelect />
+          <Stepper.Step label="Security" description="Password setup" icon={<IconLock />} allowStepSelect />
+          <Stepper.Step label="Verification" description="Confirm account" icon={<IconCheck />} allowStepSelect={false} />
+        </Stepper>
         
         <Inline justify="center" gap="md">
           <Button 
             variant="outline" 
-            onClick={prevStep}
+            onClick={() => setActiveStep((s) => Math.max(0, s - 1))}
             disabled={activeStep === 0}
           >
             Previous
           </Button>
           <Button 
-            onClick={nextStep}
-            disabled={activeStep === interactiveSteps.length - 1}
+            onClick={() => setActiveStep((s) => Math.min(totalSteps - 1, s + 1))}
+            disabled={activeStep === totalSteps - 1}
           >
             Next
           </Button>
         </Inline>
         
         <Text size="sm" ta="center" c="dimmed">
-          Current step: {activeStep + 1} of {interactiveSteps.length}
+          Current step: {activeStep + 1} of {totalSteps}
         </Text>
       </Stack>
     );
@@ -322,51 +186,25 @@ export const InteractiveStepper: Story = {
 export const EcommerceCheckout: Story = {
   render: () => {
     const [currentStep, setCurrentStep] = useState(1);
-    
-    const checkoutSteps = [
-      { 
-        id: 'cart', 
-        label: 'Shopping Cart', 
-        description: 'Review items',
-        icon: <IconShoppingCart />
-      },
-      { 
-        id: 'shipping', 
-        label: 'Shipping Info', 
-        description: 'Delivery address',
-        icon: <IconTruck />
-      },
-      { 
-        id: 'payment', 
-        label: 'Payment', 
-        description: 'Billing details',
-        icon: <IconCreditCard />
-      },
-      { 
-        id: 'confirmation', 
-        label: 'Order Complete', 
-        description: 'Confirmation',
-        icon: <IconPackage />
-      },
-    ];
+    const stepLabels = ['Shopping Cart', 'Shipping Info', 'Payment', 'Order Complete'];
 
     return (
       <Stack gap="lg" w={700}>
         <Title order={3} size="md" fw={500}>E-commerce Checkout Process</Title>
         
-        <Stepper
-          steps={checkoutSteps}
-          active={currentStep}
-          onStepClick={setCurrentStep}
-          size="lg"
-        />
+        <Stepper active={currentStep} onStepClick={setCurrentStep} size="lg">
+          <Stepper.Step label="Shopping Cart" description="Review items" icon={<IconShoppingCart />} />
+          <Stepper.Step label="Shipping Info" description="Delivery address" icon={<IconTruck />} />
+          <Stepper.Step label="Payment" description="Billing details" icon={<IconCreditCard />} />
+          <Stepper.Step label="Order Complete" description="Confirmation" icon={<IconPackage />} />
+        </Stepper>
         
         <Paper variant="border">
           <Text fw={500} mb="sm">
-            Step {currentStep + 1}: {checkoutSteps[currentStep]?.label}
+            Step {currentStep + 1}: {stepLabels[currentStep]}
           </Text>
           <Text size="sm" c="dimmed">
-            {checkoutSteps[currentStep]?.description}
+            Content for this step goes here.
           </Text>
         </Paper>
       </Stack>
@@ -382,56 +220,23 @@ export const EcommerceCheckout: Story = {
 };
 
 export const OnboardingFlow: Story = {
-  render: () => {
-    const onboardingSteps = [
-      { 
-        id: 'welcome', 
-        label: 'Welcome', 
-        description: 'Get started',
-        icon: <IconHome />
-      },
-      { 
-        id: 'profile', 
-        label: 'Create Profile', 
-        description: 'Basic information',
-        icon: <IconUser />
-      },
-      { 
-        id: 'preferences', 
-        label: 'Preferences', 
-        description: 'Customize settings',
-        icon: <IconSettings />
-      },
-      { 
-        id: 'verification', 
-        label: 'Verify Email', 
-        description: 'Confirm account',
-        icon: <IconMail />
-      },
-      { 
-        id: 'complete', 
-        label: 'All Set!', 
-        description: 'Ready to go',
-        icon: <IconCheck />
-      },
-    ];
-
-    return (
-      <Stack gap="lg" w={800}>
-        <Title order={3} size="md" fw={500}>User Onboarding Flow</Title>
-        
-        <Stepper
-          steps={onboardingSteps}
-          active={2}
-          size="md"
-        />
-        
-        <Text size="sm" c="dimmed" ta="center">
-          Complete your profile setup to get the most out of our platform
-        </Text>
-      </Stack>
-    );
-  },
+  render: () => (
+    <Stack gap="lg" w={800}>
+      <Title order={3} size="md" fw={500}>User Onboarding Flow</Title>
+      
+      <Stepper active={2} size="md">
+        <Stepper.Step label="Welcome" description="Get started" icon={<IconHome />} />
+        <Stepper.Step label="Create Profile" description="Basic information" icon={<IconUser />} />
+        <Stepper.Step label="Preferences" description="Customize settings" icon={<IconSettings />} />
+        <Stepper.Step label="Verify Email" description="Confirm account" icon={<IconMail />} />
+        <Stepper.Step label="All Set!" description="Ready to go" icon={<IconCheck />} />
+      </Stepper>
+      
+      <Text size="sm" c="dimmed" ta="center">
+        Complete your profile setup to get the most out of our platform
+      </Text>
+    </Stack>
+  ),
   parameters: {
     docs: {
       description: {
@@ -444,33 +249,7 @@ export const OnboardingFlow: Story = {
 export const FormWizard: Story = {
   render: () => {
     const [wizardStep, setWizardStep] = useState(0);
-    
-    const wizardSteps = [
-      { 
-        id: 'basic', 
-        label: 'Basic Info', 
-        description: 'Name and contact',
-        icon: <IconUser />
-      },
-      { 
-        id: 'documents', 
-        label: 'Documents', 
-        description: 'Upload files',
-        icon: <IconFileText />
-      },
-      { 
-        id: 'schedule', 
-        label: 'Schedule', 
-        description: 'Pick a date',
-        icon: <IconCalendar />
-      },
-      { 
-        id: 'review', 
-        label: 'Review', 
-        description: 'Confirm details',
-        icon: <IconCheck />
-      },
-    ];
+    const totalSteps = 4;
 
     return (
       <Paper variant="border">
@@ -479,12 +258,12 @@ export const FormWizard: Story = {
             Application Form Wizard
           </Title>
           
-          <Stepper
-            steps={wizardSteps}
-            active={wizardStep}
-            onStepClick={setWizardStep}
-            size="md"
-          />
+          <Stepper active={wizardStep} onStepClick={setWizardStep} size="md">
+            <Stepper.Step label="Basic Info" description="Name and contact" icon={<IconUser />} />
+            <Stepper.Step label="Documents" description="Upload files" icon={<IconFileText />} />
+            <Stepper.Step label="Schedule" description="Pick a date" icon={<IconCalendar />} />
+            <Stepper.Step label="Review" description="Confirm details" icon={<IconCheck />} />
+          </Stepper>
           
           <Inline justify="space-between" mt="lg">
             <Button 
@@ -496,14 +275,14 @@ export const FormWizard: Story = {
             </Button>
             
             <Text size="sm" c="dimmed">
-              Step {wizardStep + 1} of {wizardSteps.length}
+              Step {wizardStep + 1} of {totalSteps}
             </Text>
             
             <Button 
-              onClick={() => setWizardStep(s => Math.min(wizardSteps.length - 1, s + 1))}
-              disabled={wizardStep === wizardSteps.length - 1}
+              onClick={() => setWizardStep(s => Math.min(totalSteps - 1, s + 1))}
+              disabled={wizardStep === totalSteps - 1}
             >
-              {wizardStep === wizardSteps.length - 1 ? 'Submit' : 'Continue'}
+              {wizardStep === totalSteps - 1 ? 'Submit' : 'Continue'}
             </Button>
           </Inline>
         </Stack>
@@ -520,67 +299,39 @@ export const FormWizard: Story = {
 };
 
 export const ProjectSetup: Story = {
-  render: () => {
-    const setupSteps = [
-      { 
-        id: 'project', 
-        label: 'Project Details', 
-        description: 'Name and description',
-        icon: <IconFileText />
-      },
-      { 
-        id: 'team', 
-        label: 'Team Members', 
-        description: 'Invite collaborators',
-        icon: <IconUser />
-      },
-      { 
-        id: 'settings', 
-        label: 'Configuration', 
-        description: 'Project settings',
-        icon: <IconSettings />
-      },
-      { 
-        id: 'deploy', 
-        label: 'Deploy', 
-        description: 'Go live',
-        icon: <IconCloudUpload />
-      },
-    ];
-
-    return (
-      <Stack gap="lg" w={600}>
-        <Inline gap="lg">
-          <div style={{ flex: 1 }}>
-            <Title order={3} size="md" fw={500} mb="sm">
-              Horizontal Layout
-            </Title>
-            <Stepper
-              steps={setupSteps}
-              active={1}
-              size="sm"
-            />
-          </div>
-        </Inline>
-        
-        <Inline gap="lg" align="flex-start">
-          <div>
-            <Title order={3} size="md" fw={500} mb="sm">
-              Vertical Layout
-            </Title>
-            <Paper variant="border">
-              <Stepper
-                steps={setupSteps}
-                active={1}
-                orientation="vertical"
-                size="sm"
-              />
-            </Paper>
-          </div>
-        </Inline>
-      </Stack>
-    );
-  },
+  render: () => (
+    <Stack gap="lg" w={600}>
+      <Inline gap="lg">
+        <div style={{ flex: 1 }}>
+          <Title order={3} size="md" fw={500} mb="sm">
+            Horizontal Layout
+          </Title>
+          <Stepper active={1} size="sm">
+            <Stepper.Step label="Project Details" description="Name and description" icon={<IconFileText />} />
+            <Stepper.Step label="Team Members" description="Invite collaborators" icon={<IconUser />} />
+            <Stepper.Step label="Configuration" description="Project settings" icon={<IconSettings />} />
+            <Stepper.Step label="Deploy" description="Go live" icon={<IconCloudUpload />} />
+          </Stepper>
+        </div>
+      </Inline>
+      
+      <Inline gap="lg" align="flex-start">
+        <div>
+          <Title order={3} size="md" fw={500} mb="sm">
+            Vertical Layout
+          </Title>
+          <Paper variant="border">
+            <Stepper active={1} orientation="vertical" size="sm">
+              <Stepper.Step label="Project Details" description="Name and description" icon={<IconFileText />} />
+              <Stepper.Step label="Team Members" description="Invite collaborators" icon={<IconUser />} />
+              <Stepper.Step label="Configuration" description="Project settings" icon={<IconSettings />} />
+              <Stepper.Step label="Deploy" description="Go live" icon={<IconCloudUpload />} />
+            </Stepper>
+          </Paper>
+        </div>
+      </Inline>
+    </Stack>
+  ),
   parameters: {
     docs: {
       description: {
@@ -597,56 +348,40 @@ export const UseCases: Story = {
       
       <div>
         <Text size="sm" fw={500} mb="sm">1. Account Registration:</Text>
-        <Stepper
-          steps={[
-            { id: 'email', label: 'Email', description: 'Enter email address', icon: <IconMail /> },
-            { id: 'password', label: 'Password', description: 'Create password', icon: <IconLock /> },
-            { id: 'verify', label: 'Verify', description: 'Confirm email', icon: <IconCheck /> },
-          ]}
-          active={1}
-          size="sm"
-        />
+        <Stepper active={1} size="sm">
+          <Stepper.Step label="Email" description="Enter email address" icon={<IconMail />} />
+          <Stepper.Step label="Password" description="Create password" icon={<IconLock />} />
+          <Stepper.Step label="Verify" description="Confirm email" icon={<IconCheck />} />
+        </Stepper>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">2. Order Fulfillment:</Text>
-        <Stepper
-          steps={[
-            { id: 'order', label: 'Order Placed', icon: <IconShoppingCart /> },
-            { id: 'processing', label: 'Processing', icon: <IconSettings /> },
-            { id: 'shipped', label: 'Shipped', icon: <IconTruck /> },
-            { id: 'delivered', label: 'Delivered', icon: <IconPackage /> },
-          ]}
-          active={2}
-          size="sm"
-        />
+        <Stepper active={2} size="sm">
+          <Stepper.Step label="Order Placed" icon={<IconShoppingCart />} />
+          <Stepper.Step label="Processing" icon={<IconSettings />} />
+          <Stepper.Step label="Shipped" icon={<IconTruck />} />
+          <Stepper.Step label="Delivered" icon={<IconPackage />} />
+        </Stepper>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">3. Data Migration:</Text>
-        <Stepper
-          steps={[
-            { id: 'backup', label: 'Backup', description: 'Create backup', icon: <IconDatabase /> },
-            { id: 'transfer', label: 'Transfer', description: 'Move data', icon: <IconCloudUpload /> },
-            { id: 'verify', label: 'Verify', description: 'Check integrity', icon: <IconCheck /> },
-          ]}
-          active={0}
-          size="sm"
-        />
+        <Stepper active={0} size="sm">
+          <Stepper.Step label="Backup" description="Create backup" icon={<IconDatabase />} />
+          <Stepper.Step label="Transfer" description="Move data" icon={<IconCloudUpload />} />
+          <Stepper.Step label="Verify" description="Check integrity" icon={<IconCheck />} />
+        </Stepper>
       </div>
       
       <div>
         <Text size="sm" fw={500} mb="sm">4. Multi-step Form:</Text>
-        <Stepper
-          steps={[
-            { id: 'personal', label: 'Personal', icon: <IconUser /> },
-            { id: 'contact', label: 'Contact', icon: <IconPhone /> },
-            { id: 'address', label: 'Address', icon: <IconMapPin /> },
-            { id: 'review', label: 'Review', icon: <IconFileText /> },
-          ]}
-          active={2}
-          size="sm"
-        />
+        <Stepper active={2} size="sm">
+          <Stepper.Step label="Personal" icon={<IconUser />} />
+          <Stepper.Step label="Contact" icon={<IconPhone />} />
+          <Stepper.Step label="Address" icon={<IconMapPin />} />
+          <Stepper.Step label="Review" icon={<IconFileText />} />
+        </Stepper>
       </div>
     </Stack>
   ),
@@ -661,12 +396,18 @@ export const UseCases: Story = {
 
 export const Interactive: Story = {
   args: {
-    steps: basicSteps,
     active: 1,
     orientation: 'horizontal',
     size: 'md',
-    iconSize: 18,
   },
+  render: (args) => (
+    <Stepper {...args}>
+      <Stepper.Step label="Personal Info" description="Enter your details" />
+      <Stepper.Step label="Payment" description="Add payment method" />
+      <Stepper.Step label="Review" description="Confirm your order" />
+      <Stepper.Step label="Complete" description="Order confirmation" />
+    </Stepper>
+  ),
   parameters: {
     docs: {
       description: {
@@ -674,4 +415,4 @@ export const Interactive: Story = {
       },
     },
   },
-}; 
+};

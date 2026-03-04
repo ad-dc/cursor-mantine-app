@@ -45,7 +45,7 @@ export type { DSSearchableSelectProps, DSAutocompleteClearableProps, DSMultisele
 
 // ========================== NAVIGATION ==========================
 export { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation';
-export type { DSBreadcrumbProps, DSBackBreadcrumbProps, BreadcrumbItem, DSNavLinkProps, DSStepperProps, StepData, DSTabsProps } from './Navigation';
+export type { DSBreadcrumbProps, DSBackBreadcrumbProps, BreadcrumbItem, DSNavLinkProps, DSStepperProps, DSTabsProps } from './Navigation';
 
 // ========================== FEEDBACK ==========================
 
