@@ -1,45 +1,53 @@
 import { figma } from '@figma/code-connect';
-import { Select, Combobox } from '@mantine/core';
+import { Select } from '@/components/DesignSystem';
 
+// Main connection — targets the "Ⓜ️ Select" component (1563:2429).
+//
+// The Select in Figma is a single component wrapping an Input/Text Input
+// instance. All props are read from the nested instance via nestedProps.
 figma.connect(
   Select,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=4129-10931&t=F9hLR9eQ6A8lxsBi-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1563-2429',
   {
     props: {
-      // TODO: Restore bindings once the Figma select exposes matching props/layers
-      // data: figma.children('options'),
-      // value: figma.string('value'),
-      // placeholder: figma.string('placeholder'),
-      // label: figma.string('label'),
-      // description: figma.string('description'),
-      // error: figma.string('error'),
-      // disabled: figma.boolean('disabled'),
-      // searchable: figma.boolean('searchable'),
-      // clearable: figma.boolean('clearable'),
-      // size: figma.enum('size', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // variant: figma.enum('variant', {
-      //   default: 'default',
-      //   filled: 'filled',
-      //   unstyled: 'unstyled',
-      // }),
+      inputProps: figma.nestedProps('Input/Text Input', {
+        size: figma.enum('size', { xs: 'xs', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' }),
+        label: figma.string('label'),
+        description: figma.boolean('hasDescription', {
+          true: figma.string('description'),
+          false: undefined,
+        }),
+        required: figma.boolean('required'),
+        showOptional: figma.boolean('showOptional'),
+        hasHelpIcon: figma.boolean('hasHelpIcon'),
+        placeholder: figma.enum('state', {
+          default: figma.string('placeholder'),
+        }),
+        value: figma.enum('state', {
+          filled: figma.string('value'),
+          disabled: figma.string('value'),
+          error: figma.string('value'),
+        }),
+        disabled: figma.enum('state', { default: undefined, filled: undefined, disabled: true, error: undefined }),
+        error: figma.enum('state', { default: undefined, filled: undefined, disabled: undefined, error: true }),
+        errorMessage: figma.string('error'),
+      }),
     },
-    example: () => (
+    example: ({ inputProps }) => (
       <Select
-        data={[
-          { value: 'option-1', label: 'Option 1' },
-          { value: 'option-2', label: 'Option 2' },
-          { value: 'option-3', label: 'Option 3' },
-        ]}
-        placeholder="Select option"
-        size="md"
-        variant="default"
-        rightSection={<Combobox.Chevron />}
+        data={['Option 1', 'Option 2', 'Option 3']}
+        size={inputProps.size}
+        label={inputProps.label}
+        placeholder={inputProps.placeholder}
+        value={inputProps.value}
+        description={inputProps.description}
+        required={inputProps.required}
+        showOptional={inputProps.showOptional}
+        hasHelpIcon={inputProps.hasHelpIcon}
+        helpIconLabel="More information"
+        disabled={inputProps.disabled}
+        error={inputProps.error}
+        errorCaption={inputProps.errorMessage}
       />
     ),
   }
