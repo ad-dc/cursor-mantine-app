@@ -513,6 +513,22 @@ The Figma Select component is a single component wrapping a nested `Input/Text I
 
 ---
 
+### Combobox
+
+**Component Name:** `Combobox`  
+**Mantine Base:** `Select` (via DS Select)  
+**Purpose:** Single selection dropdown — identical to Select. Exists as a separate Figma Code Connect identity for the `Ⓜ️ ComboBox` Figma component.
+
+#### Figma Structure
+
+Same as Select. The Figma Combobox component wraps a nested `🧰 Input/Text Input` instance. All props are read via `figma.nestedProps('🧰 Input/Text Input', { ... })`. Right section is fixed to `IconSelector` (⬍).
+
+#### Figma-Exposed Props
+
+Same prop surface as Select — see Select entry above.
+
+---
+
 ### Multiselect
 
 **Component Name:** `Multiselect`  
@@ -958,6 +974,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Radio | Inputs | size, label, value | md | - |
 | Switch | Inputs | size, label, checked | - | - |
 | Select | Combobox | size, state, label, required, showOptional | sm | - |
+| Combobox | Combobox | size, state, label, required, showOptional | sm | - |
 | Multiselect | Combobox | size, label, data | md | - |
 | Modal | Overlays | title, size, actions | md | - |
 | Drawer | Overlays | title, size, position | md | - |

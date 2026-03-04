@@ -14,4 +14,7 @@ export { Multiselect } from './Multiselect';
 export type { DSMultiselectProps } from './Multiselect';
 
 export { Select } from './Select';
-export type { DSSelectProps } from './Select'; 
+export type { DSSelectProps } from './Select';
+
+export { Combobox } from './Combobox';
+export type { DSComboboxProps } from './Combobox';
