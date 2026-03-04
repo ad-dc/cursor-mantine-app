@@ -353,7 +353,7 @@ const FilterIconButton: React.FC<FilterIconButtonProps> = ({
       onClick={onClick}
       aria-label={translate("table.filters.toggle.aria")}
       size="xs"
-      leftIcon={icon}
+      leftSection={icon}
       style={{
         height: rem(30),
         borderRadius: 'var(--mantine-radius-sm)',

@@ -1031,28 +1031,28 @@ export default function Home() {
             <DSButton 
               variant="primary" 
               size="xs" 
-              leftIcon={<RiCircleLine size={14} />}
+              leftSection={<RiCircleLine size={14} />}
             >
               Primary
             </DSButton>
             <DSButton 
               variant="secondary" 
               size="xs" 
-              leftIcon={<RiAddLine size={14} />}
+              leftSection={<RiAddLine size={14} />}
             >
               Secondary
             </DSButton>
             <DSButton 
               variant="danger" 
               size="xs" 
-              leftIcon={<RiAddLine size={14} />}
+              leftSection={<RiAddLine size={14} />}
             >
               Danger
             </DSButton>
             <DSButton 
               variant="outline" 
               size="xs" 
-              leftIcon={<RiCircleLine size={14} />}
+              leftSection={<RiCircleLine size={14} />}
             >
               Outline
             </DSButton>
@@ -1931,9 +1931,9 @@ function Demo() {
           size="xs"
         >
           <Inline gap="md" justify="center">
-            <DSButton leftIcon={<RiAddLine size={16} />}>Add Item</DSButton>
-            <DSButton leftIcon={<RiEyeLine size={16} />} variant="outline">View All</DSButton>
-            <DSButton leftIcon={<RiServerLine size={16} />} variant="default">Export</DSButton>
+            <DSButton leftSection={<RiAddLine size={16} />}>Add Item</DSButton>
+            <DSButton leftSection={<RiEyeLine size={16} />} variant="outline">View All</DSButton>
+            <DSButton leftSection={<RiServerLine size={16} />} variant="default">Export</DSButton>
           </Inline>
         </Drawer>
 
@@ -2424,7 +2424,7 @@ function Demo() {
                 </Text>
               </Card>
               
-              <Card withShadow>
+              <Card>
                 <Title order={6}>Card with Shadow</Title>
                 <Text size="sm" c="dimmed">
                   This card has a medium shadow for elevation.
@@ -2438,7 +2438,6 @@ function Demo() {
             <Title order={5} size="xs">Interactive Cards</Title>
             <Inline gap="md" align="flex-start">
               <Card 
-                withShadow 
                 onClick={() => console.log('Card clicked!')}
                 style={{ cursor: 'pointer' }}
               >
@@ -2455,7 +2454,7 @@ function Demo() {
             <Title order={5} size="xs">Cards with Images</Title>
             <Inline gap="md" align="flex-start">
               {/* Card with full-width image on top */}
-              <Card withShadow style={{ width: 300 }} padding="none">
+              <Card style={{ width: 300 }} padding="none">
                 {/* Image Section - uses padding="none" on card to allow full-width image */}
                 <div style={{ 
                   width: '100%', 
@@ -2484,7 +2483,7 @@ function Demo() {
               </Card>
 
               {/* Card with rounded image and normal padding */}
-              <Card withShadow style={{ width: 300 }}>
+              <Card style={{ width: 300 }}>
                 <div style={{ 
                   width: '100%', 
                   height: 160, 
@@ -2515,7 +2514,7 @@ function Demo() {
             <Title order={5} size="xs">Complex Content</Title>
             <Inline gap="md" align="flex-start">
               {/* User Profile Card */}
-              <Card withShadow style={{ width: 250 }}>
+              <Card style={{ width: 250 }}>
                 <Inline gap="sm" mb="md">
                   <Avatar 
                     variant="image" 
@@ -2537,7 +2536,7 @@ function Demo() {
               </Card>
 
               {/* Stats Card */}
-              <Card withShadow style={{ width: 250 }}>
+              <Card style={{ width: 250 }}>
                 <Title order={6} mb="md">Project Stats</Title>
                 <Stack gap="sm">
                   <Inline justify="space-between">
@@ -2585,7 +2584,7 @@ function Demo() {
             <Stack gap="md">
               {/* Dashboard Cards Grid */}
               <Inline gap="md" align="flex-start" style={{ flexWrap: 'wrap' }}>
-                <Card withShadow style={{ width: 200 }}>
+                <Card style={{ width: 200 }}>
                   <Inline justify="space-between" align="flex-start" mb="sm">
                     <Stack gap="0">
                       <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Total Users</Text>
@@ -2596,7 +2595,7 @@ function Demo() {
                   <Text size="xs" c="green">+12% from last month</Text>
                 </Card>
 
-                                 <Card withShadow style={{ width: 200 }}>
+                                 <Card style={{ width: 200 }}>
                    <Inline justify="space-between" align="flex-start" mb="sm">
                      <Stack gap="0">
                        <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Revenue</Text>
@@ -2607,7 +2606,7 @@ function Demo() {
                    <Text size="xs" c="blue">+8% from last month</Text>
                  </Card>
 
-                                  <Card withShadow style={{ width: 200 }}>
+                                  <Card style={{ width: 200 }}>
                    <Inline justify="space-between" align="flex-start" mb="sm">
                      <Stack gap="0">
                        <Text size="xs" c="dimmed" tt="uppercase" fw={600}>Orders</Text>
@@ -2620,7 +2619,7 @@ function Demo() {
               </Inline>
 
               {/* List Card */}
-              <Card withShadow style={{ maxWidth: 400 }}>
+              <Card style={{ maxWidth: 400 }}>
                 <Title order={6} mb="md">Recent Activity</Title>
                 <Stack gap="sm">
                   <Inline gap="sm">
