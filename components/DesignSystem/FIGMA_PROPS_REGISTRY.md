@@ -76,8 +76,8 @@ Style-based variants used across components:
 | `fullWidth` | `boolean` | No | `false` | Whether button spans full width |
 | `disabled` | `boolean` | No | `false` | Disabled state |
 | `loading` | `boolean` | No | `false` | Loading state with spinner |
-| `leftIcon` | `ReactNode` | No | - | Icon on the left side |
-| `rightIcon` | `ReactNode` | No | - | Icon on the right side |
+| `leftSection` | `ReactNode` | No | - | Icon on the left side |
+| `rightSection` | `ReactNode` | No | - | Icon on the right side |
 | `children` | `ReactNode` | Yes | - | Button label text |
 
 #### Variant to Mantine Mapping
@@ -361,8 +361,8 @@ Style-based variants used across components:
 | `showOptional` | `boolean` | No | `false` | Show "(Optional)" text |
 | `error` | `ReactNode` | No | - | Error message |
 | `disabled` | `boolean` | No | `false` | Disabled state |
-| `leftIcon` | `ReactNode` | No | - | Left section icon |
-| `rightIcon` | `ReactNode` | No | - | Right section icon |
+| `leftSection` | `ReactNode` | No | - | Left section icon |
+| `rightSection` | `ReactNode` | No | - | Right section icon |
 
 ---
 

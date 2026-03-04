@@ -118,27 +118,27 @@ export const FileTypes: Story = {
         label="Image Upload"
         placeholder="Upload image file"
         accept="image/png,image/jpeg,image/gif,image/webp"
-        leftIcon={<RiImageLine size={16} />}
+        leftSection={<RiImageLine size={16} />}
         description="Accepts PNG, JPEG, GIF, and WebP files"
       />
       <FileInput
         label="Document Upload"
         placeholder="Upload document"
         accept=".pdf,.doc,.docx,.txt"
-        leftIcon={<RiFileTextLine size={16} />}
+        leftSection={<RiFileTextLine size={16} />}
         description="Accepts PDF, Word documents, and text files"
       />
       <FileInput
         label="PDF Only"
         placeholder="Upload PDF file"
         accept="application/pdf"
-        leftIcon={<RiFilePdfLine size={16} />}
+        leftSection={<RiFilePdfLine size={16} />}
         description="Only PDF files are allowed"
       />
       <FileInput
         label="Any File Type"
         placeholder="Upload any file"
-        leftIcon={<RiUploadLine size={16} />}
+        leftSection={<RiUploadLine size={16} />}
         description="All file types are accepted"
       />
     </Stack>
@@ -319,7 +319,7 @@ export const UseCases: Story = {
           placeholder="Choose profile picture"
           accept="image/jpeg,image/png"
           clearable
-          leftIcon={<RiImageLine size={16} />}
+          leftSection={<RiImageLine size={16} />}
           description="Upload a profile picture (JPEG or PNG, max 5MB)"
         />
         
@@ -328,7 +328,7 @@ export const UseCases: Story = {
           placeholder="Upload ID document"
           accept="image/*,.pdf"
           required
-          leftIcon={<RiFileTextLine size={16} />}
+          leftSection={<RiFileTextLine size={16} />}
           description="Upload a photo of your ID or passport"
         />
         
@@ -337,7 +337,7 @@ export const UseCases: Story = {
           placeholder="Select multiple files"
           multiple
           clearable
-          leftIcon={<RiUploadLine size={16} />}
+          leftSection={<RiUploadLine size={16} />}
           description="Upload multiple files for batch processing"
         />
         
@@ -345,7 +345,7 @@ export const UseCases: Story = {
           label="Invoice Upload"
           placeholder="Upload invoice"
           accept=".pdf,.jpg,.jpeg,.png"
-          leftIcon={<RiFilePdfLine size={16} />}
+          leftSection={<RiFilePdfLine size={16} />}
           description="Upload invoice as PDF or image"
         />
         
@@ -353,7 +353,7 @@ export const UseCases: Story = {
           label="Data Import"
           placeholder="Upload CSV file"
           accept=".csv,.xlsx,.xls"
-          leftIcon={<RiFileTextLine size={16} />}
+          leftSection={<RiFileTextLine size={16} />}
           description="Upload spreadsheet for data import"
         />
       </Stack>

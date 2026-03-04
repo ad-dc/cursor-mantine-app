@@ -306,7 +306,7 @@ export function PageContentHeader({
         {/* Special drawer button - no border, no radius, fills space */}
         <Button
           onClick={toggleDrawer}
-          rightIcon={
+          rightSection={
             drawerOpened ? <RiArrowUpSLine size={16} /> : <RiArrowDownSLine size={16} />
           }
           fullWidth

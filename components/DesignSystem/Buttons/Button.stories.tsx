@@ -90,10 +90,10 @@ export const Sizes: Story = {
 export const WithIcons: Story = {
   render: () => (
     <Stack gap="md">
-      <Button leftIcon={<RiAddLine size={16} />}>Add Item</Button>
-      <Button rightIcon={<RiDownloadLine size={16} />}>Download</Button>
-      <Button variant="danger" leftIcon={<RiDeleteBinLine size={16} />}>Delete</Button>
-      <Button variant="outline" leftIcon={<RiEyeLine size={16} />} rightIcon={<RiDownloadLine size={16} />}>
+      <Button leftSection={<RiAddLine size={16} />}>Add Item</Button>
+      <Button rightSection={<RiDownloadLine size={16} />}>Download</Button>
+      <Button variant="danger" leftSection={<RiDeleteBinLine size={16} />}>Delete</Button>
+      <Button variant="outline" leftSection={<RiEyeLine size={16} />} rightSection={<RiDownloadLine size={16} />}>
         View & Download
       </Button>
     </Stack>

@@ -1,4 +1,4 @@
-import { MantineProvider, Avatar, Card } from '@mantine/core';
+import { MantineProvider, Avatar } from '@mantine/core';
 import React from 'react';
 
 export function MantineThemeProvider({ children }: { children: React.ReactNode }) {
@@ -15,17 +15,6 @@ export function MantineThemeProvider({ children }: { children: React.ReactNode }
               placeholder: {
                 backgroundColor: '#ffffff',
                 color: 'var(--mantine-color-dimmed)',
-              }
-            }
-          }),
-          Card: Card.extend({
-            styles: {
-              root: {
-                transition: 'box-shadow 200ms ease, transform 200ms ease',
-                '&.ds-card--interactive:hover': {
-                  boxShadow: 'var(--mantine-shadow-md)',
-                  transform: 'translateY(-2px)',
-                }
               }
             }
           })

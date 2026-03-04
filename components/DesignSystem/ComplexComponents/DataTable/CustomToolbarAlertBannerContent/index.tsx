@@ -50,7 +50,7 @@ const CustomToolbarAlertBannerContent = ({
         variant="outline"
         color="gray"
         size="xs"
-        leftIcon={<RiFlashlightFill size={16} />}
+        leftSection={<RiFlashlightFill size={16} />}
         style={{ borderColor: 'white', color: 'white' }}
       >
         Button one
@@ -59,7 +59,7 @@ const CustomToolbarAlertBannerContent = ({
         variant="outline"
         color="gray"
         size="xs"
-        leftIcon={<RiFlashlightFill size={16} />}
+        leftSection={<RiFlashlightFill size={16} />}
         style={{ borderColor: 'white', color: 'white' }}
       >
         Button two

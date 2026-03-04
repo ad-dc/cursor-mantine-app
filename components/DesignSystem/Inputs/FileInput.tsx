@@ -12,10 +12,6 @@ export interface DSFileInputProps extends Omit<MantineFileInputProps<any>, 'size
   required?: boolean;
   /** Whether to show "(Optional)" text after label */
   showOptional?: boolean;
-  /** Icon to display on the left */
-  leftIcon?: React.ReactNode;
-  /** Icon to display on the right */
-  rightIcon?: React.ReactNode;
 }
 
 /**
@@ -83,8 +79,6 @@ export const FileInput = forwardRef<HTMLButtonElement, DSFileInputProps>(
     {
       size = 'md',
       className,
-      leftIcon,
-      rightIcon,
       leftSection,
       rightSection,
       showOptional = false,
@@ -112,8 +106,8 @@ export const FileInput = forwardRef<HTMLButtonElement, DSFileInputProps>(
         size={size}
         radius="sm"
         className={className}
-        leftSection={leftIcon || leftSection}
-        rightSection={rightIcon || rightSection}
+        leftSection={leftSection}
+        rightSection={rightSection}
         label={enhancedLabel}
         {...props}
       />
