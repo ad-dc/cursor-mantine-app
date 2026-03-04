@@ -478,20 +478,38 @@ Style-based variants used across components:
 
 **Component Name:** `Select`  
 **Mantine Base:** `Select`  
-**Purpose:** Single selection dropdown.
+**Purpose:** Single selection dropdown. Thin DS wrapper over Mantine's opinionated Select (which itself wraps Combobox). For advanced use cases, use `SearchableSelect` or build on Combobox directly.
 
-#### Figma-Exposed Props
+#### Figma Structure
+
+The Figma Select component is a single component wrapping a nested `Input/Text Input` instance. All props are read via `figma.nestedProps('Input/Text Input', { ... })`. The right section is fixed to `IconSelector` (⬍).
+
+#### Figma-Exposed Props (via nestedProps from Input/Text Input)
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'sm'` | Input size |
+| `state` | `'default' \| 'filled' \| 'disabled' \| 'error'` | No | `'default'` | Input state (maps to disabled/error/placeholder/value) |
 | `label` | `string` | No | - | Input label |
-| `placeholder` | `string` | No | - | Placeholder text |
-| `disabled` | `boolean` | No | `false` | Disabled state |
-| `searchable` | `boolean` | No | `false` | Enable search filtering |
-| `clearable` | `boolean` | No | `false` | Allow clearing selection |
-| `borderless` | `boolean` | No | `false` | Remove border styling |
-| `data` | `Array` | Yes | - | Options array |
+| `placeholder` | `string` | No | - | Placeholder text (state=default) |
+| `value` | `string` | No | - | Input value (state=filled/disabled/error) |
+| `hasDescription` | `boolean` | No | `false` | Toggle description visibility |
+| `description` | `string` | No | - | Help text below label |
+| `required` | `boolean` | No | `false` | Show required asterisk |
+| `showOptional` | `boolean` | No | `false` | Show "(Optional)" text |
+| `hasHelpIcon` | `boolean` | No | `false` | Show ⓘ icon in right section |
+| `error` | `string` | No | - | Error caption text |
+
+#### DS-Only Props (not in Figma)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `Array` | - | Options array (runtime) |
+| `borderless` | `boolean` | `false` | Maps to `variant="unstyled"` |
+| `searchable` | `boolean` | `false` | Enable search filtering |
+| `clearable` | `boolean` | `false` | Allow clearing selection |
+| `errorCaption` | `string` | - | Error message for `error={true}` |
+| `helpIconLabel` | `string` | - | Tooltip text for help icon |
 
 ---
 
@@ -939,7 +957,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Checkbox | Inputs | size, label, checked, disabled | md | - |
 | Radio | Inputs | size, label, value | md | - |
 | Switch | Inputs | size, label, checked | - | - |
-| Select | Combobox | size, label, data, searchable | sm | - |
+| Select | Combobox | size, state, label, required, showOptional | sm | - |
 | Multiselect | Combobox | size, label, data | md | - |
 | Modal | Overlays | title, size, actions | md | - |
 | Drawer | Overlays | title, size, position | md | - |
