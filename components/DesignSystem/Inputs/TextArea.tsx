@@ -1,69 +1,124 @@
-import React from 'react';
-import { Textarea as MantineTextarea, TextareaProps as MantineTextareaProps } from '@mantine/core';
+import React, { forwardRef } from 'react';
+import { Textarea as MantineTextarea, TextareaProps as MantineTextareaProps, ActionIcon, Group } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
+import { ComponentSize } from '../config';
+import { Text } from '../Typography/Text';
+import { Tooltip } from '../Overlays/Tooltip';
 
-// Define the DS TextArea props interface
-export interface DSTextAreaProps extends Omit<MantineTextareaProps, 'radius'> {
-  /** Show "(Optional)" text after label */
+// ========================== TYPES ==========================
+
+export interface DSTextAreaProps extends Omit<MantineTextareaProps, 'size' | 'radius'> {
+  /** Input size from design system scale */
+  size?: ComponentSize;
+  /** Whether to show "(Optional)" text after label */
   showOptional?: boolean;
+  /** Whether to show a help icon with a tooltip in the right section */
+  hasHelpIcon?: boolean;
+  /** Tooltip label shown when hovering the help icon. Also used as aria-label for a11y */
+  helpIconLabel?: string;
+  /** Optional click handler for the help icon */
+  onHelpIconClick?: React.MouseEventHandler<HTMLButtonElement>;
+  /**
+   * Optional error message text shown below the input when in error state.
+   * Used with error={true} (from state) for red border + message; omit for red border only.
+   */
+  errorCaption?: string;
 }
 
+// ========================== COMPONENT ==========================
+
 /**
- * TextArea component with consistent design system styling.
- * Built on top of Mantine's Textarea component with enforced radius.
- * 
+ * AppDirect Design System TextArea Component
+ *
+ * A multi-line text input built on top of Mantine's Textarea with
+ * consistent design system styling and enforced radius.
+ *
  * @example
  * ```tsx
- * // Basic textarea
  * <TextArea label="Comments" placeholder="Enter your comments..." />
- * 
- * // Different sizes
- * <TextArea label="Small" size="sm" />
- * <TextArea label="Large" size="lg" />
- * 
- * // Required field (shows red asterisk)
- * <TextArea label="Description" required />
- * 
- * // Optional field (shows gray optional text)
- * <TextArea label="Additional Notes" showOptional />
- * 
- * // With rows and autosize
- * <TextArea 
- *   label="Article Content"
- *   placeholder="Write your article..."
- *   rows={5}
- *   autosize
+ * ```
+ *
+ * @example
+ * ```tsx
+ * <TextArea
+ *   label="Description"
+ *   placeholder="Add more details"
  *   minRows={3}
  *   maxRows={10}
- * />
- * 
- * // With validation
- * <TextArea 
- *   label="Feedback"
- *   placeholder="Your feedback..."
- *   error="This field is required"
- *   description="Please provide detailed feedback"
+ *   autosize
+ *   showOptional
+ *   hasHelpIcon
+ *   helpIconLabel="Provide a detailed description"
  * />
  * ```
  */
-export const TextArea: React.FC<DSTextAreaProps> = ({
-  label,
-  showOptional = false,
-  required = false,
-  ...props
-}) => {
-  // Create the label with optional indicator if needed
-  const labelWithOptional = showOptional && !required && label
-    ? `${label} (Optional)`
-    : label;
+export const TextArea = forwardRef<HTMLTextAreaElement, DSTextAreaProps>(
+  (
+    {
+      size = 'md',
+      showOptional = false,
+      required,
+      label,
+      hasHelpIcon = false,
+      helpIconLabel,
+      onHelpIconClick,
+      rightSection,
+      error,
+      errorCaption,
+      ...props
+    },
+    ref
+  ) => {
+    const effectiveError = error === true ? (errorCaption ?? true) : error;
 
-  return (
-    <MantineTextarea
-      label={labelWithOptional}
-      required={required}
-      radius="sm"
-      {...props}
-    />
-  );
-};
+    const enhancedLabel = React.useMemo(() => {
+      if (!label) return label;
+      if (showOptional && !required) {
+        return (
+          <>
+            {label} <Text span c="dimmed" fw="normal">(Optional)</Text>
+          </>
+        );
+      }
+      return label;
+    }, [label, showOptional, required]);
 
-export default TextArea; 
+    const helpIconElement = hasHelpIcon ? (
+      <Tooltip
+        label={helpIconLabel ?? 'Help'}
+        position="top"
+        withArrow
+      >
+        <ActionIcon
+          variant="transparent"
+          size="xs"
+          aria-label={helpIconLabel ?? 'Help'}
+          onClick={onHelpIconClick}
+          color="gray"
+          style={{ cursor: onHelpIconClick ? 'pointer' : 'default' }}
+        >
+          <IconInfoCircle size={14} aria-hidden />
+        </ActionIcon>
+      </Tooltip>
+    ) : null;
+
+    const composedRightSection = (helpIconElement && rightSection)
+      ? <Group gap={4} wrap="nowrap">{rightSection}{helpIconElement}</Group>
+      : helpIconElement || rightSection;
+
+    return (
+      <MantineTextarea
+        ref={ref}
+        size={size}
+        radius="sm"
+        required={required}
+        label={enhancedLabel}
+        rightSection={composedRightSection}
+        error={effectiveError}
+        {...props}
+      />
+    );
+  }
+);
+
+TextArea.displayName = 'TextArea';

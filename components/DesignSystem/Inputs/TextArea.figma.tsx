@@ -1,39 +1,48 @@
 import { figma } from '@figma/code-connect';
-import { Textarea } from '@mantine/core';
+import { TextArea } from '@/components/DesignSystem';
 
 figma.connect(
-  Textarea,
+  TextArea,
   'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1421-3843&t=F9hLR9eQ6A8lxsBi-4',
   {
     props: {
-      // TODO: Restore bindings once the Figma textarea exposes matching props
-      // size: figma.enum('size', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // label: figma.string('label'),
-      // placeholder: figma.string('placeholder'),
-      // description: figma.string('description'),
-      // error: figma.string('error'),
-      // required: figma.boolean('required'),
-      // disabled: figma.boolean('disabled'),
-      // autosize: figma.boolean('autosize'),
-      // value: figma.string('value'),
-      // defaultValue: figma.string('defaultValue'),
+      size: figma.enum('size', { xs: 'xs', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' }),
+      label: figma.string('label'),
+      description: figma.boolean('hasDescription', {
+        true: figma.string('description'),
+        false: undefined,
+      }),
+      required: figma.boolean('required'),
+      showOptional: figma.boolean('showOptional'),
+      hasHelpIcon: figma.boolean('hasHelpIcon'),
+      placeholder: figma.enum('state', {
+        default: figma.string('placeholder'),
+      }),
+      value: figma.enum('state', {
+        filled: figma.string('value'),
+        disabled: figma.string('value'),
+        error: figma.string('value'),
+      }),
+      disabled: figma.enum('state', { default: undefined, filled: undefined, disabled: true, error: undefined }),
+      error: figma.enum('state', { default: undefined, filled: undefined, disabled: undefined, error: true }),
+      errorMessage: figma.string('error'),
     },
-    example: () => (
-      <Textarea
-        size="md"
-        label="Description"
-        placeholder="Add more details"
-        description="Optional"
+    example: (props) => (
+      <TextArea
+        size={props.size}
+        label={props.label}
+        placeholder={props.placeholder}
+        value={props.value}
+        description={props.description}
+        required={props.required}
+        showOptional={props.showOptional}
+        hasHelpIcon={props.hasHelpIcon}
+        helpIconLabel="More information"
+        disabled={props.disabled}
+        error={props.error}
+        errorCaption={props.errorMessage}
         minRows={3}
-        maxRows={6}
       />
     ),
   }
 );
-
