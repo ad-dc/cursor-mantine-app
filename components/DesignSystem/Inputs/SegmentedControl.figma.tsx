@@ -1,44 +1,27 @@
 import { figma } from '@figma/code-connect';
-import { SegmentedControl } from '@mantine/core';
+import { SegmentedControl } from '@/components/DesignSystem';
 
 figma.connect(
   SegmentedControl,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1509-686&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1509-686',
   {
     props: {
-      // TODO: Restore bindings once the Figma segmented control exposes matching props/layers
-      // size: figma.enum('size', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // data: figma.children('segments'),
-      // value: figma.string('value'),
-      // defaultValue: figma.string('defaultValue'),
-      // disabled: figma.boolean('disabled'),
-      // readOnly: figma.boolean('readOnly'),
-      // fullWidth: figma.boolean('fullWidth'),
-      // orientation: figma.enum('orientation', {
-      //   horizontal: 'horizontal',
-      //   vertical: 'vertical',
-      // }),
-      // radius: figma.enum('radius', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
+      size: figma.enum('size', { xs: 'xs', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' }),
+      showSegment3: figma.boolean('segment3'),
+      showSegment4: figma.boolean('segment4'),
+      showSegment5: figma.boolean('segment5'),
     },
-    example: () => (
+    example: (props) => (
       <SegmentedControl
-        data={['Option 1', 'Option 2']}
-        value="Option 1"
-        size="md"
+        size={props.size}
+        data={[
+          'Segment 1',
+          'Segment 2',
+          ...(props.showSegment3 ? ['Segment 3'] : []),
+          ...(props.showSegment4 ? ['Segment 4'] : []),
+          ...(props.showSegment5 ? ['Segment 5'] : []),
+        ]}
       />
     ),
   }
 );
-
