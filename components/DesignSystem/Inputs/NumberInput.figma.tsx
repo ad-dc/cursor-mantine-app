@@ -1,39 +1,52 @@
 import { figma } from '@figma/code-connect';
-import { NumberInput } from '@mantine/core';
+import { NumberInput } from '@/components/DesignSystem';
 
 figma.connect(
   NumberInput,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1501-3350&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1499-2677',
   {
     props: {
-      // TODO: Restore bindings once the Figma number input exposes matching props
-      // size: figma.enum('size', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // label: figma.string('label'),
-      // placeholder: figma.string('placeholder'),
-      // description: figma.string('description'),
-      // error: figma.string('error'),
-      // required: figma.boolean('required'),
-      // disabled: figma.boolean('disabled'),
-      // prefix: figma.string('prefix'),
-      // suffix: figma.string('suffix'),
+      inputProps: figma.nestedProps('Input/Text Input', {
+        size: figma.enum('size', { xs: 'xs', sm: 'sm', md: 'md', lg: 'lg', xl: 'xl' }),
+        label: figma.string('label'),
+        description: figma.boolean('hasDescription', {
+          true: figma.string('description'),
+          false: undefined,
+        }),
+        required: figma.boolean('required'),
+        showOptional: figma.boolean('showOptional'),
+        hasHelpIcon: figma.boolean('hasHelpIcon'),
+        placeholder: figma.enum('state', {
+          default: figma.string('placeholder'),
+        }),
+        value: figma.enum('state', {
+          filled: figma.string('value'),
+          disabled: figma.string('value'),
+          error: figma.string('value'),
+        }),
+        disabled: figma.enum('state', { default: undefined, filled: undefined, disabled: true, error: undefined }),
+        error: figma.enum('state', { default: undefined, filled: undefined, disabled: undefined, error: true }),
+        errorMessage: figma.string('error'),
+      }),
     },
-    example: () => (
+    example: ({ inputProps }) => (
       <NumberInput
-        size="md"
-        label="Amount"
-        placeholder="Enter amount"
+        size={inputProps.size}
+        label={inputProps.label}
+        placeholder={inputProps.placeholder}
+        value={inputProps.value}
+        description={inputProps.description}
+        required={inputProps.required}
+        showOptional={inputProps.showOptional}
+        hasHelpIcon={inputProps.hasHelpIcon}
+        helpIconLabel="More information"
+        disabled={inputProps.disabled}
+        error={inputProps.error}
+        errorCaption={inputProps.errorMessage}
         min={0}
         max={100}
         step={1}
-        defaultValue={10}
       />
     ),
   }
 );
-
