@@ -1,6 +1,5 @@
 import { figma } from '@figma/code-connect';
 import { Tooltip } from '@/components/DesignSystem';
-import { Button } from '@/components/DesignSystem';
 
 figma.connect(
   Tooltip,
@@ -21,7 +20,7 @@ figma.connect(
     },
     example: (props) => (
       <Tooltip label={props.label} position={props.position}>
-        <Button>Hover me</Button>
+        <span>Trigger element</span>
       </Tooltip>
     ),
   }
