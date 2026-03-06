@@ -17,7 +17,7 @@ const meta: Meta<typeof ColorInput> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     size: {
       control: 'select',

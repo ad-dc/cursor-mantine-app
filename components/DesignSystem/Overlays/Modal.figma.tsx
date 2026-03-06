@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Modal, Button } from '@mantine/core';
+import { Modal, Button } from '@/components/DesignSystem';
 
 figma.connect(
   Modal,

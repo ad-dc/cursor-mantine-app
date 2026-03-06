@@ -19,7 +19,7 @@ const meta: Meta<typeof Menu> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     width: {
       control: 'number',

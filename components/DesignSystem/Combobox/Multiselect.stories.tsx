@@ -16,7 +16,7 @@ const meta: Meta<typeof Multiselect> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     label: {
       control: 'text',

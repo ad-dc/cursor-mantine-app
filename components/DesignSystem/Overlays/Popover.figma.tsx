@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Popover, Button, Stack, Text } from '@mantine/core';
+import { Popover, Button, Stack, Text } from '@/components/DesignSystem';
 
 figma.connect(
   Popover,

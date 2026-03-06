@@ -19,7 +19,7 @@ const meta: Meta<typeof Paper> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     variant: {
       control: 'select',

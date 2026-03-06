@@ -21,7 +21,7 @@ const meta: Meta<typeof Popover> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     position: {
       control: 'select',

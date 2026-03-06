@@ -20,7 +20,7 @@ const meta: Meta<typeof NavLink> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     label: {
       control: 'text',

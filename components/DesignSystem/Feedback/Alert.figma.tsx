@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Alert } from '@mantine/core';
+import { Alert } from '@/components/DesignSystem';
 import { RiInformationLine, RiCheckboxCircleLine, RiErrorWarningLine, RiTimeLine } from '@remixicon/react';
 
 figma.connect(

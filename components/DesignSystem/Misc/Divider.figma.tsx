@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Divider } from '@mantine/core';
+import { Divider } from '@/components/DesignSystem';
 
 figma.connect(
   Divider,

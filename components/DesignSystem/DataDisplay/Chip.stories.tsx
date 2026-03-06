@@ -17,7 +17,7 @@ const meta: Meta<typeof Chip> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     variant: {
       control: 'select',

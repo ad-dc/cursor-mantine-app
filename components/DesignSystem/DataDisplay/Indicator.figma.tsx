@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Indicator } from '@mantine/core';
+import { Indicator } from '@/components/DesignSystem';
 
 figma.connect(
   Indicator,

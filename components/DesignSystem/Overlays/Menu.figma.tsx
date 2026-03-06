@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Menu, Button } from '@mantine/core';
+import { Menu, Button } from '@/components/DesignSystem';
 
 // Disabled: node-id=2938-803 is not a component or component set
 // TODO: Get valid Figma component URL, then uncomment

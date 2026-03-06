@@ -33,6 +33,7 @@ A flexible list component built on top of Mantine's List with consistent Design 
       },
     },
   },
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

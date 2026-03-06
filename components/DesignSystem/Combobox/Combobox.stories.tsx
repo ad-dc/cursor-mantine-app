@@ -21,6 +21,7 @@ Same API and behavior as Select — see Select stories for full coverage.
       },
     },
   },
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     data: {
       control: 'object',

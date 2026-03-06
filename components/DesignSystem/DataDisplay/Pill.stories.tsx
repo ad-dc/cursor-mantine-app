@@ -19,7 +19,7 @@ const meta: Meta<typeof Pill> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     size: {
       control: 'select',

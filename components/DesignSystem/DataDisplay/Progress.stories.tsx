@@ -17,7 +17,7 @@ const meta: Meta<typeof Progress> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

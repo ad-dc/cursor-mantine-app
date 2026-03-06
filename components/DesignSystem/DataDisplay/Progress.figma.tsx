@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Progress } from '@mantine/core';
+import { Progress } from '@/components/DesignSystem';
 
 figma.connect(
   Progress,

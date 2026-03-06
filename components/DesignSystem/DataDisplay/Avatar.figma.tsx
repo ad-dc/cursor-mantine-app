@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Avatar } from '@mantine/core';
+import { Avatar } from '@/components/DesignSystem';
 import { RiUser3Fill } from '@remixicon/react';
 
 figma.connect(

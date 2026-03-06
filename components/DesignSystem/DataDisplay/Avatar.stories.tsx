@@ -18,7 +18,7 @@ const meta: Meta<typeof Avatar> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     variant: {
       control: 'select',

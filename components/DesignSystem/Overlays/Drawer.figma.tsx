@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Drawer, Button, Stack, Text } from '@mantine/core';
+import { Drawer, Button, Stack, Text } from '@/components/DesignSystem';
 
 figma.connect(
   Drawer,
