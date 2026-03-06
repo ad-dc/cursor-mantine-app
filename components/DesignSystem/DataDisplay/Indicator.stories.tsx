@@ -24,7 +24,7 @@ const meta: Meta<typeof Indicator> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     type: {
       control: 'select',

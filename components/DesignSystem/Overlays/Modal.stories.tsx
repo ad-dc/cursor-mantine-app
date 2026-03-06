@@ -20,7 +20,7 @@ const meta: Meta<typeof Modal> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

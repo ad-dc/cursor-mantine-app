@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Paper } from '@mantine/core';
+import { Paper } from '@/components/DesignSystem';
 
 figma.connect(
   Paper,

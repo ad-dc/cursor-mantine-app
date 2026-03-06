@@ -16,7 +16,7 @@ const meta: Meta<typeof Breadcrumb> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     separator: {
       control: 'text',

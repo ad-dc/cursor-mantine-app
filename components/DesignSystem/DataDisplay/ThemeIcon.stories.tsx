@@ -13,7 +13,7 @@ const meta: Meta<typeof ThemeIcon> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Table } from '@mantine/core';
+import { Table } from '@/components/DesignSystem';
 
 const defaultData = {
   head: ['Name', 'Email', 'Role'],

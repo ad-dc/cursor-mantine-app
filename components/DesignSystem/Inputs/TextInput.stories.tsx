@@ -15,7 +15,7 @@ const meta: Meta<typeof TextInput> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     size: {
       control: 'select',

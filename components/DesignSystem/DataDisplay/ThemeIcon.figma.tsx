@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { ThemeIcon } from '@mantine/core';
+import { ThemeIcon } from '@/components/DesignSystem';
 import { RiStarLine } from '@remixicon/react';
 
 figma.connect(

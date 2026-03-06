@@ -16,7 +16,7 @@ const meta: Meta<typeof Kbd> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

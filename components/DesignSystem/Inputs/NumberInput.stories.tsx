@@ -16,7 +16,7 @@ const meta: Meta<typeof NumberInput> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     size: {
       control: 'select',

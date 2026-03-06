@@ -17,7 +17,7 @@ const meta: Meta<typeof Badge> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     variant: {
       control: 'select',

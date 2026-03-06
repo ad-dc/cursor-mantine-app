@@ -18,7 +18,7 @@ const meta: Meta<typeof Tabs> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     orientation: {
       control: 'select',

@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Text } from '@mantine/core';
+import { Text } from '@/components/DesignSystem';
 /*
 NOT WORKING
 figma.connect(

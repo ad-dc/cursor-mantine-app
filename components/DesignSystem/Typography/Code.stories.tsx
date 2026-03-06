@@ -15,7 +15,7 @@ const meta: Meta<typeof Code> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

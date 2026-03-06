@@ -16,7 +16,7 @@ const meta: Meta<typeof Switch> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     label: {
       control: 'text',

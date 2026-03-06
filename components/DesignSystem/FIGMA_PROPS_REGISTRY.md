@@ -117,7 +117,7 @@ Style-based variants used across components:
 
 #### Notes
 
-- Uses `subtle` variant with custom gray styling
+- Supports `default` and `link` variant mappings
 - Fixed border radius of `sm`
 
 ---
@@ -471,6 +471,79 @@ Style-based variants used across components:
 #### Notes
 
 - Fixed color: `green`, fixed radius: `xl`
+
+---
+
+### Slider
+
+**Component Name:** `Slider`
+**Mantine Base:** `Slider`
+**Purpose:** Range input for selecting a numeric value by dragging a thumb along a track.
+
+#### Figma-Exposed Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| (none) | - | - | - | No Figma property bindings; static example only |
+
+#### Notes
+
+- Fixed `thumbSize={16}` and `defaultValue={40}` in Code Connect example
+- Component supports full Mantine Slider API at runtime
+
+---
+
+### SegmentedControl
+
+**Component Name:** `SegmentedControl`
+**Mantine Base:** `SegmentedControl`
+**Purpose:** Inline toggle between a fixed set of options, visually similar to a button group.
+
+#### Figma-Exposed Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'sm'` | Control size |
+| `segment3` | `boolean` | No | `false` | Show third segment |
+| `segment4` | `boolean` | No | `false` | Show fourth segment |
+| `segment5` | `boolean` | No | `false` | Show fifth segment |
+
+#### Notes
+
+- Segments 1 and 2 are always visible; segments 3-5 are toggled via boolean Figma properties
+- `data` array is built dynamically based on visibility flags
+
+---
+
+### ColorInput
+
+**Component Name:** `ColorInput`
+**Mantine Base:** `ColorInput`
+**Purpose:** Color picker input with swatch preview and hex/rgb format support.
+
+#### Figma Structure
+
+The Figma ColorInput component wraps a nested `Input/Text Input` instance. All props are read via `figma.nestedProps('Input/Text Input', { ... })`.
+
+#### Figma-Exposed Props (via nestedProps from Input/Text Input)
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'sm'` | Input size |
+| `state` | `'default' \| 'filled' \| 'disabled' \| 'error'` | No | `'default'` | Input state |
+| `label` | `string` | No | - | Input label |
+| `description` | `string` | No | - | Help text (visible when `hasDescription` is true) |
+| `required` | `boolean` | No | `false` | Show required asterisk |
+| `showOptional` | `boolean` | No | `false` | Show "(Optional)" text |
+| `hasHelpIcon` | `boolean` | No | `false` | Show help icon |
+| `placeholder` | `string` | No | - | Placeholder text (state=default) |
+| `value` | `string` | No | - | Input value (state=filled/disabled/error) |
+| `error` | `string` | No | - | Error caption text |
+
+#### Notes
+
+- Fixed `format="hex"` in Code Connect example
+- Left section shows color swatch preview
 
 ---
 
@@ -973,6 +1046,9 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Checkbox | Inputs | size, label, checked, disabled | md | - |
 | Radio | Inputs | size, label, value | md | - |
 | Switch | Inputs | size, label, checked | - | - |
+| Slider | Inputs | (static example) | - | - |
+| SegmentedControl | Inputs | size, segment3-5 | sm | - |
+| ColorInput | Inputs | size, state, label, required, showOptional | sm | - |
 | Select | Combobox | size, state, label, required, showOptional | sm | - |
 | Combobox | Combobox | size, state, label, required, showOptional | sm | - |
 | Multiselect | Combobox | size, label, data | md | - |

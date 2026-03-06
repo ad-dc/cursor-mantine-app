@@ -25,6 +25,7 @@ A flexible select component built on Mantine's Select with design system default
       },
     },
   },
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     data: {
       control: 'object',

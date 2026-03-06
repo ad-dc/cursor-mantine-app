@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Kbd } from '@mantine/core';
+import { Kbd } from '@/components/DesignSystem';
 
 figma.connect(
   Kbd,

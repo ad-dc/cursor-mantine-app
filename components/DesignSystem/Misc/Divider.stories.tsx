@@ -17,7 +17,7 @@ const meta: Meta<typeof Divider> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     orientation: {
       control: 'select',

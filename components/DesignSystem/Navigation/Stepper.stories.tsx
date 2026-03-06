@@ -37,7 +37,7 @@ const meta: Meta<typeof Stepper> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     active: {
       control: { type: 'number', min: 0, max: 4 },

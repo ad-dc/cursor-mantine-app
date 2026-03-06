@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { List } from '@mantine/core';
+import { List } from '@/components/DesignSystem';
 import { IconCheck } from '@tabler/icons-react';
 
 // Disabled: List shares node-id=4129-10931 with Select and Table

@@ -35,6 +35,7 @@ A simple table component for displaying tabular data with consistent styling.
       },
     },
   },
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     striped: {
       control: 'boolean',
