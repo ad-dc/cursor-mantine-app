@@ -1,6 +1,6 @@
 import { figma } from '@figma/code-connect';
-import { Alert } from '@/components/DesignSystem';
-import { RiInformationLine, RiCheckboxCircleLine, RiErrorWarningLine, RiTimeLine } from '@remixicon/react';
+import { Alert } from '@/components/DesignSystem/DataDisplay/Alert';
+import { RiInformationLine } from '@remixicon/react';
 
 figma.connect(
   Alert,
@@ -35,9 +35,7 @@ figma.connect(
     example: () => (
       <Alert
         title="Alert title"
-        color="blue"
-        variant="light"
-        radius="md"
+        type="info"
         withCloseButton
         icon={<RiInformationLine size={20} />}
       >
@@ -46,4 +44,3 @@ figma.connect(
     ),
   }
 );
-

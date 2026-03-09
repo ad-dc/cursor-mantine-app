@@ -1,5 +1,5 @@
 import { ThemeIcon, Title } from '@mantine/core';
-import { Inline } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem/Layout/Inline';
 import Image from 'next/image';
 
 export function HeaderBar() {

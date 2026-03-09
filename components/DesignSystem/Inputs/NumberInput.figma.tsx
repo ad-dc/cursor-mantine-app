@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { NumberInput } from '@/components/DesignSystem';
+import { NumberInput } from './NumberInput';
 
 figma.connect(
   NumberInput,

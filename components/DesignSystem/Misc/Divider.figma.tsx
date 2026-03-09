@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Divider } from '@/components/DesignSystem';
+import { Divider } from './Divider';
 
 figma.connect(
   Divider,
@@ -57,4 +57,3 @@ figma.connect(
     ),
   }
 );
-

@@ -1,6 +1,5 @@
 'use client';
 
-import { Badge } from '@/components/DesignSystem';
 import { Button } from '@/components/DesignSystem/Buttons/Button';
 import { RiCircleLine } from '@remixicon/react';
 import FigmaGeneratedBadge from './FigmaGeneratedBadge';

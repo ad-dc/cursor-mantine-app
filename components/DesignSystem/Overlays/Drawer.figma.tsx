@@ -1,5 +1,8 @@
 import { figma } from '@figma/code-connect';
-import { Drawer, Button, Stack, Text } from '@/components/DesignSystem';
+import { Button } from '../Buttons/Button';
+import { Stack } from '../Layout/Stack';
+import { Text } from '../Typography/Text';
+import { Drawer } from './Drawer';
 
 figma.connect(
   Drawer,
@@ -31,10 +34,9 @@ figma.connect(
           <Text size="sm">
             Drawer content goes here. Use this space to present detailed forms or flows.
           </Text>
-          <Button variant="filled">Primary action</Button>
+          <Button variant="primary">Primary action</Button>
         </Stack>
       </Drawer>
     ),
   }
 );
-

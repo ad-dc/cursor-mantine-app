@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { ActionIcon } from '@/components/DesignSystem';
+import { ActionIcon } from './ActionIcon';
 import { IconStar } from '@tabler/icons-react';
 
 figma.connect(

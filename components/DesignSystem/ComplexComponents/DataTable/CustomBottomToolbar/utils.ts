@@ -1,4 +1,4 @@
-import { translate } from "fe-tools/lib/api/translate";
+import { translate } from "../translations";
 
 const DEFAULT_PAGE_SIZE = 5;
 

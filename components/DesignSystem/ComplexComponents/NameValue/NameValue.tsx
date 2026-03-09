@@ -1,5 +1,6 @@
 import React from 'react';
-import { Stack, Grid } from '@/components/DesignSystem';
+import { Grid } from '../../Layout/Grid';
+import { Stack } from '../../Layout/Stack';
 import { NameValueItem, NameValueItemProps } from './NameValueItem';
 
 export interface NameValuePair {

@@ -24,7 +24,7 @@ const meta: Meta<typeof Indicator> = {
       },
     },
   },
-  tags: ['autodocs', 'needs-connect'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     type: {
       control: 'select',
@@ -578,4 +578,3 @@ export const Interactive: Story = {
     },
   },
 };
-

@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Code } from '@/components/DesignSystem';
+import { Code } from './Code';
 
 figma.connect(
   Code,
@@ -24,4 +24,3 @@ figma.connect(
     ),
   }
 );
-

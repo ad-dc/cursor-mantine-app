@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { ColorInput } from '@/components/DesignSystem';
+import { ColorInput } from './ColorInput';
 
 // Main connection — targets the "Ⓜ️ Input/Color" component (1373:6404).
 //

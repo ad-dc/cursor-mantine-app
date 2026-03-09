@@ -97,6 +97,12 @@ const translations = {
   "table.pagination.showing": "Showing {start}-{end} of {total}",
   "table.pagination.page": "Page {current} of {total}",
   "table.rows.per.page": "Rows per page",
+  "table.row.count": "Showing {start}-{end} of {total}",
+
+  // Error translations
+  "table.error.title": "Unable to load table",
+  "table.error.default": "Something went wrong while loading data.",
+  "table.error.retry": "Try again",
 
   // Selection translations
   "table.selected.rows": "{count} rows selected",

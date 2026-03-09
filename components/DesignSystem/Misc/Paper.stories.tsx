@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@mantine/core';
-import { Inline } from '@/components/DesignSystem';
+import { Inline } from '@/components/DesignSystem/Layout/Inline';
 import { Paper } from './Paper';
 import { Title } from '../Typography/Title';
 import { Text } from '../Typography/Text';
@@ -19,7 +19,7 @@ const meta: Meta<typeof Paper> = {
       },
     },
   },
-  tags: ['autodocs', 'needs-connect'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     variant: {
       control: 'select',
@@ -222,7 +222,7 @@ export const AsCards: Story = {
       <Paper variant="border" style={{ width: 250 }}>
         <Inline gap="xs" justify="space-between" align="flex-start" mb="sm">
           <Title order={4} size="sm" fw={500}>User Profile</Title>
-          <Badge variant="filled" color="green">Online</Badge>
+          <Badge variant="filled" color="success">Online</Badge>
         </Inline>
         <Inline gap="sm" mb="sm">
           <div style={{

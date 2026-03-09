@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Text } from '@/components/DesignSystem';
+import { Text } from './Text';
 /*
 NOT WORKING
 figma.connect(

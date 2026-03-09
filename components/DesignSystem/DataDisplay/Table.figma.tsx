@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Table } from '@/components/DesignSystem';
+import { Table } from './Table';
 
 const defaultData = {
   head: ['Name', 'Email', 'Role'],
@@ -54,4 +54,3 @@ figma.connect(
   }
 );
 */
-

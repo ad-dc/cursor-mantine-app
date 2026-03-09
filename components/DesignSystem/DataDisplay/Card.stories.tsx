@@ -21,7 +21,7 @@ const meta: Meta<typeof Card> = {
       },
     },
   },
-  tags: ['autodocs', 'needs-connect'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     interactive: {
       control: 'boolean',

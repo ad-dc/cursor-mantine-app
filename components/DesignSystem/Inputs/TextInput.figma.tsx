@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { TextInput } from '@/components/DesignSystem';
+import { TextInput } from './TextInput';
 
 // Main connection — targets the "Input/Text Input" component set (574:2048).
 //

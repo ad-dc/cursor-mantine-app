@@ -1,5 +1,6 @@
 import { figma } from '@figma/code-connect';
-import { Popover } from '@/components/DesignSystem';
+import { Button } from '../Buttons/Button';
+import { Popover } from './Popover';
 
 figma.connect(
   Popover,
@@ -23,7 +24,11 @@ figma.connect(
       content: figma.instance('content'),
     },
     example: (props) => (
-      <Popover position={props.position} withArrow={props.withArrow}>
+      <Popover
+        trigger={<Button variant="outline">Open popover</Button>}
+        position={props.position}
+        withArrow={props.withArrow}
+      >
         {props.content}
       </Popover>
     ),

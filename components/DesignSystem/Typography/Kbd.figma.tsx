@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Kbd } from '@/components/DesignSystem';
+import { Kbd } from './Kbd';
 
 figma.connect(
   Kbd,
@@ -23,4 +23,3 @@ figma.connect(
     ),
   }
 );
-

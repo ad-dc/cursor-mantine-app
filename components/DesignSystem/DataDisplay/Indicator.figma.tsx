@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Indicator } from '@/components/DesignSystem';
+import { Indicator } from './Indicator';
 
 figma.connect(
   Indicator,
@@ -38,4 +38,3 @@ figma.connect(
     ),
   }
 );
-

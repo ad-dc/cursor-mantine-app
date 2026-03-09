@@ -28,18 +28,6 @@ const meta: Meta<typeof ActionIcon> = {
       control: false,
       description: 'Icon content (React element)',
     },
-    customSize: {
-      control: 'number',
-      description: 'Override default size with custom dimensions',
-    },
-    customFill: {
-      control: 'color',
-      description: 'Custom background color',
-    },
-    customBorder: {
-      control: 'text',
-      description: 'Custom border style',
-    },
   },
 };
 
@@ -123,7 +111,7 @@ export const CustomStyling: Story = {
         <div style={{ fontSize: '12px', marginTop: '4px' }}>Red Theme</div>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <ActionIcon customSize={48}>
+        <ActionIcon size="xl" style={{ width: 48, height: 48 }}>
           <RiMore2Fill size={24} />
         </ActionIcon>
         <div style={{ fontSize: '12px', marginTop: '4px' }}>Custom Size</div>

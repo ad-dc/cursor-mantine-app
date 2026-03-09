@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Paper } from '@/components/DesignSystem';
+import { Paper } from './Paper';
 
 figma.connect(
   Paper,
@@ -33,10 +33,9 @@ figma.connect(
       // children: figma.children('content'),
     },
     example: () => (
-      <Paper shadow="xs" radius="md" withBorder p="md">
+      <Paper variant="border-shadow" radius="md" p="md">
         Paper content goes here.
       </Paper>
     ),
   }
 );
-

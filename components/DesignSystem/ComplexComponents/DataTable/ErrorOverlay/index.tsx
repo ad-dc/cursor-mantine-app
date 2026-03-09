@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Stack, Text } from "@mantine/core";
-import { Button } from '@/components/DesignSystem';
+import { Button } from '../../../Buttons/Button';
 import { translate } from '../translations';
 
 interface ErrorOverlayProps {
@@ -18,7 +18,7 @@ const ErrorOverlay = ({ error, onRetry }: ErrorOverlayProps): ReactElement => {
         {error || translate("table.error.default")}
       </Text>
       {onRetry && (
-        <Button variant="light" onClick={onRetry}>
+        <Button variant="default" onClick={onRetry}>
           {translate("table.error.retry")}
         </Button>
       )}

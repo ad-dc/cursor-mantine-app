@@ -1,4 +1,9 @@
 import type { StorybookConfig } from "@storybook/nextjs-vite";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const dirname =
+  typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 const config: StorybookConfig = {
   "stories": [
@@ -24,6 +29,18 @@ const config: StorybookConfig = {
       "shouldExtractLiteralValuesFromEnum": true,
       "propFilter": (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     },
-  }
+  },
+  async viteFinal(config) {
+    return {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...(config.resolve?.alias ?? {}),
+          "@": path.resolve(dirname, ".."),
+        },
+      },
+    };
+  },
 };
 export default config;

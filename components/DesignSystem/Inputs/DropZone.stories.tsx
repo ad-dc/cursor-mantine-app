@@ -18,7 +18,7 @@ const meta: Meta<typeof DropZone> = {
       },
     },
   },
-  tags: ['autodocs', 'needs-connect'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     title: {
       control: 'text',

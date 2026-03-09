@@ -38,10 +38,6 @@ const meta: Meta<typeof NavLink> = {
       control: 'boolean',
       description: 'Whether the nav item is disabled',
     },
-    href: {
-      control: 'text',
-      description: 'Navigation href',
-    },
   },
 };
 

@@ -27,7 +27,7 @@ figma.connect(
       <Chip
         value="chip-value"
         size={props.size}
-        color={props.color}
+        variant={props.color}
         checked={props.checked}
       >
         {props.children}

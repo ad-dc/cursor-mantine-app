@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Card } from '@/components/DesignSystem';
+import { Card } from './Card';
 
 figma.connect(
   Card,
@@ -34,10 +34,9 @@ figma.connect(
       // sectionContent: figma.children('section content'),
     },
     example: () => (
-      <Card withBorder shadow="xs" radius="md" padding="md">
+      <Card>
         Card content
       </Card>
     ),
   }
 );
-

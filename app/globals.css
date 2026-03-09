@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-inter: "Inter", "Aptos", "Segoe UI", sans-serif;
+  --font-roboto-mono: "Roboto Mono", "SFMono-Regular", "Consolas", monospace;
 }
 
 @media (prefers-color-scheme: dark) {

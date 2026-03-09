@@ -1,6 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Avatar } from '@/components/DesignSystem';
-import { RiUser3Fill } from '@remixicon/react';
+import { Avatar } from './Avatar';
 
 figma.connect(
   Avatar,
@@ -41,10 +40,7 @@ figma.connect(
       // }),
     },
     example: () => (
-      <Avatar size="md" color="blue" radius="xl">
-        <RiUser3Fill size={24} />
-      </Avatar>
+      <Avatar variant="icon" size="md" />
     ),
   }
 );
-

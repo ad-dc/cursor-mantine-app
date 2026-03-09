@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Slider } from '@/components/DesignSystem';
+import { Slider } from './Slider';
 
 figma.connect(
   Slider,
