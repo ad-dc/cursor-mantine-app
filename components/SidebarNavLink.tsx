@@ -1,9 +1,5 @@
 import { NavLink, ThemeIcon } from '@mantine/core';
 import React from 'react';
-
-const navLinkStyle = {
-
-};
 // 'Styles' is a Mantine prop that allows you to override the default styles of a component.
 // 'Style' is a Mantine prop that allows you to override the default style of a component.
 const navLinkStyles = {

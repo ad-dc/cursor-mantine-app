@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Progress } from '@/components/DesignSystem';
+import { Progress } from './Progress';
 
 figma.connect(
   Progress,
@@ -16,8 +16,7 @@ figma.connect(
       // }),
     },
     example: () => (
-      <Progress size="md" value={50} radius="xl" striped animated />
+      <Progress size="md" value={50} striped animated />
     ),
   }
 );
-

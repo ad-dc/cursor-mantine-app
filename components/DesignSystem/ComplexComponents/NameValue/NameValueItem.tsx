@@ -1,6 +1,6 @@
 import React from 'react';
-import { Stack } from '@/components/DesignSystem';
-import { Inline } from '@/components/DesignSystem';
+import { Inline } from '../../Layout/Inline';
+import { Stack } from '../../Layout/Stack';
 import { Text } from '../../Typography/Text';
 import { CopyButton } from '../Utilities/CopyButton';
 

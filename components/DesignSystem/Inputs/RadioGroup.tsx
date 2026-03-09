@@ -1,12 +1,11 @@
 import React, { forwardRef } from 'react';
-import { Radio as MantineRadio, Radio,Props as MantineRadioGroupProps } from '@mantine/core';
-import { Inline } from '@/components/DesignSystem';
+import { Radio as MantineRadio } from '@mantine/core';
 import { ComponentSize } from '../config';
 
 /**
  * Enhanced RadioGroup props extending Mantine's RadioGroupProps
  */
-export interface DSRadioGroupProps extends Omit<MantineRadioGroupProps, 'size'> {
+export interface DSRadioGroupProps extends Omit<React.ComponentPropsWithoutRef<typeof MantineRadio.Group>, 'size'> {
   /** RadioGroup size from design system scale */
   size?: ComponentSize;
 }

@@ -1,5 +1,6 @@
 import { figma } from '@figma/code-connect';
-import { Modal, Button } from '@/components/DesignSystem';
+import { Button } from '../Buttons/Button';
+import { Modal } from './Modal';
 
 figma.connect(
   Modal,
@@ -37,4 +38,3 @@ figma.connect(
     ),
   }
 );
-

@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { ThemeIcon } from '@/components/DesignSystem';
+import { ThemeIcon } from './ThemeIcon';
 import { RiStarLine } from '@remixicon/react';
 
 figma.connect(
@@ -32,10 +32,9 @@ figma.connect(
       // }),
     },
     example: () => (
-      <ThemeIcon size={32} radius="xl" color="blue" variant="light">
+      <ThemeIcon size="md" radius="xl" color="blue">
         <RiStarLine size={16} />
       </ThemeIcon>
     ),
   }
 );
-

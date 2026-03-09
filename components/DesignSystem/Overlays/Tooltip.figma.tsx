@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Tooltip } from '@/components/DesignSystem';
+import { Tooltip } from './Tooltip';
 
 figma.connect(
   Tooltip,

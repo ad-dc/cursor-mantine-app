@@ -1,5 +1,5 @@
 import React from 'react';
-import { Inline } from '@/components/DesignSystem';
+import { Inline } from '../../Layout/Inline';
 import { Title } from '../../Typography/Title';
 import { Text } from '../../Typography/Text';
 

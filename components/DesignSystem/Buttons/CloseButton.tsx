@@ -5,7 +5,7 @@ export interface DSCloseButtonProps extends Omit<CloseButtonProps, 'size'> {
   /** Size of the close button */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Color variant of the close button */
-  color?: 'black' | 'blue';
+  color?: 'black' | 'blue' | 'gray';
   /** Whether the button is disabled */
   disabled?: boolean;
   /** Style object for the component */
@@ -53,6 +53,8 @@ export const CloseButton = forwardRef<HTMLButtonElement, DSCloseButtonProps>(
       ? 'var(--mantine-color-gray-4)'
       : color === 'blue' 
         ? 'var(--mantine-color-blue-6)'
+        : color === 'gray'
+          ? 'var(--mantine-color-gray-6)'
         : 'var(--mantine-color-black)';
 
     return (

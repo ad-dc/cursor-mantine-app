@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { TextArea } from '@/components/DesignSystem';
+import { TextArea } from './TextArea';
 
 figma.connect(
   TextArea,

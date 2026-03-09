@@ -1,5 +1,5 @@
-import { NavLink, ThemeIcon, Divider,Title } from '@mantine/core';
-import { Inline } from '@/components/DesignSystem';
+import { ThemeIcon, Divider,Title } from '@mantine/core';
+import { Inline } from '@/components/DesignSystem/Layout/Inline';
 import React from 'react';
 import { SidebarNavLink } from './SidebarNavLink';
 

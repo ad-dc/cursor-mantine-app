@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Select } from '@/components/DesignSystem';
+import { Select } from './Select';
 
 // Main connection — targets the "Ⓜ️ Select" component (1563:2429).
 //

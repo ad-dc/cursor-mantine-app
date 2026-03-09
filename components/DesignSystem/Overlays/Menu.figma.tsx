@@ -1,5 +1,6 @@
 import { figma } from '@figma/code-connect';
-import { Menu, Button } from '@/components/DesignSystem';
+import { Button } from '../Buttons/Button';
+import { Menu } from './Menu';
 
 // Disabled: node-id=2938-803 is not a component or component set
 // TODO: Get valid Figma component URL, then uncomment
@@ -39,4 +40,3 @@ figma.connect(
   }
 );
 */
-

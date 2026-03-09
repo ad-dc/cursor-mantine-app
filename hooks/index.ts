@@ -25,8 +25,6 @@ export type {
   HandlersForRender 
 } from './useTableRenderFunctions';
 export { useSelectedRowsText } from './useSelectedRowsText';
-export { usePaginationInfo } from './usePaginationInfo';
-export type { PaginationInfo } from './usePaginationInfo';
 
 // Mantine-related hooks
 // export { useMantineRules } from './useMantineRules';

@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { List } from '@/components/DesignSystem';
+import { List } from './List';
 import { IconCheck } from '@tabler/icons-react';
 
 // Disabled: List shares node-id=4129-10931 with Select and Table
@@ -41,4 +41,3 @@ figma.connect(
   }
 );
 */
-

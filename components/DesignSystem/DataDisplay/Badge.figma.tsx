@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Badge } from '@/components/DesignSystem';
+import { Badge } from './Badge';
 import { RiCircleFill } from '@remixicon/react';
 
 figma.connect(

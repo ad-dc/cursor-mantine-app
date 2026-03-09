@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { ActionIcon, Indicator, Stack, Text, rem } from '@mantine/core';
-import { Grid } from '@/components/DesignSystem';
-import { Inline } from '@/components/DesignSystem';
-import { Button } from '@/components/DesignSystem';
+import { Button } from '../../../Buttons/Button';
+import { Grid } from '../../../Layout/Grid';
+import { Inline } from '../../../Layout/Inline';
 import { IconFilter, IconMaximize, IconMinimize, IconBaselineDensityMedium, IconBaselineDensitySmall, IconBaselineDensityLarge } from '@tabler/icons-react';
 import { DatesRangeValue } from "@mantine/dates";
 import {
@@ -349,7 +349,7 @@ const FilterIconButton: React.FC<FilterIconButtonProps> = ({
   return (
     <Button
       data-testid="additional-filter-toggle"
-      variant={areFiltersShown ? "outline" : "light"}
+      variant={areFiltersShown ? "outline" : "default"}
       onClick={onClick}
       aria-label={translate("table.filters.toggle.aria")}
       size="xs"
@@ -448,7 +448,7 @@ const ToolbarActions = <T extends MRT_RowData>({ table }: ToolbarActionsProps<T>
   };
 
   return (
-    <Inline justify="end" gap="xs">
+    <Inline justify="flex-end" gap="xs">
       {/* Fullscreen toggle button */}
       <ActionIconButton
         onClick={handleFullscreenToggle}

@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Stepper } from '@/components/DesignSystem';
+import { Stepper } from './Stepper';
 
 /**
  * Code Connect configuration for Stepper component

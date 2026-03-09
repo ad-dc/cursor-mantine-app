@@ -1,5 +1,6 @@
 import { figma } from '@figma/code-connect';
-import { Dropzone, Text } from '@mantine/dropzone';
+import { Dropzone } from '@mantine/dropzone';
+import { Text } from '@mantine/core';
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
 
 figma.connect(
@@ -38,4 +39,3 @@ figma.connect(
     ),
   }
 );
-

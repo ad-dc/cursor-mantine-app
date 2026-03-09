@@ -1,6 +1,9 @@
 import React from 'react';
 import { Collapse, rem } from '@mantine/core';
-import { Grid, Inline, Stack, Box } from '@/components/DesignSystem';
+import { Box } from '../../Layout/Box';
+import { Grid } from '../../Layout/Grid';
+import { Inline } from '../../Layout/Inline';
+import { Stack } from '../../Layout/Stack';
 import { Button } from '../../Buttons/Button';
 import { ActionIcon } from '../../Buttons/ActionIcon';
 import { Badge } from '../../DataDisplay/Badge';

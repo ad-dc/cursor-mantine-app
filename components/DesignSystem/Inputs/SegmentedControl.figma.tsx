@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { SegmentedControl } from '@/components/DesignSystem';
+import { SegmentedControl } from './SegmentedControl';
 
 figma.connect(
   SegmentedControl,

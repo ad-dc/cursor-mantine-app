@@ -9,9 +9,9 @@ export interface DSBadgeProps extends Omit<MantineBadgeProps, 'size' | 'color' |
   /** Badge size from design system scale */
   size?: ComponentSize;
   /** Badge style variant */
-  variant?: 'filled' | 'outline';
+  variant?: 'filled' | 'outline' | 'info' | 'success' | 'danger' | 'pending' | 'default' | 'warning';
   /** Badge semantic color variant */
-  color?: 'info' | 'success' | 'danger' | 'pending' | 'default';
+  color?: 'info' | 'success' | 'danger' | 'pending' | 'default' | 'warning' | 'blue' | 'green' | 'red' | 'yellow' | 'gray';
 }
 
 export const BADGE_BUILD = 'badge-2025-09-26';
@@ -70,29 +70,48 @@ export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
     }, []);
 
     // Map design system colors to Mantine colors
-    const getMantineColor = (dsColor: DSBadgeProps['color']) => {
-      switch (dsColor) {
+    const getMantineColor = (dsColor: DSBadgeProps['color'], dsVariant: DSBadgeProps['variant']) => {
+      const resolvedColor = dsColor === 'default' && ['info', 'success', 'danger', 'pending', 'warning'].includes(dsVariant || '')
+        ? (dsVariant === 'warning' ? 'pending' : dsVariant)
+        : dsColor;
+
+      switch (resolvedColor) {
         case 'info':
+        case 'blue':
           return 'blue';
         case 'success':
+        case 'green':
           return 'green';
         case 'danger':
+        case 'red':
           return 'red';
         case 'pending':
+        case 'warning':
+        case 'yellow':
           return 'yellow';
         case 'default':
+        case 'gray':
           return 'gray';
         default:
           return 'gray';
       }
     };
 
+    const getMantineVariant = (dsVariant: DSBadgeProps['variant']) => {
+      switch (dsVariant) {
+        case 'outline':
+          return 'outline';
+        default:
+          return 'filled';
+      }
+    };
+
     return (
       <MantineBadge
         ref={ref}
-        variant={variant}
+        variant={getMantineVariant(variant)}
         size={size}
-        color={getMantineColor(color)}
+        color={getMantineColor(color, variant)}
         radius="sm"
         data-ui="Badge"
         data-build={BADGE_BUILD}

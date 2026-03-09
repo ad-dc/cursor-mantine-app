@@ -16,7 +16,7 @@ const meta: Meta<typeof SearchableSelect> = {
       },
     },
   },
-  tags: ['autodocs', 'needs-connect'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     label: {
       control: 'text',

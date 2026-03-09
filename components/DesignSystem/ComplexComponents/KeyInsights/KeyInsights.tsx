@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@/components/DesignSystem';
+import { Box } from '../../Layout/Box';
 import { Text } from '../../Typography/Text';
 import { Title } from '../../Typography/Title';
 

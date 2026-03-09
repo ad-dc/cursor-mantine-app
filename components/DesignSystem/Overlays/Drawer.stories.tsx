@@ -21,7 +21,7 @@ const meta: Meta<typeof Drawer> = {
       },
     },
   },
-  tags: ['autodocs', 'needs-connect'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     position: {
       control: 'select',

@@ -1,5 +1,5 @@
 import { figma } from '@figma/code-connect';
-import { Button } from '@/components/DesignSystem';
+import { Button } from './Button';
 import { RiCircleLine } from '@remixicon/react';
 
 /**

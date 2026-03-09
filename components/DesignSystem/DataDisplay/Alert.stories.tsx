@@ -17,7 +17,7 @@ const meta: Meta<typeof Alert> = {
       },
     },
   },
-  tags: ['autodocs', 'needs-connect'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     type: {
       control: 'select',
