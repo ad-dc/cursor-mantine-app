@@ -51,7 +51,7 @@ export type { DSBreadcrumbProps, DSBackBreadcrumbProps, BreadcrumbItem, DSNavLin
 
 // ========================== OVERLAYS ==========================
 export { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
-export type { DSDrawerProps, DSMenuProps, MenuItem, MenuSection, DSModalProps, ModalAction, ConfirmationModalProps, DSPopoverProps, PopoverAction, ConfirmationPopoverProps, DSTooltipProps } from './Overlays';
+export type { DSDrawerProps, DSMenuProps, MenuItem, MenuSection, DSModalProps, ConfirmationModalProps, DSPopoverProps, PopoverAction, ConfirmationPopoverProps, DSTooltipProps } from './Overlays';
 
 // ========================== DATA DISPLAY ==========================
 export { Alert, Avatar, Badge, Card, Chip, Pill, Indicator, Progress, ThemeIcon, List, Table } from './DataDisplay';

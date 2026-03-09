@@ -11,7 +11,7 @@ export { Popover, ConfirmationPopover } from './Popover';
 export { Tooltip } from './Tooltip';
 export type { DSDrawerProps } from './Drawer';
 export type { DSMenuProps, MenuItem, MenuSection } from './Menu';
-export type { DSModalProps, ModalAction, ConfirmationModalProps } from './Modal';
+export type { DSModalProps, ConfirmationModalProps } from './Modal';
 export type { DSPopoverProps, PopoverAction, ConfirmationPopoverProps } from './Popover';
 export type { DSTooltipProps } from './Tooltip';
 
