@@ -1,159 +1,191 @@
 # Figma Code Connect Setup Guide
 
-This guide explains how to use Figma Code Connect to bridge your Design System components with Figma designs.
+This guide explains the current Figma Code Connect workflow for the Design System.
 
 ## Overview
 
-Figma Code Connect allows you to:
-- Connect React components to Figma design components
-- Show real code examples in Figma
-- Map Figma properties to React props
-- Maintain consistency between design and code
+Figma Code Connect is used in this project to:
 
-## Installation
+- connect DS React components to Figma components
+- show real DS code in Figma Dev Mode
+- map Figma properties to real DS props
+- keep design and implementation aligned
 
-Code Connect is already installed in this project:
+## Where To Look
 
-```bash
-npm install @figma/code-connect
-```
+Use these files together:
+
+- `.cursor/rules/figma-code-connect.mdc` — authoring rules and serializer gotchas for `*.figma.tsx`
+- `.cursor/rules/design-system.mdc` — DS conventions plus container composition rules
+- `components/DesignSystem/FIGMA_PROPS_REGISTRY.md` — Figma-facing prop contract for each component
+- Storybook tags — `code-connected` and `needs-connect` are the current tracker for component coverage
+
+Code Connect files use the `.figma.tsx` extension and live alongside their corresponding components.
 
 ## Configuration
 
-The project includes a `figma.config.json` file that configures Code Connect:
+The project uses `figma.config.json` to include Code Connect files under `components/DesignSystem/**/*.figma.tsx`.
 
-```json
-{
-  "codeConnect": {
-    "include": [
-      "components/DesignSystem/**/*.figma.tsx",
-      "components/DesignSystem/**/*.figma.ts"
-    ],
-    "exclude": [
-      "node_modules/**",
-      ".next/**",
-      "storybook-static/**",
-      "**/*.test.*",
-      "**/*.spec.*"
-    ],
-    "parser": "react"
-  }
-}
-```
-
-## Code Connect Files
-
-Code Connect files use the `.figma.tsx` extension and are located alongside their corresponding components:
-
-### Current Code Connect Files:
-- `components/DesignSystem/Buttons/Button.figma.tsx`
-- `components/DesignSystem/DataDisplay/Badge.figma.tsx`
-- `components/DesignSystem/ComplexComponents/DataTable/DataTable.figma.tsx`
-
-## How to Create Code Connect Files
-
-### 1. Basic Structure
+## Basic Structure
 
 ```tsx
 import { figma } from '@figma/code-connect';
-import { YourComponent } from './YourComponent';
+import { YourComponent } from '@/components/DesignSystem';
 
 figma.connect(
   YourComponent,
   'https://www.figma.com/design/YOUR_FILE_KEY/YOUR_FILE_NAME?node-id=YOUR_NODE_ID',
   {
     props: {
-      // Map Figma properties to React props
+      // Map Figma properties to real DS props
     },
     example: (props) => (
-      <YourComponent {...props}>
-        {props.children}
-      </YourComponent>
+      <YourComponent {...props} />
     ),
   }
 );
 ```
 
-### 2. Property Mapping
+## Property Mapping
 
-#### Enum Properties (Variants, Sizes, Colors)
+### Enum Properties
+
 ```tsx
-variant: figma.enum('Variant', {
-  'Primary': 'primary',
-  'Secondary': 'secondary',
-  'Default': 'default',
+variant: figma.enum('variant', {
+  primary: 'primary',
+  secondary: 'secondary',
+  default: 'default',
 }),
 ```
 
-#### Boolean Properties
+### Boolean Properties
+
 ```tsx
-disabled: figma.boolean('Disabled'),
-loading: figma.boolean('Loading'),
+disabled: figma.boolean('disabled'),
+loading: figma.boolean('loading'),
 ```
 
-#### Text Content
+### Text Properties
+
+Use `figma.string(...)` for text props.
+
 ```tsx
-children: figma.textContent('Button Text'),
+label: figma.string('label'),
+children: figma.string('children'),
 ```
 
-#### Instance Properties (Icons, Components)
-```tsx
-leftIcon: figma.instance('Left Icon'),
-rightIcon: figma.instance('Right Icon'),
-```
+### Nested Prop Passthrough
 
-#### Nested Properties
+Use `figma.nestedProps(...)` when a component wraps another component and needs to read the nested instance's props.
+
 ```tsx
-data: figma.nestedProps('Table Data', {
-  headers: figma.children('Headers'),
-  rows: figma.children('Rows'),
+input: figma.nestedProps('Input/Text Input', {
+  size: figma.enum('size', {
+    xs: 'xs',
+    sm: 'sm',
+    md: 'md',
+  }),
+  label: figma.string('label'),
 }),
 ```
 
-### 3. Multiple Variants
+### Instance Swap Slots
 
-You can create multiple connections for different variants of the same component:
+Use `figma.instance(...)` for container components with content slots.
 
 ```tsx
-// General component connection
-figma.connect(Component, 'URL_1', { /* general props */ });
-
-// Specific variant connection
-figma.connect(
-  Component,
-  'URL_2',
-  {
-    variant: { 'Type': 'Primary' },
-    props: {
-      variant: 'primary',
-      // other specific props
-    },
-    example: (props) => <Component variant="primary" {...props} />
-  }
-);
+props: {
+  content: figma.instance('content'),
+},
+example: (props) => (
+  <Popover position={props.position} withArrow={props.withArrow}>
+    {props.content}
+  </Popover>
+),
 ```
+
+Critical rule: the instance swap must be a **direct child** of the Figma component.
+
+```text
+Works:
+Popover
+  content (instance swap)
+  .Popover/Core/pointer
+
+Does not work:
+Popover
+  content (frame)
+    TextArea (instance swap)
+```
+
+### `figma.children(...)` Caveat
+
+`figma.children('layerName')` creates a slot/drill-down link in Dev Mode. It does not reliably inline child code for container composition. Use it only when that navigation behavior is acceptable.
+
+## Serializer Rule
+
+Never use a block-body function in `example`. Keep `example` as a pure JSX expression.
+
+```tsx
+// Bad
+example: (props) => {
+  const items = [{ label: props.label, href: '#' }];
+  return <Breadcrumb items={items} />;
+}
+
+// Good
+example: (props) => (
+  <Breadcrumb items={[{ label: props.label, href: '#' }]} />
+)
+```
+
+Keep conditional logic inline in the expression.
+
+## Optional Layers
+
+If a designer needs to show or hide optional layers and have it reflected in code:
+
+1. Add a boolean property in Figma
+2. Map it with `figma.boolean(...)`
+3. Use conditional spreads or inline conditionals in `example`
+
+```tsx
+props: {
+  showLevel3: figma.boolean('Level 3'),
+  level3: figma.nestedProps('level 3', {
+    label: figma.string('label'),
+  }),
+},
+example: (props) => (
+  <Breadcrumb
+    items={[
+      { label: 'Level 1', href: '#' },
+      ...(props.showLevel3 ? [{ label: props.level3.label }] : []),
+    ]}
+  />
+),
+```
+
+## Subcomponent Stubs
+
+If Figma falls back to auto-generated Tailwind-like output for internal nodes, add stub `figma.connect(...)` mappings for those internal subcomponent nodes to prevent the fallback.
 
 ## CLI Commands
 
-### Parse (Test Configuration)
+### Parse
+
 Test your Code Connect files without publishing:
 
 ```bash
-npx figma connect parse --dir components/DesignSystem
+FIGMA_ACCESS_TOKEN=$(grep FIGMA_ACCESS_TOKEN .env.local | cut -d= -f2) npx figma connect parse --skip-update-check
 ```
 
-### Publish to Figma
-Publish your Code Connect files to Figma (requires Figma access token):
+### Publish
+
+Publish Code Connect files to Figma:
 
 ```bash
-npx figma connect publish --token YOUR_FIGMA_TOKEN
-```
-
-### Unpublish from Figma
-Remove Code Connect files from Figma:
-
-```bash
-npx figma connect unpublish --token YOUR_FIGMA_TOKEN
+FIGMA_ACCESS_TOKEN=$(grep FIGMA_ACCESS_TOKEN .env.local | cut -d= -f2) npx figma connect publish --skip-update-check
 ```
 
 ## Getting Figma Node URLs
@@ -161,102 +193,70 @@ npx figma connect unpublish --token YOUR_FIGMA_TOKEN
 1. Open your Figma file
 2. Select the component you want to connect
 3. Right-click and choose "Copy link"
-4. The URL format is: `https://www.figma.com/design/FILE_KEY/FILE_NAME?node-id=NODE_ID`
+4. The URL format is `https://www.figma.com/design/FILE_KEY/FILE_NAME?node-id=NODE_ID`
 
 ## Setting Up Figma Access Token
 
 1. Go to Figma → Settings → Account → Personal Access Tokens
-2. Generate a new token with appropriate permissions
-3. Use the token with CLI commands:
+2. Generate a token with appropriate permissions
+3. Store it in `.env.local`
 
 ```bash
-npx figma connect publish --token YOUR_TOKEN
+FIGMA_ACCESS_TOKEN=your_token_here
 ```
 
-Or set it as an environment variable:
-
-```bash
-export FIGMA_ACCESS_TOKEN=your_token_here
-npx figma connect publish
-```
+4. Pass it into parse/publish commands as shown above
 
 ## Example Workflow
 
-1. **Design in Figma**: Create your component with proper variants and properties
-2. **Build in Code**: Implement the React component
-3. **Create Code Connect File**: Map Figma properties to React props
-4. **Test Locally**: Run `npx figma connect parse` to verify
-5. **Publish**: Run `npx figma connect publish` to connect to Figma
+1. Build or verify the DS component first
+2. Align Figma property names to real DS props whenever possible
+3. Create the `.figma.tsx` file
+4. Use:
+   - `figma.string(...)` for text props
+   - `figma.nestedProps(...)` for nested prop passthrough
+   - `figma.instance(...)` for container slots
+5. Run parse locally
+6. Publish to Figma
+7. Verify in Figma Dev Mode
 
 ## Best Practices
 
 ### Property Naming
-- Use consistent naming between Figma and React props
-- Use descriptive Figma property names (e.g., "Button Text" instead of "Text")
 
-### Variants
-- Create specific connections for important variants
-- Use the `variant` field to filter connections
+- Prefer 1:1 naming between Figma properties and DS props
+- Avoid unnecessary translation layers where a direct mapping is possible
 
-### Documentation
-- Include comprehensive examples in your Code Connect files
-- Document any special mapping logic
+### Imports
 
-### Nested Component Mapping (Critical!)
-- **ALWAYS map nested components explicitly** to prevent Tailwind fallback
-- When Figma components contain nested structures (e.g., `.Core/Badge/` inside a Badge component set), you MUST create separate `figma.connect` mappings for EACH nested component
-- Without explicit mappings, Figma auto-generates mixed React/Tailwind output which is unacceptable for design system usage
-- Example: Badge component requires both main component set mapping AND `.Core/Badge/` mapping
+- Import DS components from `@/components/DesignSystem`
+- Do not import raw Mantine components in `.figma.tsx` when a DS wrapper exists
 
-```tsx
-// Main component mapping
-figma.connect(Badge, 'main-component-url', { /* main props */ });
+### Examples
 
-// Nested component mapping (prevents Tailwind fallback)
-figma.connect(Badge, 'nested-component-url', { /* nested props */ });
-```
-
-### File Organization
-- Keep Code Connect files alongside their components
-- Use the `.figma.tsx` extension for consistency
+- Keep examples minimal and representative
+- Document unusual mapping logic inline in the `.figma.tsx` file when needed
+- Use Storybook tags, not this file, to track which components are connected
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **"Cannot find component"**: Ensure the import path is correct
+1. **"Cannot find component"**: Ensure the component is exported from `@/components/DesignSystem`
 2. **"Invalid Figma URL"**: Check that the node ID is correct
 3. **"Property not found"**: Verify Figma property names match exactly
+4. **Tailwind-like fallback output**: Add missing subcomponent stubs or nested mappings
+5. **Container slot does not render inline**: Ensure the instance swap is a direct child and use `figma.instance(...)`
 
 ### Debugging
+
 - Use `npx figma connect parse --verbose` for detailed output
-- Check that your `figma.config.json` includes the right files
-- Verify your component exports are correct
-
-## Integration with Design System
-
-This setup integrates with your existing Design System:
-
-- **Components**: All major components can have Code Connect files
-- **Storybook**: Code Connect complements Storybook documentation
-- **TypeScript**: Full type safety with your existing component props
-- **Build Process**: Code Connect files are excluded from builds
-
-## Next Steps
-
-1. Create Code Connect files for more components:
-   - Input components (TextInput, Select, etc.)
-   - Layout components (Stack, Inline, Grid)
-   - Complex components (DataTable, Modal, etc.)
-
-2. Set up CI/CD integration to automatically publish changes
-
-3. Train your design team on using Code Connect in Figma
-
-4. Consider using the Figma MCP server for enhanced integration
+- Check that `figma.config.json` includes the right files
+- Verify component exports are correct
+- Inspect parse output if the serializer appears to mangle JSX
 
 ## Resources
 
 - [Figma Code Connect Documentation](https://www.figma.com/developers/code-connect)
 - [Code Connect GitHub Repository](https://github.com/figma/code-connect)
-- [Design System Components](./components/DesignSystem/) 
+- [Design System Components](./components/DesignSystem/)

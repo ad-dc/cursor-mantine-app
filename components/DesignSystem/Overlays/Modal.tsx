@@ -2,130 +2,23 @@ import React, { forwardRef } from 'react';
 import { Modal as MantineModal, ModalProps as MantineModalProps, Stack } from '@mantine/core';
 import { Inline } from '@/components/DesignSystem';
 import { Button } from '../Buttons';
-import { CloseButton } from '../Buttons';
 
 /**
- * Modal Action Button interface
+ * Thin Design System wrapper over Mantine Modal.
+ *
+ * Keeps the core Mantine shell props (`title`, `size`, `withCloseButton`,
+ * `children`, etc.) while applying DS defaults like `radius="sm"`.
  */
-export interface ModalAction {
-  /** Unique identifier for the action */
-  id: string;
-  /** Button label */
-  label: string;
-  /** Button variant */
-  variant?: 'primary' | 'outline' | 'default' | 'danger';
-  /** Click handler */
-  onClick?: () => void;
-  /** Whether button is disabled */
-  disabled?: boolean;
-  /** Whether button is loading */
-  loading?: boolean;
-  /** Whether button should close modal on click */
-  closeOnClick?: boolean;
-}
-
-/**
- * Enhanced Modal props extending Mantine's ModalProps
- */
-export interface DSModalProps extends Omit<MantineModalProps, 'children' | 'title' | 'onClose'> {
+export interface DSModalProps extends Omit<MantineModalProps, 'title'> {
   /** Modal title */
-  title?: string;
-  /** Modal content */
-  children: React.ReactNode;
-  /** Primary/secondary action buttons (left-aligned) */
-  actions?: ModalAction[];
-  /** Tertiary action buttons (right-aligned) */
-  tertiaryActions?: ModalAction[];
-  /** Modal size */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | number;
-  /** Whether to show close button in header */
-  withCloseButton?: boolean;
-  /** Whether modal can be closed by clicking overlay */
-  closeOnClickOutside?: boolean;
-  /** Whether modal can be closed by pressing Escape */
-  closeOnEscape?: boolean;
-  /** Called when modal is closed */
-  onClose?: () => void;
-  /** Whether modal is opened */
-  opened: boolean;
-  /** Modal content padding */
-  padding?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  /** Whether to center the modal vertically */
-  centered?: boolean;
+  title?: React.ReactNode;
 }
 
 /**
  * AppDirect Design System Modal Component
  * 
  * A modal dialog component built on top of Mantine's Modal with
- * consistent design system styling and flexible content support.
- * 
- * @example
- * ```tsx
- * // Basic confirmation modal (left-aligned primary actions)
- * <Modal
- *   opened={confirmOpened}
- *   onClose={() => setConfirmOpened(false)}
- *   title="Confirm Action"
- *   actions={[
- *     {
- *       id: "confirm",
- *       label: "Confirm",
- *       variant: "primary",
- *       onClick: handleConfirm,
- *       closeOnClick: true
- *     },
- *     {
- *       id: "cancel",
- *       label: "Cancel",
- *       variant: "outline",
- *       closeOnClick: true
- *     }
- *   ]}
- * >
- *   <Text>Are you sure you want to perform this action?</Text>
- * </Modal>
- * ```
- * 
- * @example
- * ```tsx
- * // Form modal with primary actions (left) and tertiary actions (right)
- * <Modal
- *   opened={formOpened}
- *   onClose={() => setFormOpened(false)}
- *   title="Create New Item"
- *   size="md"
- *   actions={[
- *     {
- *       id: "save",
- *       label: "Save",
- *       variant: "primary",
- *       onClick: handleSave,
- *       loading: saving
- *     },
- *     {
- *       id: "cancel",
- *       label: "Cancel",
- *       variant: "outline",
- *       closeOnClick: true
- *     }
- *   ]}
- *   tertiaryActions={[
- *     {
- *       id: "more-options",
- *       label: "More Options",
- *       variant: "default",
- *       onClick: showMoreOptions
- *     }
- *   ]}
- * >
- *   <Stack gap="md">
- *     <TextInput label="Name" placeholder="Enter name..." />
- *     <TextArea label="Description" placeholder="Enter description..." />
- *     <Switch label="Active" />
- *   </Stack>
- * </Modal>
- * ```
+ * consistent design system styling.
  * 
  * @example
  * ```tsx
@@ -142,28 +35,19 @@ export interface DSModalProps extends Omit<MantineModalProps, 'children' | 'titl
  * 
  * @example
  * ```tsx
- * // Danger confirmation modal
+ * // Confirmation buttons composed inside children
  * <Modal
- *   opened={deleteOpened}
- *   onClose={() => setDeleteOpened(false)}
- *   title="Delete Item"
- *   actions={[
- *     {
- *       id: "delete",
- *       label: "Delete",
- *       variant: "danger",
- *       onClick: handleDelete,
- *       closeOnClick: true
- *     },
- *     {
- *       id: "cancel",
- *       label: "Cancel",
- *       variant: "outline",
- *       closeOnClick: true
- *     }
- *   ]}
+ *   opened={confirmOpened}
+ *   onClose={() => setConfirmOpened(false)}
+ *   title="Confirm Action"
  * >
- *   <Text>This action cannot be undone. Are you sure you want to delete this item?</Text>
+ *   <Stack gap="md">
+ *     <Text>Are you sure you want to perform this action?</Text>
+ *     <Inline justify="flex-end" gap="sm">
+ *       <Button variant="outline">Cancel</Button>
+ *       <Button variant="primary">Confirm</Button>
+ *     </Inline>
+ *   </Stack>
  * </Modal>
  * ```
  */
@@ -171,35 +55,19 @@ export const Modal = forwardRef<HTMLDivElement, DSModalProps>(
   (
     {
       title,
-      children,
-      actions = [],
-      tertiaryActions = [],
       size = 'md',
       withCloseButton = true,
       closeOnClickOutside = true,
       closeOnEscape = true,
-      onClose,
-      opened,
       padding = 'md',
       centered = true,
       ...props
     },
     ref
   ) => {
-    const handleActionClick = (action: ModalAction) => {
-      if (action.onClick) {
-        action.onClick();
-      }
-      if (action.closeOnClick && onClose) {
-        onClose();
-      }
-    };
-
     return (
       <MantineModal
         ref={ref}
-        opened={opened}
-        onClose={onClose || (() => {})}
         title={title}
         size={size}
         withCloseButton={withCloseButton}
@@ -209,51 +77,7 @@ export const Modal = forwardRef<HTMLDivElement, DSModalProps>(
         centered={centered}
         radius="sm"
         {...props}
-      >
-        <Stack gap="md">
-          {/* Modal Content */}
-          <div>
-            {children}
-          </div>
-          
-          {/* Modal Actions Footer */}
-          {(actions.length > 0 || tertiaryActions.length > 0) && (
-            <Inline justify="space-between" gap="sm" pt="sm">
-              {/* Left-aligned primary/secondary actions */}
-              <Inline gap="sm">
-                {actions.map((action) => (
-                  <Button
-                    key={action.id}
-                    variant={action.variant || 'outline'}
-                    onClick={() => handleActionClick(action)}
-                    disabled={action.disabled}
-                    loading={action.loading}
-                    size="sm"
-                  >
-                    {action.label}
-                  </Button>
-                ))}
-              </Inline>
-              
-              {/* Right-aligned tertiary actions */}
-              <Inline gap="sm">
-                {tertiaryActions.map((action) => (
-                  <Button
-                    key={action.id}
-                    variant={action.variant || 'outline'}
-                    onClick={() => handleActionClick(action)}
-                    disabled={action.disabled}
-                    loading={action.loading}
-                    size="sm"
-                  >
-                    {action.label}
-                  </Button>
-                ))}
-              </Inline>
-            </Inline>
-          )}
-        </Stack>
-      </MantineModal>
+      />
     );
   }
 );
@@ -261,13 +85,9 @@ export const Modal = forwardRef<HTMLDivElement, DSModalProps>(
 Modal.displayName = 'Modal';
 
 /**
- * Pre-configured Modal variants for common use cases
+ * Pre-configured confirmation helper built on top of Modal.
  */
-
-/**
- * Confirmation Modal - Pre-configured for yes/no confirmations
- */
-export interface ConfirmationModalProps extends Omit<DSModalProps, 'actions' | 'tertiaryActions'> {
+export interface ConfirmationModalProps extends Omit<DSModalProps, 'children'> {
   /** Confirmation button label */
   confirmLabel?: string;
   /** Cancel button label */
@@ -280,8 +100,8 @@ export interface ConfirmationModalProps extends Omit<DSModalProps, 'actions' | '
   onCancel?: () => void;
   /** Whether confirm button is loading */
   confirmLoading?: boolean;
-  /** Optional tertiary actions (right-aligned) */
-  tertiaryActions?: ModalAction[];
+  /** Optional content shown above the confirmation actions */
+  children?: React.ReactNode;
 }
 
 export const ConfirmationModal = forwardRef<HTMLDivElement, ConfirmationModalProps>(
@@ -293,38 +113,43 @@ export const ConfirmationModal = forwardRef<HTMLDivElement, ConfirmationModalPro
       onConfirm,
       onCancel,
       confirmLoading = false,
-      tertiaryActions = [],
       onClose,
+      children,
       ...props
     },
     ref
   ) => {
-    const actions: ModalAction[] = [
-      {
-        id: 'cancel',
-        label: cancelLabel,
-        variant: 'outline',
-        onClick: onCancel,
-        closeOnClick: true,
-      },
-      {
-        id: 'confirm',
-        label: confirmLabel,
-        variant: confirmVariant,
-        onClick: onConfirm,
-        loading: confirmLoading,
-        closeOnClick: !confirmLoading,
-      },
-    ];
+    const handleCancel = () => {
+      onCancel?.();
+      onClose();
+    };
+
+    const handleConfirm = () => {
+      onConfirm?.();
+
+      if (!confirmLoading) {
+        onClose();
+      }
+    };
 
     return (
       <Modal
         ref={ref}
-        actions={actions}
-        tertiaryActions={tertiaryActions}
         onClose={onClose}
         {...props}
-      />
+      >
+        <Stack gap="md">
+          {children}
+          <Inline justify="flex-end" gap="sm">
+            <Button variant="outline" onClick={handleCancel}>
+              {cancelLabel}
+            </Button>
+            <Button variant={confirmVariant} onClick={handleConfirm} loading={confirmLoading}>
+              {confirmLabel}
+            </Button>
+          </Inline>
+        </Stack>
+      </Modal>
     );
   }
 );

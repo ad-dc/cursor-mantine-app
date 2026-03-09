@@ -636,14 +636,9 @@ Same prop surface as Select — see Select entry above.
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `title` | `string` | No | - | Modal title |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| number` | No | `'md'` | Modal width |
-| `opened` | `boolean` | Yes | - | Open/closed state |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Modal width |
 | `withCloseButton` | `boolean` | No | `true` | Show close button |
-| `centered` | `boolean` | No | `true` | Center vertically |
-| `padding` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Content padding |
-| `actions` | `ModalAction[]` | No | `[]` | Left-aligned buttons |
-| `tertiaryActions` | `ModalAction[]` | No | `[]` | Right-aligned buttons |
-| `children` | `ReactNode` | Yes | - | Modal content |
+| `children` | `ReactNode` | Yes | - | Direct-child instance swap for modal body content |
 
 ---
 
@@ -711,15 +706,19 @@ Same prop surface as Select — see Select entry above.
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `title` | `string` | No | - | Popover heading |
-| `position` | `'top' \| 'left' \| 'right' \| 'bottom'` | No | `'bottom'` | Popover position |
-| `opened` | `boolean` | No | - | Controlled open state |
-| `width` | `number \| 'auto'` | No | `'auto'` | Popover width |
-| `withArrow` | `boolean` | No | `true` | Show arrow |
-| `actions` | `PopoverAction[]` | No | `[]` | Left-aligned buttons |
-| `tertiaryActions` | `PopoverAction[]` | No | `[]` | Right-aligned buttons |
-| `trigger` | `ReactNode` | Yes | - | Trigger element |
-| `children` | `ReactNode` | Yes | - | Popover content |
+| `position` | `'top' \| 'left' \| 'right' \| 'bottom' \| 'none'` | No | `'bottom'` | Popover placement in Figma; `none` maps to `position=\"bottom\"` with no arrow |
+| `content` | `ReactNode` | Yes | - | Instance swap slot rendered inline via `figma.instance('content')` |
+
+#### Figma Structure
+
+The Popover component exposes `content` as an instance swap property and Code Connect reads it with `figma.instance('content')`.
+
+#### Notes
+
+- `withArrow` is derived from the `position` variant: `top`, `bottom`, `left`, and `right` map to `withArrow={true}`, while `none` maps to `withArrow={false}`
+- The trigger is a fixed example in Code Connect: `<Button variant="outline">Open popover</Button>`
+- The slotted component must be a **direct child** of the Popover component in Figma for inline rendering to work
+- Only code-connected components render inline when placed in the slot; non-connected components will not produce useful composed output
 
 ---
 
@@ -1055,7 +1054,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Modal | Overlays | title, size, actions | md | - |
 | Drawer | Overlays | title, size, position | md | - |
 | Tooltip | Overlays | label, position | - | - |
-| Popover | Overlays | title, position, actions | - | - |
+| Popover | Overlays | position, content | - | - |
 | Menu | Overlays | sections, trigger | - | - |
 | Tabs | Navigation | tabs, variant, orientation | - | default |
 | Stepper | Navigation | orientation, hasContent, content, step3-10 | md | horizontal |
