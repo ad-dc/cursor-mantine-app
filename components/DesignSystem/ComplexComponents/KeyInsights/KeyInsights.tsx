@@ -131,8 +131,8 @@ const sizeConfig = {
  * />
  * 
  * @example
- * // In a grid layout with borders
- * <Grid cols={3} spacing="sm">
+ * // In a simple grid layout with borders
+ * <SimpleGrid cols={3} spacing="sm">
  *   <KeyInsight
  *     value={1250}
  *     title="Total Users"
@@ -152,7 +152,7 @@ const sizeConfig = {
  *     size="lg"
  *     showBorder={false}
  *   />
- * </Grid>
+ * </SimpleGrid>
  * 
  * @example
  * // Dynamic usage with data

@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { ActionIcon, Indicator, Stack, Text, rem } from '@mantine/core';
 import { Button } from '../../../Buttons/Button';
 import { Grid } from '../../../Layout/Grid';
+import { SimpleGrid } from '../../../Layout/SimpleGrid';
 import { Inline } from '../../../Layout/Inline';
 import { IconFilter, IconMaximize, IconMinimize, IconBaselineDensityMedium, IconBaselineDensitySmall, IconBaselineDensityLarge } from '@tabler/icons-react';
 import { DatesRangeValue } from "@mantine/dates";
@@ -494,7 +495,7 @@ const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
   if (!visible) return null;
 
   return (
-    <Grid data-testid="additional-filters" cols={3} spacing="xs" role="menu">
+    <SimpleGrid data-testid="additional-filters" cols={3} spacing="xs" role="menu">
       {/* Date range selector */}
       <DateRangeSelector
         key={dateRangeSelectorKey}
@@ -512,7 +513,7 @@ const ExpandableFilters: React.FC<ExpandableFiltersProps> = ({
         placeholderWithSelection={translate("table.filters.placeholder.select.more")}
         data={CITY_OPTIONS}
       />
-    </Grid>
+    </SimpleGrid>
   );
 };
 
@@ -693,35 +694,39 @@ const CustomTopToolbar = <T extends MRT_RowData>({
         }}
       >
         {/* Top row: Search and action buttons */}
-        <Grid cols={2}>
-          {/* Left side: Filter toggle and search */}
-          <Inline gap="xs" align="center">
-            {/* Filter toggle button with optional indicator */}
-            {filtersAreActive ? (
-              <Indicator size="8">
-                <FilterIconButton 
-                  areFiltersShown={showFiltersState} 
+        <Grid gutter="md">
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            {/* Left side: Filter toggle and search */}
+            <Inline gap="xs" align="center">
+              {/* Filter toggle button with optional indicator */}
+              {filtersAreActive ? (
+                <Indicator size="8">
+                  <FilterIconButton
+                    areFiltersShown={showFiltersState}
+                    onClick={handleFilterToggle}
+                    text=""
+                  />
+                </Indicator>
+              ) : (
+                <FilterIconButton
+                  areFiltersShown={showFiltersState}
                   onClick={handleFilterToggle}
                   text=""
                 />
-              </Indicator>
-            ) : (
-              <FilterIconButton 
-                areFiltersShown={showFiltersState} 
-                onClick={handleFilterToggle}
-                text=""
-              />
-            )}
+              )}
 
-            {/* Search input */}
-            <SearchFilter
-              searchTerm={searchTerm as string}
-              onChange={handleSearchChange}
-            />
-          </Inline>
+              {/* Search input */}
+              <SearchFilter
+                searchTerm={searchTerm as string}
+                onChange={handleSearchChange}
+              />
+            </Inline>
+          </Grid.Col>
 
           {/* Right side: Action buttons */}
-          <ToolbarActions table={table} />
+          <Grid.Col span={{ base: 12, md: 6 }}>
+            <ToolbarActions table={table} />
+          </Grid.Col>
         </Grid>
 
         {/* Second row: Active filters and result count */}

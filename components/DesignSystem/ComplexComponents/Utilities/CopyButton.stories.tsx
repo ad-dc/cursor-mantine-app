@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@mantine/core';
-import { Grid } from '@/components/DesignSystem';
+import { SimpleGrid } from '@/components/DesignSystem';
 import { Inline } from '@/components/DesignSystem';
 import { CopyButton } from './CopyButton';
 import { useState } from 'react';
@@ -422,7 +422,7 @@ export const SystemInformation: Story = {
       <Stack gap="lg" w={600}>
         <Title order={3} size="md">System Information</Title>
         
-        <Grid cols={2} spacing="md">
+        <SimpleGrid cols={2} spacing="md">
           {Object.entries(groupedInfo).map(([category, items]) => (
             <Card key={category}>
               <Stack gap="sm">
@@ -448,7 +448,7 @@ export const SystemInformation: Story = {
               </Stack>
             </Card>
           ))}
-        </Grid>
+        </SimpleGrid>
 
         {copyStatus && (
           <Text size="sm" c="green" fw={500}>

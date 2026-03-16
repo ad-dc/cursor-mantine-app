@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Grid, Stack } from '@/components/DesignSystem';
+import { SimpleGrid, Stack } from '@/components/DesignSystem';
 import { Inline } from '@/components/DesignSystem';
 import { KeyInsight } from './KeyInsights';
 import { Title } from '../../Typography/Title';
@@ -146,7 +146,7 @@ export const AllSizes: Story = {
 
 export const SizeComparison: Story = {
   render: () => (
-    <Grid cols={3} spacing="lg" w={800}>
+    <SimpleGrid cols={3} spacing="lg" w={800}>
       <KeyInsight
         value="$24.5K"
         title="Revenue"
@@ -165,7 +165,7 @@ export const SizeComparison: Story = {
         subtitle="vs last month"
         size="lg"
       />
-    </Grid>
+    </SimpleGrid>
   ),
   parameters: {
     docs: {
@@ -180,7 +180,7 @@ export const SizeComparison: Story = {
 
 export const DashboardExample: Story = {
   render: () => (
-    <Grid cols={4} spacing="md" w={800}>
+    <SimpleGrid cols={4} spacing="md" w={800}>
       <KeyInsight
         value={1250}
         title="Total Users"
@@ -207,7 +207,7 @@ export const DashboardExample: Story = {
         size="md"
         showBorder={false}
       />
-    </Grid>
+    </SimpleGrid>
   ),
   parameters: {
     docs: {
@@ -222,7 +222,7 @@ export const MetricsGrid: Story = {
   render: () => (
     <div style={{ width: 600 }}>
       <Title order={2} mb="lg">Analytics Overview</Title>
-      <Grid cols={3} spacing="lg">
+      <SimpleGrid cols={3} spacing="lg">
         <KeyInsight
           value="$24,500"
           title="Revenue"
@@ -258,7 +258,7 @@ export const MetricsGrid: Story = {
           subtitle="Open"
           size="lg"
         />
-      </Grid>
+      </SimpleGrid>
     </div>
   ),
   parameters: {
@@ -315,7 +315,7 @@ export const HeroMetrics: Story = {
   render: () => (
     <Stack gap="xl" align="center">
       <Title order={1} ta="center">Company Performance</Title>
-      <Grid cols={2} spacing="xl" w={800}>
+      <SimpleGrid cols={2} spacing="xl" w={800}>
         <KeyInsight
           value="$2.4M"
           title="Annual Revenue"
@@ -328,7 +328,7 @@ export const HeroMetrics: Story = {
           subtitle="Monthly Active"
           size="super-jumbo"
         />
-      </Grid>
+      </SimpleGrid>
     </Stack>
   ),
   parameters: {

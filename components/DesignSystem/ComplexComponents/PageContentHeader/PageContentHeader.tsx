@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse, rem } from '@mantine/core';
 import { Box } from '../../Layout/Box';
-import { Grid } from '../../Layout/Grid';
+import { SimpleGrid } from '../../Layout/SimpleGrid';
 import { Inline } from '../../Layout/Inline';
 import { Stack } from '../../Layout/Stack';
 import { Button } from '../../Buttons/Button';
@@ -232,7 +232,7 @@ export function PageContentHeader({
   
   const renderKeyInsights = () => (
     <Box p={0}>
-      <Grid cols={insights.length} spacing="sm">
+      <SimpleGrid cols={insights.length} spacing="sm">
         {insights.map((insight, index) => (
           <KeyInsight
             key={index}
@@ -242,7 +242,7 @@ export function PageContentHeader({
             showBorder={index < insights.length - 1}
           />
         ))}
-      </Grid>
+      </SimpleGrid>
     </Box>
   );
   
