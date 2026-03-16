@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Stack } from '@/components/DesignSystem';
-import { Grid } from '@/components/DesignSystem';
+import { SimpleGrid } from '@/components/DesignSystem';
 import { Inline } from '@/components/DesignSystem';
 import { NameValue } from './NameValue';
 import { useState } from 'react';
@@ -282,7 +282,7 @@ export const ColorVariations: Story = {
 
 export const RealWorldExamples: Story = {
   render: () => (
-    <Grid cols={2} spacing="xl" w={800}>
+    <SimpleGrid cols={2} spacing="xl" w={800}>
              <Card>
          <Stack gap="md">
            <Title order={4} size="sm">User Profile</Title>
@@ -346,7 +346,7 @@ export const RealWorldExamples: Story = {
            />
          </Stack>
        </Card>
-    </Grid>
+    </SimpleGrid>
   ),
   parameters: {
     docs: {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DashboardWidget } from './DashboardWidget';
 import { Text } from '../../Typography/Text';
 import { Title } from '../../Typography/Title';
-import { Stack, Grid } from '../../Layout';
+import { Stack, SimpleGrid } from '../../Layout';
 import { List, Table } from '../../DataDisplay';
 import { Pill } from '../../DataDisplay/Pill';
 import { KeyInsight } from '../KeyInsights';
@@ -435,7 +435,7 @@ export const WithActionsMenuOnly: Story = {
 
 export const ConsistentFooterSpacing: Story = {
   render: () => (
-    <Grid cols={2} spacing="md">
+    <SimpleGrid cols={2} spacing="md">
       <DashboardWidget
         title="Widget Without Links"
       >
@@ -467,7 +467,7 @@ export const ConsistentFooterSpacing: Story = {
           </Text>
         </Stack>
       </DashboardWidget>
-    </Grid>
+    </SimpleGrid>
   ),
   parameters: {
     docs: {
@@ -480,7 +480,7 @@ export const ConsistentFooterSpacing: Story = {
 
 export const ScrollableContent: Story = {
   render: () => (
-    <Grid cols={2} spacing="md" style={{ height: '400px' }}>
+    <SimpleGrid cols={2} spacing="md" style={{ height: '400px' }}>
       <DashboardWidget
         title="Short Content"
         footerLinks={[
@@ -543,7 +543,7 @@ export const ScrollableContent: Story = {
           />
         </Stack>
       </DashboardWidget>
-    </Grid>
+    </SimpleGrid>
   ),
   parameters: {
     docs: {
@@ -576,7 +576,7 @@ export const SalesDashboard: Story = {
         backgroundColor: 'var(--mantine-color-gray-0)',
         minHeight: '100vh'
       }}>
-        <Grid 
+        <SimpleGrid
           cols={2} 
           spacing="lg"
           style={{
@@ -795,7 +795,7 @@ export const SalesDashboard: Story = {
             subtitle="64 new this week"
           />
         </DashboardWidget>
-        </Grid>
+        </SimpleGrid>
       </div>
     );
   },

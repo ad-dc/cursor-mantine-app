@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '../../Layout/Grid';
+import { SimpleGrid } from '../../Layout/SimpleGrid';
 import { Stack } from '../../Layout/Stack';
 import { NameValueItem, NameValueItemProps } from './NameValueItem';
 
@@ -79,7 +79,7 @@ export interface NameValueProps {
  * />
  * 
  * @example
- * // Grid layout with copy functionality
+ * // SimpleGrid layout with copy functionality
  * const serverInfo = [
  *   { name: "Server ID", value: "srv-abc123", showCopy: true, onCopy: (v) => navigator.clipboard.writeText(v) },
  *   { name: "IP Address", value: "192.168.1.100", showCopy: true, onCopy: (v) => navigator.clipboard.writeText(v) },
@@ -155,12 +155,12 @@ export function NameValue({
     return <NameValueItem key={index} {...itemProps} />;
   };
   
-  // Use grid layout if columns prop is provided
+  // Use equal-width grid layout if columns prop is provided
   if (columns) {
     return (
-      <Grid cols={columns} spacing={0}>
+      <SimpleGrid cols={columns} spacing={0}>
         {allPairs.map((pair, index) => renderPair(pair, index))}
-      </Grid>
+      </SimpleGrid>
     );
   }
   

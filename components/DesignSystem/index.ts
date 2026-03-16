@@ -23,7 +23,7 @@ import { Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs } from './Navigation
 import { Drawer, Menu, Modal, ConfirmationModal, Popover, ConfirmationPopover, Tooltip } from './Overlays';
 import { Kbd, Code, Text, Title } from './Typography';
 import { Divider, Paper } from './Misc';
-import { Stack, Inline, Box, Grid } from './Layout';
+import { Stack, Group, Inline, Box, SimpleGrid, Grid, Flex, Container, Center } from './Layout';
 import { KeyInsight } from './ComplexComponents/KeyInsights';
 import { NameValue, NameValueItem } from './ComplexComponents/NameValue';
 import { CopyButton } from './ComplexComponents/Utilities';
@@ -66,8 +66,20 @@ export { Divider, Paper } from './Misc';
 export type { DividerProps, PaperProps } from './Misc';
 
 // ========================== LAYOUT ==========================
-export { Stack, Inline, Box, Grid } from './Layout';
-export type { DSStackProps, DSInlineProps, DSBoxProps, DSGridProps, SpacingScale } from './Layout';
+export { Stack, Group, Inline, Box, SimpleGrid, Grid, Flex, Container, Center } from './Layout';
+export type {
+  DSStackProps,
+  DSGroupProps,
+  DSInlineProps,
+  DSBoxProps,
+  DSSimpleGridProps,
+  DSGridProps,
+  DSGridColProps,
+  DSFlexProps,
+  DSContainerProps,
+  DSCenterProps,
+  SpacingScale,
+} from './Layout';
 
 // ========================== COMPLEX COMPONENTS ==========================
 export { KeyInsight } from './ComplexComponents/KeyInsights';
@@ -162,9 +174,14 @@ export const Misc = {
 
 export const Layout = {
   Stack,
+  Group,
   Inline,
   Box,
+  SimpleGrid,
   Grid,
+  Flex,
+  Container,
+  Center,
 };
 
 export const ComplexComponents = {

@@ -18,7 +18,10 @@ export interface DSInlineProps extends Omit<MantineGroupProps, 'gap'> {
 
 /**
  * AppDirect Design System Inline Component
- * 
+ *
+ * Legacy horizontal layout alias retained for backward compatibility.
+ * Prefer `Group` for new code to align with Mantine naming conventions.
+ *
  * A layout primitive that arranges child elements horizontally with consistent spacing
  * using design system tokens. Built on top of Mantine's Group component.
  * 
