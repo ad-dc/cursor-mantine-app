@@ -732,11 +732,15 @@ The Popover component exposes `content` as an instance swap property and Code Co
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | `number` | No | `200` | Menu width |
-| `position` | Position type | No | `'bottom-start'` | Menu placement |
-| `shadow` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Drop shadow |
-| `trigger` | `ReactNode` | Yes | - | Trigger element |
-| `sections` | `MenuSection[]` | Yes | - | Menu structure |
+| `content` | `ReactNode` | Yes | - | Opened dropdown content rendered inside `Menu.Dropdown` |
+
+#### Composition Notes
+
+- Preferred mapping is Mantine-aligned composition: `Menu`, `Menu.Dropdown`, `Menu.Item`, `Menu.Label`
+- Figma only models the static opened menu surface; trigger and interaction remain code-owned
+- `Menu.Item` exposes `text`, `leftSection`, `rightSection`, and `state` (`default` / `active`)
+- `Menu.Label` exposes `text`
+- `Menu.Divider` is intentionally excluded from the current Figma contract
 
 ---
 
