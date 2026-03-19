@@ -2,41 +2,78 @@ import { figma } from '@figma/code-connect';
 import { Button } from '../Buttons/Button';
 import { Menu } from './Menu';
 
-// Disabled: node-id=2938-803 is not a component or component set
-// TODO: Get valid Figma component URL, then uncomment
-/*
+const MenuItem = Menu.Item;
+const MenuLabel = Menu.Label;
+
 figma.connect(
   Menu,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=2938-803&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=5733-6690',
   {
     props: {
-      // TODO: Restore bindings once the Figma component exposes these props
-      // triggerLabel: figma.string('trigger label'),
-      // position: figma.enum('position', {
-      //   top: 'top',
-      //   bottom: 'bottom',
-      //   left: 'left',
-      //   right: 'right',
-      // }),
-      // width: figma.number('width'),
-      // children: figma.children('menu items'),
+      content: figma.instance('content'),
     },
-    example: () => (
-      <Menu position="bottom" withinPortal width={220}>
+    example: (props) => (
+      <Menu defaultOpened withinPortal={false}>
         <Menu.Target>
-          <Button variant="light">Open menu</Button>
+          <Button variant="outline" size="xs">
+            Open menu
+          </Button>
         </Menu.Target>
-        <Menu.Dropdown>
-          <>
-            <Menu.Item>Dashboard</Menu.Item>
-            <Menu.Item>Settings</Menu.Item>
-            <Menu.Divider />
-            <Menu.Label>Danger zone</Menu.Label>
-            <Menu.Item color="red">Delete account</Menu.Item>
-          </>
-        </Menu.Dropdown>
+        <Menu.Dropdown>{props.content}</Menu.Dropdown>
       </Menu>
     ),
   }
 );
-*/
+
+figma.connect(
+  MenuItem,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=5711-1305',
+  {
+    props: {
+      children: figma.string('children'),
+      leftSection: figma.instance('leftSection'),
+      rightSection: figma.instance('rightSection'),
+    },
+    example: (props) => (
+      <MenuItem
+        leftSection={props.leftSection}
+        rightSection={props.rightSection}
+      >
+        {props.children}
+      </MenuItem>
+    ),
+  }
+);
+
+figma.connect(
+  MenuItem,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=5711-1305',
+  {
+    variant: { state: 'active' },
+    props: {
+      children: figma.string('children'),
+      leftSection: figma.instance('leftSection'),
+      rightSection: figma.instance('rightSection'),
+    },
+    example: (props) => (
+      <MenuItem
+        leftSection={props.leftSection}
+        rightSection={props.rightSection}
+        active
+      >
+        {props.children}
+      </MenuItem>
+    ),
+  }
+);
+
+figma.connect(
+  MenuLabel,
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1213-1768',
+  {
+    props: {
+      children: figma.string('children'),
+    },
+    example: (props) => <MenuLabel>{props.children}</MenuLabel>,
+  }
+);

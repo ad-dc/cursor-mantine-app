@@ -31,65 +31,56 @@ export interface MenuSection {
   items: MenuItem[];
 }
 
-/**
- * Enhanced Menu props
- */
-export interface DSMenuProps {
+export interface LegacyMenuProps extends Omit<MantineMenuProps, 'children'> {
   /** Menu trigger element */
   trigger: React.ReactNode;
   /** Array of menu sections */
   sections: MenuSection[];
-  /** Menu width */
-  width?: number;
-  /** Menu shadow */
-  shadow?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  /** Menu position */
-  position?: 'bottom' | 'bottom-start' | 'bottom-end' | 'top' | 'top-start' | 'top-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end';
-  /** Whether menu is opened by default */
-  defaultOpened?: boolean;
-  /** Control menu opened state */
-  opened?: boolean;
-  /** Called when menu state changes */
-  onChange?: (opened: boolean) => void;
+  /** Mantine-composed children are not used with the legacy API */
+  children?: never;
 }
+
+/**
+ * Thin Menu wrapper over Mantine Menu.
+ *
+ * Preferred usage mirrors Mantine composition directly:
+ * `Menu -> Menu.Target -> Menu.Dropdown -> Menu.Item`.
+ *
+ * The legacy `trigger + sections` API is still supported to avoid breaking
+ * existing DS consumers while Menu moves to a 1:1 Mantine/Figma prop model.
+ */
+export type DSMenuProps = MantineMenuProps | LegacyMenuProps;
+
+const isLegacyMenuProps = (props: DSMenuProps): props is LegacyMenuProps =>
+  'trigger' in props && 'sections' in props;
 
 /**
  * AppDirect Design System Menu Component
  * 
  * A dropdown menu component built on top of Mantine's Menu with
- * consistent design system styling and structured data approach.
+ * consistent design system styling.
  * 
  * @example
  * ```tsx
- * // Basic usage
- * <Menu
- *   trigger={<Button>Actions</Button>}
- *   sections={[
- *     {
- *       title: "Actions",
- *       items: [
- *         {
- *           id: "edit",
- *           label: "Edit",
- *           leftSection: <RiEditLine size={14} />,
- *           onClick: () => console.log('Edit')
- *         },
- *         {
- *           id: "delete",
- *           label: "Delete",
- *           leftSection: <RiDeleteBinLine size={14} />,
- *           color: "red",
- *           onClick: () => console.log('Delete')
- *         }
- *       ]
- *     }
- *   ]}
- * />
+ * // Mantine-aligned composition
+ * <Menu shadow="md" width={220}>
+ *   <Menu.Target>
+ *     <Button>Actions</Button>
+ *   </Menu.Target>
+ *
+ *   <Menu.Dropdown>
+ *     <Menu.Item>Edit</Menu.Item>
+ *     <Menu.Item>Duplicate</Menu.Item>
+ *     <Menu.Divider />
+ *     <Menu.Label>Danger zone</Menu.Label>
+ *     <Menu.Item color="red">Delete</Menu.Item>
+ *   </Menu.Dropdown>
+ * </Menu>
  * ```
  * 
  * @example
  * ```tsx
- * // With multiple sections and shortcuts
+ * // Legacy structured API still supported during migration
  * <Menu
  *   trigger={<Button>Menu</Button>}
  *   sections={[
@@ -127,46 +118,33 @@ export interface DSMenuProps {
  * />
  * ```
  */
-export const Menu = forwardRef<HTMLDivElement, DSMenuProps>(
-  (
-    {
+const MenuRoot = forwardRef<HTMLDivElement, DSMenuProps>((props, _ref) => {
+  if (isLegacyMenuProps(props)) {
+    const {
       trigger,
       sections,
-      width = 200,
       shadow = 'md',
-      position = 'bottom-start',
-      defaultOpened,
-      opened,
-      onChange,
-    },
-    ref
-  ) => {
+      radius = 'sm',
+      ...menuProps
+    } = props;
+
     return (
       <MantineMenu
-        width={width}
         shadow={shadow}
-        position={position}
-        radius="sm"
-        defaultOpened={defaultOpened}
-        opened={opened}
-        onChange={onChange}
+        radius={radius}
+        {...menuProps}
       >
-        <MantineMenu.Target>
-          {trigger}
-        </MantineMenu.Target>
+        <MantineMenu.Target>{trigger}</MantineMenu.Target>
 
         <MantineMenu.Dropdown>
           {sections.map((section, sectionIndex) => (
             <React.Fragment key={sectionIndex}>
-              {/* Add divider between sections (except before first section) */}
               {sectionIndex > 0 && <MantineMenu.Divider />}
-              
-              {/* Section title/label */}
+
               {section.title && (
                 <MantineMenu.Label>{section.title}</MantineMenu.Label>
               )}
-              
-              {/* Section items */}
+
               {section.items.map((item) => (
                 <MantineMenu.Item
                   key={item.id}
@@ -185,6 +163,28 @@ export const Menu = forwardRef<HTMLDivElement, DSMenuProps>(
       </MantineMenu>
     );
   }
-);
 
-Menu.displayName = 'Menu'; 
+  const {
+    shadow = 'md',
+    radius = 'sm',
+    ...menuProps
+  } = props;
+
+  return (
+    <MantineMenu
+      shadow={shadow}
+      radius={radius}
+      {...menuProps}
+    />
+  );
+});
+
+MenuRoot.displayName = 'Menu';
+
+export const Menu = Object.assign(MenuRoot, {
+  Target: MantineMenu.Target,
+  Dropdown: MantineMenu.Dropdown,
+  Item: MantineMenu.Item,
+  Label: MantineMenu.Label,
+  Divider: MantineMenu.Divider,
+});
