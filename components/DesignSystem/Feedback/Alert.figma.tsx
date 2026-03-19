@@ -1,45 +1,29 @@
 import { figma } from '@figma/code-connect';
 import { Alert } from '@/components/DesignSystem/DataDisplay/Alert';
-import { RiInformationLine } from '@remixicon/react';
 
 figma.connect(
   Alert,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1511-1265&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=5724-914',
   {
     props: {
-      // TODO: Restore bindings once the Figma alert exposes matching props
-      // title: figma.string('title'),
-      // children: figma.string('message'),
-      // color: figma.enum('color', {
-      //   blue: 'blue',
-      //   green: 'green',
-      //   red: 'red',
-      //   yellow: 'yellow',
-      //   gray: 'gray',
-      // }),
-      // variant: figma.enum('variant', {
-      //   light: 'light',
-      //   filled: 'filled',
-      //   outline: 'outline',
-      //   transparent: 'transparent',
-      // }),
-      // radius: figma.enum('radius', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // withCloseButton: figma.boolean('closable'),
+      title: figma.string('title'),
+      children: figma.string('children'),
+      color: figma.enum('color', {
+        info: 'info',
+        pending: 'pending',
+        success: 'success',
+        danger: 'danger',
+        default: 'default',
+      }),
+      withCloseButton: figma.boolean('withCloseButton'),
     },
-    example: () => (
+    example: (props) => (
       <Alert
-        title="Alert title"
-        type="info"
-        withCloseButton
-        icon={<RiInformationLine size={20} />}
+        title={props.title}
+        color={props.color}
+        withCloseButton={props.withCloseButton}
       >
-        Alert message goes here.
+        {props.children}
       </Alert>
     ),
   }
