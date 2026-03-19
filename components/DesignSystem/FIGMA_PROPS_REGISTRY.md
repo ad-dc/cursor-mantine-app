@@ -245,15 +245,15 @@ Style-based variants used across components:
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `type` | `'info' \| 'success' \| 'danger' \| 'pending' \| 'default'` | No | `'default'` | Semantic alert type |
+| `color` | `'info' \| 'success' \| 'danger' \| 'pending' \| 'default'` | No | `'default'` | Semantic alert color |
 | `title` | `string` | No | - | Alert heading |
 | `withCloseButton` | `boolean` | No | `false` | Show dismiss button |
 | `children` | `ReactNode` | No | - | Alert body content |
 
-#### Type Mapping
+#### Color Mapping
 
-| DS Type | Mantine Color | Default Icon |
-|---------|---------------|--------------|
+| DS Color | Mantine Color | Default Icon |
+|----------|---------------|--------------|
 | `info` | `blue` | RiInformationLine |
 | `success` | `green` | RiCheckboxCircleLine |
 | `danger` | `red` | RiErrorWarningLine |

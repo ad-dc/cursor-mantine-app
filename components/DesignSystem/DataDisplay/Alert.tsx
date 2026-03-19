@@ -6,7 +6,9 @@ import { RiInformationLine, RiCheckboxCircleLine, RiErrorWarningLine, RiTimeLine
  * Enhanced Alert props extending Mantine's AlertProps
  */
 export interface DSAlertProps extends Omit<MantineAlertProps, 'color' | 'variant' | 'icon'> {
-  /** Alert semantic type */
+  /** Alert semantic color */
+  color?: 'info' | 'success' | 'danger' | 'pending' | 'default';
+  /** Deprecated semantic alias kept for backward compatibility */
   type?: 'info' | 'success' | 'danger' | 'pending' | 'default';
   /** Custom icon (overrides default semantic icon) */
   icon?: React.ReactNode;
@@ -29,21 +31,21 @@ export interface DSAlertProps extends Omit<MantineAlertProps, 'color' | 'variant
  * @example
  * ```tsx
  * // Basic usage
- * <Alert type="info" title="Information">
+ * <Alert color="info" title="Information">
  *   This is an informational alert message.
  * </Alert>
  * 
- * // Different types
- * <Alert type="success" title="Success">Operation completed successfully!</Alert>
- * <Alert type="danger" title="Error">Something went wrong.</Alert>
- * <Alert type="pending" title="Processing">Your request is being processed...</Alert>
+ * // Different semantic colors
+ * <Alert color="success" title="Success">Operation completed successfully!</Alert>
+ * <Alert color="danger" title="Error">Something went wrong.</Alert>
+ * <Alert color="pending" title="Processing">Your request is being processed...</Alert>
  * ```
  * 
  * @example
  * ```tsx
  * // With close button
  * <Alert 
- *   type="info" 
+ *   color="info" 
  *   title="Notification"
  *   withCloseButton
  *   onClose={() => console.log('Alert closed')}
@@ -53,7 +55,7 @@ export interface DSAlertProps extends Omit<MantineAlertProps, 'color' | 'variant
  * 
  * // With custom icon
  * <Alert 
- *   type="info" 
+ *   color="info" 
  *   title="Custom Alert"
  *   icon={<RiStarLine size={20} />}
  * >
@@ -63,16 +65,17 @@ export interface DSAlertProps extends Omit<MantineAlertProps, 'color' | 'variant
  * 
  * @example
  * ```tsx
- * // Different types
- * <Alert type="info" title="Information">Info message with light background</Alert>
- * <Alert type="success" title="Success">Success message with light background</Alert>
- * <Alert type="danger" title="Error">Error message with light background</Alert>
+ * // Different semantic colors
+ * <Alert color="info" title="Information">Info message with light background</Alert>
+ * <Alert color="success" title="Success">Success message with light background</Alert>
+ * <Alert color="danger" title="Error">Error message with light background</Alert>
  * ```
  */
 export const Alert = forwardRef<HTMLDivElement, DSAlertProps>(
   (
     {
-      type = 'default',
+      color = 'default',
+      type,
       icon: customIcon,
       title,
       withCloseButton = false,
@@ -82,9 +85,12 @@ export const Alert = forwardRef<HTMLDivElement, DSAlertProps>(
     },
     ref
   ) => {
-    // Map design system types to Mantine colors and icons
-    const getAlertConfig = (alertType: DSAlertProps['type']) => {
-      switch (alertType) {
+    // Keep `type` as a deprecated alias while `color` becomes the primary API.
+    const semanticColor = color ?? type ?? 'default';
+
+    // Map semantic colors to Mantine colors and default icons
+    const getAlertConfig = (alertColor: NonNullable<DSAlertProps['color']>) => {
+      switch (alertColor) {
         case 'info':
           return {
             color: 'blue',
@@ -118,14 +124,14 @@ export const Alert = forwardRef<HTMLDivElement, DSAlertProps>(
       }
     };
 
-    const { color, icon: defaultIcon } = getAlertConfig(type);
+    const { color: mantineColor, icon: defaultIcon } = getAlertConfig(semanticColor);
     const alertIcon = customIcon || defaultIcon;
 
     return (
       <MantineAlert
         ref={ref}
         variant="light"
-        color={color}
+        color={mantineColor}
         radius="sm"
         icon={alertIcon}
         title={title}
