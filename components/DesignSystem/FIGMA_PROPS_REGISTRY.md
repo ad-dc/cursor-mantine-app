@@ -312,13 +312,13 @@ Style-based variants used across components:
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | `number` (0-100) | Yes | - | Progress percentage |
+| `value` | `0 \| 25 \| 50 \| 75 \| 100` | Yes | - | Published progress percentage variants |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Bar thickness |
-| `animated` | `boolean` | No | `false` | Animate the bar |
 
 #### Notes
 
 - Fixed color: `blue`, fixed radius: `xl`
+- Current Figma set exposes fixed value steps rather than arbitrary numeric input
 
 ---
 
@@ -638,7 +638,7 @@ Same prop surface as Select — see Select entry above.
 | `title` | `string` | No | - | Modal title |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Modal width |
 | `withCloseButton` | `boolean` | No | `true` | Show close button |
-| `children` | `ReactNode` | Yes | - | Direct-child instance swap for modal body content |
+| `children` | `ReactNode` | Yes | - | Native Figma slot for modal body content |
 
 ---
 
@@ -656,7 +656,7 @@ Same prop surface as Select — see Select entry above.
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Drawer width token |
 | `opened` | `boolean` | Yes | - | Open/closed state |
 | `withCloseButton` | `boolean` | No | `true` | Show close button |
-| `children` | `ReactNode` | Yes | - | Drawer content |
+| `children` | `ReactNode` | Yes | - | Native Figma slot for drawer content |
 
 #### Size Mapping
 
@@ -710,18 +710,17 @@ Same prop surface as Select — see Select entry above.
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `position` | `'top' \| 'left' \| 'right' \| 'bottom' \| 'none'` | No | `'bottom'` | Popover placement in Figma; `none` maps to `position=\"bottom\"` with no arrow |
-| `content` | `ReactNode` | Yes | - | Instance swap slot rendered inline via `figma.instance('content')` |
+| `children` | `ReactNode` | Yes | - | Native Figma slot for popover body content |
 
 #### Figma Structure
 
-The Popover component exposes `content` as an instance swap property and Code Connect reads it with `figma.instance('content')`.
+The Popover component exposes `children` as a native Figma slot and Code Connect reads it with `figma.slot('children')`.
 
 #### Notes
 
 - `withArrow` is derived from the `position` variant: `top`, `bottom`, `left`, and `right` map to `withArrow={true}`, while `none` maps to `withArrow={false}`
 - The trigger is a fixed example in Code Connect: `<Button variant="outline">Open popover</Button>`
-- The slotted component must be a **direct child** of the Popover component in Figma for inline rendering to work
-- Only code-connected components render inline when placed in the slot; non-connected components will not produce useful composed output
+- Native slots are referenced by name in Dev Mode; Code Connect does not traverse slot contents to generate inline child code
 
 ---
 
@@ -932,7 +931,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 |------|------|----------|---------|-------------|
 | `shadow` | `'none' \| 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'none'` | Elevation level |
 | `border` | `boolean` | No | `false` | Toggle surface border |
-| `content` | `ReactNode` | Yes | - | Direct-child instance swap mapped to React `children` |
+| `children` | `ReactNode` | Yes | - | Native Figma slot mapped to React `children` |
 
 #### Notes
 

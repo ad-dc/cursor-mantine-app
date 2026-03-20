@@ -21,7 +21,7 @@ figma.connect(
         right: true,
         none: false,
       }),
-      content: figma.instance('content'),
+      children: figma.slot('children'),
     },
     example: (props) => (
       <Popover
@@ -29,7 +29,7 @@ figma.connect(
         position={props.position}
         withArrow={props.withArrow}
       >
-        {props.content}
+        {props.children}
       </Popover>
     ),
   }

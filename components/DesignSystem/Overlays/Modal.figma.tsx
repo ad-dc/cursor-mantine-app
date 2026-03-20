@@ -16,7 +16,7 @@ figma.connect(
         xl: 'xl',
       }),
       withCloseButton: figma.boolean('withCloseButton'),
-      children: figma.instance('children'),
+      children: figma.slot('children'),
     },
     example: (props) => (
       <Modal
