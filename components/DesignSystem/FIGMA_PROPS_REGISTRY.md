@@ -223,15 +223,11 @@ Style-based variants used across components:
 |------|------|----------|---------|-------------|
 | `variant` | `'icon' \| 'image' \| 'initials'` | Yes | - | Avatar content type |
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Avatar size |
-| `src` | `string` | Conditional | - | Image URL (required for `image` variant) |
-| `initials` | `string` | Conditional | - | Two-letter initials (required for `initials` variant) |
-| `alt` | `string` | No | - | Alt text for image |
 
-#### Example Configurations
+#### Notes
 
-- **User icon:** `variant="icon"`, `size="md"`
-- **Profile image:** `variant="image"`, `src="..."`, `size="lg"`
-- **Initials:** `variant="initials"`, `initials="JD"`, `size="md"`
+- Figma exposes only the visual DS contract: `variant` and `size`
+- `src`, `alt`, and `initials` remain code-owned or representational details, not Figma props
 
 ---
 

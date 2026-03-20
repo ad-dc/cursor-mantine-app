@@ -6,41 +6,21 @@ figma.connect(
   'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=1640-29&t=y0IJ175mkJJcYKZp-4',
   {
     props: {
-      // TODO: Restore bindings once the Figma avatar exposes matching props
-      // size: figma.enum('size', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // variant: figma.enum('variant', {
-      //   filled: 'filled',
-      //   light: 'light',
-      //   outline: 'outline',
-      //   transparent: 'transparent',
-      // }),
-      // radius: figma.enum('radius', {
-      //   xs: 'xs',
-      //   sm: 'sm',
-      //   md: 'md',
-      //   lg: 'lg',
-      //   xl: 'xl',
-      // }),
-      // src: figma.string('image url'),
-      // alt: figma.string('alt text'),
-      // initials: figma.string('initials'),
-      // color: figma.enum('color', {
-      //   gray: 'gray',
-      //   blue: 'blue',
-      //   red: 'red',
-      //   green: 'green',
-      //   yellow: 'yellow',
-      //   violet: 'violet',
-      // }),
+      size: figma.enum('size', {
+        xs: 'xs',
+        sm: 'sm',
+        md: 'md',
+        lg: 'lg',
+        xl: 'xl',
+      }),
+      variant: figma.enum('variant', {
+        icon: 'icon',
+        image: 'image',
+        initials: 'initials',
+      }),
     },
-    example: () => (
-      <Avatar variant="icon" size="md" />
+    example: (props) => (
+      <Avatar variant={props.variant} size={props.size} />
     ),
   }
 );
