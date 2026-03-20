@@ -4,14 +4,14 @@ import { Paper as MantinePaper, PaperProps as MantinePaperProps } from '@mantine
 import { forwardRef } from 'react';
 
 export interface PaperProps extends Omit<MantinePaperProps, 'padding'> {
-  /** Paper variant - controls shadow and border */
+  /** Legacy variant alias retained for backwards compatibility */
   variant?: 'default' | 'shadow' | 'border' | 'border-shadow';
   /** Content of the paper */
   children: React.ReactNode;
 }
 
 export const Paper = forwardRef<HTMLDivElement, PaperProps>(
-  ({ variant = 'default', children, p = 'sm', ...props }, ref) => {
+  ({ variant, children, p = 'sm', shadow, withBorder, ...props }, ref) => {
     const getVariantProps = () => {
       switch (variant) {
         case 'shadow':
@@ -27,12 +27,15 @@ export const Paper = forwardRef<HTMLDivElement, PaperProps>(
     };
 
     const variantProps = getVariantProps();
+    const resolvedShadow = shadow ?? variantProps.shadow;
+    const resolvedWithBorder = withBorder ?? variantProps.withBorder;
 
     return (
       <MantinePaper
         ref={ref}
         p={p}
-        {...variantProps}
+        shadow={resolvedShadow}
+        withBorder={resolvedWithBorder}
         {...props}
       >
         {children}

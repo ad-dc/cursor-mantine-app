@@ -5,7 +5,7 @@ import { ComponentSize } from '../config';
 /**
  * Enhanced Drawer props extending Mantine's DrawerProps
  */
-export interface DSDrawerProps extends Omit<MantineDrawerProps, 'size'> {
+export interface DSDrawerProps extends Omit<MantineDrawerProps, 'size' | 'position'> {
   /** Whether the drawer is open */
   opened: boolean;
   /** Callback fired when drawer should close */
@@ -15,9 +15,9 @@ export interface DSDrawerProps extends Omit<MantineDrawerProps, 'size'> {
   /** Drawer content */
   children: React.ReactNode;
   /** Drawer size from design system scale */
-  size?: ComponentSize | number;
+  size?: ComponentSize;
   /** Position of the drawer */
-  position?: 'top' | 'left' | 'right' | 'bottom';
+  position?: 'right';
   /** Whether to show close button */
   withCloseButton?: boolean;
   /** Whether clicking overlay closes drawer */
@@ -30,7 +30,7 @@ export interface DSDrawerProps extends Omit<MantineDrawerProps, 'size'> {
  * AppDirect Design System Drawer Component
  * 
  * A sliding overlay component built on top of Mantine's Drawer with
- * consistent design system styling and positioning options.
+ * consistent design system styling for right-side drawer layouts.
  * 
  * @example
  * ```tsx
@@ -46,12 +46,11 @@ export interface DSDrawerProps extends Omit<MantineDrawerProps, 'size'> {
  * 
  * @example
  * ```tsx
- * // Different positions and sizes
+ * // Different sizes
  * <Drawer
  *   opened={opened}
  *   onClose={close}
  *   title="Navigation"
- *   position="left"
  *   size="sm"
  * >
  *   <Navigation />
@@ -61,7 +60,6 @@ export interface DSDrawerProps extends Omit<MantineDrawerProps, 'size'> {
  *   opened={opened}
  *   onClose={close}
  *   title="Details"
- *   position="right"
  *   size="lg"
  * >
  *   <Details />
@@ -99,35 +97,13 @@ export const Drawer = forwardRef<HTMLDivElement, DSDrawerProps>(
     },
     ref
   ) => {
-    // Map design system sizes to drawer widths
-    const getDrawerSize = (drawerSize: ComponentSize | number) => {
-      if (typeof drawerSize === 'number') {
-        return drawerSize;
-      }
-      
-      switch (drawerSize) {
-        case 'xs':
-          return 320; // From Figma design token: admin/drawer/size/xs: 320
-        case 'sm':
-          return 400;
-        case 'md':
-          return 500;
-        case 'lg':
-          return 600;
-        case 'xl':
-          return 720;
-        default:
-          return 500;
-      }
-    };
-
     return (
       <MantineDrawer
         ref={ref}
         opened={opened}
         onClose={onClose}
         title={title}
-        size={getDrawerSize(size)}
+        size={size}
         position={position}
         withCloseButton={withCloseButton}
         closeOnClickOutside={closeOnClickOutside}

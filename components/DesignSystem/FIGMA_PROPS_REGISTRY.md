@@ -653,8 +653,7 @@ Same prop surface as Select — see Select entry above.
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `title` | `ReactNode` | No | - | Drawer title |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| number` | No | `'md'` | Drawer width |
-| `position` | `'top' \| 'left' \| 'right' \| 'bottom'` | No | `'right'` | Slide direction |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'md'` | Drawer width token |
 | `opened` | `boolean` | Yes | - | Open/closed state |
 | `withCloseButton` | `boolean` | No | `true` | Show close button |
 | `children` | `ReactNode` | Yes | - | Drawer content |
@@ -668,6 +667,10 @@ Same prop surface as Select — see Select entry above.
 | `md` | 500 |
 | `lg` | 600 |
 | `xl` | 720 |
+
+#### Notes
+
+- Current DS and Figma support only `position="right"` for Drawer
 
 ---
 
@@ -927,12 +930,14 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `variant` | `'default' \| 'shadow' \| 'border' \| 'border-shadow'` | No | `'default'` | Surface style |
-| `children` | `ReactNode` | Yes | - | Paper content |
+| `shadow` | `'none' \| 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'none'` | Elevation level |
+| `border` | `boolean` | No | `false` | Toggle surface border |
+| `content` | `ReactNode` | Yes | - | Direct-child instance swap mapped to React `children` |
 
 #### Notes
 
 - Fixed padding: `sm`
+- The DS wrapper accepts Mantine-style `shadow` / `withBorder`; legacy `variant` remains as a compatibility alias in code only
 
 ---
 
