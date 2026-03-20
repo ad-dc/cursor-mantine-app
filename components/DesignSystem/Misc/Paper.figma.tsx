@@ -16,7 +16,7 @@ figma.connect(
         xl: 'xl',
       }),
       withBorder: figma.boolean('border'),
-      children: figma.instance('children'),
+      children: figma.instance('content'),
     },
     example: (props) => (
       <Paper shadow={props.shadow} withBorder={props.withBorder}>

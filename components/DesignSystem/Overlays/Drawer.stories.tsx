@@ -25,7 +25,7 @@ const meta: Meta<typeof Drawer> = {
   argTypes: {
     position: {
       control: 'select',
-      options: ['top', 'left', 'right', 'bottom'],
+      options: ['right'],
       description: 'Position of the drawer',
     },
     size: {
@@ -86,10 +86,7 @@ export const Positions: Story = {
     const [openedPosition, setOpenedPosition] = useState<string | null>(null);
     
     const positions = [
-      { key: 'top', label: 'Top' },
       { key: 'right', label: 'Right' },
-      { key: 'bottom', label: 'Bottom' },
-      { key: 'left', label: 'Left' },
     ] as const;
     
     return (
@@ -123,7 +120,7 @@ export const Positions: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Drawer component in different positions.',
+        story: 'Drawer component using the supported right-side position.',
       },
     },
   },
@@ -200,7 +197,6 @@ export const NavigationDrawer: Story = {
           opened={opened}
           onClose={() => setOpened(false)}
           title="Navigation"
-          position="left"
           size="sm"
         >
           <Stack gap="xs">
@@ -357,7 +353,6 @@ export const FilterDrawer: Story = {
           opened={opened}
           onClose={() => setOpened(false)}
           title="Filter Products"
-          position="left"
           size="sm"
         >
           <Stack gap="lg">
@@ -468,7 +463,6 @@ export const MobileMenuDrawer: Story = {
           opened={opened}
           onClose={() => setOpened(false)}
           title="Menu"
-          position="top"
           size="xs"
         >
           <Stack gap="sm">
