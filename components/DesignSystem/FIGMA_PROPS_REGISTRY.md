@@ -328,14 +328,13 @@ Style-based variants used across components:
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'xxl'` | No | `'md'` | Icon container size |
-| `color` | `'default' \| 'blue'` | No | `'default'` | Icon color variant |
-| `children` | `ReactNode` | Yes | - | Icon element |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'xxl'` | No | `'xs'` | Published Figma size variants for the icon container |
 
 #### Notes
 
-- `xxl` size = 58x58px
-- Uses `default` Mantine variant
+- Figma exposes only `size` for this component
+- Size mapping: `xs -> xs`, `sm -> sm`, `md -> md`, `lg -> lg`, `xl -> xl`, `xxl -> xxl`
+- `color`, `variant`, `radius`, and `children` remain code-owned in the current Figma contract
 
 ---
 
