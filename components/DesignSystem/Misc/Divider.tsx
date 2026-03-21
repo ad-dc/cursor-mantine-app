@@ -7,7 +7,7 @@ export interface DividerProps extends Omit<MantineDividerProps, 'color'> {
   /** Orientation of the divider */
   orientation?: 'horizontal' | 'vertical';
   /** Thickness of the divider - supports Mantine t-shirt sizes */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const Divider = forwardRef<HTMLDivElement, DividerProps>(

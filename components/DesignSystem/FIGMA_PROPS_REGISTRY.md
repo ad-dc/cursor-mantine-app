@@ -891,7 +891,11 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'sm'` | Key size |
-| `children` | `ReactNode` | Yes | - | Key label (e.g., "⌘K") |
+| `content` | `string` | Yes | - | Keyboard shortcut text rendered as React children |
+
+#### Notes
+
+- Figma exposes `content` for handoff convenience, and Code Connect renders it into React children
 
 ---
 
@@ -906,11 +910,12 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `orientation` | `'horizontal' \| 'vertical'` | No | `'horizontal'` | Divider direction |
-| `size` | `'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'sm'` | Line thickness |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | No | `'sm'` | Line thickness |
 
 #### Notes
 
 - Fixed color: `gray.4`
+- The root published Figma set covers both horizontal and vertical variants
 
 ---
 
