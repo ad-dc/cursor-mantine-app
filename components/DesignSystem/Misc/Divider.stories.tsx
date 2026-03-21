@@ -26,7 +26,7 @@ const meta: Meta<typeof Divider> = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
       description: 'Thickness of the divider',
     },
     label: {
@@ -57,6 +57,13 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <Stack gap="lg" w={400}>
+      <div>
+        <Text size="sm" fw={500} mb="sm">Extra Small (xs):</Text>
+        <Text>Content above</Text>
+        <Divider size="xs" />
+        <Text>Content below</Text>
+      </div>
+
       <div>
         <Text size="sm" fw={500} mb="sm">Small (sm):</Text>
         <Text>Content above</Text>
