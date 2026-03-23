@@ -264,17 +264,27 @@ Style-based variants used across components:
 **Mantine Base:** `Card`  
 **Purpose:** Container for related content with consistent styling.
 
+#### Figma vs DS alignment
+
+The Figma **Card** component does not expose surface tokens as properties; the DS component **fixes** them in code. Do not map `padding`, `radius`, `shadow`, or `withBorder` from Figma — they are not part of the DS `Card` public contract.
+
+| Layer | What’s modeled |
+|-------|----------------|
+| **Figma** | Layout / content only (maps to `children` in code). |
+| **DS `Card`** | Fixed: `padding="md"`, `radius="sm"`, `shadow="xs"`, `withBorder={true}`. |
+| **Code-only (not in Figma)** | `interactive`, `onClick` — add in application code when needed. |
+
 #### Figma-Exposed Props
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interactive` | `boolean` | No | `false` | Enable hover effects and cursor pointer |
-| `children` | `ReactNode` | Yes | - | Card content |
+| `children` | `ReactNode` | Yes | - | Card body content (Figma content slot → `children`) |
 
 #### Notes
 
-- Fixed styling: `padding="md"`, `radius="sm"`, `shadow="xs"`, `withBorder=true`
-- `Card.Section` available for full-bleed content
+- Code Connect reads the native Figma **children** slot with `figma.slot('children')` in `Card.figma.tsx` (same pattern as Paper, Modal, Drawer, Popover).
+- `Card.Section` is available in code for full-bleed sections; not a separate Figma prop in the current contract.
+- **Mantine `Card` props omitted by DS:** `size`, `variant`, `padding`, `shadow`, `withBorder`, `radius` (all enforced inside `Card.tsx`).
 
 ---
 
@@ -1048,7 +1058,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Pill | DataDisplay | size, withRemoveButton | md | - |
 | Avatar | DataDisplay | variant, size, src/initials | md | - |
 | Alert | DataDisplay | type, title, withCloseButton | - | default |
-| Card | DataDisplay | interactive | - | - |
+| Card | DataDisplay | children (slot); fixed surface in code | - | - |
 | Indicator | DataDisplay | variant→type, size, withBorder, hasLabel/label, inline | sm | default |
 | Progress | DataDisplay | value, size, animated | md | - |
 | ThemeIcon | DataDisplay | size, color | md | default |
