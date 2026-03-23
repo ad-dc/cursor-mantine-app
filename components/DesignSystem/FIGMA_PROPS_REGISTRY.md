@@ -1032,17 +1032,38 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 ### DropZone
 
 **Component Name:** `DropZone`  
-**Mantine Base:** `Dropzone`  
+**Mantine Base:** `Dropzone` (`@mantine/dropzone`)  
 **Purpose:** File upload area with drag-and-drop support.
+
+#### Figma vs DS alignment
+
+Code Connect maps the **DS** `DropZone` in `Inputs/DropZone.tsx` (not raw Mantine `Dropzone`). Icons, `Inline` layout, and idle/accept/reject states are fixed in code.
+
+| Layer | What’s modeled |
+|-------|----------------|
+| **Figma** | Copy: `title`, `description` (via `figma.string`). |
+| **DS `DropZone`** | Wraps Mantine `Dropzone` with default `maxSize`, `accept`, and built-in UI. |
+| **Code-only / defaults** | `maxSize`, `accept`, `onDrop`, `onReject` — set in app code; defaults match `DropZone.tsx`. |
 
 #### Figma-Exposed Props
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `title` | `string` | No | `"This is the title"` | Main text |
-| `description` | `string` | No | - | Secondary text |
-| `maxSize` | `number` | No | 5MB | Max file size in bytes |
-| `accept` | `string[] \| object` | No | `IMAGE_MIME_TYPE` | Accepted file types |
+| `title` | `string` | No | `"This is the title"` | Main heading text |
+| `description` | `string` | No | (see DS default) | Secondary text |
+
+#### Code Connect
+
+- `title` → `figma.string('title')`
+- `description` → `figma.string('description')`
+- File: `Inputs/DropZone.figma.tsx`
+
+#### Notes (DS API; not driven by Figma in current mapping)
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `maxSize` | `number` | `5 * 1024 ** 2` | Max file size in bytes |
+| `accept` | `string[] \| Record<...>` | `IMAGE_MIME_TYPE` | Accepted MIME types |
 
 ---
 
@@ -1093,7 +1114,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Inline | Layout | gap, align, justify, wrap | md | - |
 | List | Layout | size, spacing, type | md | - |
 | Table | Layout | striped, highlightOnHover | - | - |
-| DropZone | Inputs | title, description | - | - |
+| DropZone | Inputs | title, description; maxSize/accept default in code | - | - |
 
 ---
 
