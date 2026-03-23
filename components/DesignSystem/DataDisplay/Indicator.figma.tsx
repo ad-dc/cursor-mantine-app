@@ -3,37 +3,42 @@ import { Indicator } from './Indicator';
 
 figma.connect(
   Indicator,
-  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=807-601&t=y0IJ175mkJJcYKZp-4',
+  'https://www.figma.com/design/rXvD5jPC1i02ZIma87Qcbl/ADDS-Admin-Mantine-Core?node-id=807-601',
   {
     props: {
-      // TODO: Restore bindings once the Figma indicator exposes matching props/layers
-      // color: figma.enum('color', {
-      //   gray: 'gray',
-      //   blue: 'blue',
-      //   green: 'green',
-      //   red: 'red',
-      //   yellow: 'yellow',
-      // }),
-      // position: figma.enum('position', {
-      //   'top-start': 'top-start',
-      //   'top-center': 'top-center',
-      //   'top-end': 'top-end',
-      //   'middle-start': 'middle-start',
-      //   'middle-center': 'middle-center',
-      //   'middle-end': 'middle-end',
-      //   'bottom-start': 'bottom-start',
-      //   'bottom-center': 'bottom-center',
-      //   'bottom-end': 'bottom-end',
-      // }),
-      // withBorder: figma.boolean('with border'),
-      // disabled: figma.boolean('disabled'),
-      // processing: figma.boolean('processing'),
-      // label: figma.string('label'),
-      // children: figma.children('target'),
+      type: figma.enum('variant', {
+        success: 'success',
+        error: 'danger',
+        pending: 'pending',
+        default: 'default',
+        info: 'info',
+      }),
+      size: figma.enum('size', {
+        xs: 8,
+        sm: 12,
+        md: 16,
+        lg: 20,
+        xl: 24,
+      }),
+      withBorder: figma.boolean('withBorder'),
+      label: figma.boolean('hasLabel', {
+        true: figma.string('label'),
+        false: undefined,
+      }),
+      inline: figma.boolean('hasLabel', {
+        true: true,
+        false: undefined,
+      }),
     },
-    example: () => (
-      <Indicator color="gray" size={12} position="top-end" withBorder label="12">
-        <div style={{ width: 64, height: 32, background: 'var(--mantine-color-gray-1)' }} />
+    example: (props) => (
+      <Indicator
+        type={props.type}
+        size={props.size}
+        withBorder={props.withBorder}
+        label={props.label}
+        inline={props.inline}
+      >
+        <div />
       </Indicator>
     ),
   }
