@@ -1029,6 +1029,71 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 
 ---
 
+### DataTable
+
+**Component Name:** `DataTable`  
+**Mantine Base:** `mantine-react-table` (`useMantineReactTable` + `MantineReactTable`)  
+**Purpose:** Full-featured data table with pagination, sorting, filtering, row selection, density controls, and error/empty states. Wraps Mantine React Table with custom toolbars and DS styling.
+
+#### Figma vs DS alignment
+
+The Figma **Datatable** component is a visual spec with a `children` slot containing a table example. It does not expose configurable properties — the DataTable is entirely **configuration-driven in code**. Sub-components within the table (Badge, Checkbox, Button, TextInput, Select, Chip, etc.) are already code-connected individually.
+
+| Layer | What's modeled |
+|-------|----------------|
+| **Figma** | Visual reference only. `children` slot contains an example table layout for designers to copy and customize. |
+| **DS `DataTable`** | Full MRT configuration: columns, pagination, sorting, filtering, selection, density, toolbars, error/empty states. |
+| **Code-only** | `columns`, `data`, `pageInfo`, all callbacks (`onPaginationChange`, `onSortChange`, `onFiltersChange`, `onRowSelectionChange`), `isLoading`, `isError`, `onRetry`. |
+
+#### Figma-Exposed Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Native Figma slot containing the table example layout |
+
+#### Code Connect
+
+- **Static boilerplate** — no `figma.enum` / `figma.boolean` bindings
+- `children` → `figma.slot('children')` for the visual content slot
+- File: `ComplexComponents/DataTable/DataTable.figma.tsx`
+
+#### DS API Surface (all code-owned)
+
+| Category | Prop | Type | Default | Description |
+|----------|------|------|---------|-------------|
+| Data | `data` | `T[]` | - | Row data array |
+| Data | `columns` | `MRT_ColumnDef<T>[]` | - | Column definitions |
+| Data | `totalCount` | `number` | `0` | Total rows across all pages |
+| Loading | `isLoading` | `boolean` | `false` | Loading state |
+| Loading | `isError` | `boolean` | `false` | Error state |
+| Loading | `error` | `string` | - | Error message |
+| Loading | `onRetry` | `() => void` | - | Retry callback |
+| Pagination | `pageInfo` | `PageInfo` | - | Cursor-based pagination info |
+| Pagination | `onPaginationChange` | `(state) => void` | - | Page change callback |
+| Pagination | `defaultPageSize` | `number` | `10` | Rows per page |
+| Selection | `onRowSelectionChange` | `(state) => void` | - | Selection callback |
+| Sorting | `onSortChange` | `(field, dir) => void` | - | Sort change callback |
+| Filters | `filtersState` | `Filters` | `{}` | Current filter state |
+| Filters | `onFiltersChange` | `(filters) => void` | - | Filter change callback |
+| Filters | `locale` | `string` | `'en'` | i18n locale |
+| Toggles | `showFilters` | `boolean` | `true` | Show filter panel |
+| Toggles | `showSearch` | `boolean` | `true` | Show search input |
+| Toggles | `showDensityToggle` | `boolean` | `true` | Show density control |
+| Toggles | `showFullScreenToggle` | `boolean` | `true` | Show fullscreen control |
+| UI | `defaultDensity` | `DensityState` | `'xs'` | Default row density |
+| Style | `mantineTableContainerProps` | `Record` | `{}` | Container overrides |
+| Style | `mantinePaperProps` | `Record` | `{}` | Paper wrapper overrides |
+
+#### Notes
+
+- Import `DataTable` from `@/components/DesignSystem` — do NOT use `mantine-react-table` directly
+- The DS component handles custom top/bottom toolbars, sortable headers, error overlay, and alert banners internally
+- Column definitions use `MRT_ColumnDef<T>` from `mantine-react-table` (re-exported by DS)
+- Pagination is cursor-based (`pageInfo` with `startCursor`/`endCursor`), matching the AppDirect GraphQL API pattern
+- Reference implementation: `micro-ui-ts/src/components/Table/`
+
+---
+
 ### DropZone
 
 **Component Name:** `DropZone`  
@@ -1114,6 +1179,7 @@ Code Connect maps the **DS** `DropZone` in `Inputs/DropZone.tsx` (not raw Mantin
 | Inline | Layout | gap, align, justify, wrap | md | - |
 | List | Layout | size, spacing, type | md | - |
 | Table | Layout | striped, highlightOnHover | - | - |
+| DataTable | ComplexComponents | static boilerplate; columns/data/pagination/filters all code-owned | - | - |
 | DropZone | Inputs | title, description; maxSize/accept default in code | - | - |
 
 ---
