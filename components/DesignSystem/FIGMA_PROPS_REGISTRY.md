@@ -286,15 +286,20 @@ Style-based variants used across components:
 
 #### Figma-Exposed Props
 
-| Prop | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| `type` | `'success' \| 'danger' \| 'pending' \| 'info' \| 'default'` | No | `'default'` | Semantic status type |
-| `size` | `number` | No | `12` | Indicator size in pixels |
-| `position` | Position type | No | `'top-end'` | Position relative to child |
-| `count` | `number` | No | - | Number to display |
-| `processing` | `boolean` | No | `false` | Animated/processing state |
-| `withBorder` | `boolean` | No | `false` | Add white border outline |
-| `children` | `ReactNode` | Yes | - | Element to attach indicator to |
+| Figma Prop | DS Prop | Mantine Prop | Type | Default | Description |
+|------------|---------|--------------|------|---------|-------------|
+| `variant` | `type` | `color` | `'success' \| 'danger' \| 'pending' \| 'info' \| 'default'` | `'default'` | Semantic status type. Figma `error` maps to DS `danger` |
+| `size` | `size` | `size` | enum → px: xs=8, sm=12, md=16, lg=20, xl=24 | `12` (sm) | Indicator size in pixels |
+| `withBorder` | `withBorder` | `withBorder` | `boolean` | `false` | Add white border outline |
+| `hasLabel` | — | — | `boolean` | `false` | Figma convenience toggle for label visibility |
+| `label` | `label` | `label` | `string` | — | Label text (only rendered when `hasLabel` is true) |
+| — | `inline` | `inline` | `boolean` | — | Auto-set to `true` when `hasLabel` is true |
+
+#### Notes
+
+- `hasLabel` is a Figma-only convenience boolean; in Mantine/DS, presence of `label` controls visibility
+- When `hasLabel` is true, `inline` is also set to `true` so the indicator renders as an inline element
+- `position`, `disabled`, `processing`, `count`, `withOutline`, `children` remain code-owned (not exposed in current Figma component)
 
 ---
 
@@ -1044,7 +1049,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 | Avatar | DataDisplay | variant, size, src/initials | md | - |
 | Alert | DataDisplay | type, title, withCloseButton | - | default |
 | Card | DataDisplay | interactive | - | - |
-| Indicator | DataDisplay | type, size, count | - | default |
+| Indicator | DataDisplay | variant→type, size, withBorder, hasLabel/label, inline | sm | default |
 | Progress | DataDisplay | value, size, animated | md | - |
 | ThemeIcon | DataDisplay | size, color | md | default |
 | TextInput | Inputs | size, label, required, error | md | - |
