@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Collapse, rem } from '@mantine/core';
 import { Box } from '../../Layout/Box';
@@ -13,7 +15,7 @@ import { Title } from '../../Typography/Title';
 import { Card } from '../../DataDisplay/Card';
 import { useDisclosure } from '@mantine/hooks';
 import { RiEditLine, RiArrowDownSLine, RiArrowUpSLine } from '@remixicon/react';
-import { KeyInsight, KeyInsightProps } from '../KeyInsights';
+import { KeyInsight, KeyInsightProps } from '../KeyInsight';
 import { NameValue, NameValuePair } from '../NameValue';
 import { DescriptionBlock } from './DescriptionBlock';
 

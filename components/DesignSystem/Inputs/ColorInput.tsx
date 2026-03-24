@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { ColorInput as MantineColorInput, ColorInputProps as MantineColorInputProps, ActionIcon, Group } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';

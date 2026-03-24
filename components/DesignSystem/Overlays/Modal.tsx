@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Modal as MantineModal, ModalProps as MantineModalProps, Stack } from '@mantine/core';
 import { Inline } from '@/components/DesignSystem';

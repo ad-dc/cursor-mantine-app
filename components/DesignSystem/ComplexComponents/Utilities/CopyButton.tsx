@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { ActionIcon } from '@mantine/core';
 import { Tooltip } from '../../Overlays/Tooltip';

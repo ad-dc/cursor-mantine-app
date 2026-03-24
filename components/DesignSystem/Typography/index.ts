@@ -8,7 +8,7 @@ export { Kbd } from './Kbd';
 export type { DSKbdProps } from './Kbd';
 
 export { Code } from './Code';
-export type { CodeProps } from './Code';
+export type { DSCodeProps } from './Code';
 
 export { Text } from './Text';
 export type { DSTextProps } from './Text';

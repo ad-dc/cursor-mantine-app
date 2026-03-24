@@ -1,0 +1,152 @@
+---
+description: Automated mapping from Figma auto-layout properties to DS layout primitives. Applied when implementing designs from Figma.
+globs:
+alwaysApply: false
+---
+
+# Figma Layout Primitive Mapping
+
+When translating Figma designs to code using `get_design_context`, map layout containers to DS primitives automatically based on the generated code's layout properties. Do NOT require designers to name layers after layout primitives.
+
+## Decision Algorithm
+
+For each container/frame in the Figma output, inspect the generated Tailwind/CSS classes or inline styles and apply the first matching rule:
+
+### 1. Vertical stack (flex-direction: column)
+
+Indicators: `flex-col`, `flex-direction: column`, vertical auto-layout
+
+```tsx
+import { Stack } from '@/components/DesignSystem';
+<Stack gap="md">{children}</Stack>
+```
+
+### 2. Horizontal row (flex-direction: row)
+
+Indicators: `flex-row`, `flex-direction: row`, `inline-flex`, horizontal auto-layout
+
+```tsx
+import { Inline } from '@/components/DesignSystem';
+<Inline gap="sm">{children}</Inline>
+```
+
+Use `Group` only when `Inline` is not semantically appropriate (rare).
+
+### 3. Grid layout
+
+Indicators: `grid`, `grid-cols-*`, `grid-template-columns`, repeated equal-width children
+
+```tsx
+import { Grid } from '@/components/DesignSystem';
+<Grid cols={{ base: 1, md: 2, lg: 3 }} spacing="lg">{children}</Grid>
+```
+
+Map `grid-cols-N` to `cols={N}`. For responsive grids, use breakpoint object syntax.
+
+### 4. Container with padding only (no child flow)
+
+Indicators: padding/background but no flex/grid on the frame itself, single child or content wrapper
+
+```tsx
+import { Box } from '@/components/DesignSystem';
+<Box p="md" bg="gray.1">{children}</Box>
+```
+
+### 5. Centered content
+
+Indicators: `items-center justify-center` on both axes, single child centered in frame
+
+```tsx
+import { Center } from '@/components/DesignSystem';
+<Center h={200}>{children}</Center>
+```
+
+### 6. Page-level container
+
+Indicators: max-width constraint, centered horizontally, page-level wrapper
+
+```tsx
+import { Container } from '@/components/DesignSystem';
+<Container size="md">{children}</Container>
+```
+
+### 7. Advanced flex (responsive direction changes)
+
+Indicators: direction changes across breakpoints, complex flex-wrap patterns
+
+```tsx
+import { Flex } from '@/components/DesignSystem';
+<Flex direction={{ base: 'column', sm: 'row' }} gap="md">{children}</Flex>
+```
+
+### 8. Fallback
+
+If none of the above patterns match (e.g., absolute positioning, no auto-layout), use `Box` with Mantine system props.
+
+## Spacing Token Mapping
+
+Map pixel values from Figma to DS spacing tokens:
+
+| Figma Value | DS Token |
+|-------------|----------|
+| 4px         | `"xs"`   |
+| 8px         | `"sm"`   |
+| 16px        | `"md"`   |
+| 24px        | `"lg"`   |
+| 32px        | `"xl"`   |
+| 48px        | `"xxl"`  |
+
+If `get_variable_defs` returns a Figma spacing variable, resolve it to the closest DS token before using it.
+
+For values between standard tokens, use the nearest token. For truly custom values, pass the numeric value directly (e.g., `gap={12}`).
+
+## Alignment / Justify Mapping
+
+| Tailwind / CSS                | DS Prop                       |
+|-------------------------------|-------------------------------|
+| `items-start`                 | `align="flex-start"`          |
+| `items-center`                | `align="center"`              |
+| `items-end`                   | `align="flex-end"`            |
+| `items-stretch`               | `align="stretch"`             |
+| `justify-start`               | `justify="flex-start"`        |
+| `justify-center`              | `justify="center"`            |
+| `justify-end`                 | `justify="flex-end"`          |
+| `justify-between`             | `justify="space-between"`     |
+| `flex-wrap`                   | `wrap="wrap"`                 |
+
+## Layer Name Overrides (backward compatibility)
+
+If a Figma layer IS explicitly named after a layout primitive, honor that name:
+
+- Layer named `Stack` -> `Stack`
+- Layer named `Grid` -> `Grid`
+- Layer named `Inline` -> `Inline`
+
+This is an override, not a requirement. The auto-detection above should handle all other cases.
+
+## Composing Nested Layouts
+
+Real designs often nest multiple primitives. Apply the decision algorithm recursively:
+
+```tsx
+// Figma: vertical frame > horizontal frame > items
+<Stack gap="lg">
+  <Inline justify="space-between">
+    <Title order={3}>Section</Title>
+    <Badge>Status</Badge>
+  </Inline>
+  <Grid cols={{ base: 1, md: 2 }} spacing="md">
+    <Card>...</Card>
+    <Card>...</Card>
+  </Grid>
+</Stack>
+```
+
+## When to Read This Rule
+
+This rule applies when:
+- Implementing a design from a Figma URL
+- The implement-design skill is translating `get_design_context` output
+- Generating layout code from any Figma selection
+
+For full layout guidance including edge cases, also read `components/DesignSystem/LAYOUT_GUIDE.md`.

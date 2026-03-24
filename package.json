@@ -11,6 +11,8 @@
     "typecheck:all": "tsc -p tsconfig.all.json --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "create-page": "node tools/create-page.js",
+    "export-pages": "node tools/export-page.js",
     "figma:parse": "dotenv -e .env.local -- figma connect parse --config figma.config.json --dir components/DesignSystem --exit-on-unreadable-files",
     "figma:publish": "dotenv -e .env.local -- figma connect publish",
     "figma:unpublish": "dotenv -e .env.local -- figma connect unpublish"

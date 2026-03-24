@@ -1,3 +1,5 @@
+'use client';
+
 import { Tabs as MantineTabs, TabsProps as MantineTabsProps } from '@mantine/core';
 
 // ========================== TYPES ==========================

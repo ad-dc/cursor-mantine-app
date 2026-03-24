@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Progress as MantineProgress, ProgressProps as MantineProgressProps } from '@mantine/core';
 import { ComponentSize } from '../config';

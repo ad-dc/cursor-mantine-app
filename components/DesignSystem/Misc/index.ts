@@ -5,10 +5,10 @@
  */
 
 export { Divider } from './Divider';
-export type { DividerProps } from './Divider';
+export type { DSDividerProps } from './Divider';
 
 export { Paper } from './Paper';
-export type { PaperProps } from './Paper';
+export type { DSPaperProps } from './Paper';
 
 // Future misc component exports will go here:
 // export { Portal } from './Portal';

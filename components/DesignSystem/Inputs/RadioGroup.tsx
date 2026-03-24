@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Radio as MantineRadio } from '@mantine/core';
 import { ComponentSize } from '../config';

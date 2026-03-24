@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Drawer as MantineDrawer, DrawerProps as MantineDrawerProps } from '@mantine/core';
 import { ComponentSize } from '../config';

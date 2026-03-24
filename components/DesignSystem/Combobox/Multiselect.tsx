@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Checkbox, Combobox,Input, Pill as MantinePill, PillsInput, useCombobox, InputWrapper } from '@mantine/core';
 import { Inline } from '@/components/DesignSystem';

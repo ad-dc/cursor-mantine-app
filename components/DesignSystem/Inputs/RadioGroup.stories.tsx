@@ -19,7 +19,7 @@ const meta: Meta<typeof RadioGroup> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

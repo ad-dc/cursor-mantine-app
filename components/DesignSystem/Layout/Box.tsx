@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Box as MantineBox, BoxProps as MantineBoxProps } from '@mantine/core';
 import { ComponentColor } from '../config';

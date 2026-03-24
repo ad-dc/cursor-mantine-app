@@ -22,11 +22,15 @@ alwaysApply: true
 
 ## Figma Layout Primitive Mapping
 
-When generating code from Figma selections, map auto-layout frames to DS primitives:
+When generating code from Figma selections, automatically detect layout primitives from the generated code's flex/grid properties rather than relying on layer names. See `.cursor/rules/figma-layout-mapping.mdc` for the full decision algorithm and spacing token mapping.
 
-- Layer named `Stack` → `Stack` from `@/components/DesignSystem`
-- Layer named `Grid` → `Grid` from `@/components/DesignSystem`
-- Translate Figma spacing variables to the closest DS spacing token
+Quick reference:
+- `flex-direction: column` → `Stack`
+- `flex-direction: row` → `Inline`
+- `grid` / `grid-cols-*` → `Grid`
+- padding-only container → `Box`
+- centered content → `Center`
+- If a layer IS named `Stack`, `Grid`, or `Inline`, honor that name as an override
 
 ---
 
@@ -42,7 +46,7 @@ import { Button, TextInput, Alert } from '@/components/DesignSystem';
 import { Button, TextInput, Alert } from '@mantine/core';
 ```
 
-**Available categories:** Buttons, Inputs, Combobox, Navigation, DataDisplay, Overlays, Typography, Feedback, Misc
+**Available categories:** Buttons, Inputs, Combobox, Navigation, DataDisplay, Overlays, Typography, Misc, Layout, ComplexComponents
 
 If a Mantine component has no DS wrapper yet, create one:
 

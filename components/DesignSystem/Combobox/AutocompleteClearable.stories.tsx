@@ -16,7 +16,7 @@ const meta: Meta<typeof AutocompleteClearable> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     label: {
       control: 'text',

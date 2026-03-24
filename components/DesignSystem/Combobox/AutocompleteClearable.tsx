@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { CloseButton, Combobox, TextInput, useCombobox } from '@mantine/core';
 

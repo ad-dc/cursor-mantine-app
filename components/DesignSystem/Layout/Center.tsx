@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Center as MantineCenter, CenterProps as MantineCenterProps } from '@mantine/core';
 

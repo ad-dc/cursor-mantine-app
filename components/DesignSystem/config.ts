@@ -168,41 +168,32 @@ export const inputVariants = {
 } as const;
 
 // ========================== COMMON PROPS ==========================
+// Size tokens are canonically defined in types.ts (DS_SIZES / DSSize).
+// Re-exported here for backward compatibility with existing component imports.
+
+export { DS_SIZES as componentSizes } from './types';
+export type { DSSize as ComponentSize } from './types';
 
 /**
- * Common component sizes
- * Standardized size options across components
- */
-export const componentSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
-export type ComponentSize = typeof componentSizes[number];
-
-/**
- * Common component variants
- * Standardized variant options across components
- */
-export const componentVariants = ['default', 'outline'] as const;
-export type ComponentVariant = typeof componentVariants[number];
-
-/**
- * Common color options
- * Available colors for components
+ * Mantine color palette names accepted by components that pass through
+ * to Mantine's color prop. Distinct from semantic colors in types.ts.
  */
 export const componentColors = [
-  'primary', 
-  'secondary', 
-  'gray', 
-  'red', 
-  'pink', 
-  'grape', 
-  'violet', 
-  'indigo', 
-  'blue', 
-  'cyan', 
-  'teal', 
-  'green', 
-  'lime', 
-  'yellow', 
-  'orange'
+  'primary',
+  'secondary',
+  'gray',
+  'red',
+  'pink',
+  'grape',
+  'violet',
+  'indigo',
+  'blue',
+  'cyan',
+  'teal',
+  'green',
+  'lime',
+  'yellow',
+  'orange',
 ] as const;
 export type ComponentColor = typeof componentColors[number];
 

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { NumberInput as MantineNumberInput, NumberInputProps as MantineNumberInputProps, ActionIcon, Group } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';

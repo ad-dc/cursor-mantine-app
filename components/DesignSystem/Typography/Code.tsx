@@ -3,14 +3,14 @@
 import { Code as MantineCode, CodeProps as MantineCodeProps } from '@mantine/core';
 import { forwardRef } from 'react';
 
-export interface CodeProps extends MantineCodeProps {
+export interface DSCodeProps extends MantineCodeProps {
   /** Code content */
   children: React.ReactNode;
   /** Size of the code text - supports Mantine t-shirt sizes */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export const Code = forwardRef<HTMLElement, CodeProps>(
+export const Code = forwardRef<HTMLElement, DSCodeProps>(
   ({ children, size = 'sm', fz, ...props }, ref) => {
     return (
       <MantineCode

@@ -30,7 +30,7 @@ const meta: Meta<typeof PageContentHeader> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     title: {
       control: 'text',
