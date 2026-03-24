@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink as MantineNavLink, ThemeIcon } from '@mantine/core';
-import Link from 'next/link';
 
 const navLinkStyles = {
   root: {
@@ -32,7 +31,7 @@ export function SidebarNavLink({
 }: DSSidebarNavLinkProps) {
   return (
     <MantineNavLink
-      component={href ? Link : undefined}
+      component="a"
       href={href ?? '#'}
       label={label}
       leftSection={
