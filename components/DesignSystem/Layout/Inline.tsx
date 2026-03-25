@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Group as MantineGroup, GroupProps as MantineGroupProps } from '@mantine/core';
 import { SpacingScale } from './Stack';

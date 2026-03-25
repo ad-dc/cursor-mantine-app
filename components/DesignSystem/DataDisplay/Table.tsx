@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Table as MantineTable, TableProps as MantineTableProps } from '@mantine/core';
 

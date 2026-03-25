@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Breadcrumbs as MantineBreadcrumbs, Anchor, Text, Group, BreadcrumbsProps as MantineBreadcrumbsProps } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Chip as MantineChip, ChipProps as MantineChipProps } from '@mantine/core';
 

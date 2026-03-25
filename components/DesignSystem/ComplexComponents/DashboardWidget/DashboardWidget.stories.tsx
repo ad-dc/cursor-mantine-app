@@ -5,12 +5,13 @@ import { Title } from '../../Typography/Title';
 import { Stack, SimpleGrid } from '../../Layout';
 import { List, Table } from '../../DataDisplay';
 import { Pill } from '../../DataDisplay/Pill';
-import { KeyInsight } from '../KeyInsights';
+import { KeyInsight } from '../KeyInsight';
 import { useState } from 'react';
 
 const meta: Meta<typeof DashboardWidget> = {
   title: 'Design System/Complex Components/DashboardWidget',
   component: DashboardWidget,
+  tags: ['autodocs', 'needs-connect'],
   parameters: {
     layout: 'padded',
     docs: {

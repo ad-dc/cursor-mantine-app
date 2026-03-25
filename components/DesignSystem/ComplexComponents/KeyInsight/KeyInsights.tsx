@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Box } from '../../Layout/Box';
 import { Text } from '../../Typography/Text';

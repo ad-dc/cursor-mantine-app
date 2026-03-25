@@ -18,7 +18,7 @@ const meta: Meta<typeof FileInput> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     size: {
       control: 'select',

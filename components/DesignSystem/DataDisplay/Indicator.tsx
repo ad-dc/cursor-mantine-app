@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Indicator as MantineIndicator, IndicatorProps as MantineIndicatorProps } from '@mantine/core';
 

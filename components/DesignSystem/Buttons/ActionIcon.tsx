@@ -1,3 +1,5 @@
+'use client';
+
 import type React from 'react';
 import { forwardRef } from 'react';
 import { ActionIcon as MantineActionIcon, ActionIconProps as MantineActionIconProps } from '@mantine/core';

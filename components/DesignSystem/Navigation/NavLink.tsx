@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { NavLink as MantineNavLink, NavLinkProps as MantineNavLinkProps } from '@mantine/core';
 

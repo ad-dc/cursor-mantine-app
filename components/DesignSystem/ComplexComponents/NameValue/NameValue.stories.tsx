@@ -21,7 +21,7 @@ const meta: Meta<typeof NameValue> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     name: {
       control: 'text',

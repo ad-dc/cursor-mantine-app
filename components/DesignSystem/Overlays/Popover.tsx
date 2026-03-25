@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Popover as MantinePopover, PopoverProps as MantinePopoverProps, Stack,Text } from '@mantine/core';
 import { Inline } from '@/components/DesignSystem';

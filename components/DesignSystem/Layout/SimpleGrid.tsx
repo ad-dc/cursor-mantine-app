@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { SimpleGrid as MantineSimpleGrid, SimpleGridProps as MantineSimpleGridProps } from '@mantine/core';
 import { SpacingScale } from './Stack';

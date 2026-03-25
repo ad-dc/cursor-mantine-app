@@ -2,20 +2,21 @@
 
 import { RiBarChartBoxLine, RiHome4Line, RiSettings3Line, RiTeamLine } from '@remixicon/react';
 
-import { HeaderBar } from '@/components/HeaderBar';
-import { MainLayout } from '@/components/MainLayout';
-import { SidebarNav, type NavItem } from '@/components/SidebarNav';
-import { Button } from '@/components/DesignSystem/Buttons/Button';
-import { Alert } from '@/components/DesignSystem/DataDisplay/Alert';
-import { Badge } from '@/components/DesignSystem/DataDisplay/Badge';
-import { Card } from '@/components/DesignSystem/DataDisplay/Card';
-import { NameValue } from '@/components/DesignSystem/ComplexComponents/NameValue';
-import { PageContentHeader } from '@/components/DesignSystem/ComplexComponents/PageContentHeader';
-import { Inline } from '@/components/DesignSystem/Layout/Inline';
-import { Stack } from '@/components/DesignSystem/Layout/Stack';
-import { Breadcrumb } from '@/components/DesignSystem/Navigation/Breadcrumb';
-import { Text } from '@/components/DesignSystem/Typography/Text';
-import { Title } from '@/components/DesignSystem/Typography/Title';
+import {
+  AppShellLayout,
+  type NavItem,
+  Button,
+  Alert,
+  Badge,
+  Card,
+  NameValue,
+  PageContentHeader,
+  Inline,
+  Stack,
+  Breadcrumb,
+  Text,
+  Title,
+} from '@/components/DesignSystem';
 
 type AccountStatus = 'Active' | 'Pending' | 'At Risk';
 
@@ -29,8 +30,8 @@ interface CustomerRow {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Overview', icon: 'ri-home-4-line', active: true, color: 'dark' },
-  { label: 'Customers', icon: 'ri-team-line', color: 'dark' },
+  { label: 'Overview', icon: 'ri-home-4-line', href: '/', active: true, color: 'dark' },
+  { label: 'Customers', icon: 'ri-team-line', href: '/prototype/customers', color: 'dark' },
   { label: 'Pipeline', icon: 'ri-briefcase-4-line', color: 'dark' },
   { label: 'Reports', icon: 'ri-bar-chart-box-line', color: 'dark' },
   { label: 'Settings', icon: 'ri-settings-3-line', color: 'dark' },
@@ -56,10 +57,7 @@ export default function HomePage() {
   const activeCount = rows.filter((row) => row.status === 'Active').length;
 
   return (
-    <MainLayout
-      header={<HeaderBar />}
-      navbar={<SidebarNav navItems={navItems} title="Revenue Ops" />}
-    >
+    <AppShellLayout navItems={navItems} title="Revenue Ops">
       <Stack gap="lg">
         <Breadcrumb
           items={[
@@ -163,6 +161,6 @@ export default function HomePage() {
           </Stack>
         </Card>
       </Stack>
-    </MainLayout>
+    </AppShellLayout>
   );
 }

@@ -16,7 +16,7 @@ const meta: Meta<typeof KeyInsight> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     value: {
       control: 'text',

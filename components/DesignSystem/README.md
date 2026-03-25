@@ -1,231 +1,113 @@
-# ADDS - AppDirect Design System
+# AppDirect Design System
 
-A comprehensive design system built on top of Mantine components, providing consistent styling, behavior, and API across AppDirect applications.
+A design system layer built on top of Mantine v7, providing consistent component wrappers, semantic tokens, and layout primitives for AppDirect applications.
 
-## 🎨 Overview
-
-This design system provides:
-- **Consistent styling** with design tokens and themes
-- **Enhanced components** with additional functionality
-- **TypeScript support** with comprehensive type definitions
-- **Organized structure** by component categories
-- **Comprehensive documentation** with usage examples
-
-## 📁 Structure
+## Structure
 
 ```
 DesignSystem/
-├── config.ts              # Design tokens and configuration
-├── index.ts               # Main exports
-├── README.md              # Documentation
-├── Inputs/                # Input components
-│   ├── TextInput.tsx
-│   ├── Checkbox.tsx
-│   └── index.ts
-├── Buttons/               # Button components
-│   ├── Button.tsx
-│   ├── ActionIcon.tsx
-│   └── index.ts
-├── Navigation/            # Navigation components
-├── Feedback/              # Feedback components
-├── Overlays/              # Overlay components
-├── DataDisplay/           # Data display components
-├── Typography/            # Typography components
-└── Misc/                  # Miscellaneous components
+├── index.ts                # Main barrel export
+├── config.ts               # Design token values (colors, spacing, shadows, utilities)
+├── types.ts                # Shared type definitions and semantic color mappings
+├── LAYOUT_GUIDE.md         # When to use which layout primitive
+├── FIGMA_PROPS_REGISTRY.md # Figma Code Connect prop contracts
+├── Buttons/                # Button, ActionIcon, CloseButton
+├── Inputs/                 # TextInput, TextArea, NumberInput, ColorInput, Slider, Switch,
+│                           # SegmentedControl, Checkbox, Radio, RadioGroup, DropZone, FileInput
+├── Combobox/               # SearchableSelect, AutocompleteClearable, Multiselect, Select, Combobox
+├── Navigation/             # Breadcrumb, BackBreadcrumb, NavLink, Stepper, Tabs
+├── Overlays/               # Drawer, Menu, Modal, ConfirmationModal, Popover,
+│                           # ConfirmationPopover, Tooltip
+├── DataDisplay/            # Alert, Avatar, Badge, Card, CardSection, Chip, Pill,
+│                           # Indicator, Progress, ThemeIcon, List, Table
+├── Typography/             # Kbd, Code, Text, Title
+├── Misc/                   # Divider, Paper
+├── Layout/                 # Stack, Group, Inline, Box, SimpleGrid, Grid, Flex, Container, Center
+├── Shell/                  # AppShellLayout, HeaderBar, SidebarNav, SidebarNavLink,
+│                           # SingleColumnLayout, TertiaryColumnLayout
+└── ComplexComponents/      # KeyInsight, NameValue, CopyButton, PageContentHeader,
+                            # DescriptionBlock, DataTable, DashboardWidget
 ```
 
-## 🚀 Usage
+## Usage
 
-### Import Specific Components
+### Import specific components
 
 ```tsx
-import { ADDSButton, ADDSTextInput } from '@/components/DesignSystem';
+import { Button, TextInput, Badge, Stack } from '@/components/DesignSystem';
 
 function MyForm() {
   return (
-    <form>
-      <ADDSTextInput 
-        label="Name" 
-        placeholder="Enter your name"
-        required 
-      />
-      <ADDSButton variant="primary" type="submit">
-        Submit
-      </ADDSButton>
-    </form>
+    <Stack gap="md">
+      <TextInput label="Name" placeholder="Enter your name" required />
+      <Button variant="primary">Submit</Button>
+    </Stack>
   );
 }
 ```
 
-### Import by Category
+### Import by category
 
 ```tsx
 import { Inputs, Buttons } from '@/components/DesignSystem';
 
 function MyComponent() {
   return (
-    <div>
+    <>
       <Inputs.TextInput placeholder="Search..." />
       <Buttons.Button variant="primary">Search</Buttons.Button>
-    </div>
+    </>
   );
 }
 ```
 
-## 🎯 Component Categories
-
-### ✅ Inputs
-- **TextInput** - Enhanced text input with validation states
-- Checkbox *(coming soon)*
-- NumberInput *(coming soon)*
-- Textarea *(coming soon)*
-- Switch *(coming soon)*
-- Slider *(coming soon)*
-- Radio *(coming soon)*
-- SegmentedControl *(coming soon)*
-- ColorInput *(coming soon)*
-- Chip *(coming soon)*
-
-### ✅ Buttons
-- **Button** - Enhanced button with design system variants
-- ActionIcon *(coming soon)*
-- CloseButton *(coming soon)*
-
-### 🔄 Navigation *(planned)*
-- Breadcrumbs
-- NavLink
-- Stepper
-- Tabs
-
-### 🔄 Feedback *(planned)*
-- Alert
-- Progress
-
-### 🔄 Overlays *(planned)*
-- Drawer
-- Menu
-- Modal
-- Popover
-- Tooltip
-
-### 🔄 Data Display *(planned)*
-- Avatar
-- Badge
-- Card
-- Indicator
-- Kbd
-- ThemeIcon
-
-### 🔄 Typography *(planned)*
-- Code
-- Table
-
-### 🔄 Misc *(planned)*
-- Divider
-- Paper
-- Dropzone
-
-## 🛠 Design Tokens
-
-The design system uses consistent design tokens defined in `config.ts`:
-
-### Colors
-- **Primary**: Brand primary colors (blue scale)
-- **Secondary**: Brand secondary colors (light blue scale)
-- **System colors**: Gray, red, green, etc.
-
-### Spacing
-- `xs`: 4px
-- `sm`: 8px
-- `md`: 16px
-- `lg`: 24px
-- `xl`: 32px
-- `xxl`: 48px
-
-### Typography
-- Font sizes: xs (12px) → xxl (24px)
-- Font weights: normal (400) → bold (700)
-- Line heights: tight (1.2) → loose (1.8)
-
-### Border Radius
-- `sm`: 4px
-- `md`: 8px
-- `lg`: 12px
-- `xl`: 16px
-- `full`: 9999px
-
-## 📝 Component Development
-
-### Creating New Components
-
-1. **Create component directory**: `mkdir components/DesignSystem/Category/ComponentName`
-2. **Create component file**: Follow the established patterns
-3. **Export in category index**: Add to `Category/index.ts`
-4. **Export in main index**: Add to `DesignSystem/index.ts`
-5. **Update category exports**: Add to category object
-
-### Component Template
+### Import types
 
 ```tsx
-import React, { forwardRef } from 'react';
-import { Component as MantineComponent, ComponentProps as MantineComponentProps } from '@mantine/core';
-import { ComponentSize, ComponentColor, addsClassName } from '../config';
-
-export interface ADDSComponentProps extends Omit<MantineComponentProps, 'size' | 'color'> {
-  size?: ComponentSize;
-  color?: ComponentColor;
-  variant?: 'default' | 'custom';
-}
-
-export const ADDSComponent = forwardRef<HTMLElement, ADDSComponentProps>(
-  ({ size = 'md', color = 'primary', className, ...props }, ref) => {
-    const componentClassName = [
-      addsClassName('component'),
-      addsClassName('component', size),
-      className,
-    ].filter(Boolean).join(' ');
-
-    return (
-      <MantineComponent
-        ref={ref}
-        size={size}
-        color={color}
-        className={componentClassName}
-        {...props}
-      />
-    );
-  }
-);
-
-ADDSComponent.displayName = 'ADDSComponent';
+import type { DSButtonProps, DSTextInputProps } from '@/components/DesignSystem';
 ```
 
-## 🎨 Styling
+## Creating New Components
 
-Components use:
-- **CSS Custom Properties** for theme integration
-- **Mantine's styling system** as the foundation
-- **Design system classes** with `adds-` prefix
-- **Consistent naming** for variants and states
+When a Mantine component has no DS wrapper yet, create one following this pattern:
 
-## 📚 Documentation
+```tsx
+'use client';
 
-Each component includes:
-- **Comprehensive JSDoc** with descriptions
-- **Multiple usage examples** covering common scenarios
-- **TypeScript interfaces** with detailed prop descriptions
-- **Accessibility considerations** where applicable
+import React, { forwardRef } from 'react';
+import {
+  ComponentName as MantineComponentName,
+  ComponentNameProps as MantineComponentNameProps,
+} from '@mantine/core';
 
-## 🧪 Testing
+export interface DSComponentNameProps extends MantineComponentNameProps {}
 
-*(To be implemented)*
-- Unit tests for component behavior
-- Visual regression tests for styling
-- Accessibility tests for compliance
+export const ComponentName = forwardRef<HTMLDivElement, DSComponentNameProps>(
+  ({ ...props }, ref) => <MantineComponentName ref={ref} {...props} />
+);
+ComponentName.displayName = 'ComponentName';
+```
 
-## 🚢 Deployment
+Then export through the category `index.ts` and `components/DesignSystem/index.ts`.
 
-*(To be implemented)*
-- Storybook integration for component showcase
-- Design token documentation
-- Component usage guidelines 
+## Styling
+
+- Use Mantine system props (`bg`, `c`, `w`, `h`, `p`, `m`, `radius`, `shadow`, etc.)
+- Do not use Tailwind CSS, CSS modules, or inline `style` props
+- See `config.ts` for design token values and `types.ts` for semantic color mappings
+
+## Layout Primitives
+
+See [LAYOUT_GUIDE.md](./LAYOUT_GUIDE.md) for guidance on when to use `Stack`, `Inline`, `Grid`, `Box`, and other layout primitives.
+
+## Figma Code Connect
+
+Components with Code Connect mappings have a sibling `.figma.tsx` file. See [FIGMA_PROPS_REGISTRY.md](./FIGMA_PROPS_REGISTRY.md) for the Figma-facing prop contracts.
+
+Storybook tags track Code Connect coverage:
+- `code-connected` -- component has a published `.figma.tsx` mapping
+- `needs-connect` -- component still needs a Code Connect file
+
+## Storybook
+
+Run `npm run storybook` to browse components and their documentation on port 6006.

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Card as MantineCard, CardProps as MantineCardProps, BoxProps } from '@mantine/core';
 

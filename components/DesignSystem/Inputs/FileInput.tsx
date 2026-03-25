@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { FileInput as MantineFileInput, FileInputProps as MantineFileInputProps } from '@mantine/core';
 import { ComponentSize } from '../config';

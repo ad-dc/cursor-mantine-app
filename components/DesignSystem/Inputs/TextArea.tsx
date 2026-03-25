@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Textarea as MantineTextarea, TextareaProps as MantineTextareaProps, ActionIcon, Group } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';

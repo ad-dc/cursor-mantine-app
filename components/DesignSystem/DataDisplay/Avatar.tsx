@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef, useState, useCallback } from 'react';
 import { Avatar as MantineAvatar, AvatarProps as MantineAvatarProps } from '@mantine/core';
 import { RiUser3Fill } from '@remixicon/react';
@@ -123,47 +125,40 @@ export const Avatar = forwardRef<HTMLDivElement, DSAvatarProps>(
       setImageError(true);
     }, []);
 
-    // Validate props based on variant
-    React.useEffect(() => {
-      if (variant === 'image' && !src) {
-        console.warn('Avatar: src is required when variant is "image"');
-      }
-      if (variant === 'initials' && !initials) {
-        console.warn('Avatar: initials is required when variant is "initials"');
-      }
-      if (variant === 'initials' && initials && initials.length !== 2) {
-        console.warn('Avatar: initials should be exactly 2 characters');
-      }
-    }, [variant, src, initials]);
+    if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      React.useEffect(() => {
+        if (variant === 'image' && !src) {
+          console.warn('Avatar: src is required when variant is "image"');
+        }
+        if (variant === 'initials' && !initials) {
+          console.warn('Avatar: initials is required when variant is "initials"');
+        }
+        if (variant === 'initials' && initials && initials.length !== 2) {
+          console.warn('Avatar: initials should be exactly 2 characters');
+        }
+      }, [variant, src, initials]);
+    }
 
     // Render icon content
     const renderIcon = () => {
       const iconSize = ICON_SIZES[size];
       
       if (icon) {
-        // Custom icon provided
         return React.isValidElement(icon) 
           ? React.cloneElement(icon as React.ReactElement, { 
               size: iconSize,
-              style: { 
-                color: 'var(--mantine-color-black)',
-                ...(icon.props?.style || {})
-              }
+              color: 'var(--mantine-color-black)',
             })
           : icon;
       }
       
-      // Default user icon
-      return <RiUser3Fill size={iconSize} style={{ color: 'var(--mantine-color-black)' }} />;
+      return <RiUser3Fill size={iconSize} color="var(--mantine-color-black)" />;
     };
 
     // Render initials content
     const renderInitials = (text: string) => {
-      return (
-        <span style={{ color: 'var(--mantine-color-dimmed)' }}>
-          {text.substring(0, 2).toUpperCase()}
-        </span>
-      );
+      return text.substring(0, 2).toUpperCase();
     };
 
     // Handle different variants
@@ -214,6 +209,3 @@ export const Avatar = forwardRef<HTMLDivElement, DSAvatarProps>(
 );
 
 Avatar.displayName = 'Avatar';
-
-// Default export for convenience
-export default Avatar; 

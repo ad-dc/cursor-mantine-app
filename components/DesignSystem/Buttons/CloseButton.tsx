@@ -1,3 +1,5 @@
+'use client';
+
 import { forwardRef } from 'react';
 import { CloseButton as MantineCloseButton, CloseButtonProps } from '@mantine/core';
 

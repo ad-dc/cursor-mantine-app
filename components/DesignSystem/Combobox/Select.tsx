@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Select as MantineSelect, SelectProps as MantineSelectProps, ActionIcon, Group } from '@mantine/core';
 import { IconInfoCircle, IconSelector } from '@tabler/icons-react';

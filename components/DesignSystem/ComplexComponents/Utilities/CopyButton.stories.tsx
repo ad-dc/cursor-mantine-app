@@ -22,7 +22,7 @@ const meta: Meta<typeof CopyButton> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'needs-connect'],
   argTypes: {
     value: {
       control: 'text',

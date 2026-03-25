@@ -1236,4 +1236,234 @@ figma.connect(Badge, 'figma-node-id', {
   example: (props) => <Badge {...props} />,
 });---
 
+---
+
+## Shell & Page Template Components
+
+These components provide the prototype application chrome and content layout structure. They are **not** ported to production -- they exist for prototyping context only.
+
+---
+
+### AppShellLayout
+
+**Component Name:** `AppShellLayout`  
+**Purpose:** Top-level prototype shell with AppDirect-branded header and optional left navigation sidebar. Wraps Mantine `AppShell`.
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Page content |
+| `title` | `string` | No | `'Prototype'` | Application name shown in header |
+| `navItems` | `NavItem[]` | No | `[]` | Navigation items for the left sidebar |
+| `hideNav` | `boolean` | No | `false` | Hide the sidebar for header-only layout |
+
+#### NavItem Shape
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `label` | `string` | Yes | Display text |
+| `icon` | `string` | Yes | Remix Icon class (e.g. `ri-home-4-line`) |
+| `href` | `string` | No | Route path for navigation |
+| `active` | `boolean` | No | Highlight as current page |
+| `color` | `string` | No | Icon color (default: `dark`) |
+
+#### Templates
+
+- **Full app shell:** `<AppShellLayout navItems={[...]} title="App Name">{content}</AppShellLayout>`
+- **Header only:** `<AppShellLayout title="App Name" hideNav>{content}</AppShellLayout>`
+
+---
+
+### HeaderBar
+
+**Component Name:** `HeaderBar`  
+**Purpose:** AppDirect-branded header bar with logo and title. Used internally by `AppShellLayout`.
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | `string` | No | `'Prototype'` | Title displayed in the header |
+
+---
+
+### SidebarNav
+
+**Component Name:** `SidebarNav`  
+**Purpose:** Left navigation sidebar with icon links. Used internally by `AppShellLayout`.
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `navItems` | `NavItem[]` | Yes | - | Navigation items to render |
+| `title` | `string` | Yes | - | Section title above the nav links |
+
+---
+
+### SingleColumnLayout
+
+**Component Name:** `SingleColumnLayout`  
+**Purpose:** Full-width single-column content area. Use inside `AppShellLayout` for standard pages.
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `children` | `ReactNode` | Yes | - | Page content |
+| `gap` | `string` | No | `'lg'` | Vertical gap between sections |
+
+---
+
+### TertiaryColumnLayout
+
+**Component Name:** `TertiaryColumnLayout`  
+**Purpose:** Two-column content layout with primary area and narrower aside panel.
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `main` | `ReactNode` | Yes | - | Primary content (left, wider) |
+| `aside` | `ReactNode` | Yes | - | Side panel content (right, narrower) |
+| `mainSpan` | `number` | No | `8` | Column span for main area (out of 12) |
+
+---
+
+## Page Composition Patterns
+
+This section provides patterns for assembling DS components into prototype pages. These serve as guidance for both human developers and AI-driven code generation.
+
+### Pattern 1: Single Column with Data List
+
+A standard page with a header, key metrics, and a list of items.
+
+```tsx
+import {
+  AppShellLayout, SingleColumnLayout, PageContentHeader,
+  Card, Badge, Inline, Stack, Text, Title, Breadcrumb,
+  type NavItem,
+} from '@/components/DesignSystem';
+
+const navItems: NavItem[] = [
+  { label: 'Page Name', icon: 'ri-file-line', href: '/prototype/page-name', active: true },
+];
+
+export default function ExamplePage() {
+  return (
+    <AppShellLayout navItems={navItems} title="App Name">
+      <SingleColumnLayout>
+        <Breadcrumb items={[{ label: 'Prototypes', href: '/prototype' }, { label: 'Page Name' }]} />
+        <PageContentHeader
+          title="Page Title"
+          subhead="Description"
+          badge="Prototype"
+          contentSection="insights"
+          insights={[
+            { value: 42, title: 'Metric A' },
+            { value: '$1,200', title: 'Metric B' },
+          ]}
+        />
+        <Card>
+          <Stack gap="xs">
+            {/* Repeat rows */}
+            <Inline justify="space-between" align="center">
+              <Stack gap={0}>
+                <Title order={5}>Item Name</Title>
+                <Text size="sm" c="dimmed">Subtitle</Text>
+              </Stack>
+              <Badge color="success">Status</Badge>
+            </Inline>
+          </Stack>
+        </Card>
+      </SingleColumnLayout>
+    </AppShellLayout>
+  );
+}
+```
+
+### Pattern 2: Detail Page with Side Panel
+
+A detail/profile page using `TertiaryColumnLayout` with key-value pairs and action buttons.
+
+```tsx
+import {
+  AppShellLayout, TertiaryColumnLayout, PageContentHeader,
+  Card, NameValue, Button, Breadcrumb, Stack, Title, Divider,
+  type NavItem,
+} from '@/components/DesignSystem';
+
+const navItems: NavItem[] = [
+  { label: 'Items', icon: 'ri-list-check', href: '/prototype/items' },
+  { label: 'Item Detail', icon: 'ri-file-line', href: '/prototype/item-detail', active: true },
+];
+
+export default function DetailPage() {
+  return (
+    <AppShellLayout navItems={navItems} title="App Name">
+      <Breadcrumb items={[
+        { label: 'Prototypes', href: '/prototype' },
+        { label: 'Items', href: '/prototype/items' },
+        { label: 'Item Name' },
+      ]} />
+      <PageContentHeader title="Item Name" subhead="Category" />
+      <TertiaryColumnLayout
+        main={
+          <Card>
+            <Stack gap="sm">
+              <Title order={4}>Details</Title>
+              <NameValue columns={2} pairs={[
+                { name: 'Field A', value: 'Value A' },
+                { name: 'Field B', value: 'Value B' },
+              ]} />
+            </Stack>
+          </Card>
+        }
+        aside={
+          <Card>
+            <Stack gap="sm">
+              <Title order={5}>Actions</Title>
+              <Button variant="primary" fullWidth>Primary Action</Button>
+              <Button variant="outline" fullWidth>Secondary Action</Button>
+              <Divider />
+              <NameValue pairs={[{ name: 'Status', value: 'Active' }]} />
+            </Stack>
+          </Card>
+        }
+      />
+    </AppShellLayout>
+  );
+}
+```
+
+### Pattern 3: Header-Only Page (No Nav)
+
+A standalone page without left navigation, useful for landing or summary views.
+
+```tsx
+import {
+  AppShellLayout, SingleColumnLayout, PageContentHeader,
+  Card, Stack, Text, Breadcrumb,
+} from '@/components/DesignSystem';
+
+export default function StandalonePage() {
+  return (
+    <AppShellLayout title="App Name" hideNav>
+      <SingleColumnLayout>
+        <Breadcrumb items={[{ label: 'Prototypes', href: '/prototype' }, { label: 'Page' }]} />
+        <PageContentHeader title="Standalone Page" subhead="No sidebar" badge="Prototype" />
+        <Card>
+          <Stack gap="sm">
+            <Text>Full-width content without navigation sidebar.</Text>
+          </Stack>
+        </Card>
+      </SingleColumnLayout>
+    </AppShellLayout>
+  );
+}
+```
+
+---
+
 *This document is the authoritative reference for Figma Code Connect integration with the AppDirect Design System.*

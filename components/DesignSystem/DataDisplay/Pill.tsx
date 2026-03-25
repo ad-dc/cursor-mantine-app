@@ -1,3 +1,5 @@
+'use client';
+
 import { forwardRef } from 'react';
 import { Box, CloseButton } from '@mantine/core';
 import { Inline } from '../Layout';

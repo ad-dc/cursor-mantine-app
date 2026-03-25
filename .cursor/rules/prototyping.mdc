@@ -1,0 +1,81 @@
+---
+description: Rules for creating and editing prototype pages
+globs: app/prototype/**/*
+alwaysApply: false
+---
+
+# Prototyping Rules
+
+## Page Creation
+
+When creating a new prototype page:
+
+1. Use `npm run create-page` or manually create under `app/prototype/<slug>/page.tsx`
+2. Update `prototype-manifest.json` with the new page entry
+3. Choose a template: `app-shell` (header + nav) or `content-only` (header only)
+4. Choose a content layout: `single-column` or `tertiary` (main + aside)
+
+## Component Imports
+
+Always import DS components from the barrel:
+
+```tsx
+import { Button, Card, Stack, TextInput } from '@/components/DesignSystem';
+```
+
+Never import from `@mantine/core` directly in prototype pages.
+
+## Page Structure
+
+Every prototype page must follow the portable page contract -- content is cleanly separable from the shell wrapper:
+
+```tsx
+'use client';
+
+import { AppShellLayout, SingleColumnLayout, ... } from '@/components/DesignSystem';
+
+export default function PageName() {
+  return (
+    <AppShellLayout navItems={navItems} title="App Name">
+      <SingleColumnLayout>
+        {/* Page content goes here -- this is what gets exported */}
+      </SingleColumnLayout>
+    </AppShellLayout>
+  );
+}
+```
+
+## Template Selection
+
+- **app-shell**: Use `AppShellLayout` with `navItems` for pages that are part of a multi-page prototype with navigation
+- **content-only**: Use `AppShellLayout` with `hideNav` for standalone pages without sidebar
+
+## Content Layouts
+
+- **SingleColumnLayout**: Full-width content wrapped in a `Stack`
+- **TertiaryColumnLayout**: Two-column layout with `main` and `aside` props (8/4 grid split)
+
+## Navigation
+
+Wire sidebar nav links using the `href` prop on `NavItem`:
+
+```tsx
+const navItems: NavItem[] = [
+  { label: 'Customers', icon: 'ri-team-line', href: '/prototype/customers', active: true },
+  { label: 'Settings', icon: 'ri-settings-3-line', href: '/prototype/settings' },
+];
+```
+
+Set `active: true` on the current page's nav item.
+
+## Breadcrumbs
+
+Always include a breadcrumb trail starting from the prototype index:
+
+```tsx
+<Breadcrumb items={[{ label: 'Prototypes', href: '/prototype' }, { label: 'Page Title' }]} />
+```
+
+## Styling
+
+Use Mantine system props only (`bg`, `c`, `p`, `m`, `gap`, `radius`, etc.). No Tailwind, CSS modules, or inline styles.

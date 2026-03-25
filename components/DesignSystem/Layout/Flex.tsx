@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Flex as MantineFlex, FlexProps as MantineFlexProps } from '@mantine/core';
 

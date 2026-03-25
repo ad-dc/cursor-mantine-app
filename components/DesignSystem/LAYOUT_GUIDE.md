@@ -23,11 +23,11 @@ Need layout/spacing?
 | `Group` | ✅ Use `Inline` | ❌ Never | Ensures consistent horizontal spacing with design tokens |
 | `Box` | ✅ **Always** | ❌ Never | Provides design token access for spacing/colors |
 | `SimpleGrid` | ✅ Use `Grid` | ❌ Never | Ensures consistent grid spacing with design tokens |
-| `Grid` (CSS Grid) | ⚠️ Case by case | ✅ Complex layouts | Use Mantine for advanced CSS Grid features |
-| `Container` | ❌ Never | ✅ **Always** | Page-level container, not a primitive |
-| `Flex` | ❌ Never | ✅ **Always** | Advanced flexbox control beyond Stack/Inline |
-| `Center` | ❌ Never | ✅ **Always** | Specific centering utility |
-| `Collapse` | ❌ Never | ✅ **Always** | Animation/interaction component |
+| `Grid` (CSS Grid) | ✅ **Always** | ❌ Never | DS wrapper provides consistent defaults |
+| `Container` | ✅ **Always** | ❌ Never | DS wrapper keeps imports consistent |
+| `Flex` | ✅ **Always** | ❌ Never | DS wrapper for advanced flexbox control |
+| `Center` | ✅ **Always** | ❌ Never | DS wrapper keeps imports consistent |
+| `Collapse` | ❌ Never | ✅ **Always** | Animation/interaction component (no DS wrapper) |
 
 ## 🎨 **Design System Layout Primitives**
 
@@ -119,9 +119,9 @@ import { SimpleGrid } from '@mantine/core';
 
 ### **When to Use Mantine Core Directly:**
 
-#### **1. Form Controls & Interactions**
+#### **1. Animations & Interactions**
 ```tsx
-// ✅ Use Mantine core for complex form controls
+// ✅ Use Mantine core for animation/interaction components with no DS wrapper
 import { Collapse, Transition, Affix } from '@mantine/core';
 
 <Collapse in={opened}>
@@ -129,10 +129,10 @@ import { Collapse, Transition, Affix } from '@mantine/core';
 </Collapse>
 ```
 
-#### **2. Advanced Layout Features**
+#### **2. Advanced Layout (still use DS imports)**
 ```tsx
-// ✅ Use Mantine Flex for advanced flexbox control
-import { Flex } from '@mantine/core';
+// ✅ Use DS Flex for advanced flexbox control
+import { Flex } from '@/components/DesignSystem';
 
 <Flex
   direction={{ base: 'column', sm: 'row' }}
@@ -143,10 +143,10 @@ import { Flex } from '@mantine/core';
 </Flex>
 ```
 
-#### **3. Specialized Utilities**
+#### **3. Page Containers & Centering (still use DS imports)**
 ```tsx
-// ✅ Use Mantine utilities for specific purposes
-import { Center, Container } from '@mantine/core';
+// ✅ Use DS versions for consistent imports
+import { Center, Container } from '@/components/DesignSystem';
 
 <Container size="md">
   <Center h="100vh">
@@ -280,14 +280,11 @@ gap={24}
 ## 📚 **Quick Reference**
 
 ```tsx
-// Layout Primitives (Always use DS versions)
-import { Stack, Inline, Box, Grid } from '@/components/DesignSystem';
+// All layout primitives from DS (always)
+import { Stack, Inline, Box, Grid, Flex, Center, Container } from '@/components/DesignSystem';
 
-// Mantine Core (Use for specific functionality)
+// Mantine Core (only for animations/interactions with no DS wrapper)
 import { 
-  Flex,        // Advanced flexbox
-  Center,      // Centering utility
-  Container,   // Page container
   Collapse,    // Animations
   Transition,  // Animations
   Affix,       // Positioning

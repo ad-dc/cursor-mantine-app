@@ -1,4 +1,6 @@
-import React, { forwardRef, useEffect } from 'react';
+'use client';
+
+import React, { forwardRef } from 'react';
 import { Badge as MantineBadge, BadgeProps as MantineBadgeProps } from '@mantine/core';
 import { ComponentSize } from '../config';
 
@@ -13,8 +15,6 @@ export interface DSBadgeProps extends Omit<MantineBadgeProps, 'size' | 'color' |
   /** Badge semantic color variant */
   color?: 'info' | 'success' | 'danger' | 'pending' | 'default' | 'warning' | 'blue' | 'green' | 'red' | 'yellow' | 'gray';
 }
-
-export const BADGE_BUILD = 'badge-2025-09-26';
 
 /**
  * AppDirect Design System Badge Component
@@ -63,12 +63,6 @@ export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
     },
     ref
   ) => {
-    useEffect(() => {
-      // Mount fingerprint log for Figma verification
-      // eslint-disable-next-line no-console
-      console.log('@@BADGE_MOUNT@@', BADGE_BUILD, variant);
-    }, []);
-
     // Map design system colors to Mantine colors
     const getMantineColor = (dsColor: DSBadgeProps['color'], dsVariant: DSBadgeProps['variant']) => {
       const resolvedColor = dsColor === 'default' && ['info', 'success', 'danger', 'pending', 'warning'].includes(dsVariant || '')
@@ -113,8 +107,6 @@ export const Badge = forwardRef<HTMLDivElement, DSBadgeProps>(
         size={size}
         color={getMantineColor(color, variant)}
         radius="sm"
-        data-ui="Badge"
-        data-build={BADGE_BUILD}
         {...props}
       >
         {children}

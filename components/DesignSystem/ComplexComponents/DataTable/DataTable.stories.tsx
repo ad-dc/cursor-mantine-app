@@ -80,7 +80,7 @@ const meta: Meta<typeof DataTable> = {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'code-connected'],
   argTypes: {
     isLoading: {
       control: 'boolean',

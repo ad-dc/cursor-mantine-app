@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { List as MantineList, ListProps as MantineListProps } from '@mantine/core';
 import { ComponentSize } from '../config';

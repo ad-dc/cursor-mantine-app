@@ -1,3 +1,5 @@
+'use client';
+
 import React, { forwardRef } from 'react';
 import { Stack as MantineStack, StackProps as MantineStackProps } from '@mantine/core';
 import { ComponentSize } from '../config';

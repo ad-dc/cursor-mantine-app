@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Switch as MantineSwitch, SwitchProps as MantineSwitchProps } from '@mantine/core';
 

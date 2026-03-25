@@ -3,14 +3,14 @@
 import { Paper as MantinePaper, PaperProps as MantinePaperProps } from '@mantine/core';
 import { forwardRef } from 'react';
 
-export interface PaperProps extends Omit<MantinePaperProps, 'padding'> {
+export interface DSPaperProps extends Omit<MantinePaperProps, 'padding'> {
   /** Legacy variant alias retained for backwards compatibility */
   variant?: 'default' | 'shadow' | 'border' | 'border-shadow';
   /** Content of the paper */
   children: React.ReactNode;
 }
 
-export const Paper = forwardRef<HTMLDivElement, PaperProps>(
+export const Paper = forwardRef<HTMLDivElement, DSPaperProps>(
   ({ variant, children, p = 'sm', shadow, withBorder, ...props }, ref) => {
     const getVariantProps = () => {
       switch (variant) {

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { SimpleGrid } from '../../Layout/SimpleGrid';
 import { Stack } from '../../Layout/Stack';
