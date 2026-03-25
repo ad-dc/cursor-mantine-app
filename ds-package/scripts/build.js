@@ -4,14 +4,10 @@
  * Build script for @appdirect/ds-prototype-kit
  *
  * Copies DS component source files to dist/, excluding stories, tests,
- * and figma-specific files. The package is distributed as TypeScript source
- * that consumers compile with their own build tooling.
+ * figma-specific files, and components with unresolvable external dependencies.
  *
- * Why source distribution?
- * - DS components are thin wrappers; pre-compiling adds complexity for
- *   minimal gain.
- * - Consumers (Next.js, Rspack) already have TypeScript compilation.
- * - Source enables tree-shaking and lets consumers see exactly what they get.
+ * The package is distributed as TypeScript source that consumers compile
+ * with their own build tooling (Next.js, Vite, Rspack).
  */
 
 const fs = require('fs');
@@ -30,36 +26,85 @@ const SKIP_PATTERNS = [
   /FIGMA_PROPS_REGISTRY\.md$/,
   /LAYOUT_GUIDE\.md$/,
   /README\.md$/,
+  /Welcome\.stories\.mdx$/,
+];
+
+// Files that import from outside the DS directory (hooks/, etc.)
+// and can't be resolved in the package
+const SKIP_FILES_WITH_EXTERNAL_REFS = [
+  /ComplexComponents\/DataTable\//,
 ];
 
 function shouldSkip(filename) {
   return SKIP_PATTERNS.some((pattern) => pattern.test(filename));
 }
 
-function copyDirSync(src, dest) {
+function shouldSkipPath(relativePath) {
+  return SKIP_FILES_WITH_EXTERNAL_REFS.some((pattern) => pattern.test(relativePath));
+}
+
+/**
+ * Compute the relative prefix to reach the dist root from a file's location.
+ * e.g., "Combobox/Multiselect.tsx" -> "../"
+ *       "ComplexComponents/Utilities/CopyButton.tsx" -> "../../"
+ */
+function getRelativeToRoot(relativeFilePath) {
+  const depth = relativeFilePath.split(path.sep).length - 1;
+  if (depth <= 0) return './';
+  return '../'.repeat(depth);
+}
+
+/**
+ * Strip lines that reference excluded modules (DataTable, etc.)
+ * from the barrel index.ts so it doesn't try to import missing files.
+ */
+function stripExcludedExports(content) {
+  return content
+    .split('\n')
+    .filter((line) => !line.includes('DataTable') || line.startsWith('//'))
+    .join('\n');
+}
+
+function rewriteImports(content, relativeFilePath) {
+  const toRoot = getRelativeToRoot(relativeFilePath);
+
+  // Rewrite barrel import: @/components/DesignSystem (no trailing slash)
+  // e.g., import { Inline } from '@/components/DesignSystem'
+  content = content.replace(
+    /from\s+['"]@\/components\/DesignSystem['"]/g,
+    `from '${toRoot.slice(0, -1)}'`
+  );
+
+  // Rewrite subfolder imports: @/components/DesignSystem/Layout/Inline
+  // e.g., import { Inline } from '@/components/DesignSystem/Layout/Inline'
+  content = content.replace(
+    /from\s+['"]@\/components\/DesignSystem\/([^'"]+)['"]/g,
+    (match, subpath) => `from '${toRoot}${subpath}'`
+  );
+
+  return content;
+}
+
+function copyDirSync(src, dest, relativeBase = '') {
   fs.mkdirSync(dest, { recursive: true });
   const entries = fs.readdirSync(src, { withFileTypes: true });
 
   for (const entry of entries) {
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
+    const relativePath = path.join(relativeBase, entry.name);
 
     if (entry.isDirectory()) {
-      copyDirSync(srcPath, destPath);
-    } else if (!shouldSkip(entry.name)) {
+      copyDirSync(srcPath, destPath, relativePath);
+    } else if (!shouldSkip(entry.name) && !shouldSkipPath(relativePath)) {
       let content = fs.readFileSync(srcPath, 'utf-8');
 
-      // Rewrite internal DS relative imports (e.g., '../Layout/Stack')
-      // These stay as relative imports within the package.
-      // No rewriting needed since the directory structure is preserved.
-
-      // Rewrite next/image and next/link to optional peer imports
-      // so the package works without Next.js (falls back gracefully)
       if (entry.name.endsWith('.tsx') || entry.name.endsWith('.ts')) {
-        content = content.replace(
-          /from\s+['"]@\/components\/DesignSystem\//g,
-          "from '../"
-        );
+        content = rewriteImports(content, relativePath);
+        // Strip excluded module references from the barrel
+        if (entry.name === 'index.ts' && relativeBase === '') {
+          content = stripExcludedExports(content);
+        }
       }
 
       fs.writeFileSync(destPath, content, 'utf-8');
@@ -67,18 +112,30 @@ function copyDirSync(src, dest) {
   }
 }
 
+function removeEmptyDirs(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      removeEmptyDirs(path.join(dir, entry.name));
+    }
+  }
+  if (fs.readdirSync(dir).length === 0) {
+    fs.rmdirSync(dir);
+  }
+}
+
 function main() {
   console.log('Building @appdirect/ds-prototype-kit...\n');
 
-  // Clean
   if (fs.existsSync(DIST_DIR)) {
     fs.rmSync(DIST_DIR, { recursive: true });
   }
 
-  // Copy source files
   copyDirSync(SOURCE_DIR, DIST_DIR);
 
-  // Count files
+  // Clean up empty directories left by skipped files
+  removeEmptyDirs(DIST_DIR);
+
   let fileCount = 0;
   function countFiles(dir) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -93,6 +150,7 @@ function main() {
   countFiles(DIST_DIR);
 
   console.log(`  Copied ${fileCount} files to dist/`);
+  console.log('  Excluded: DataTable (external hook dependencies)');
   console.log('  Done.\n');
 }
 
