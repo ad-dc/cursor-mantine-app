@@ -1032,7 +1032,7 @@ Steps 1 and 2 are always visible. Steps 3-10 are toggled via boolean properties.
 ### DataTable
 
 **Component Name:** `DataTable`  
-**Mantine Base:** `mantine-react-table` (`useMantineReactTable` + `MantineReactTable`)  
+**Mantine Base:** `mantine-react-table-open` (`useMantineReactTable` + `MantineReactTable`)  
 **Purpose:** Full-featured data table with pagination, sorting, filtering, row selection, density controls, and error/empty states. Wraps Mantine React Table with custom toolbars and DS styling.
 
 #### Figma vs DS alignment
@@ -1086,9 +1086,9 @@ The Figma **Datatable** component is a visual spec with a `children` slot contai
 
 #### Notes
 
-- Import `DataTable` from `@/components/DesignSystem` — do NOT use `mantine-react-table` directly
+- Import `DataTable` from `@/components/DesignSystem` — do NOT use `mantine-react-table-open` directly for UI (use `DataTable`; use the package only for column types if needed)
 - The DS component handles custom top/bottom toolbars, sortable headers, error overlay, and alert banners internally
-- Column definitions use `MRT_ColumnDef<T>` from `mantine-react-table` (re-exported by DS)
+- Column definitions use `MRT_ColumnDef<T>` from `mantine-react-table-open` (import from that package or define columns inline)
 - Pagination is cursor-based (`pageInfo` with `startCursor`/`endCursor`), matching the AppDirect GraphQL API pattern
 - Reference implementation: `micro-ui-ts/src/components/Table/`
 

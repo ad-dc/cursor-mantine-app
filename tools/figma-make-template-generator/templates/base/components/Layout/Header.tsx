@@ -1,4 +1,4 @@
-import { Group, Image, Text } from "@mantine/core@7";
+import { Group, Image, Text } from "@mantine/core@9";
 import { logoPngDataUrl } from "../../lib/assets";
 
 export function Header() {

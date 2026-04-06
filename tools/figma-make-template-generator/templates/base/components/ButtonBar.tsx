@@ -1,4 +1,4 @@
-import { Button, Group } from "@mantine/core@7";
+import { Button, Group } from "@mantine/core@9";
 
 export function ButtonBar() {
   return (

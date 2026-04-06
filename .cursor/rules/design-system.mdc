@@ -8,7 +8,7 @@ alwaysApply: true
 ## Tech Stack
 
 - **Next.js v14+** App Router
-- **Mantine v7** for UI and styling
+- **Mantine v9** for UI and styling
 - **TypeScript**
 
 ---

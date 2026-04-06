@@ -1,4 +1,4 @@
-import { NumberInput as MantineNumberInput, NumberInputProps as MantineNumberInputProps } from "@mantine/core@7";
+import { NumberInput as MantineNumberInput, NumberInputProps as MantineNumberInputProps } from "@mantine/core@9";
 
 export interface DSNumberInputProps extends MantineNumberInputProps {
   makeId?: string;

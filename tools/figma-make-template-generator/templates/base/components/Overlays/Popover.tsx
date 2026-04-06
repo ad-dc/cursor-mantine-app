@@ -1,5 +1,5 @@
 import React from "react";
-import { Popover as MantinePopover, PopoverProps as MantinePopoverProps } from "@mantine/core@7";
+import { Popover as MantinePopover, PopoverProps as MantinePopoverProps } from "@mantine/core@9";
 
 export interface DSPopoverProps extends MantinePopoverProps { makeId?: string }
 

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Select as MantineSelect, SelectProps as MantineSelectProps } from "@mantine/core@7";
+import { Select as MantineSelect, SelectProps as MantineSelectProps } from "@mantine/core@9";
 
 export interface DSSelectProps extends MantineSelectProps {
   leftIcon?: React.ReactNode;

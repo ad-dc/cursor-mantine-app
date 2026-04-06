@@ -1,4 +1,4 @@
-import { Grid as MantineGrid, GridCol as MantineCol, GridProps as MantineGridProps, GridColProps as MantineColProps } from "@mantine/core@7";
+import { Grid as MantineGrid, GridCol as MantineCol, GridProps as MantineGridProps, GridColProps as MantineColProps } from "@mantine/core@9";
 
 export interface DSGridProps extends MantineGridProps {
   makeId?: string;

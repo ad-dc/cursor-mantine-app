@@ -9,7 +9,7 @@ import {
   MRT_DensityState as DensityState,
   MRT_RowData,
   MRT_ColumnDef as ColumnDef,
-} from 'mantine-react-table';
+} from 'mantine-react-table-open';
 import { useTableState } from '../../../../hooks/useTableState';
 import { useTableHandlers } from '../../../../hooks/useTableHandlers';
 import { useTableRenderFunctions } from '../../../../hooks/useTableRenderFunctions';

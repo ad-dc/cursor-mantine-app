@@ -1,4 +1,4 @@
-import { Badge as MantineBadge, BadgeProps as MantineBadgeProps } from "@mantine/core@7";
+import { Badge as MantineBadge, BadgeProps as MantineBadgeProps } from "@mantine/core@9";
 
 export interface DSBadgeProps extends MantineBadgeProps {
   makeId?: string;

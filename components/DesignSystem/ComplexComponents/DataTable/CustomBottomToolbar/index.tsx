@@ -4,7 +4,7 @@ import { Inline } from '@/components/DesignSystem';
 import {
   MRT_TableInstance as MRTTableInstance,
   MRT_RowData,
-} from "mantine-react-table";
+} from "mantine-react-table-open";
 import { translate } from '../translations';
 import { RiArrowLeftSLine, RiArrowRightSLine } from '@remixicon/react';
 

@@ -1,4 +1,4 @@
-import { Switch as MantineSwitch, SwitchProps as MantineSwitchProps } from "@mantine/core@7";
+import { Switch as MantineSwitch, SwitchProps as MantineSwitchProps } from "@mantine/core@9";
 
 export interface DSSwitchProps extends MantineSwitchProps {
   makeId?: string;

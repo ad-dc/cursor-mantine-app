@@ -4,7 +4,7 @@ import {
   MRT_RowSelectionState as RowSelectionState,
   MRT_DensityState as DensityState,
   MRT_SortingState as SortingState,
-} from 'mantine-react-table';
+} from 'mantine-react-table-open';
 import { useTableState } from './useTableState';
 
 /**

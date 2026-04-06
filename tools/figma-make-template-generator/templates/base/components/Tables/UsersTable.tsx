@@ -1,4 +1,4 @@
-import { Table, Pagination, TextInput, Group, Paper, Alert } from "@mantine/core@7";
+import { Table, Pagination, TextInput, Group, Paper, Alert } from "@mantine/core@9";
 import { useState, useMemo } from "react";
 import { useDebouncedValue } from "../../hooks/useDebouncedValue";
 import { usePagination } from "../../hooks/usePagination";

@@ -1,7 +1,7 @@
 {
   "name": "@appdirect/ds-prototype-kit",
   "version": "0.1.3",
-  "description": "AppDirect Design System components for prototyping. Wraps Mantine v7 with standardized props, variants, and tokens.",
+  "description": "AppDirect Design System components for prototyping. Wraps Mantine v9 with standardized props, variants, and tokens.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -33,13 +33,13 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@mantine/dropzone": "^7.9.0",
+    "@mantine/dropzone": "^9.0.1",
     "@remixicon/react": "^4.6.0",
     "@tabler/icons-react": "^3.33.0"
   },
   "peerDependencies": {
-    "@mantine/core": "^7.9.0",
-    "@mantine/hooks": "^7.9.0",
+    "@mantine/core": "^9.0.1",
+    "@mantine/hooks": "^9.0.1",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },

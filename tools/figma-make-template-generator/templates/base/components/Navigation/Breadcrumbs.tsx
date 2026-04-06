@@ -1,4 +1,4 @@
-import { Breadcrumbs as MantineBreadcrumbs, BreadcrumbsProps as MantineBreadcrumbsProps } from "@mantine/core@7";
+import { Breadcrumbs as MantineBreadcrumbs, BreadcrumbsProps as MantineBreadcrumbsProps } from "@mantine/core@9";
 
 export interface DSBreadcrumbsProps extends MantineBreadcrumbsProps {
   makeId?: string;

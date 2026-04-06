@@ -26,6 +26,8 @@ export default function SettingsPage() {
           title="Settings"
           subhead=""
           badge="Prototype"
+          contentSection="description"
+          description=""
         />
 
         <Card>

@@ -22,7 +22,7 @@ export function TertiaryColumnLayout({
   const asideSpan = 12 - mainSpan;
 
   return (
-    <Grid gutter="lg">
+    <Grid gap="lg">
       <Grid.Col span={mainSpan}>{main}</Grid.Col>
       <Grid.Col span={asideSpan}>{aside}</Grid.Col>
     </Grid>

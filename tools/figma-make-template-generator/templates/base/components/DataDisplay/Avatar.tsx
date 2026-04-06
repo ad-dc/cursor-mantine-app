@@ -1,4 +1,4 @@
-import { Avatar as MantineAvatar, AvatarProps as MantineAvatarProps } from "@mantine/core@7";
+import { Avatar as MantineAvatar, AvatarProps as MantineAvatarProps } from "@mantine/core@9";
 
 export interface DSAvatarProps extends MantineAvatarProps {
   makeId?: string;

@@ -24,7 +24,7 @@ This project generates a Figma Make‑compatible template zip.
 - Copy into `templates/base/components/DS/` or equivalent
 - Rewrite imports:
   - path aliases → relative paths
-  - `@mantine/*` → `@mantine/*@7`
+  - `@mantine/*` → `@mantine/*@9`
 - Assets: convert referenced images to data URLs or local module exports; rewrite paths
 - Styles: prefer plain CSS; warn on CSS Modules/SCSS
 

@@ -36,6 +36,8 @@ export default function CustomerDetailPage() {
         title="Northwind Health"
         subhead="Enterprise customer"
         badge="Active"
+        contentSection="description"
+        description=""
       />
 
       <TertiaryColumnLayout

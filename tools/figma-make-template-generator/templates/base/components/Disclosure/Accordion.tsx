@@ -1,5 +1,5 @@
 import React from "react";
-import { Accordion as MantineAccordion, AccordionProps as MantineAccordionProps } from "@mantine/core@7";
+import { Accordion as MantineAccordion, AccordionProps as MantineAccordionProps } from "@mantine/core@9";
 
 export interface DSAccordionProps extends MantineAccordionProps { makeId?: string }
 

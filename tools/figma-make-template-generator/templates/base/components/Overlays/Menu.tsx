@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu as MantineMenu, MenuProps as MantineMenuProps } from "@mantine/core@7";
+import { Menu as MantineMenu, MenuProps as MantineMenuProps } from "@mantine/core@9";
 
 export interface DSMenuProps extends MantineMenuProps { makeId?: string }
 

@@ -73,7 +73,7 @@ const ListComponent = forwardRef<HTMLUListElement | HTMLOListElement, DSListProp
   ) => {
     return (
       <MantineList
-        ref={ref}
+        ref={ref as React.ComponentPropsWithRef<typeof MantineList>['ref']}
         size={size}
         spacing={spacing}
         {...props}

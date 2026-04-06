@@ -1,5 +1,5 @@
 import React from "react";
-import { Stepper as MantineStepper, StepperProps as MantineStepperProps } from "@mantine/core@7";
+import { Stepper as MantineStepper, StepperProps as MantineStepperProps } from "@mantine/core@9";
 
 export interface DSStepperProps extends MantineStepperProps { makeId?: string }
 

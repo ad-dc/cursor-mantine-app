@@ -1,4 +1,4 @@
-import { Text as MantineText, TextProps as MantineTextProps } from "@mantine/core@7";
+import { Text as MantineText, TextProps as MantineTextProps } from "@mantine/core@9";
 import { forwardRef } from "react";
 
 export interface DSTextProps extends MantineTextProps {

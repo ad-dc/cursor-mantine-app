@@ -92,7 +92,7 @@ export const BasicRadioGroup: Story = {
       <RadioGroup
         label="Choose an option"
         value={value}
-        onChange={setValue}
+        onChange={(v) => setValue(String(v))}
       >
         <Stack gap="xs">
           <Radio value="option1" label="First option" />
@@ -121,7 +121,7 @@ export const RadioGroupSizes: Story = {
           label="Extra Small"
           size="xs"
           value={value}
-          onChange={setValue}
+          onChange={(v) => setValue(String(v))}
         >
           <Stack gap="xs">
             <Radio value="xs1" label="Option 1" />
@@ -133,7 +133,7 @@ export const RadioGroupSizes: Story = {
           label="Small"
           size="sm"
           value={value}
-          onChange={setValue}
+          onChange={(v) => setValue(String(v))}
         >
           <Stack gap="xs">
             <Radio value="sm1" label="Option 1" />
@@ -145,7 +145,7 @@ export const RadioGroupSizes: Story = {
           label="Medium (Default)"
           size="md"
           value={value}
-          onChange={setValue}
+          onChange={(v) => setValue(String(v))}
         >
           <Stack gap="xs">
             <Radio value="md1" label="Option 1" />
@@ -157,7 +157,7 @@ export const RadioGroupSizes: Story = {
           label="Large"
           size="lg"
           value={value}
-          onChange={setValue}
+          onChange={(v) => setValue(String(v))}
         >
           <Stack gap="xs">
             <Radio value="lg1" label="Option 1" />
@@ -178,7 +178,7 @@ export const WithDescriptions: Story = {
         label="Subscription Plan"
         description="Choose the plan that best fits your needs"
         value={plan}
-        onChange={setPlan}
+        onChange={(v) => setPlan(String(v))}
       >
         <Stack gap="xs">
           <Radio 
@@ -211,7 +211,7 @@ export const Required: Story = {
         label="Payment Method"
         description="Please select your preferred payment method"
         value={payment}
-        onChange={setPayment}
+        onChange={(v) => setPayment(String(v))}
         required
       >
         <Stack gap="xs">
@@ -245,7 +245,7 @@ export const FormExample: Story = {
           <RadioGroup
             label="Account Type"
             value={accountType}
-            onChange={setAccountType}
+            onChange={(v) => setAccountType(String(v))}
             required
           >
             <Stack gap="xs">
@@ -265,7 +265,7 @@ export const FormExample: Story = {
           <RadioGroup
             label="Plan Selection"
             value={plan}
-            onChange={setPlan}
+            onChange={(v) => setPlan(String(v))}
             required
           >
             <Stack gap="xs">
@@ -278,7 +278,7 @@ export const FormExample: Story = {
           <RadioGroup
             label="Billing Cycle"
             value={billing}
-            onChange={setBilling}
+            onChange={(v) => setBilling(String(v))}
           >
             <Stack gap="xs">
               <Radio 
@@ -338,7 +338,7 @@ export const SurveyExample: Story = {
           <RadioGroup
             label="How satisfied are you with our service?"
             value={satisfaction}
-            onChange={setSatisfaction}
+            onChange={(v) => setSatisfaction(String(v))}
             required
           >
             <Stack gap="xs">
@@ -353,7 +353,7 @@ export const SurveyExample: Story = {
           <RadioGroup
             label="Would you recommend us to others?"
             value={recommendation}
-            onChange={setRecommendation}
+            onChange={(v) => setRecommendation(String(v))}
             required
           >
             <Stack gap="xs">
@@ -368,7 +368,7 @@ export const SurveyExample: Story = {
           <RadioGroup
             label="How often do you use our service?"
             value={frequency}
-            onChange={setFrequency}
+            onChange={(v) => setFrequency(String(v))}
           >
             <Stack gap="xs">
               <Radio value="daily" label="Daily" />
@@ -400,7 +400,7 @@ export const WithError: Story = {
         label="Required Selection"
         description="You must select one option to continue"
         value={value}
-        onChange={setValue}
+        onChange={(v) => setValue(String(v))}
         error={!value ? "Please select an option" : null}
         required
       >

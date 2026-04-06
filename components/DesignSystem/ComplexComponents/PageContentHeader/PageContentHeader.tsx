@@ -298,7 +298,7 @@ export function PageContentHeader({
     <Box p={0}>
       <Stack gap={0}>
         
-        <Collapse in={drawerOpened}>
+        <Collapse expanded={drawerOpened}>
           <Box 
             p={spacing}
             style={{

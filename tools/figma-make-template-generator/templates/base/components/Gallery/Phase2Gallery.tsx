@@ -1,4 +1,4 @@
-import { Group, Paper, Stack, Divider, Button } from "@mantine/core@7";
+import { Group, Paper, Stack, Divider, Button } from "@mantine/core@9";
 import { Title } from "../Typography/Title";
 import { Text } from "../Typography/Text";
 import { Badge } from "../DataDisplay/Badge";
@@ -58,7 +58,7 @@ export function Phase2Gallery() {
             <Accordion.Panel>Panel 1</Accordion.Panel>
           </Accordion.Item>
         </Accordion>
-        <Collapse in={true} makeId="gallery:phase2:collapse" mt="xs">
+        <Collapse expanded={true} makeId="gallery:phase2:collapse" mt="xs">
           <Text>Collapsible content</Text>
         </Collapse>
         <Autocomplete placeholder="Search" data={["React","Vue","Svelte"]} makeId="gallery:phase2:autocomplete" mt="xs" />

@@ -20,6 +20,8 @@ export default function PrototypeIndexPage() {
         <PageContentHeader
           title="Prototype Pages"
           subhead={manifest.prototypeName}
+          contentSection="description"
+          description=""
         />
 
         <Stack gap="md">
@@ -29,7 +31,7 @@ export default function PrototypeIndexPage() {
               href={`/prototype/${page.slug}`}
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <Card withBorder p="lg" style={{ cursor: 'pointer' }}>
+              <Card p="lg" styles={{ root: { cursor: 'pointer' } }}>
                 <Inline justify="space-between" align="center">
                   <Stack gap={4}>
                     <Title order={4}>{page.title}</Title>
@@ -38,8 +40,8 @@ export default function PrototypeIndexPage() {
                     )}
                   </Stack>
                   <Inline gap="xs">
-                    <Badge color="info" variant="light">{page.template}</Badge>
-                    <Badge color="default" variant="light">{page.contentLayout}</Badge>
+                    <Badge color="info" variant="outline">{page.template}</Badge>
+                    <Badge color="default" variant="outline">{page.contentLayout}</Badge>
                   </Inline>
                 </Inline>
               </Card>

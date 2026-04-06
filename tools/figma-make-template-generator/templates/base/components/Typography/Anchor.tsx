@@ -1,4 +1,4 @@
-import { Anchor as MantineAnchor, AnchorProps as MantineAnchorProps } from "@mantine/core@7";
+import { Anchor as MantineAnchor, AnchorProps as MantineAnchorProps } from "@mantine/core@9";
 
 export interface DSAnchorProps extends MantineAnchorProps {
   makeId?: string;

@@ -41,7 +41,7 @@ import { translate } from '@/components/DesignSystem/ComplexComponents/DataTable
  *   return (
  *     <div>
  *       {selectedText && (
- *         <Text size="sm" color="blue">
+ *         <Text size="sm" c="blue">
  *           {selectedText}
  *         </Text>
  *       )}

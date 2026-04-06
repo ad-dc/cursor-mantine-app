@@ -1,4 +1,4 @@
-import { Autocomplete as MantineAutocomplete, AutocompleteProps as MantineAutocompleteProps } from "@mantine/core@7";
+import { Autocomplete as MantineAutocomplete, AutocompleteProps as MantineAutocompleteProps } from "@mantine/core@9";
 
 export interface DSAutoProps extends MantineAutocompleteProps { makeId?: string }
 

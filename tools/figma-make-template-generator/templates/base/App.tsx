@@ -1,9 +1,9 @@
-import { MantineProvider, createTheme, Button, Container, Stack } from "@mantine/core@7";
+import { MantineProvider, createTheme, Button, Container, Stack } from "@mantine/core@9";
 import "@mantine/core/styles.css";
-import { Notifications } from "@mantine/notifications@7";
+import { Notifications } from "@mantine/notifications@9";
 import "@mantine/notifications/styles.css";
-import { ModalsProvider } from "@mantine/modals@7";
-import { DatesProvider } from "@mantine/dates@7";
+import { ModalsProvider } from "@mantine/modals@9";
+import { DatesProvider } from "@mantine/dates@9";
 import "@mantine/dates/styles.css";
 import "dayjs@1";
 import "./styles/globals.css";
@@ -15,7 +15,6 @@ import { UsersTable } from "./components/Tables/UsersTable";
 import { Phase1Gallery } from "./components/Gallery/Phase1Gallery";
 import { Phase2Gallery } from "./components/Gallery/Phase2Gallery";
 import { Phase3Gallery } from "./components/Gallery/Phase3Gallery";
-import { Phase1Gallery } from "./components/Gallery/Phase1Gallery";
 
 export type User = { id: string | number; name: string; email: string; role?: string };
 
