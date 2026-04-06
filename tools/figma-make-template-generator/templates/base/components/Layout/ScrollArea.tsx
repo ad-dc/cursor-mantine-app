@@ -1,4 +1,4 @@
-import { ScrollArea as MantineScrollArea, ScrollAreaProps as MantineScrollAreaProps } from "@mantine/core@7";
+import { ScrollArea as MantineScrollArea, ScrollAreaProps as MantineScrollAreaProps } from "@mantine/core@9";
 
 export interface DSScrollAreaProps extends MantineScrollAreaProps {
   makeId?: string;

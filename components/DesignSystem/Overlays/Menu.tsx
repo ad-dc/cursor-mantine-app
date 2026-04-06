@@ -33,7 +33,7 @@ export interface MenuSection {
   items: MenuItem[];
 }
 
-export interface LegacyMenuProps extends Omit<MantineMenuProps, 'children'> {
+export interface LegacyMenuProps extends Omit<MantineMenuProps, 'children' | 'trigger'> {
   /** Menu trigger element */
   trigger: React.ReactNode;
   /** Array of menu sections */

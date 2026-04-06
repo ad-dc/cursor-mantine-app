@@ -1,4 +1,4 @@
-import { Title as MantineTitle, TitleProps as MantineTitleProps } from "@mantine/core@7";
+import { Title as MantineTitle, TitleProps as MantineTitleProps } from "@mantine/core@9";
 import { forwardRef } from "react";
 
 export interface DSTitleProps extends Omit<MantineTitleProps, "size"> {

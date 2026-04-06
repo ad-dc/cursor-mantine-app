@@ -1,4 +1,4 @@
-import { SegmentedControl as MantineSegmentedControl, SegmentedControlProps as MantineSegmentedControlProps } from "@mantine/core@7";
+import { SegmentedControl as MantineSegmentedControl, SegmentedControlProps as MantineSegmentedControlProps } from "@mantine/core@9";
 
 export interface DSSegmentedProps extends MantineSegmentedControlProps {
   makeId?: string;

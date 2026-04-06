@@ -1,6 +1,6 @@
 # AppDirect Design System
 
-A design system layer built on top of Mantine v7, providing consistent component wrappers, semantic tokens, and layout primitives for AppDirect applications.
+A design system layer built on top of Mantine v9, providing consistent component wrappers, semantic tokens, and layout primitives for AppDirect applications.
 
 ## Structure
 

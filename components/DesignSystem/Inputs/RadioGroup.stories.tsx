@@ -53,7 +53,7 @@ export const Default: Story = {
     const [value, setValue] = useState<string>('');
     
     return (
-      <RadioGroup label="Choose an option" value={value} onChange={setValue}>
+      <RadioGroup label="Choose an option" value={value} onChange={(v) => setValue(String(v))}>
         <Radio value="option1" label="First option" />
         <Radio value="option2" label="Second option" />
         <Radio value="option3" label="Third option" />
@@ -83,7 +83,7 @@ export const Sizes: Story = {
               size={size}
               label={`${size.toUpperCase()} Radio Group`}
               value={values[size]}
-              onChange={(val) => setValues(prev => ({ ...prev, [size]: val }))}
+              onChange={(val) => setValues(prev => ({ ...prev, [size]: String(val) }))}
             >
               <Radio value="option1" label="First option" />
               <Radio value="option2" label="Second option" />
@@ -112,7 +112,7 @@ export const WithDescription: Story = {
         label="Subscription Plan"
         description="Choose the plan that best fits your needs"
         value={value}
-        onChange={setValue}
+        onChange={(v) => setValue(String(v))}
       >
         <Radio value="basic" label="Basic - $9/month" />
         <Radio value="pro" label="Pro - $29/month" />
@@ -139,7 +139,7 @@ export const Required: Story = {
         description="Please select your preferred payment method"
         required
         value={value}
-        onChange={setValue}
+        onChange={(v) => setValue(String(v))}
       >
         <Radio value="card" label="Credit Card" />
         <Radio value="paypal" label="PayPal" />
@@ -168,7 +168,7 @@ export const WithError: Story = {
         error={!value ? "Please select a delivery option" : ""}
         required
         value={value}
-        onChange={setValue}
+        onChange={(v) => setValue(String(v))}
       >
         <Radio value="standard" label="Standard Delivery (5-7 days)" />
         <Radio value="express" label="Express Delivery (2-3 days)" />
@@ -198,7 +198,7 @@ export const DisabledStates: Story = {
             label="Mixed States"
             description="Some options are disabled"
             value={value}
-            onChange={setValue}
+            onChange={(v) => setValue(String(v))}
           >
             <Radio value="option1" label="Available option" />
             <Radio value="option2" label="Selected option" />
@@ -253,7 +253,7 @@ export const FormIntegration: Story = {
           required
           error={errors.priority}
           value={formData.priority}
-          onChange={(val) => setFormData(prev => ({ ...prev, priority: val }))}
+          onChange={(val) => setFormData(prev => ({ ...prev, priority: String(val) }))}
         >
           <Radio value="low" label="🟢 Low Priority" />
           <Radio value="medium" label="🟡 Medium Priority" />
@@ -267,7 +267,7 @@ export const FormIntegration: Story = {
           required
           error={errors.category}
           value={formData.category}
-          onChange={(val) => setFormData(prev => ({ ...prev, category: val }))}
+          onChange={(val) => setFormData(prev => ({ ...prev, category: String(val) }))}
         >
           <Radio value="development" label="Development" />
           <Radio value="design" label="Design" />
@@ -281,7 +281,7 @@ export const FormIntegration: Story = {
           required
           error={errors.visibility}
           value={formData.visibility}
-          onChange={(val) => setFormData(prev => ({ ...prev, visibility: val }))}
+          onChange={(val) => setFormData(prev => ({ ...prev, visibility: String(val) }))}
         >
           <Radio value="private" label="Private (Only me)" />
           <Radio value="team" label="Team members" />
@@ -320,7 +320,7 @@ export const SettingsConfiguration: Story = {
           label="Theme Preference"
           description="Choose your preferred theme"
           value={settings.theme}
-          onChange={(val) => setSettings(prev => ({ ...prev, theme: val }))}
+          onChange={(val) => setSettings(prev => ({ ...prev, theme: String(val) }))}
         >
           <Radio value="light" label="☀️ Light Theme" />
           <Radio value="dark" label="🌙 Dark Theme" />
@@ -331,7 +331,7 @@ export const SettingsConfiguration: Story = {
           label="Email Notifications"
           description="Control what notifications you receive"
           value={settings.notifications}
-          onChange={(val) => setSettings(prev => ({ ...prev, notifications: val }))}
+          onChange={(val) => setSettings(prev => ({ ...prev, notifications: String(val) }))}
         >
           <Radio value="all" label="All notifications" />
           <Radio value="important" label="Important only" />
@@ -343,7 +343,7 @@ export const SettingsConfiguration: Story = {
           label="Profile Visibility"
           description="Who can see your profile"
           value={settings.privacy}
-          onChange={(val) => setSettings(prev => ({ ...prev, privacy: val }))}
+          onChange={(val) => setSettings(prev => ({ ...prev, privacy: String(val) }))}
         >
           <Radio value="public" label="🌍 Public" />
           <Radio value="friends" label="👥 Friends only" />
@@ -354,7 +354,7 @@ export const SettingsConfiguration: Story = {
           label="Language"
           description="Choose your preferred language"
           value={settings.language}
-          onChange={(val) => setSettings(prev => ({ ...prev, language: val }))}
+          onChange={(val) => setSettings(prev => ({ ...prev, language: String(val) }))}
         >
           <Radio value="en" label="🇺🇸 English" />
           <Radio value="es" label="🇪🇸 Spanish" />
@@ -390,7 +390,7 @@ export const SurveyQuestions: Story = {
           label="How satisfied are you with our service?"
           required
           value={answers.satisfaction}
-          onChange={(val) => setAnswers(prev => ({ ...prev, satisfaction: val }))}
+          onChange={(val) => setAnswers(prev => ({ ...prev, satisfaction: String(val) }))}
         >
           <Radio value="very-satisfied" label="😊 Very Satisfied" />
           <Radio value="satisfied" label="🙂 Satisfied" />
@@ -404,7 +404,7 @@ export const SurveyQuestions: Story = {
           description="Scale from 0 (not likely) to 10 (very likely)"
           required
           value={answers.recommendation}
-          onChange={(val) => setAnswers(prev => ({ ...prev, recommendation: val }))}
+          onChange={(val) => setAnswers(prev => ({ ...prev, recommendation: String(val) }))}
         >
           <Inline gap="sm">
             {Array.from({ length: 11 }, (_, i) => (
@@ -417,7 +417,7 @@ export const SurveyQuestions: Story = {
           label="How often do you use our service?"
           required
           value={answers.frequency}
-          onChange={(val) => setAnswers(prev => ({ ...prev, frequency: val }))}
+          onChange={(val) => setAnswers(prev => ({ ...prev, frequency: String(val) }))}
         >
           <Radio value="daily" label="Daily" />
           <Radio value="weekly" label="Weekly" />
@@ -429,7 +429,7 @@ export const SurveyQuestions: Story = {
         <RadioGroup
           label="What area needs the most improvement?"
           value={answers.improvement}
-          onChange={(val) => setAnswers(prev => ({ ...prev, improvement: val }))}
+          onChange={(val) => setAnswers(prev => ({ ...prev, improvement: String(val) }))}
         >
           <Radio value="speed" label="Speed and performance" />
           <Radio value="features" label="Features and functionality" />
@@ -514,7 +514,7 @@ export const Interactive: Story = {
     const [value, setValue] = useState<string>('');
     
     return (
-      <RadioGroup {...args} value={value} onChange={setValue}>
+      <RadioGroup {...args} value={value} onChange={(v) => setValue(String(v))}>
         <Radio value="option1" label="First option" />
         <Radio value="option2" label="Second option" />
         <Radio value="option3" label="Third option" />

@@ -1,4 +1,4 @@
-import { ActionIcon as MantineActionIcon, ActionIconProps as MantineActionIconProps } from "@mantine/core@7";
+import { ActionIcon as MantineActionIcon, ActionIconProps as MantineActionIconProps } from "@mantine/core@9";
 
 export interface DSActionIconProps extends MantineActionIconProps {
   makeId?: string;

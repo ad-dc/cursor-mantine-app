@@ -1,4 +1,4 @@
-import { Loader as MantineLoader, LoaderProps as MantineLoaderProps, LoadingOverlay as MantineLoadingOverlay, LoadingOverlayProps as MantineLoadingOverlayProps, Tooltip as MantineTooltip, TooltipProps as MantineTooltipProps } from "@mantine/core@7";
+import { Loader as MantineLoader, LoaderProps as MantineLoaderProps, LoadingOverlay as MantineLoadingOverlay, LoadingOverlayProps as MantineLoadingOverlayProps, Tooltip as MantineTooltip, TooltipProps as MantineTooltipProps } from "@mantine/core@9";
 
 export interface DSLoaderProps extends MantineLoaderProps { makeId?: string }
 export function Loader({ makeId, ...props }: DSLoaderProps) {

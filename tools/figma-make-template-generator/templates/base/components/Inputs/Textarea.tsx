@@ -1,4 +1,4 @@
-import { Textarea as MantineTextarea, TextareaProps as MantineTextareaProps } from "@mantine/core@7";
+import { Textarea as MantineTextarea, TextareaProps as MantineTextareaProps } from "@mantine/core@9";
 
 export interface DSTextareaProps extends MantineTextareaProps {
   makeId?: string;

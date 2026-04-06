@@ -8,7 +8,7 @@ import { Text } from '../Typography/Text';
 import { Button } from '../Buttons/Button';
 import { ThemeIcon } from '../DataDisplay/ThemeIcon';
 
-const meta: Meta<typeof Menu> = {
+const meta = {
   title: 'Design System/Overlays/Menu',
   component: Menu,
   parameters: {
@@ -41,7 +41,7 @@ const meta: Meta<typeof Menu> = {
       description: 'Menu position',
     },
   },
-};
+} satisfies Meta;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -909,31 +909,33 @@ export const UseCases: Story = {
 };
 
 export const Interactive: Story = {
-  args: {
-    width: 200,
-    shadow: 'md',
-    position: 'bottom-start',
-    trigger: <Button>Interactive Menu</Button>,
-    sections: [
-      {
-        title: 'Interactive Section',
-        items: [
-          {
-            id: 'item1',
-            label: 'Item 1',
-            leftSection: <span>1️⃣</span>,
-            onClick: () => console.log('Item 1 clicked'),
-          },
-          {
-            id: 'item2',
-            label: 'Item 2',
-            leftSection: <span>2️⃣</span>,
-            onClick: () => console.log('Item 2 clicked'),
-          },
-        ],
-      },
-    ],
-  },
+  render: () => (
+    <Menu
+      width={200}
+      shadow="md"
+      position="bottom-start"
+      trigger={<Button>Interactive Menu</Button>}
+      sections={[
+        {
+          title: 'Interactive Section',
+          items: [
+            {
+              id: 'item1',
+              label: 'Item 1',
+              leftSection: <span>1️⃣</span>,
+              onClick: () => console.log('Item 1 clicked'),
+            },
+            {
+              id: 'item2',
+              label: 'Item 2',
+              leftSection: <span>2️⃣</span>,
+              onClick: () => console.log('Item 2 clicked'),
+            },
+          ],
+        },
+      ]}
+    />
+  ),
   parameters: {
     docs: {
       description: {

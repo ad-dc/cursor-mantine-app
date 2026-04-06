@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { TextInput as MantineTextInput, TextInputProps as MantineTextInputProps } from "@mantine/core@7";
+import { TextInput as MantineTextInput, TextInputProps as MantineTextInputProps } from "@mantine/core@9";
 
 export interface DSTextInputProps extends Omit<MantineTextInputProps, "size" | "radius"> {
   size?: "xs" | "sm" | "md" | "lg" | "xl";

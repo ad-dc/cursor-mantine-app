@@ -1,4 +1,4 @@
-import { Paper, Stack, Group, Divider, Button } from "@mantine/core@7";
+import { Paper, Stack, Group, Divider, Button } from "@mantine/core@9";
 import { Title } from "../Typography/Title";
 import { Text } from "../Typography/Text";
 import { DateInput, DatePickerInput } from "../Inputs/DateInputs";

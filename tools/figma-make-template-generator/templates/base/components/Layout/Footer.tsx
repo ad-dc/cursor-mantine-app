@@ -1,4 +1,4 @@
-import { Group, Text } from "@mantine/core@7";
+import { Group, Text } from "@mantine/core@9";
 
 export function Footer() {
   return (

@@ -1,4 +1,4 @@
-import { AppShell } from "@mantine/core@7";
+import { AppShell } from "@mantine/core@9";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { PropsWithChildren } from "react";

@@ -11,7 +11,7 @@ import {
   MRT_ColumnDef as ColumnDef,
   MRT_PaginationState as PaginationState,
   MRT_RowSelectionState as RowSelectionState,
-} from 'mantine-react-table';
+} from 'mantine-react-table-open';
 
 // Sample data types
 interface User {

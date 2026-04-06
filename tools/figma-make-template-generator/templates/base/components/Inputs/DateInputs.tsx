@@ -1,4 +1,4 @@
-import { DateInput as MantineDateInput, DateInputProps as MantineDateInputProps, DatePickerInput as MantineDatePickerInput, DatePickerInputProps as MantineDatePickerInputProps } from "@mantine/dates@7";
+import { DateInput as MantineDateInput, DateInputProps as MantineDateInputProps, DatePickerInput as MantineDatePickerInput, DatePickerInputProps as MantineDatePickerInputProps } from "@mantine/dates@9";
 
 export interface DSDateInputProps extends MantineDateInputProps { makeId?: string }
 export function DateInput({ makeId, ...props }: DSDateInputProps) {

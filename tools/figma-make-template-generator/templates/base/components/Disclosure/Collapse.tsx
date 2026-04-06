@@ -1,4 +1,4 @@
-import { Collapse as MantineCollapse, CollapseProps as MantineCollapseProps } from "@mantine/core@7";
+import { Collapse as MantineCollapse, CollapseProps as MantineCollapseProps } from "@mantine/core@9";
 
 export interface DSCollapseProps extends MantineCollapseProps { makeId?: string }
 

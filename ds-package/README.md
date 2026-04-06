@@ -1,6 +1,6 @@
 # @appdirect/ds-prototype-kit
 
-AppDirect Design System components for prototyping. Thin wrappers around Mantine v7 with standardized props, semantic color tokens, and consistent API.
+AppDirect Design System components for prototyping. Thin wrappers around Mantine v9 with standardized props, semantic color tokens, and consistent API.
 
 ## Installation
 

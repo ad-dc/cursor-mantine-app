@@ -5,14 +5,14 @@ import { Grid } from '../../../Layout/Grid';
 import { SimpleGrid } from '../../../Layout/SimpleGrid';
 import { Inline } from '../../../Layout/Inline';
 import { IconFilter, IconMaximize, IconMinimize, IconBaselineDensityMedium, IconBaselineDensitySmall, IconBaselineDensityLarge } from '@tabler/icons-react';
-import { DatesRangeValue } from "@mantine/dates";
+import { DatesRangeValue, type DateValue } from "@mantine/dates";
 import {
   MRT_TableInstance as MRTTableInstance,
   MRT_ToggleFullScreenButton as MRTToggleFullScreenButton,
   MRT_ToggleDensePaddingButton as MRTToggleDensePaddingButton,
   MRT_ToolbarAlertBanner as BaseMRTToolbarAlertBanner,
   MRT_RowData,
-} from "mantine-react-table";
+} from "mantine-react-table-open";
 import { translate } from '../translations';
 import SelectFilter from "./SelectFilter";
 import SearchFilter from "./SearchFilter";
@@ -216,6 +216,11 @@ const hasActiveFilters = (filters: Filters): boolean => {
  * @param value - The selected date range value
  * @returns Processed DateRange or null
  */
+const toBoundaryDate = (v: DateValue | null): Date | null => {
+  if (v == null) return null;
+  return v instanceof Date ? v : new Date(`${v}T12:00:00`);
+};
+
 const processDateRangeSelection = (value: DatesRangeValue | null): DateRange | null => {
   // Helper functions for date validation
   const isOnlyOneDateSelected = (): boolean => {
@@ -234,9 +239,9 @@ const processDateRangeSelection = (value: DatesRangeValue | null): DateRange | n
   let range: DateRange | null = null;
 
   if (value !== null && areBothDatesSelected()) {
-    let endDate = value[1];
-    
-    // Set end date to end of day for inclusive range
+    const start = toBoundaryDate(value[0]);
+    let endDate = toBoundaryDate(value[1]);
+
     if (endDate) {
       const endOfDay = new Date(endDate);
       endOfDay.setHours(23, 59, 59, 999);
@@ -244,7 +249,7 @@ const processDateRangeSelection = (value: DatesRangeValue | null): DateRange | n
     }
 
     range = {
-      start: value[0],
+      start,
       end: endDate,
     };
   }
@@ -694,7 +699,7 @@ const CustomTopToolbar = <T extends MRT_RowData>({
         }}
       >
         {/* Top row: Search and action buttons */}
-        <Grid gutter="md">
+        <Grid gap="md">
           <Grid.Col span={{ base: 12, md: 6 }}>
             {/* Left side: Filter toggle and search */}
             <Inline gap="xs" align="center">

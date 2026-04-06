@@ -7,8 +7,27 @@ import {
   Popover,
   useCombobox,
 } from "@mantine/core";
-import { DatePicker, DatesRangeValue } from "@mantine/dates";
+import { DatePicker, DatesRangeValue, type DateValue } from "@mantine/dates";
 import { translate } from '../../translations';
+
+/** Local-calendar YYYY-MM-DD for Mantine DatePicker string values */
+function toDateStringValue(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function formatDateValueLocale(v: DateValue | null, locale: string): string {
+  if (v == null) return "";
+  const d = typeof v === "string" ? new Date(`${v}T12:00:00`) : v;
+  return d.toLocaleDateString(locale);
+}
+
+function toPickerDate(v: DateValue | null | undefined): Date {
+  if (v == null) return new Date();
+  return typeof v === "string" ? new Date(`${v}T12:00:00`) : v;
+}
 
 /**
  * Props interface for the DateRangeSelector component
@@ -40,8 +59,8 @@ interface DateFilterState {
   previousPreset: string | null;
   /** Currently selected preset option */
   preset: string | null;
-  /** Selected custom date range [startDate, endDate] */
-  customDateRange: [Date | null, Date | null];
+  /** Selected custom date range (Mantine 9 uses date strings or Date) */
+  customDateRange: DatesRangeValue;
 }
 
 /**
@@ -91,28 +110,25 @@ const getPresetLabel = (value: string): string => {
  * @param preset - The preset type to calculate range for
  * @returns Tuple of [startDate, endDate] or null for invalid preset
  */
-const getDateRangeFromPreset = (preset: string): [Date | null, Date | null] | null => {
+const getDateRangeFromPreset = (preset: string): DatesRangeValue | null => {
   const now = new Date();
   const start = new Date();
-  
+
   switch (preset) {
     case Preset.WEEK:
-      // Last 7 days from today
       start.setDate(now.getDate() - 7);
       break;
     case Preset.MONTH:
-      // Last month from today
       start.setMonth(now.getMonth() - 1);
       break;
     case Preset.QUARTER:
-      // Last 3 months from today
       start.setMonth(now.getMonth() - 3);
       break;
     default:
       return null;
   }
-  
-  return [start, now];
+
+  return [toDateStringValue(start), toDateStringValue(now)];
 };
 
 /**
@@ -156,9 +172,10 @@ const DateRangeSelector = ({ label, locale, onChange }: DateRangeSelectorProps):
   const getValueDisplayed = useMemo(() => {
     // Show formatted date range for completed custom selection
     if (isDateRangeSelected(preset)) {
-      return `${customDateRange[0]?.toLocaleDateString(
+      return `${formatDateValueLocale(customDateRange[0], locale)} - ${formatDateValueLocale(
+        customDateRange[1],
         locale
-      )} - ${customDateRange[1]?.toLocaleDateString(locale)}`;
+      )}`;
     }
     
     // Show helper text for partial custom selection
@@ -331,7 +348,7 @@ const DateRangeSelector = ({ label, locale, onChange }: DateRangeSelectorProps):
           type="range"
           value={customDateRange}
           onChange={handleDatePickerChange}
-          defaultDate={customDateRange[0] || customDateRange[1] || new Date()}
+          defaultDate={toPickerDate(customDateRange[0] ?? customDateRange[1])}
         />
       </Popover.Dropdown>
     </Popover>

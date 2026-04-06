@@ -3,7 +3,7 @@ import {
   MRT_PaginationState as PaginationState,
   MRT_RowSelectionState as RowSelectionState,
   MRT_DensityState as DensityState,
-} from 'mantine-react-table';
+} from 'mantine-react-table-open';
 
 /**
  * Custom hook for managing table state

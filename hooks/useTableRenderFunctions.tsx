@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { MRT_RowData } from 'mantine-react-table';
+import { MRT_RowData } from 'mantine-react-table-open';
 import CustomTopToolbar, { type Filters } from '@/components/DesignSystem/ComplexComponents/DataTable/CustomTopToolbar';
 import CustomBottomToolbar from '@/components/DesignSystem/ComplexComponents/DataTable/CustomBottomToolbar';
 import CustomToolbarAlertBannerContent from '@/components/DesignSystem/ComplexComponents/DataTable/CustomToolbarAlertBannerContent';

@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs as MantineTabs, TabsProps as MantineTabsProps } from "@mantine/core@7";
+import { Tabs as MantineTabs, TabsProps as MantineTabsProps } from "@mantine/core@9";
 
 export interface DSTabsProps extends MantineTabsProps {
   makeId?: string;

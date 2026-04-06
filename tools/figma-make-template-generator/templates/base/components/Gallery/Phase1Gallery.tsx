@@ -1,4 +1,4 @@
-import { Stack, Paper, Group, Divider } from "@mantine/core@7";
+import { Stack, Paper, Group, Divider } from "@mantine/core@9";
 import { Title } from "../Typography/Title";
 import { Text } from "../Typography/Text";
 import { Anchor } from "../Typography/Anchor";
@@ -21,7 +21,7 @@ export function Phase1Gallery() {
           <Title order={3} makeId="gallery:typography:title">Typography</Title>
         </Group>
         <Divider my="sm" />
-        <Grid gutter="xs" makeId="gallery:typography:grid">
+        <Grid gap="xs" makeId="gallery:typography:grid">
           <Col span={12} makeId="gallery:typography:col:section">
             <Card p="xs" makeId="gallery:typography:card:section">
               <Title order={2} makeId="gallery:typography:section-title">Section title</Title>
@@ -50,7 +50,7 @@ export function Phase1Gallery() {
           <Title order={3} makeId="gallery:inputs:title">Inputs</Title>
         </Group>
         <Divider my="sm" />
-        <Grid gutter="xs" makeId="gallery:inputs:grid">
+        <Grid gap="xs" makeId="gallery:inputs:grid">
           <Col span={6} makeId="gallery:inputs:col:name">
             <Card p="xs" makeId="gallery:inputs:card:name">
               <TextInput size="xs" label="Name" placeholder="Enter name" makeId="gallery:inputs:name" />
@@ -105,7 +105,7 @@ export function Phase1Gallery() {
         </Group>
         <Divider my="sm" />
         <Card makeId="gallery:layout:card" p="xs" mt="xs">Card content</Card>
-        <Grid gutter="xs" makeId="gallery:layout:grid" mt="xs">
+        <Grid gap="xs" makeId="gallery:layout:grid" mt="xs">
           <Col span={6} makeId="gallery:layout:grid:col-1"><Paper p="xs" withBorder>Col 1</Paper></Col>
           <Col span={6} makeId="gallery:layout:grid:col-2"><Paper p="xs" withBorder>Col 2</Paper></Col>
         </Grid>
