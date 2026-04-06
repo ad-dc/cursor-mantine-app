@@ -10,10 +10,16 @@ npm install @appdirect/ds-prototype-kit
 
 ### Peer Dependencies
 
-- `@mantine/core` ^7.9.0
-- `@mantine/hooks` ^7.9.0
-- `react` ^18 or ^19
-- `react-dom` ^18 or ^19
+Align with **Mantine 9** (see `@mantine/core` peer requirements):
+
+- `@mantine/core` ^9.0.1
+- `@mantine/hooks` ^9.0.1
+- `react` ^19.2.0
+- `react-dom` ^19.2.0
+
+### Upgrading from 0.1.x
+
+Version **0.2.0** requires **Mantine 9** and **React 19.2+**. Upgrade `@mantine/core` and `@mantine/hooks` in your app before bumping this package. If you need Mantine 7, stay on `@appdirect/ds-prototype-kit` **0.1.x**.
 
 ## Usage
 
@@ -49,8 +55,11 @@ function MyPage() {
 
 ## Publishing
 
+`prepublishOnly` runs `build` automatically.
+
 ```bash
 cd ds-package
-npm run build
 npm publish
 ```
+
+Use a local **`.npmrc`** (not committed) for your AppDirect registry auth and scope mapping for `@appdirect`.
