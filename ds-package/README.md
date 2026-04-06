@@ -63,3 +63,20 @@ npm publish
 ```
 
 Use a local `.npmrc` (not committed) for registry auth and `@appdirect` scope.
+
+### Without registry access (local `.tgz`)
+
+To produce an installable tarball **without** Artifactory/npm (e.g. hand off to another machine or `npm install ./path`):
+
+```bash
+cd ds-package
+npm run tarball
+```
+
+This runs `build`, then writes **`appdirect-ds-prototype-kit-<version>.tgz`** in `ds-package/` (same contents as publish). Install elsewhere with:
+
+```bash
+npm install /path/to/appdirect-ds-prototype-kit-0.2.0.tgz
+```
+
+Tarballs are listed in `.gitignore`; keep them out of Git.

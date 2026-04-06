@@ -29,6 +29,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "node scripts/build.js",
+    "tarball": "npm run build && npm pack",
     "verify:package": "npm pack --dry-run --ignore-scripts",
     "prepublishOnly": "npm run build"
   },
