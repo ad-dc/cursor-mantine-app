@@ -1,6 +1,6 @@
 # AppDirect Prototype Kit
 
-Next.js 16 runtime shell with an AppDirect Mantine design system, page templates for rapid prototyping, Storybook workspace, and Figma Code Connect integration.
+Next.js 16 runtime shell with an AppDirect design system (**Mantine v9**, React 19.2+), page templates for rapid prototyping, Storybook workspace, and Figma Code Connect integration.
 
 ## Quick Start: Prototyping
 
@@ -97,7 +97,8 @@ npm run figma:unpublish
 ```bash
 cd ds-package
 npm run build          # Build @appdirect/ds-prototype-kit
-npm publish            # Publish to Artifactory
+npm run tarball        # Create appdirect-ds-prototype-kit-<version>.tgz (offline install)
+npm publish            # Publish to configured npm registry (e.g. org registry)
 ```
 
 ---

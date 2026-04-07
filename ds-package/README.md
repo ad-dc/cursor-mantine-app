@@ -19,7 +19,7 @@ Align with **Mantine 9**:
 
 ### Upgrading from 0.1.x
 
-**0.2.0** requires **Mantine 9** and **React 19.2+**. Upgrade those in your app first. For Mantine 7, stay on **0.1.x**.
+**0.2.0+** targets **Mantine 9** and **React 19.2+**—upgrade your app’s Mantine and React peers before bumping the kit. **0.1.x** is the previous release line for apps not yet on Mantine 9; new work should use **0.2.0+**.
 
 ## Usage
 
