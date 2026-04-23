@@ -2,6 +2,8 @@ import React from 'react';
 import type { Preview } from '@storybook/nextjs-vite';
 import { ThemeProvider } from '../design/ThemeProvider'; // <- bring in your tokenized theme
 import '@mantine/core/styles.layer.css';
+import '@appdirect/design-tokens/css/foundations.css';
+import '@appdirect/design-tokens/css/mantine.css';
 
 const preview: Preview = {
   decorators: [
