@@ -2,7 +2,7 @@
 
 import React, { forwardRef } from 'react';
 import { Button as MantineButton, ButtonProps as MantineButtonProps } from '@mantine/core';
-import { ComponentSize, ComponentColor } from '../config';
+import { ComponentSize } from '../config';
 import styles from './Button.module.css';
 
 /**
@@ -11,8 +11,8 @@ import styles from './Button.module.css';
 export interface DSButtonProps extends Omit<MantineButtonProps, 'size' | 'color' | 'variant'> {
   /** Button size from design system scale */
   size?: ComponentSize;
-  /** Button color from design system palette */
-  color?: ComponentColor;
+  /** @deprecated Color is now driven by design tokens via mantine.css adapter; this prop is ignored */
+  color?: string;
   /** Button style variant */
   variant?: 'primary' | 'secondary' | 'default' | 'disabled' | 'link' | 'secret' | 'outline' | 'danger';
   /** Whether button takes full width */
@@ -75,7 +75,6 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
     {
       variant = 'default',
       size = 'sm',
-      color = 'primary',
       className,
       children,
       leftSection,
@@ -84,51 +83,10 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
     },
     ref
   ) => {
-    // Map design system variants to Mantine variants
-    const getMantineVariant = (addsVariant: DSButtonProps['variant']) => {
-      switch (addsVariant) {
-        case 'primary':
-          return 'filled';  // Use Mantine's filled variant for primary
-        case 'secondary':
-          return 'filled';
-        case 'default':
-          return 'default';
-        case 'disabled':
-          return 'filled';  // Use filled but will be disabled via disabled prop
-        case 'link':
-          return 'subtle';  // Link-style button using subtle variant
-        case 'secret':
-          return 'subtle';  // Use Mantine's subtle variant
-        case 'outline':
-          return 'outline';
-        case 'danger':
-          return 'filled';  // Will use red color
-        default:
-          return addsVariant || 'default';
-      }
-    };
-
-    // Determine the appropriate color based on variant
-    const getButtonColor = (variant: DSButtonProps['variant'], defaultColor: ComponentColor) => {
-      switch (variant) {
-        case 'danger':
-          return 'red';
-        case 'primary':
-          return 'blue';
-        case 'secondary':
-          return 'cyan';
-        case 'outline':
-          return 'blue';  
-        case 'link':
-          return 'blue';    
-        case 'disabled':
-          return 'gray';
-        case 'secret':
-          return 'gray';  // Use gray color for subtle secret variant
-        default:
-          return defaultColor;
-      }
-    };
+    // Pass our DS variant name directly — mantine.css adapter targets
+    // data-variant="primary" etc. via higher-specificity selectors.
+    // "disabled" is a state, not a Mantine variant, so map it to "default".
+    const mantineVariant = variant === 'disabled' ? 'default' : (variant ?? 'default');
 
     // Determine if button should be disabled
     const isDisabled = props.disabled || variant === 'disabled';
@@ -147,9 +105,8 @@ export const Button = forwardRef<HTMLButtonElement, DSButtonProps>(
     return (
       <MantineButton
         ref={ref}
-        variant={getMantineVariant(variant)}
+        variant={mantineVariant}
         size={size}
-        color={getButtonColor(variant, color)}
         disabled={isDisabled}
         radius="sm"
         className={componentClassName}
