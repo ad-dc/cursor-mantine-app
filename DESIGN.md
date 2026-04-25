@@ -92,7 +92,7 @@ rounded:
   none: 0px
   xs: 2px                       # 0.125rem
   sm: 4px                       # 0.25rem — theme defaultRadius
-  md: 8px                       # 0.5rem — Button override (styles/theme.ts)
+  md: 8px                       # 0.5rem
   lg: 16px                      # 1rem
   xl: 32px                      # 2rem
   full: 9999px
@@ -106,7 +106,7 @@ components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     typography: "{typography.label-md}"
   button-primary-hover:
     backgroundColor: "{colors.primary-hover}"
@@ -115,17 +115,17 @@ components:
   button-default:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     typography: "{typography.label-md}"
   button-outline:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.primary}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     typography: "{typography.label-md}"
   button-danger:
     backgroundColor: "{colors.danger}"
     textColor: "{colors.on-primary}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.sm}"
     typography: "{typography.label-md}"
   input-default:
     backgroundColor: "{colors.surface}"
@@ -139,24 +139,24 @@ components:
   badge-info:
     backgroundColor: "{colors.info}"
     textColor: "{colors.on-primary}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.sm}"
     typography: "{typography.label-sm}"
   badge-success:
     backgroundColor: "{colors.success}"
     textColor: "{colors.on-primary}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.sm}"
     typography: "{typography.label-sm}"
   badge-danger:
     backgroundColor: "{colors.danger}"
     textColor: "{colors.on-primary}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.sm}"
     typography: "{typography.label-sm}"
   tooltip:
     backgroundColor: "{colors.neutral-9}"
     textColor: "{colors.on-primary}"
     rounded: "{rounded.sm}"
-    typography: "{typography.label-sm}"
-    padding: "{spacing.sm}"
+    typography: "{typography.body-sm}"
+    # padding intentionally omitted — DS wrapper uses off-scale custom padding (5px 8px) to match Figma
 ---
 
 # AppDirect Admin — DESIGN.md
@@ -224,9 +224,9 @@ For flat hierarchy (tabs, navigation, dividers) we prefer **borders and color co
 
 ## Shapes
 
-A 4-step radius scale (xs 2px, sm 4px, md 8px, lg 16px, xl 32px) plus `none` and `full`. The system-wide default is `sm` (4px) — applied to inputs, cards, menus. **Buttons use `md` (8px)** specifically (`styles/theme.ts` override) — softer than inputs to mark them as actionable.
+A 5-step radius scale (xs 2px, sm 4px, md 8px, lg 16px, xl 32px) plus `none` and `full`. The system-wide default is `sm` (4px) — applied to buttons, inputs, cards, and menus. Larger radii (`md`, `lg`, `xl`) are reserved for special surfaces (modals, drawers, pop-out cards) where a softer edge reinforces the elevated context.
 
-**Rule:** do not mix `full` (9999px, pill shape) with sharp corners in the same view. Badges are `full`; buttons are `md`; inputs are `sm` — this hierarchy is intentional.
+**Rule:** do not mix `full` (9999px, pill shape) with sharp corners in the same view. Most elements — buttons, inputs, cards, **badges** — are `sm`. Elevated surfaces are `md` or `lg`. Reserve `full` for genuinely circular elements (avatars, loading spinners, indicator dots).
 
 ## Components
 
@@ -266,7 +266,7 @@ The `components` section in the front matter defines per-variant tokens for the 
 - **Don't** use status colors for decoration or emphasis in body text
 - **Do** use `label-md` (Inter Semi-Bold 14px) for button labels, tab labels, and form field labels
 - **Don't** use more than two type families on a screen (Inter for UI, Roboto Mono for data — that's it)
-- **Do** use `rounded.md` (8px) for buttons, `rounded.sm` (4px) for inputs and cards, `rounded.full` for badges and avatars
+- **Do** use `rounded.sm` (4px) for buttons, inputs, cards, and badges; `rounded.full` for avatars and circular indicators; reserve `rounded.md`+ for elevated surfaces (modals, drawers)
 - **Don't** mix `rounded.full` (pill) with sharp corners in the same view
 - **Do** rely on spacing tokens (xs–xl) for all padding, gap, margin
 - **Don't** use raw pixel values or ad-hoc spacing

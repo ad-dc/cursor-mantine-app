@@ -64,13 +64,4 @@ export const theme: MantineThemeOverride = {
   defaultRadius: THEME_CONSTANTS.defaultRadius,
   fontFamily: THEME_CONSTANTS.fontFamily,
   fontFamilyMonospace: THEME_CONSTANTS.fontFamilyMonospace,
-  
-  // Component customizations
-  components: {
-    Button: {
-      defaultProps: {
-        radius: 'md',
-      },
-    },
-  },
 };
