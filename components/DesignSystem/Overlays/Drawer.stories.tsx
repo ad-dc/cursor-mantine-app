@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Stack, Button as MantineButton } from '@mantine/core';
 import { Inline } from '@/components/DesignSystem';
 import { Drawer } from './Drawer';

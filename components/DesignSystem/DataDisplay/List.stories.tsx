@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { List } from './List';
 import { Stack, Group } from '@mantine/core';
 import { Text } from '../Typography/Text';

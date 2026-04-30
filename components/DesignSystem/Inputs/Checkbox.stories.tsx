@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Stack } from '@mantine/core';
 import { Checkbox } from './Checkbox';
 import { useState } from 'react';

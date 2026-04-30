@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { SimpleGrid, Stack } from '@/components/DesignSystem';
 import { Inline } from '@/components/DesignSystem';
 import { KeyInsight } from './KeyInsights';

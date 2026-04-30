@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Combobox } from './Combobox';
 import { useState } from 'react';
 import { Stack } from '../Layout/Stack';
