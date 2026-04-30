@@ -6,10 +6,6 @@ import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/dropzone/styles.css';
 
-// Design tokens — foundations (semantic vars) + Mantine adapter (component selectors)
-import '@appdirect/design-tokens/css/foundations.css';
-import '@appdirect/design-tokens/css/mantine.css';
-
 // Custom CSS (load after Mantine to override)
 import "./globals.css";
 import 'remixicon/fonts/remixicon.css';

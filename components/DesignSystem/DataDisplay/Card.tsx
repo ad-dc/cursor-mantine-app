@@ -2,6 +2,7 @@
 
 import React, { forwardRef } from 'react';
 import { Card as MantineCard, CardProps as MantineCardProps, BoxProps } from '@mantine/core';
+import classes from './Card.module.css';
 
 // ========================== TYPES ==========================
 
@@ -23,39 +24,6 @@ export interface DSCardSectionProps extends
   withBorder?: boolean;
   /** Adds same left and right padding as the Card component */
   inheritPadding?: boolean;
-}
-
-// ========================== STYLES ==========================
-
-// Inject CSS styles for interactive cards
-if (typeof document !== 'undefined') {
-  const styleId = 'ds-card-interactive-styles';
-  if (!document.getElementById(styleId)) {
-    const style = document.createElement('style');
-    style.id = styleId;
-    style.textContent = `
-      .ds-card--interactive {
-        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1) !important;
-      }
-      
-      .ds-card--interactive:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: var(--mantine-shadow-md) !important;
-        border-color: var(--mantine-color-gray-4) !important;
-      }
-      
-      .ds-card--interactive:active {
-        transform: translateY(-1px) !important;
-        box-shadow: var(--mantine-shadow-sm) !important;
-      }
-      
-      .ds-card--interactive:focus-visible {
-        outline: 2px solid var(--mantine-color-blue-5) !important;
-        outline-offset: 2px !important;
-      }
-    `;
-    document.head.appendChild(style);
-  }
 }
 
 // ========================== COMPONENTS ==========================
@@ -155,16 +123,11 @@ const CardRoot = forwardRef<HTMLDivElement, DSCardProps>(
     // Determine if card should be clickable
     const isClickable = Boolean(onClick);
 
-    // Basic card styling
-    const cardStyle = {
-      ...(isClickable && { cursor: 'pointer' }),
-      ...style,
-    };
-
-    // Build class names - add interactive class when needed
+    // Build class names - add interactive/clickable classes when needed
     const cardClassName = [
       className,
-      interactive && 'ds-card--interactive',
+      interactive && classes.interactive,
+      isClickable && classes.clickable,
     ].filter(Boolean).join(' ');
 
     return (
@@ -174,7 +137,7 @@ const CardRoot = forwardRef<HTMLDivElement, DSCardProps>(
         radius="sm"
         shadow="xs"
         withBorder={true}
-        style={cardStyle}
+        style={style}
         className={cardClassName}
         onClick={onClick}
         {...props}

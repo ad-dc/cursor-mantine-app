@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { ThemeIcon } from './ThemeIcon';
 import { RiUserLine, RiServerLine, RiAddLine, RiEyeLine } from '@remixicon/react';
 
